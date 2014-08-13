@@ -14,6 +14,7 @@ namespace RepositoryPattern.Model.Product
         public string Description { get; set; }
         public int Price { get; set; }
         public int  Category { get; set; }
+        public User CreatedBy { get; set; }
 
         public int ID
         {
@@ -45,5 +46,11 @@ namespace RepositoryPattern.Model.Product
             set;
         }
         public bool DeleteFlag { get; set; }
+    }
+
+    public class User
+    {
+        public int UserID { get; set; }
+        public string UserName { get; set; }
     }
 }

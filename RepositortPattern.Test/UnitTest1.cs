@@ -31,5 +31,13 @@ namespace RepositortPattern.Test
             }
 
         }
+
+        [TestMethod]
+        public void get_list_of_product_by_category()
+        {
+            _productRepo = new ProductDataMapper();
+            IEnumerable<Product> prd = _productRepo.GetProductByCategory(1);
+            
+        }
     }
 }

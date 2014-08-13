@@ -19,12 +19,12 @@ namespace RepositoryPattern.Data
         }
 
        
-        public IEnumerable<Product> GetProductByCategory(string category)
+        public IEnumerable<Product> GetProductByCategory(int prd_category)
         {
             using (SqlCeConnection cn = Connection2)
             {
-                var products = GetProductData(
-                            @"SELECT * from Products WHERE category = @category", category);
+                var products = GetProductDataNoJoin(
+                            @"SELECT * from Products WHERE prd_category = @prd_category", new { prd_category });
                 return products;
             }
             //throw new NotImplementedException();
@@ -93,14 +93,28 @@ namespace RepositoryPattern.Data
                 cn.Open();
                 using (var multi = cn.QueryMultiple(sql, (object)param))
                 {
-                    product = multi.Read<dynamic, dynamic, Product>((prd, user) =>
+                    product = multi.Read<dynamic, dynamic, Product>((prd,user) =>
                         {
                             Product prod = Map(prd);
+                            prod.CreatedBy = new UserDataMapper().Map(user);
                             return prod;
-                        }).ToList();
+                        },splitOn: "UserID").ToList();
                 }
             }
             return product;
+        }
+
+        private IEnumerable<Product> GetProductDataNoJoin(string sql, dynamic param = null)
+        {
+            IEnumerable<Product> product = null;
+            //using (IDbConnection cn = Connection)
+            using (SqlCeConnection cn = Connection2)
+            {
+                cn.Open();
+                product = cn.Query<Product>(sql, (object)param);
+                return product;
+            }
+           
         }
     }
 }
