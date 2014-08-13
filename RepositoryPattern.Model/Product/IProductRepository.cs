@@ -9,6 +9,6 @@ namespace RepositoryPattern.Model.Product
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Product GetProductByCategory(string category);
+        IEnumerable<Product> GetProductByCategory(string category);
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data.SqlServerCe;
 
 namespace RepositoryPattern.Data
 {
@@ -18,6 +19,11 @@ namespace RepositoryPattern.Data
         protected IDbConnection Connection
         {
             get { return new SqlConnection(ConfigurationManager.ConnectionStrings["RPConnection"].ConnectionString); }
+        }
+
+        protected SqlCeConnection Connection2
+        {
+            get { return new SqlCeConnection(ConfigurationManager.ConnectionStrings["RPConnection"].ConnectionString); }
         }
 
 

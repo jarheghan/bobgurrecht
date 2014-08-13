@@ -35,7 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>C:\Users\arheghj\Documents\Convention Application\TGI.DataTransformation4.0\packages\Dapper.1.13\lib\net40\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -52,6 +58,32 @@
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RepositoryPattern.Data\RepositoryPattern.Data.csproj">
+      <Project>{9bcfe690-01dd-4a78-8376-07fb5c730bdc}</Project>
+      <Name>RepositoryPattern.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryPattern.Infrastructure\RepositoryPattern.Infrastructure.csproj">
+      <Project>{4895d6a0-f202-4645-954c-36ae126fa74e}</Project>
+      <Name>RepositoryPattern.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryPattern.Model\RepositoryPattern.Model.csproj">
+      <Project>{e1b2fddb-2b63-4445-b972-34e76467df99}</Project>
+      <Name>RepositoryPattern.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryPattern.Service\RepositoryPattern.Service.csproj">
+      <Project>{81d2b3ac-1b9d-4643-834c-921705251e3a}</Project>
+      <Name>RepositoryPattern.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RPStore1.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
