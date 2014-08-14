@@ -1,5 +1,10 @@
 ﻿@{
     ViewBag.Title = "Index";
+    var s = 0;
 }
 
 <h2>Index</h2>
+@if (s == 0)
+{
+    @Html.Action("Todo");
+}
