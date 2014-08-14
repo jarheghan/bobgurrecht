@@ -5,6 +5,7 @@ using RepositoryPattern.Infrastructure;
 using RepositoryPattern.Model;
 using System.Collections.Generic;
 using RepositoryPattern.Model.Product;
+using System.Linq;
 namespace RepositortPattern.Test
 {
     [TestClass]
@@ -24,7 +25,7 @@ namespace RepositortPattern.Test
             prd.Add(new Product { Name = "LapTops", Description = "This is to make your hair", Price = 500,Category = 2});
             prd.Add(new Product { Name = " Computer Mouses", Description = "This is for babies to wear", Price = 42, Category = 2 });
             prd.Add(new Product { Name = "Bluetooth Device", Description = "This is to wear in your hands", Price = 450, Category = 2 });
-
+            
             foreach (var p in prd)
             {
                 _productRepo.Add(p);
@@ -37,6 +38,8 @@ namespace RepositortPattern.Test
         {
             _productRepo = new ProductDataMapper();
             IEnumerable<Product> prd = _productRepo.GetProductByCategory(1);
+            int ss = prd.Count();
+            Assert.AreEqual(ss, 4);
             
         }
     }

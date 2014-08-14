@@ -83,6 +83,8 @@ namespace RepositoryPattern.Data
             };
             return product;
         }
+        
+
 
         private IEnumerable<Product> GetProductData(string sql, dynamic param = null)
         {
@@ -106,15 +108,21 @@ namespace RepositoryPattern.Data
 
         private IEnumerable<Product> GetProductDataNoJoin(string sql, dynamic param = null)
         {
-            IEnumerable<Product> product = null;
+            List<Product> product = new List<Product>();
             //using (IDbConnection cn = Connection)
             using (SqlCeConnection cn = Connection2)
             {
                 cn.Open();
-                product = cn.Query<Product>(sql, (object)param);
-                return product;
+                var prd  = cn.Query<dynamic>(sql, (object)param);
+                foreach (var p in prd)
+                {
+                    Product prds = Map(p);
+                    product.Add(prds);
+                }
+                return product.AsEnumerable();
             }
            
         }
+       
     }
 }
