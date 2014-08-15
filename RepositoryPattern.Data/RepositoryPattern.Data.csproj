@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractDataMapper.cs" />
+    <Compile Include="CategoryDataMapper.cs" />
     <Compile Include="IProductData.cs" />
     <Compile Include="ProductDataMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RepositoryPattern.Infrastructure.Domain;
 
-namespace RepositoryPattern.Model.Product
+namespace RepositoryPattern.Model.Catalog
 {
     public interface IProductRepository : IRepository<Product>
     {

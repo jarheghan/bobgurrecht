@@ -4,7 +4,7 @@ using RepositoryPattern.Data;
 using RepositoryPattern.Infrastructure;
 using RepositoryPattern.Model;
 using System.Collections.Generic;
-using RepositoryPattern.Model.Product;
+using RepositoryPattern.Model.Catalog;
 using System.Linq;
 namespace RepositortPattern.Test
 {
@@ -12,6 +12,7 @@ namespace RepositortPattern.Test
     public class UnitTest1
     {
         public IProductRepository _productRepo;
+        public ICategoryRepository _categoryRepo;
 
         [TestMethod]
         public void insert_product_into_the_product_table()
@@ -41,6 +42,22 @@ namespace RepositortPattern.Test
             int ss = prd.Count();
             Assert.AreEqual(ss, 4);
             
+        }
+
+        [TestMethod]
+        public void insert_category_into_the_category_table()
+        {
+            _categoryRepo = new CategoryDataMapper();
+
+            List<Category> cat = new List<Category>();
+            cat.Add(new Category { Name = "Technology Garget", Description = "This Technology Garget", Alias = "Tech", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Cloth", Description = "This Cloth", Alias = "Cloth", MetaKeyword = "", DisplayOrder = 1 });
+
+            foreach (var p in cat)
+            {
+                _categoryRepo.Add(p);
+            }
+
         }
     }
 }

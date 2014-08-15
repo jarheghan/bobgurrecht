@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryPattern.Model.Product
+namespace RepositoryPattern.Model.Catalog
 {
     public class Product : IAggregateRoot
     {

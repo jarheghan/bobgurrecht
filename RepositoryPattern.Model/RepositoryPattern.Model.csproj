@@ -39,13 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Product\IProductRepository.cs" />
-    <Compile Include="Product\Product.cs" />
+    <Compile Include="Catalog\Category.cs" />
+    <Compile Include="Catalog\ICategoryRepository.cs" />
+    <Compile Include="Catalog\IProductRepository.cs" />
+    <Compile Include="Catalog\Product.cs" />
+    <Compile Include="Catalog\ProductCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cart\" />
-    <Folder Include="Category\" />
     <Folder Include="Customers\" />
     <Folder Include="Order\" />
   </ItemGroup>

@@ -1,4 +1,4 @@
-﻿using RepositoryPattern.Model.Product;
+﻿using RepositoryPattern.Model.Catalog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
