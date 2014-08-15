@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryPattern.Infrastructure.configuration
 {
-    interface IEngine
+    public interface IEngine
     {
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace RepositoryPattern.Infrastructure.configuration
 {
-    class EngineContext
+    public class EngineContext
     {
+        
     }
 }

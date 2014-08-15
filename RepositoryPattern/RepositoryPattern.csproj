@@ -123,6 +123,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,13 +216,31 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RepositoryPattern.Data\RepositoryPattern.Data.csproj">
+      <Project>{9bcfe690-01dd-4a78-8376-07fb5c730bdc}</Project>
+      <Name>RepositoryPattern.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryPattern.Infrastructure\RepositoryPattern.Infrastructure.csproj">
+      <Project>{4895d6a0-f202-4645-954c-36ae126fa74e}</Project>
+      <Name>RepositoryPattern.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryPattern.Model\RepositoryPattern.Model.csproj">
+      <Project>{e1b2fddb-2b63-4445-b972-34e76467df99}</Project>
+      <Name>RepositoryPattern.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryPattern.Service\RepositoryPattern.Service.csproj">
+      <Project>{81d2b3ac-1b9d-4643-834c-921705251e3a}</Project>
+      <Name>RepositoryPattern.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
