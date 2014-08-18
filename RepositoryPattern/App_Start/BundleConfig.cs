@@ -42,7 +42,10 @@ namespace RepositoryPattern
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
             bundles.Add(new StyleBundle("~/Bootstrap/css").Include("~/Content/bootstrap/bootstrap.css"
-                    , "~/Content/bootstrap/bootstrap.theme.css"));
+                    , "~/Content/bootstrap/bootstrap.theme.css"
+                    , "~/Content/themes/Plumb/css/custom.css"
+                    , "~/Content/themes/Plumb/css/normalize.css"
+                    ));
         }
     }
 }
