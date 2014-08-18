@@ -59,5 +59,61 @@ namespace RepositortPattern.Test
             }
 
         }
+
+        [TestMethod]
+        public void insert_productcategory_into_productcategory_table()
+        {
+            _categoryRepo = new CategoryDataMapper();
+            List<ProductCategory> prdcat = new List<ProductCategory>();
+            prdcat.Add(new ProductCategory { ProductID = 1, CategoryID = 1, DisplayOrder = 1, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 2, CategoryID = 1, DisplayOrder = 2, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 3, CategoryID = 1, DisplayOrder = 3, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 4, CategoryID = 2, DisplayOrder = 4, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 5, CategoryID = 2, DisplayOrder = 5, IsFeaturedProduct = false });
+
+            foreach (var pc in prdcat)
+            {
+                _categoryRepo.InsertProductCategory(pc);
+            }
+        }
+
+        [TestMethod]
+        public void get_product_by_productid()
+        {
+            _productRepo = new ProductDataMapper();
+            Product prd = _productRepo.GetProductByID(1);
+            Console.WriteLine(prd.Name + " " + prd.Price + " " + prd.Description);
+
+        }
+
+        [TestMethod]
+        public void get_list_of_productcategory_by_categoryid()
+        {
+            _categoryRepo = new CategoryDataMapper();
+            _productRepo = new ProductDataMapper();
+            var productCategory = _categoryRepo.GetProductCategoriesByCategoryID(1);
+            
+            var model = productCategory
+                        .Select(x =>
+                            {
+                                var product = _productRepo.GetProductByID(x.ProductID ?? default(int));
+                                return new ProductCategory()
+                                {
+                                    ID = x.ID,
+                                    CategoryID = x.CategoryID,
+                                    ProductID = x.ProductID,
+                                    Product = product,
+                                    IsFeaturedProduct = x.IsFeaturedProduct,
+                                    AddDate = x.AddDate,
+                                    AddUser = x.AddUser,
+                                    ChangeDate = x.ChangeDate,
+                                    ChangeUser = x.ChangeUser,
+                                    DeleteFlag = x.DeleteFlag
+                                };
+                            });
+          
+
+            Assert.AreEqual(4, productCategory.Count());
+        }
     }
 }

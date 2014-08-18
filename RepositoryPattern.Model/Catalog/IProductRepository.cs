@@ -10,5 +10,7 @@ namespace RepositoryPattern.Model.Catalog
     public interface IProductRepository : IRepository<Product>
     {
         IEnumerable<Product> GetProductByCategory(int category);
+        Product GetProductByID(int productID);
+        IEnumerable<Product> GetProductByPriceValue(int price);
     }
 }

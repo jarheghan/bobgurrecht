@@ -77,6 +77,22 @@ namespace RepositoryPattern.Data
                 Description = result.prd_description,
                 Price = result.prd_price,
                 Category = result.prd_category,
+                ShortDescription = result.prd_short_description,
+                ShowOnHomePage = result.prd_showonhomepage,
+                MetaKeyword = result.prd_meta_keyword,
+                MetaDescrption = result.prd_meta_description,
+                MetaTitle = result.prd_meta_title,
+                SKU = result.prd_sku,
+                ManufacturePartNo = result.prd_manufacturepart_no,
+                StockQuantity = result.prd_stock_quantity,
+                DisplayStockAvaliable = result.prd_display_stock_avaliable,
+                DisplayStockQuantity = result.prd_display_stock_quatity,
+                CallForPrice = result.prd_call_for_price,
+                OldPrice = result.prd_old_price,
+                Weight = result.prd_weight,
+                Width = result.prd_width,
+                Length = result.prd_length,
+                Height = result.prd_height,
                 DeleteFlag = true,
                 AddDate = DateTime.Now,
                 AddUser = "Jarheghan"
@@ -98,7 +114,7 @@ namespace RepositoryPattern.Data
                     product = multi.Read<dynamic, dynamic, Product>((prd,user) =>
                         {
                             Product prod = Map(prd);
-                            prod.CreatedBy = new UserDataMapper().Map(user);
+                            //prod.CreatedBy = new UserDataMapper().Map(user);
                             return prod;
                         },splitOn: "UserID").ToList();
                 }
@@ -123,6 +139,24 @@ namespace RepositoryPattern.Data
             }
            
         }
-       
+
+
+
+        public Product GetProductByID(int productID)
+        {
+           
+            using (SqlCeConnection cn = Connection2)
+            {
+                cn.Open();
+                var product = cn.Query<dynamic>("select * from products where prd_id = @ProductID", new { ProductID = productID }).FirstOrDefault();
+                Product prd = Map(product);
+                return prd;
+            }
+        }
+
+        public IEnumerable<Product> GetProductByPriceValue(int price)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

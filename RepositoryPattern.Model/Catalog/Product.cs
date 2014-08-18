@@ -12,10 +12,24 @@ namespace RepositoryPattern.Model.Catalog
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Price { get; set; }
-        public int  Category { get; set; }
-        public User CreatedBy { get; set; }
-
+        public int? Price { get; set; }
+        public int?  Category { get; set; }
+        public string ShortDescription { get; set; }
+        public string ShowOnHomePage { get; set; }
+        public string MetaKeyword { get; set; }
+        public string MetaDescrption { get; set; }
+        public string MetaTitle { get; set; }
+        public string SKU { get; set; }
+        public string ManufacturePartNo { get; set; }
+        public int? StockQuantity { get; set; }
+        public bool? DisplayStockAvaliable { get; set; }
+        public bool? DisplayStockQuantity { get; set; }
+        public bool? CallForPrice { get; set; }
+        public int? OldPrice { get; set; }
+        public float? Weight { get; set; }
+        public float? Length { get; set; }
+        public float? Width { get; set; }
+        public float? Height { get; set; }
         public int ID
         {
             get;
@@ -34,18 +48,18 @@ namespace RepositoryPattern.Model.Catalog
             set;
         }
 
-        public DateTime AddDate
+        public DateTime? AddDate
         {
             get;
             set;
         }
 
-        public DateTime ChangeDate
+        public DateTime? ChangeDate
         {
             get;
             set;
         }
-        public bool DeleteFlag { get; set; }
+        public bool? DeleteFlag { get; set; }
     }
 
     public class User

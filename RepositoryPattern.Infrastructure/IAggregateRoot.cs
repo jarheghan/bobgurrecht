@@ -11,8 +11,8 @@ namespace RepositoryPattern.Infrastructure
         int ID { get; set; }
         string AddUser { get; set; }
         string ChangeUser { get; set; }
-        DateTime AddDate { get; set; }
-        DateTime ChangeDate { get; set; }
-        bool DeleteFlag { get; set; }
+        DateTime? AddDate { get; set; }
+        DateTime? ChangeDate { get; set; }
+        bool? DeleteFlag { get; set; }
     }
 }

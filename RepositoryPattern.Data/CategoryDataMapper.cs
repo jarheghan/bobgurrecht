@@ -53,6 +53,25 @@ namespace RepositoryPattern.Data
             return category;
         }
 
+        private ProductCategory Map(dynamic result,string name)
+        {
+            name = "";
+            var productCategory = new ProductCategory
+            {
+                ID = result.pcm_id,
+                ProductID = result.pcm_prd_id,
+                CategoryID = result.pcm_cat_id,
+                IsFeaturedProduct = result.pcm_is_feature_product,
+                DisplayOrder = result.pcm_display_order,
+                AddDate = result.pcm_add_date,
+                AddUser = result.pcm_add_user,
+                ChangeDate = result.pcm_change_date,
+                ChangeUser = result.pcm_change_user,
+                DeleteFlag = result.pcm_delete_flag
+            };
+            return productCategory;
+        }
+
         public void Add(Category item)
         {
             var param = new
@@ -95,5 +114,81 @@ namespace RepositoryPattern.Data
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Category> GetAllCategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ProductCategory> GetProductCategoriesByCategoryID(int categoryId)
+        {
+            List<ProductCategory> pcm = new List<ProductCategory>();
+            using (SqlCeConnection cn = Connection2)
+            {
+                var productcategory = cn.Query<dynamic>("select * from ProductCategoryMapping where pcm_cat_id = @categoryId", 
+                    new { categoryId = categoryId });
+                foreach (var pc in productcategory)
+                {
+                    ProductCategory p = Map(pc,"");
+                    pcm.Add(p);
+                }
+                return pcm.AsEnumerable();
+            }
+        }
+
+        public IEnumerable<ProductCategory> GetProductCategoriesByProductID(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Category GetCategoryById(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Category> GetAllCategoriesDisplayedOnHomePage()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Category> GetAllCategoriesByParentCategoryId(int parentCategoryID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InsertProductCategory(ProductCategory productCategory)
+        {
+            var param = new
+            {
+                ProductID = productCategory.ProductID,
+                CategoryID = productCategory.CategoryID,
+                IsFeaturedProduct = productCategory.IsFeaturedProduct,
+                DisplayOrder = productCategory.DisplayOrder,
+                AddUser = "Jarheghan",
+                AddDate = DateTime.Now,
+                DeleteFlag = false
+            };
+
+            using (SqlCeConnection cn = Connection2)
+            {
+                var i = cn.Query<int>(@"INSERT INTO ProductCategoryMapping 
+                                    (pcm_prd_id, pcm_cat_id,pcm_is_featured_product,pcm_display_order,
+                                     pcm_add_date, pcm_add_user, pcm_delete_flag)
+                                    VALUES(@ProductID,@CategoryID,@IsFeaturedProduct,@DisplayOrder,@AddDate,@AddUser,@DeleteFlag)"
+                                    , param);
+
+            }
+        }
+
+        public void UpdateProductCategory(int productcategoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteProductCategory(int productcategoryId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
