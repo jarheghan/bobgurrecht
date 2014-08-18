@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace RepositoryPattern.Controllers
 {
-    public partial class HomeController : BaseController
+    public class CommonController : BaseController
     {
         //
-        // GET: /Home/
+        // GET: /Common/
 
-        public ActionResult Index()
+        public ActionResult Menu()
         {
-            return View();
+            return PartialView();
         }
 
     }

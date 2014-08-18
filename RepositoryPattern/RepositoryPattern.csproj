@@ -123,6 +123,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -133,6 +135,10 @@
     <Content Include="App_Data\RPStore.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -187,11 +193,35 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\Plumb\css\custom.css" />
+    <Content Include="Content\themes\Plumb\css\normalize.css" />
+    <Content Include="Content\themes\Plumb\img\home-button.png" />
+    <Content Include="Content\themes\Plumb\img\I01028.jpg" />
+    <Content Include="Content\themes\Plumb\img\I01035.jpg" />
+    <Content Include="Content\themes\Plumb\img\i01049.jpg" />
+    <Content Include="Content\themes\Plumb\img\I08000.jpg" />
+    <Content Include="Content\themes\Plumb\img\I08002.jpg" />
+    <Content Include="Content\themes\Plumb\img\i95067-1.jpg" />
+    <Content Include="Content\themes\Plumb\img\i95067.jpg" />
+    <Content Include="Content\themes\Plumb\img\kitchen-faucets.jpg" />
+    <Content Include="Content\themes\Plumb\img\logo-small.png" />
+    <Content Include="Content\themes\Plumb\img\plumbing-parts-albuquerque-new-mexico.png" />
+    <Content Include="Content\themes\Plumb\img\plumbing.jpg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\themes\Plumb\img\.DS_Store" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
@@ -215,8 +245,11 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Root.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_RootHead.cshtml" />
+    <Content Include="Views\Shared\HeaderMain.cshtml" />
+    <Content Include="Views\Common\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

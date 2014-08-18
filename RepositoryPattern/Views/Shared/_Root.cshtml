@@ -1,3 +1,36 @@
 ﻿@{
     Layout = "~/Views/Shared/_RootHead.cshtml";
 }
+
+<div id="page">
+    @if (IsSectionDefined("header"))
+    {
+        @RenderSection("header")
+    }
+    else{
+        <section>
+
+        </section>
+    }
+    <div id="content_wrapper">
+
+        <section id="content">
+            <!-- Content before body-->
+
+            <div id="content-body" class="row">
+                @RenderBody()
+                <!-- Add more content after the body -->
+            </div>
+        </section>
+    </div>
+     @if (IsSectionDefined("footer"))
+     {
+         @RenderSection("footer")
+     }
+        else{
+            <div id="footer-wrapper">
+                <!-- fill with other footer information -->
+            </div>
+     }
+</div>
+<!-- You could add a widget to this after the footer -->

@@ -6,15 +6,7 @@ using System.Web.Mvc;
 
 namespace RepositoryPattern.Controllers
 {
-    public partial class BaseController : Controller
+    public abstract partial class BaseController : Controller
     {
-        //
-        // GET: /Base/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
     }
 }
