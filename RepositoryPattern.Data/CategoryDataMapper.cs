@@ -117,7 +117,18 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<Category> GetAllCategories()
         {
-            throw new NotImplementedException();
+            using (SqlCeConnection cn = Connection2)
+            {
+                List<Category> category = new List<Category>();
+                cn.Open();
+                var categories = cn.Query<dynamic>("select * from categories");
+                foreach (var ca in categories)
+                {
+                    Category cat = Map(ca);
+                    category.Add(cat);
+                }
+                return category.AsEnumerable();
+            }
         }
 
         public IEnumerable<ProductCategory> GetProductCategoriesByCategoryID(int categoryId)

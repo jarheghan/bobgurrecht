@@ -1,4 +1,18 @@
-﻿@{var csspart = "~/Content/themes/Plumb";} 
+﻿@model IEnumerable<RepositoryPattern.Model.Catalog.Category>
+@using RepositoryPattern.Model.Catalog;
+@{var csspart = "~/Content/themes/Plumb";} 
+
+@functions{
+    private string GetCssClassForMenu(MenuPathState state)
+    {
+        var liClasses = new List<string>();
+       if((state & MenuPathState.Parent) == MenuPathState.Parent)
+       {
+           liClasses.Add("dropdown-menu multi-level");  
+       }
+       return liClasses.Count > 0 ? string.Join(" ", liClasses) : null; 
+    }
+}
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
       <div class="collapse navbar-collapse">
@@ -38,28 +52,18 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+     <ul class="nav navbar-nav">
           <li class="active"><a href="index.html">Home</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Departments <span class="caret"></span></a>
           <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-            <li><a href="#">Pipe/Hose/Tubing</a></li>
-            <li class="dropdown-submenu"><a href="#"  tabindex="-1">Supply</a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Plumbing Specialties</a></li>
-                    <li><a href="#">Shower/Tub</a></li>
-                    <li><a href="#">Tools</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Plumbing Specialties</a></li>
-            <li><a href="#">Shower/Tub</a></li>
-            <li><a href="#">Tools</a></li>
-            <li><a href="#">Evaperative Cooler</a></li>
-            <li><a href="#">Water Cooler/Drinking Fountain</a></li>
-            <li><a href="#">Disposers/Parts</a></li>
-            <li><a href="#">Instant Water Heater/Parts</a></li>
-            <li><a href="#">Fixtures</a></li>
-            
+            @if (Model != null)
+            {
+                foreach (var cat in Model)
+                {
+                <li><a href="#">@cat.Name</a></li>
+                }
+            }
             <li class="divider"></li>
           </ul>
         </li>
@@ -73,8 +77,6 @@
       <ul class="nav navbar-nav navbar-right">
         <li id="wish-btn"><a href="#">View My List</a></li>
             <li class="divider"></li>
-          </ul>
-        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

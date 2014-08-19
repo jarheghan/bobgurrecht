@@ -30,4 +30,12 @@ namespace RepositoryPattern.Model.Catalog
         public bool? DeleteFlag  { get; set; }
         
     }
+
+    public enum MenuPathState
+    {
+        Unknown = 0,
+        Parent = 1,
+        Expanded = 2,
+        Selected = 3
+    }
 }

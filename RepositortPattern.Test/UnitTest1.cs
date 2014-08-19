@@ -72,11 +72,11 @@ namespace RepositortPattern.Test
         {
             _categoryRepo = new CategoryDataMapper();
             List<ProductCategory> prdcat = new List<ProductCategory>();
-            prdcat.Add(new ProductCategory { ProductID = 1, CategoryID = 3, DisplayOrder = 1, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 2, CategoryID = 3, DisplayOrder = 2, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 3, CategoryID = 4, DisplayOrder = 3, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 4, CategoryID = 4, DisplayOrder = 4, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 5, CategoryID = 5, DisplayOrder = 5, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 1, CategoryID = 1, DisplayOrder = 1, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 2, CategoryID = 1, DisplayOrder = 2, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 3, CategoryID = 2, DisplayOrder = 3, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 4, CategoryID = 2, DisplayOrder = 4, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 5, CategoryID = 3, DisplayOrder = 5, IsFeaturedProduct = false });
 
             foreach (var pc in prdcat)
             {
