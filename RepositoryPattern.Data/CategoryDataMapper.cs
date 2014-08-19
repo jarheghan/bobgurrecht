@@ -154,7 +154,14 @@ namespace RepositoryPattern.Data
 
         public Category GetCategoryById(int categoryId)
         {
-            throw new NotImplementedException();
+            using (SqlCeConnection cn = Connection2)
+            {
+                cn.Open();
+                var categories = cn.Query<dynamic>("select * from categories where cat_id = @categoryId",
+                                new {categoryId = categoryId }).FirstOrDefault();
+                Category cat = Map(categories);
+                return cat;
+            }
         }
 
         public IEnumerable<Category> GetAllCategoriesDisplayedOnHomePage()

@@ -104,12 +104,14 @@ namespace RepositortPattern.Test
                         .Select(x =>
                             {
                                 var product = _productRepo.GetProductByID(x.ProductID ?? default(int));
+                                var category = _categoryRepo.GetCategoryById(x.CategoryID ?? default(int));
                                 return new ProductCategory()
                                 {
                                     ID = x.ID,
                                     CategoryID = x.CategoryID,
                                     ProductID = x.ProductID,
                                     Product = product,
+                                    Category = category,
                                     IsFeaturedProduct = x.IsFeaturedProduct,
                                     AddDate = x.AddDate,
                                     AddUser = x.AddUser,

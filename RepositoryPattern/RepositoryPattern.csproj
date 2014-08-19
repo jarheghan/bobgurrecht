@@ -263,6 +263,7 @@
     <Content Include="Views\Shared\_RootHead.cshtml" />
     <Content Include="Views\Common\Menu.cshtml" />
     <Content Include="Views\Common\Slider.cshtml" />
+    <Content Include="Views\Common\DisplayFeatureProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

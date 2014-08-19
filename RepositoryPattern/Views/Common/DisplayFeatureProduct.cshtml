@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RepositoryPattern.Model.Catalog.ProductCategory>
+@{var csspart = "~/Content/themes/Plumb";} 
+<div class="container">
+  <h4>Stop running around searching for parts and get what you need fast. Ninty-five percent of orders are shipped the same day, and usually arrive the next day. Bob Garrecht Supply carries a vast array of plumbing parts. Whether you ned parts for a fairly new toliet or a valve for a 1950's faucet. We probbably have it. If we we don't, we can get it for you. Call, email or place your order right here on our website</h4>
+  </div>
+
+<div class="main-content">
+<div class="container">
+  <div class="page-header">
+  <h1><small>Feature Products</small></h1>
+  </div>
+@if(Model != null)
+{
+    var ss = Model.Select(x => x.Category.Name).FirstOrDefault();
+<div class="col-md-4">
+    <div class="thumbnail">
+      <img src="@Url.Content(csspart + "/img/kitchen-faucets.jpg")" alt="...">
+      <div class="caption">
+        <h3>@ss</h3>
+        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+        <p><a href="#" class="btn btn-default" role="button">Shop All Products</a></p>
+      </div>
+    </div>
+  </div>
+    
+  
+<div class="col-md-8">
+    @foreach(var cat in Model)
+    {   
+    <div class="col-sm-3">
+    <a href="product-page.html"><img class="small-thumbnail" src="@Url.Content(csspart + "/img/i01049.jpg")">
+    <label class="plabel">@cat.Product.Name</label></a>
+    </div>
+    }
+</div>
+
+}
+</div>
+</div>

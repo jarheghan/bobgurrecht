@@ -63,7 +63,9 @@ namespace RepositoryPattern.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            //IProductRepository
             kernel.Bind<ICategoryRepository>().To<CategoryDataMapper>().InSingletonScope();
+            kernel.Bind<IProductRepository>().To<ProductDataMapper>().InSingletonScope();
         }        
     }
 }
