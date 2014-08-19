@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper">
-      <HintPath>..\packages\Dapper.1.27\lib\net45\Dapper.dll</HintPath>
+    <Reference Include="Dapper, Version=1.30.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Dapper.1.30\lib\net40\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -52,9 +53,6 @@
     <Compile Include="UserDataMapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\RepositoryPattern.Infrastructure\RepositoryPattern.Infrastructure.csproj">
       <Project>{4895d6a0-f202-4645-954c-36ae126fa74e}</Project>
       <Name>RepositoryPattern.Infrastructure</Name>
@@ -63,6 +61,9 @@
       <Project>{e1b2fddb-2b63-4445-b972-34e76467df99}</Project>
       <Name>RepositoryPattern.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

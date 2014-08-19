@@ -50,8 +50,15 @@ namespace RepositortPattern.Test
             _categoryRepo = new CategoryDataMapper();
 
             List<Category> cat = new List<Category>();
-            cat.Add(new Category { Name = "Technology Garget", Description = "This Technology Garget", Alias = "Tech", MetaKeyword = "", DisplayOrder = 1 });
-            cat.Add(new Category { Name = "Cloth", Description = "This Cloth", Alias = "Cloth", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Pipe/Hose/Tubing", Description = "Pipe/Hose/Tubing", Alias = "Pipe/Hose/Tubing", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Supply", Description = "Supply", Alias = "Cloth", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Plumbering Specialties", Description = "This Technology Garget", Alias = "Tech", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Shower/Tub", Description = "This Cloth", Alias = "Cloth", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Tools", Description = "Tools", Alias = "Tech", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Evaperative Cooler", Description = "This Cloth", Alias = "Cloth", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Water Cooler/Drinking Fountain", Description = "Water Cooler/Drinking Fountain", Alias = "Cloth", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Disposer/Parts", Description = "Disposer/Parts", Alias = "Disposer/Parts", MetaKeyword = "", DisplayOrder = 1 });
+            cat.Add(new Category { Name = "Fixtures", Description = "Fixtures", Alias = "Fixtures", MetaKeyword = "", DisplayOrder = 1 });
 
             foreach (var p in cat)
             {
@@ -65,11 +72,11 @@ namespace RepositortPattern.Test
         {
             _categoryRepo = new CategoryDataMapper();
             List<ProductCategory> prdcat = new List<ProductCategory>();
-            prdcat.Add(new ProductCategory { ProductID = 1, CategoryID = 1, DisplayOrder = 1, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 2, CategoryID = 1, DisplayOrder = 2, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 3, CategoryID = 1, DisplayOrder = 3, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 4, CategoryID = 2, DisplayOrder = 4, IsFeaturedProduct = false });
-            prdcat.Add(new ProductCategory { ProductID = 5, CategoryID = 2, DisplayOrder = 5, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 1, CategoryID = 3, DisplayOrder = 1, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 2, CategoryID = 3, DisplayOrder = 2, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 3, CategoryID = 4, DisplayOrder = 3, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 4, CategoryID = 4, DisplayOrder = 4, IsFeaturedProduct = false });
+            prdcat.Add(new ProductCategory { ProductID = 5, CategoryID = 5, DisplayOrder = 5, IsFeaturedProduct = false });
 
             foreach (var pc in prdcat)
             {
@@ -113,7 +120,7 @@ namespace RepositortPattern.Test
                             });
           
 
-            Assert.AreEqual(4, productCategory.Count());
+            Assert.AreEqual(3, productCategory.Count());
         }
     }
 }
