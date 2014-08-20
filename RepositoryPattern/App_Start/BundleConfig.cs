@@ -45,6 +45,11 @@ namespace RepositoryPattern
                     , "~/Content/themes/Plumb/css/custom.css"
                     , "~/Content/themes/Plumb/css/normalize.css"
                     ));
+            bundles.Add(new StyleBundle("~/adminBootstrap/css").Include("~/Content/bootstrap/bootstrap.css"
+                   , "~/Content/bootstrap/bootstrap.theme.css"
+                   , "~/Content/themes/Plumb/css/admin.css"
+                   , "~/Content/themes/Plumb/css/normalize.css"
+                   ));
         }
     }
 }

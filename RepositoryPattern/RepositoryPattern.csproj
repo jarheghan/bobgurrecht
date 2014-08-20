@@ -136,6 +136,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -148,6 +151,7 @@
     <Content Include="App_Data\RPStore.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
@@ -208,6 +212,60 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\Plumb\css\custom.css" />
     <Content Include="Content\themes\Plumb\css\normalize.css" />
+    <Content Include="Content\themes\Plumb\css\admin.css" />
+    <Content Include="Content\themes\Plumb\images\avatar-bg.png" />
+    <Content Include="Content\themes\Plumb\images\badges_text.png" />
+    <Content Include="Content\themes\Plumb\images\bg.png" />
+    <Content Include="Content\themes\Plumb\images\box_bg_bot.jpg" />
+    <Content Include="Content\themes\Plumb\images\buttons.png" />
+    <Content Include="Content\themes\Plumb\images\calendar_arrows.png" />
+    <Content Include="Content\themes\Plumb\images\calendar_header.png" />
+    <Content Include="Content\themes\Plumb\images\chosen.png" />
+    <Content Include="Content\themes\Plumb\images\comment_arrow.png" />
+    <Content Include="Content\themes\Plumb\images\comment_bg_bot.jpg" />
+    <Content Include="Content\themes\Plumb\images\icons\plus.png" />
+    <Content Include="Content\themes\Plumb\images\icons\plus_small.png" />
+    <Content Include="Content\themes\Plumb\images\icons\search.png" />
+    <Content Include="Content\themes\Plumb\images\icons\star_off.png" />
+    <Content Include="Content\themes\Plumb\images\icons\star_on.png" />
+    <Content Include="Content\themes\Plumb\images\jp-controls.png" />
+    <Content Include="Content\themes\Plumb\images\jslider.png" />
+    <Content Include="Content\themes\Plumb\images\knob-balance.png" />
+    <Content Include="Content\themes\Plumb\images\knob-volume-bg.png" />
+    <Content Include="Content\themes\Plumb\images\knob-volume.png" />
+    <Content Include="Content\themes\Plumb\images\loading.gif" />
+    <Content Include="Content\themes\Plumb\images\nicEditorIcons.png" />
+    <Content Include="Content\themes\Plumb\images\play.png" />
+    <Content Include="Content\themes\Plumb\images\post_image_controls.png" />
+    <Content Include="Content\themes\Plumb\images\progressbars.png" />
+    <Content Include="Content\themes\Plumb\images\ribbons-shadow.png" />
+    <Content Include="Content\themes\Plumb\images\ribbons.png" />
+    <Content Include="Content\themes\Plumb\images\scrollbar.png" />
+    <Content Include="Content\themes\Plumb\images\seeking.gif" />
+    <Content Include="Content\themes\Plumb\images\selects1.png" />
+    <Content Include="Content\themes\Plumb\images\selects2.png" />
+    <Content Include="Content\themes\Plumb\images\styled_checkbox.png" />
+    <Content Include="Content\themes\Plumb\images\styled_checkbox_large.png" />
+    <Content Include="Content\themes\Plumb\images\styled_radiobutton.png" />
+    <Content Include="Content\themes\Plumb\images\tag.png" />
+    <Content Include="Content\themes\Plumb\images\temp\avatar.png" />
+    <Content Include="Content\themes\Plumb\images\temp\avatar1.png" />
+    <Content Include="Content\themes\Plumb\images\temp\music-player1.png" />
+    <Content Include="Content\themes\Plumb\images\temp\music-player2.png" />
+    <Content Include="Content\themes\Plumb\images\temp\music-player3.png" />
+    <Content Include="Content\themes\Plumb\images\temp\tabimage1.png" />
+    <Content Include="Content\themes\Plumb\images\temp\tabimage2.png" />
+    <Content Include="Content\themes\Plumb\images\temp\tabimage5.png" />
+    <Content Include="Content\themes\Plumb\images\temp\tabimage6.png" />
+    <Content Include="Content\themes\Plumb\images\temp\tabimage7.png" />
+    <Content Include="Content\themes\Plumb\images\temp\top-slider-1.jpg" />
+    <Content Include="Content\themes\Plumb\images\temp\top-slider-2.jpg" />
+    <Content Include="Content\themes\Plumb\images\temp\top-slider-3.jpg" />
+    <Content Include="Content\themes\Plumb\images\temp\top-slider-4.jpg" />
+    <Content Include="Content\themes\Plumb\images\temp\top-slider-5.jpg" />
+    <Content Include="Content\themes\Plumb\images\temp\vjs_poster2.png" />
+    <Content Include="Content\themes\Plumb\images\video-js.png" />
+    <Content Include="Content\themes\Plumb\images\video_controls.png" />
     <Content Include="Content\themes\Plumb\img\home-button.png" />
     <Content Include="Content\themes\Plumb\img\I01028.jpg" />
     <Content Include="Content\themes\Plumb\img\I01035.jpg" />
@@ -229,6 +287,14 @@
     <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\bootstrap.css.map" />
     <Content Include="Content\themes\Plumb\img\.DS_Store" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\Views\Common\Menu.cshtml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
@@ -266,6 +332,10 @@
     <Content Include="Views\Common\DisplayFeatureProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Content\" />
+    <Folder Include="Areas\Admin\Infacstructure\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Scripts\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -305,7 +375,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>40696</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:16789/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
