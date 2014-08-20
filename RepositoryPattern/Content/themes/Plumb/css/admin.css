@@ -1165,7 +1165,7 @@ input[type="password"]:focus{
 .tabs_framed{margin-bottom:30px;}
 .col-sm-4 .tabs_framed{margin-bottom:25px;}
 
-.tab-content {
+.tabs{
     overflow: visible;
     background: url(../images/box_bg_bot.jpg) bottom repeat-x #fafafa;
     border-radius:0 4px 4px 4px;
