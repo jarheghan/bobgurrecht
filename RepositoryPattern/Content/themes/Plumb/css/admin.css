@@ -1753,7 +1753,7 @@ input[type="password"]:focus{
 .progressbar.style2 .downloadbar .ui-widget-content:after {background: none;}
 
 .progressbar.style2 .downloadbar .ui-progressbar .ui-progressbar-value {
-	height: 5;
+	height: 5px;
 	position: relative;
     background:url(../images/progressbars.png) left -24px no-repeat;
     margin-top: 1px;

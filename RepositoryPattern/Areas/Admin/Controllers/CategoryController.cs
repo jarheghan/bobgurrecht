@@ -38,5 +38,10 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public ActionResult List()
+        {
+            return View();
+        }
     }
 }

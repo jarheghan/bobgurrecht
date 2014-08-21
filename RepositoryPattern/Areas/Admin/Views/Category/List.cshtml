@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using Telerik.Web.Mvc.UI
+
+<h2>List</h2>
+<div id="clientsDb">
+    @(Html.Telerik().Grid<RepositoryPattern.Model.Catalog.ProductCategory>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.Category.MetaTitle).Width(140);
+            columns.Bound(c => c.Category.Alias).Width(190);
+           
+            //columns.Command(command => command.Destroy).Width(110);
+        })
+        .HtmlAttributes(new { style = "height: 380px;" })
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Customers_Read", "Grid"))
+            
+        )
+    )
+</div>
