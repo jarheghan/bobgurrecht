@@ -158,5 +158,11 @@ namespace RepositoryPattern.Data
         {
             throw new NotImplementedException();
         }
+
+
+        public IEnumerable<Product> GetAllProduct()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

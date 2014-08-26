@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepositoryPattern.Model.Catalog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,14 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 {
     public class CategoryController : Controller
     {
+        public CategoryController(ICategoryRepository categoryRepository
+            ,IProductRepository productRepository)
+        {
+           this._categoryRepository = categoryRepository;
+           this._productRepository = productRepository;
+        }
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
         //
         // GET: /Admin/Category/
 
@@ -41,7 +50,8 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            return View();
+            IEnumerable<Category> cat = _categoryRepository.GetAllCategories();
+            return View(cat);
         }
     }
 }

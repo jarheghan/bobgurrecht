@@ -12,5 +12,6 @@ namespace RepositoryPattern.Model.Catalog
         IEnumerable<Product> GetProductByCategory(int category);
         Product GetProductByID(int productID);
         IEnumerable<Product> GetProductByPriceValue(int price);
+        IEnumerable<Product> GetAllProduct();
     }
 }
