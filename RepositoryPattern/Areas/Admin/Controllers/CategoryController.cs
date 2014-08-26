@@ -31,9 +31,11 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Edit(int categoryId)
+        public ActionResult Edit(int Id)
         {
-            return View();
+            Category cat = new Category();
+            cat = _categoryRepository.GetCategoryById(Id);
+            return View(cat);
         }
 
         [HttpPost]

@@ -11,20 +11,26 @@
             @Html.Action("Menu", "Common", new {area="Admin"})
   <div class="row">
      <div class="col-sm-12">
+               <a href="@Url.Action("Create")" class="btn btn-round"><span>Add New Category</span></a> 
 <div id="clientsDb">
     @(Html.Telerik().Grid<Category>(Model)
         .Name("Category")
         .Columns(columns =>
         {
-            columns.Bound(c => c.Name).Width(140);
+            columns.Bound(c => c.Name).Width(190);
             columns.Bound(c => c.Description).Width(190);
             columns.Bound(c => c.Alias).Width(190);
+            columns.Bound(c => c.ID).Width(190);
+            columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Edit Category", "Edit", new { Id = c.ID }));
+                            
+                                
         })
         .HtmlAttributes(new { style = "height: 380px;" })
         .Scrollable()
-        .Groupable()
+        //.Groupable()
         .Sortable()
-        .Pageable()
+        //.Pageable()
+       
     )
 </div>
          </div>

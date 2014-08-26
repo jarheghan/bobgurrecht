@@ -1,7 +1,9 @@
-﻿@{
-    ViewBag.Title = "Create";
+﻿@using RepositoryPattern.Model.Catalog;
+@{
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+@model Category
  @{var listItems = new List<SelectListItem>
                                         {
                                           new SelectListItem { Text = "Toyoto", Value = "0" },
@@ -19,7 +21,7 @@
                 <div class="tabs_framed styled">
                     <div class="inner">
                         <ul class="tabs clearfix active_bookmark1">
-                            <li class="active"><a href="#events" data-toggle="tab"><sup class="note">5</sup>Category Info</a></li>
+                            <li class="active"><a href="#events" data-toggle="tab"><sup class="note">@Model.ID</sup>Category Info</a></li>
                             <li><a href="#reminders" data-toggle="tab">Seo Info</a></li>
                         </ul>
 
@@ -27,11 +29,11 @@
                             <div class="tab-pane fade in active" id="events">
                                 <div class="field_text">
                                     <label for="subject" class="label_title">Name:</label>
-                                    <input type="text" name="cat_name" id="cat_name" value="" placeholder="Enter Category Name" class="inputtext input_middle required" />
+                                    <input type="text" name="cat_name" id="cat_name" value="@Model.Name" placeholder="Enter Category Name" class="inputtext input_middle required" />
                                 </div>
                                  <div class="field_text">
                                     <label for="subject" class="label_title">Description:</label>
-                                    <input type="text" name="cat_description" id="cat_description" value="" placeholder="Enter Description" class="inputtext input_middle required" />
+                                    <input type="text" name="cat_description" id="cat_description" value="@Model.Description" placeholder="Enter Description" class="inputtext input_middle required" />
                                 </div>
                                  <div class="field_text">
                                     <label for="subject" class="label_title">Parent Category:</label>
@@ -39,7 +41,7 @@
                                 </div>
                                  <div class="field_text">
                                     <label for="subject" class="label_title">Alias:</label>
-                                    <input type="text" name="cat_alias" id="cat_alias" value="" placeholder="Enter Alias" class="inputtext input_middle required" />
+                                    <input type="text" name="cat_alias" id="cat_alias" value="@Model.Alias" placeholder="Enter Alias" class="inputtext input_middle required" />
                                 </div>
                                 <div class="field_text">
                                 </div>
@@ -64,5 +66,3 @@
         </div>
     </div>
  
-
-    

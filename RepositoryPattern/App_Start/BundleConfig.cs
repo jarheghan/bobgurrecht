@@ -49,6 +49,7 @@ namespace RepositoryPattern
                    , "~/Content/bootstrap/bootstrap.theme.css"
                    , "~/Content/themes/Plumb/css/admin.css"
                    , "~/Content/themes/Plumb/css/normalize.css"
+                   , "~/Content/themes/Plumb/css/telerik.css"
                    ));
         }
     }
