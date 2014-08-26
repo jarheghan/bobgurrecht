@@ -14,7 +14,7 @@
             @Html.Action("Menu", "Common", new {area="Admin"})
   <div class="row">
      <div class="col-sm-12">
-                       <a href="#" class="btn btn-round"><span>Save</span></a>                
+                                  
                 <!-- tabs -->
                 <div class="tabs_framed styled">
                     <div class="inner">
@@ -22,7 +22,8 @@
                             <li class="active"><a href="#events" data-toggle="tab"><sup class="note">5</sup>Category Info</a></li>
                             <li><a href="#reminders" data-toggle="tab">Seo Info</a></li>
                         </ul>
-
+                        @using(Html.BeginForm())
+                        {
                         <div class="tab-content clearfix">
                             <div class="tab-pane fade in active" id="events">
                                 <div class="field_text">
@@ -56,9 +57,12 @@
                             <div class="tab-pane fade" id="reminders">
                            </div>
                         </div>
+                             <a href="#" class="btn btn-round"><span>Save</span></a>  
+                        }
                     </div>
                 </div>
                 <!--/ tabs -->
+           
             </div>
          </div>
         </div>

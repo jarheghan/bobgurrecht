@@ -50,6 +50,7 @@ namespace RepositoryPattern
                    , "~/Content/themes/Plumb/css/admin.css"
                    , "~/Content/themes/Plumb/css/normalize.css"
                    , "~/Content/themes/Plumb/css/telerik.css"
+                   ,"~/Content/themes/Plumb/css/telerik.rtl.css"
                    ));
         }
     }

@@ -328,6 +328,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -341,6 +342,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Admin\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\themes\Plumb\css\telerik.css" />
+    <Content Include="Content\themes\Plumb\css\telerik.rtl.css" />
+    <Content Include="Content\themes\Plumb\css\telerik.rtl111.css" />
     <Content Include="Content\themes\Plumb\telerik\Black\editor.png" />
     <Content Include="Content\themes\Plumb\telerik\Black\imagebrowser.png" />
     <Content Include="Content\themes\Plumb\telerik\Black\loading.gif" />
@@ -602,7 +606,6 @@
     <Content Include="Content\themes\Plumb\css\custom.css" />
     <Content Include="Content\themes\Plumb\css\normalize.css" />
     <Content Include="Content\themes\Plumb\css\admin.css" />
-    <Content Include="Content\themes\Plumb\css\telerik.css" />
     <Content Include="Content\themes\Plumb\images\avatar-bg.png" />
     <Content Include="Content\themes\Plumb\images\badges_text.png" />
     <Content Include="Content\themes\Plumb\images\bg.png" />
