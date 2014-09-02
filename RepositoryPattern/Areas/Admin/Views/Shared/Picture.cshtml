@@ -2,9 +2,10 @@
 @{
     int picture = 1;
     var ramdom = CommonHelpers.GenerateRandomInteger();
+    var clientId = "picture" + ramdom;
 }
 
-<div id="pictureid" class="fileupload" style="display: inline-block;">
+<div id="@clientId" class="fileupload" style="display: inline-block;">
     
 @*    @Html.HiddenFor(x => x, new { @class = "hidden"} )*@
 
@@ -42,7 +43,7 @@
 
     $(function () {
 
-        var el = $('#pictureid'),
+        var el = $('#@clientId'),
             img = el.find('img'),
             elHidden = el.find('.hidden'),
             elRemove = el.find('.remove');

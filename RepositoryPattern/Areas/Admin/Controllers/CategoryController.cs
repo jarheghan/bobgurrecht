@@ -26,8 +26,9 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(int ss)
+        public ActionResult Create(Category category)
         {
+
             return View();
         }
 
