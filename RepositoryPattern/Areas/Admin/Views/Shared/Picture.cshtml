@@ -1,4 +1,5 @@
-﻿@using RepositoryPattern.Areas.Admin.Infacstructure
+﻿
+@using RepositoryPattern.Areas.Admin.Infacstructure
 @{
     int picture = 1;
     var ramdom = CommonHelpers.GenerateRandomInteger();
@@ -6,10 +7,10 @@
 }
 
 <div id="@clientId" class="fileupload" style="display: inline-block;">
-    
-@*    @Html.HiddenFor(x => x, new { @class = "hidden"} )*@
+    @*@Html.HiddenFor(x => x, new { @class = "hidden"} )
+    @Html.Hidden(
 
-    <img src="@Url.Content("~/Content/themes/Plumb/images/default-image.jpg")" class="img-polaroid" alt="" />
+    *@<img src="@Url.Content("~/Content/themes/Plumb/images/default-image.jpg")" class="img-polaroid" alt="" />
 
     <button class="btn remove" @Html.Attr("style", "display:none", picture == null )>
         <i class="icon-trash"></i>
@@ -55,6 +56,7 @@
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
 
             done: function (e, data) {
+                debugger;
                 var result = data.result;
                 if (result.success) {
                     img.attr('src', result.imageUrl);

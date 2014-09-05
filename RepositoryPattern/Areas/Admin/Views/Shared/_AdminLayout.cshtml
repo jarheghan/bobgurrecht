@@ -23,11 +23,17 @@
 												}).ToString())
     
 </head>
-<body>
-    @RenderBody()
+<body class="skin-blue">
+    @Html.Action("Header","Common", new {area="Admin"})
+   <div class="wrapper row-offcanvas row-offcanvas-left">
+        @RenderBody()
+   </div>
     
    @* @Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundle/bootstrap")
-    @RenderSection("scripts", required: false)
+    @if(IsSectionDefined("scripts"))
+    {
+    @RenderSection("scripts")
+    }
 </body>
 </html>

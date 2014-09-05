@@ -16,5 +16,16 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             return PartialView();
         }
 
+        public ActionResult BodySide()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Header()
+        {
+            return PartialView();
+        }
+
+
     }
 }

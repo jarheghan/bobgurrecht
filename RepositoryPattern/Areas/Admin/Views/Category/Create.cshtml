@@ -4,6 +4,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
     Html.RequiresCss("FileUpload/jquery.fileupload-ui.css", "Content",5);
+    Html.RequiresCss("admin/font-awesome.css", "Content", 5);
+    Html.RequiresCss("admin/ionicons.css", "Content", 5);
     
     Html.RequiresJs("FileUpload/tmpl.min.js", "Content", 5);
     Html.RequiresJs("FileUpload/canvas-to-blob.min.js", "Content", 5);
@@ -13,10 +15,12 @@
     Html.RequiresJs("FileUpload/jquery.fileupload-ip.js", "Content", 20);
     Html.RequiresJs("FileUpload/jquery.fileupload-ui.js", "Content", 30);
 
-    Html.RequiresJs("FileUpload/locale.js", "Content", 90);
-    Html.RequiresJs("FileUpload/main.js", "Content", 99);
     Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
     Html.RequiresJs("jquery-ui-1.8.20.js", "jquery", 2);
+    Html.RequiresJs("FileUpload/locale.js", "Content", 90);
+    Html.RequiresJs("FileUpload/main.js", "Content", 99);
+    Html.RequiresJs("admin/app.js", "Content", 99);
+    Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
  @{var listItems = new List<SelectListItem>
                                         {
@@ -24,66 +28,7 @@
                                           new SelectListItem { Text = "Honda", Value = "1" },
                                           new SelectListItem { Text = "Subaru", Value = "2" }
                                         };}
-<div class="container">
-    <!-- content -->
-    <div class="content " role="main">
-            @Html.Action("Menu", "Common", new {area="Admin"})
-  <div class="row">
-     <div class="col-sm-12">
-                                  
-                <!-- tabs -->
-                <div class="tabs_framed styled">
-                    <div class="inner">
-                        <ul class="tabs clearfix active_bookmark1">
-                            <li class="active"><a href="#events" data-toggle="tab">@*<sup class="note">5</sup>*@Category Info</a></li>
-                            <li><a href="#reminders" data-toggle="tab">Seo Info</a></li>
-                        </ul>
-                        @using(Html.BeginForm())
-                        {
-                        <div class="tab-content clearfix">
-                            <div class="tab-pane fade in active" id="events">
-                                <div class="field_text">
-                                    <label for="subject" class="label_title">Name:</label>
-                                    <input type="text" name="cat_name" id="cat_name" value="" placeholder="Enter Category Name" class="inputtext input_middle required" />
-                                </div>
-                                 <div class="field_text">
-                                    <label for="subject" class="label_title">Description:</label>
-                                    <input type="text" name="cat_description" id="cat_description" value="" placeholder="Enter Description" class="inputtext input_middle required" />
-                                </div>
-                                 <div class="field_text">
-                                    <label for="subject" class="label_title">Parent Category:</label>
-                                    @Html.DropDownList("Test", new SelectList(listItems, "Value", "Text"), new {@class="select_styled select_styled_red" })
-                                </div>
-                                 <div class="field_text">
-                                    <label for="subject" class="label_title">Alias:</label>
-                                    <input type="text" name="cat_alias" id="cat_alias" value="" placeholder="Enter Alias" class="inputtext input_middle required" />
-                                </div>
-                                <div class="field_text">
-                                </div>
-                                
-                                <div class="field_textupload">
-                                  @*   <img src="@Url.Content("~/Content/themes/Plumb/images/default-image.jpg")" alt="" />
-                                 <span class="fileUpload btn btn-red">
-                                     <span><i class="plus"></i>Upload a file</span>
-                                    <input type="file"  id="upload"   class="upload" />
-                                </span>*@
 
-                                @Html.Partial("Picture")
-                               </div>
-                            </div>
-                            <div class="tab-pane fade" id="reminders">
-                           </div>
-                        </div>
-                             <a href="#" class="btn btn-round"><span>Save</span></a>  
-                        }
-                    </div>
-                </div>
-                <!--/ tabs -->
-           
-            </div>
-         </div>
-        </div>
-    </div>
  @section scripts{
 @*<script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -148,4 +93,57 @@
      }
 
 
+
+  @Html.Action("Menu", "Common", new {area="Admin"})
+
+ <aside class="right-side">
+ <section class="content">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-10">
+                            <!-- general form elements -->
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h3 class="box-title">Create Category</h3>
+                                </div><!-- /.box-header -->
+                                <!-- form start -->
+                                <div role="form">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Name</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Description</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="exampleInputPassword1">Parent Category</label>
+                                             @Html.DropDownList("Test", new SelectList(listItems, "Value", "Text"), new {@class="select_styled select_styled_red" })
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="exampleInputPassword1">Alias</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                          @Html.Partial("Picture")
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Check me out
+                                            </label>
+                                        </div>
+                                    </div><!-- /.box-body -->
+
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div><!-- /.box -->
+                    </div>
+              </section>
     
+
+</aside>
+
+ 
