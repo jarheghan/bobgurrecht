@@ -1,11 +1,23 @@
-﻿@{
+﻿@using ClientDependency.Core.Mvc
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    
+    Html.RequiresCss("FileUpload/jquery.fileupload-ui.css", "Content", 5);
+    Html.RequiresCss("admin/font-awesome.css", "Content", 5);
+    Html.RequiresCss("admin/ionicons.css", "Content", 5);
+
+    Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
+    Html.RequiresJs("jquery-ui-1.8.20.js", "jquery", 2);
+    Html.RequiresJs("admin/app.js", "Content", 99);
+    Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
 
-<div class="container">
-    <!-- content -->
-    <div class="content " role="main">
-@Html.Action("Menu", "Common", new {area="Admin"})
-        </div>
-    </div>
+ @Html.Action("Menu", "Common", new {area="Admin"})
+
+ <aside class="right-side">
+  <section class="col-lg-12 connectedSortable">
+  <div class="row">
+   </div>
+  </section>
+</aside>

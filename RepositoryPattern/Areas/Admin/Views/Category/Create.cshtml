@@ -29,8 +29,59 @@
                                           new SelectListItem { Text = "Subaru", Value = "2" }
                                         };}
 
+
+
+
+  @Html.Action("Menu", "Common", new {area="Admin"})
+
+ <aside class="right-side">
+ <section class="content">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-10">
+                            <!-- general form elements -->
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h3 class="box-title">Create Category</h3>
+                                </div><!-- /.box-header -->
+                                <!-- form start -->
+                                <div role="form">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Name</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Category Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Description</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description">
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="exampleInputPassword1">Parent Category</label>
+                                             @Html.DropDownList("Test", new SelectList(listItems, "Value", "Text"), new {@class="select_styled select_styled_red" })
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="exampleInputPassword1">Alias</label>
+                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Alias">
+                                        </div>
+                                        
+                                          @Html.Partial("Partial1")
+                                     
+                                       
+                                    </div><!-- /.box-body -->
+
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div><!-- /.box -->
+                          </div>
+                    </div>
+              </section>
+</aside>
+
+ 
  @section scripts{
-@*<script id="template-upload" type="text/x-tmpl">
+<script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade">
         <td class="preview"><span class="fade"></span></td>
@@ -43,7 +94,7 @@
                 <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
             </td>
             <td class="start">{% if (!o.options.autoUpload) { %}
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="fileupload1">
                     <i class="icon-upload icon-white"></i>
                     <span>{%=locale.fileupload.start%}</span>
                 </button>
@@ -88,62 +139,6 @@
         </td>
     </tr>
 {% } %}
-</script>*@
+</script>
 
      }
-
-
-
-  @Html.Action("Menu", "Common", new {area="Admin"})
-
- <aside class="right-side">
- <section class="content">
-                    <div class="row">
-                        <!-- left column -->
-                        <div class="col-md-10">
-                            <!-- general form elements -->
-                            <div class="box box-primary">
-                                <div class="box-header">
-                                    <h3 class="box-title">Create Category</h3>
-                                </div><!-- /.box-header -->
-                                <!-- form start -->
-                                <div role="form">
-                                    <div class="box-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Name</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Description</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        </div>
-                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Parent Category</label>
-                                             @Html.DropDownList("Test", new SelectList(listItems, "Value", "Text"), new {@class="select_styled select_styled_red" })
-                                        </div>
-                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Alias</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        </div>
-                                        <div class="form-group">
-                                          @Html.Partial("Picture")
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> Check me out
-                                            </label>
-                                        </div>
-                                    </div><!-- /.box-body -->
-
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </div>
-                            </div><!-- /.box -->
-                    </div>
-              </section>
-    
-
-</aside>
-
- 
