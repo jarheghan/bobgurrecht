@@ -1,84 +1,15 @@
-﻿
-@using RepositoryPattern.Areas.Admin.Infacstructure
-@{
-    int picture = 1;
-    var ramdom = CommonHelpers.GenerateRandomInteger();
-    var clientId = "picture" + ramdom;
-}
-
-<div id="@clientId" class="fileupload" style="display: inline-block;">
-    @*@Html.HiddenFor(x => x, new { @class = "hidden"} )
-    @Html.Hidden(
-
-    *@<img src="@Url.Content("~/Content/themes/Plumb/images/default-image.jpg")" class="img-polaroid" alt="" />
-
-    <button class="btn remove" @Html.Attr("style", "display:none", picture == null )>
-        <i class="icon-trash"></i>
-        Remove Picture
-    </button>
-
-    <span class="btn btn-primary fileinput-button">
-        <i class="icon-upload-alt"></i>
-        <span>Upload</span>
-        <input id="fileupload-@ramdom" type="file" name="file" />
-    </span>
-
-    <button class="btn btn-warning cancel">
-        <i class="icon-remove"></i>
-        <span>Cancel</span>
-    </button>
-
-    <!-- The global progress information -->
-    <div class="span5 fileupload-progress fade">
-        <!-- The global progress bar -->
-        <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-            <div class="bar" style="width:0%;"></div>
+﻿<label>Picture</label>   
+<div  class="dropzone" id="dropzoneForm">
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            <input type="submit" value="Upload" />
         </div>
-        <!-- The extended global progress information -->
-        <div class="progress-extended">&nbsp;</div>
     </div>
 
-</div>
 
-<script type="text/javascript">
-
-    $(function () {
-
-        var el = $('#@clientId'),
-            img = el.find('img'),
-            elHidden = el.find('.hidden'),
-            elRemove = el.find('.remove');
-
-        $('#pictureid').fileupload({
-            url: '@(Url.Content("~/Admin/Picture/AsyncUpload"))',
-            dataType: 'json',
-            //acceptFileTypes: /^image\/(gif|jpeg|jpg|png)$/,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-
-            done: function (e, data) {
-                debugger;
-                var result = data.result;
-                if (result.success) {
-                    img.attr('src', result.imageUrl);
-                    elHidden.val(result.pictureId);
-                    elRemove.show();
-                }
-            },
-
-            error: function (jqXHR, textStatus, errorThrown) {
-                if (errorThrown === 'abort') {
-                    //alert('File Upload has been canceled');
-                }
-            }
-        });
-
-        elRemove.click(function (e) {
-            img.attr('src', '');
-            elHidden.val(0);
-            $(this).hide();
-            e.preventDefault();
-        });
-
-    });
-
-</script>
+<style type="text/css">
+    .dz-max-files-reached
+    {
+        background-color: red;
+    }
+</style>

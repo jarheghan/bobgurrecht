@@ -4,22 +4,18 @@
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
-    Html.RequiresCss("FileUpload/jquery.fileupload-ui.css", "Content", 5);
+    
+
+    Html.RequiresCss("dropzone/css/basic.css", "Content", 5);
+    Html.RequiresCss("dropzone/css/dropzone.css", "Content", 5);
     Html.RequiresCss("admin/font-awesome.css", "Content", 5);
     Html.RequiresCss("admin/ionicons.css", "Content", 5);
 
-    Html.RequiresJs("FileUpload/tmpl.min.js", "Content", 5);
-    Html.RequiresJs("FileUpload/canvas-to-blob.min.js", "Content", 5);
-    Html.RequiresJs("FileUpload/load-image.min.js", "Content", 5);
-    Html.RequiresJs("FileUpload/jquery.iframe-transport.js", "Content", 10);
-    Html.RequiresJs("FileUpload/jquery.fileupload.js", "Content", 10);
-    Html.RequiresJs("FileUpload/jquery.fileupload-ip.js", "Content", 20);
-    Html.RequiresJs("FileUpload/jquery.fileupload-ui.js", "Content", 30);
+
 
     Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
     Html.RequiresJs("jquery-ui-1.8.20.js", "jquery", 2);
-    Html.RequiresJs("FileUpload/locale.js", "Content", 90);
-    Html.RequiresJs("FileUpload/main.js", "Content", 99);
+    Html.RequiresJs("dropzone/dropzone.js", "Content", 5);
     Html.RequiresJs("admin/app.js", "Content", 99);
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
@@ -63,9 +59,9 @@
                                             <label for="exampleInputPassword1">Alias</label>
                                             <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" value="@Model.Alias">
                                         </div>
-                                        <div class="form-group">
+                                    
                                           @Html.Partial("Picture")
-                                        </div>
+                                       
                                     </div><!-- /.box-body -->
 
                                     <div class="box-footer">
@@ -80,4 +76,44 @@
 
 </aside>
 
- 
+  @section scripts{
+      <script type="text/javascript">
+
+          //File Upload response from the server
+         // Dropzone.options.dropzoneForm = {
+          $("div#dropzoneForm").dropzone({ url: "/Admin/Picture/SaveUploadedFile",
+              maxFiles: 2,
+              init: function () {
+                  this.on("maxfilesexceeded", function (data) {
+                      var res = eval('(' + data.xhr.responseText + ')');
+
+                  });
+                  this.on("addedfile", function (file) {
+
+                      // Create the remove button
+                      var removeButton = Dropzone.createElement("<button>Remove file</button>");
+
+
+                      // Capture the Dropzone instance as closure.
+                      var _this = this;
+
+                      // Listen to the click event
+                      removeButton.addEventListener("click", function (e) {
+                          // Make sure the button click doesn't submit the form:
+                          e.preventDefault();
+                          e.stopPropagation();
+                          // Remove the file preview.
+                          _this.removeFile(file);
+                          // If you want to the delete the file on the server as well,
+                          // you can do the AJAX request here.
+                      });
+
+                      // Add the button to the file preview element.
+                      file.previewElement.appendChild(removeButton);
+                  });
+              }
+          });
+
+    </script>
+
+     }

@@ -337,11 +337,7 @@
     <Compile Include="Areas\Admin\Controllers\PictureController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Infacstructure\CommonHelpers.cs" />
-    <Compile Include="Areas\Admin\Infacstructure\FileStatus.cs" />
     <Compile Include="Areas\Admin\Infacstructure\HtmlAttributeExtension.cs" />
-    <Compile Include="Areas\Admin\Infacstructure\Upload.ashx.cs">
-      <DependentUpon>Upload.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -359,29 +355,36 @@
     <Content Include="Content\admin\dashboard.js" />
     <Content Include="Content\admin\font-awesome.css" />
     <Content Include="Content\admin\ionicons.css" />
+    <Content Include="Content\bootstrap\images\animated-overlay.gif" />
+    <Content Include="Content\bootstrap\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\bootstrap\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\bootstrap\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\bootstrap\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\bootstrap\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\bootstrap\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\bootstrap\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\bootstrap\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\bootstrap\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\bootstrap\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\bootstrap\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\bootstrap\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\bootstrap\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\bootstrap\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\bootstrap\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\dropzone\css\basic.css" />
+    <Content Include="Content\dropzone\css\dropzone.css" />
+    <Content Include="Content\dropzone\dropzone-amd-module.js" />
+    <Content Include="Content\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Content\dropzone\dropzone.js" />
+    <Content Include="Content\dropzone\dropzone.min.js" />
+    <Content Include="Content\dropzone\images\spritemap%402x.png" />
+    <Content Include="Content\dropzone\images\spritemap.png" />
     <Content Include="Content\themes\Plumb\css\jquery.fileupload.css" />
     <Content Include="Content\themes\Plumb\css\telerik.css" />
     <Content Include="Content\themes\Plumb\css\telerik.rtl.css" />
     <Content Include="Content\themes\Plumb\css\telerik.rtl111.css" />
-    <Content Include="Content\FileUpload\canvas-to-blob.min.js" />
-    <Content Include="Content\FileUpload\css\demo-ie8.css" />
-    <Content Include="Content\FileUpload\css\demo.css" />
-    <Content Include="Content\FileUpload\css\jquery.fileupload-noscript.css" />
-    <Content Include="Content\FileUpload\css\jquery.fileupload-ui-noscript.css" />
-    <Content Include="Content\FileUpload\css\jquery.fileupload-ui.css" />
-    <Content Include="Content\FileUpload\css\jquery.fileupload.css" />
-    <Content Include="Content\FileUpload\css\style.css" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\progressbar.gif" />
-    <Content Include="Content\FileUpload\jquery.fileupload-ip.js" />
-    <Content Include="Content\FileUpload\jquery.fileupload-ui.css" />
-    <Content Include="Content\FileUpload\jquery.fileupload-ui.js" />
-    <Content Include="Content\FileUpload\jquery.fileupload.js" />
-    <Content Include="Content\FileUpload\jquery.iframe-transport.js" />
-    <Content Include="Content\FileUpload\load-image.min.js" />
-    <Content Include="Content\FileUpload\locale.js" />
-    <Content Include="Content\FileUpload\main.js" />
-    <Content Include="Content\FileUpload\tmpl.min.js" />
     <Content Include="Content\themes\Plumb\telerik\Black\editor.png" />
     <Content Include="Content\themes\Plumb\telerik\Black\imagebrowser.png" />
     <Content Include="Content\themes\Plumb\telerik\Black\loading.gif" />
@@ -730,7 +733,6 @@
     <Content Include="Areas\Admin\Views\Category\List.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Picture.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Partial1.cshtml" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\2013.2.611\jquery-1.7.1.min.js" />
@@ -763,9 +765,10 @@
     <Content Include="Scripts\2013.2.611\telerik.treeview.min.js" />
     <Content Include="Scripts\2013.2.611\telerik.upload.min.js" />
     <Content Include="Scripts\2013.2.611\telerik.window.min.js" />
-    <Content Include="Areas\Admin\Infacstructure\Upload.ashx" />
     <Content Include="Areas\Admin\Views\Common\BodySide.cshtml" />
     <Content Include="Areas\Admin\Views\Common\Header.cshtml" />
+    <Content Include="Content\dropzone\css\stylus\basic.styl" />
+    <Content Include="Content\dropzone\css\stylus\dropzone.styl" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -804,6 +807,7 @@
     <Folder Include="Areas\Admin\Content\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Scripts\" />
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
