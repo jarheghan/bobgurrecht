@@ -731,7 +731,6 @@
     <Content Include="Areas\Admin\Views\Common\Menu.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Category\List.cshtml" />
-    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Picture.cshtml" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
@@ -769,6 +768,7 @@
     <Content Include="Areas\Admin\Views\Common\Header.cshtml" />
     <Content Include="Content\dropzone\css\stylus\basic.styl" />
     <Content Include="Content\dropzone\css\stylus\dropzone.styl" />
+    <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

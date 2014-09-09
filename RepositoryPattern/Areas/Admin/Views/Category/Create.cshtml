@@ -43,27 +43,23 @@
                                 <div role="form">
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Name</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Category Name">
+                                            @Html.Label("Name", new {@for="" })
+                                            @Html.TextBox("txtname",null, new {@class="form-control",placeholder="Name" })
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Description</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description">
+                                            @Html.Label("Description",null, new {@for="" })
+                                            @Html.TextBox("txtDescription",null, new {@class="form-control",placeholder="Description" })
                                         </div>
                                          <div class="form-group">
-                                            <label for="exampleInputPassword1">Parent Category</label>
-                                             @Html.DropDownList("Test", new SelectList(listItems, "Value", "Text"), new {@class="select_styled select_styled_red" })
+                                            @Html.Label("Parent Category", new {@for="" })
+                                            @Html.DropDownList("ddlCategory", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
                                         </div>
                                          <div class="form-group">
-                                            <label for="exampleInputPassword1">Alias</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Alias">
+                                            @Html.Label("Alias", new {@for="" })
+                                            @Html.TextBox("txtAlias",null, new {@class="form-control",placeholder="Alias" })
                                         </div>
-                                        
                                           @Html.Partial("Picture")
-                                     
-                                       
-                                    </div><!-- /.box-body -->
-
+                                        </div><!-- /.box-body -->
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
@@ -77,7 +73,6 @@
  
  @section scripts{
       <script type="text/javascript">
-
           //File Upload response from the server
          // Dropzone.options.dropzoneForm = {
           $("div#dropzoneForm").dropzone({ url: "/Admin/Picture/SaveUploadedFile",
@@ -112,7 +107,6 @@
                   });
               }
           });
-
     </script>
 
      }
