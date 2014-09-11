@@ -18,11 +18,11 @@
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
  @{var listItems = new List<SelectListItem>
-                                        {
-                                          new SelectListItem { Text = "Toyoto", Value = "0" },
-                                          new SelectListItem { Text = "Honda", Value = "1" },
-                                          new SelectListItem { Text = "Subaru", Value = "2" }
-                                        };}
+        {
+            new SelectListItem { Text = "Toyoto", Value = "0" },
+            new SelectListItem { Text = "Honda", Value = "1" },
+            new SelectListItem { Text = "Subaru", Value = "2" }
+        };}
 
 
 
@@ -40,23 +40,24 @@
                                     <h3 class="box-title">Create Category</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
+                        @using(Html.BeginForm()){
                                 <div role="form">
                                     <div class="box-body">
                                         <div class="form-group">
                                             @Html.Label("Name", new {@for="" })
-                                            @Html.TextBox("txtname",null, new {@class="form-control",placeholder="Name" })
+                                            @Html.TextBox("Name", null, new {@class="form-control",placeholder="Name" })
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
-                                            @Html.TextBox("txtDescription",null, new {@class="form-control",placeholder="Description" })
+                                            @Html.TextBox("Description",null, new {@class="form-control",placeholder="Description" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Parent Category", new {@for="" })
-                                            @Html.DropDownList("ddlCategory", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
+                                            @Html.DropDownList("ParentCategoryID", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Alias", new {@for="" })
-                                            @Html.TextBox("txtAlias",null, new {@class="form-control",placeholder="Alias" })
+                                            @Html.TextBox("Alias",null, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                           @Html.Partial("Picture")
                                         </div><!-- /.box-body -->
@@ -64,6 +65,7 @@
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
+                        }
                             </div><!-- /.box -->
                           </div>
                     </div>
