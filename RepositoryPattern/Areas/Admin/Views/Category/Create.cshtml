@@ -40,30 +40,32 @@
                                     <h3 class="box-title">Create Category</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
+                            @using(Html.BeginForm()){
                                 <div role="form">
                                     <div class="box-body">
                                         <div class="form-group">
                                             @Html.Label("Name", new {@for="" })
-                                            @Html.TextBox("txtname",null, new {@class="form-control",placeholder="Name" })
+                                            @Html.TextBox("Name",null, new {@class="form-control",placeholder="Name" })
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
-                                            @Html.TextBox("txtDescription",null, new {@class="form-control",placeholder="Description" })
+                                            @Html.TextBox("Description",null, new {@class="form-control",placeholder="Description" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Parent Category", new {@for="" })
-                                            @Html.DropDownList("ddlCategory", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
+                                            @Html.DropDownList("ParentCategoryID", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Alias", new {@for="" })
-                                            @Html.TextBox("txtAlias",null, new {@class="form-control",placeholder="Alias" })
+                                            @Html.TextBox("Alias",null, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                           @Html.Partial("Picture")
                                         </div><!-- /.box-body -->
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
-                                </div>
+                                </div> <!-- End forms -->
+                            }
                             </div><!-- /.box -->
                           </div>
                     </div>
