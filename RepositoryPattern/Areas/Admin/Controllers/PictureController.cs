@@ -22,6 +22,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         }
         public string Paths { get; set; }
         public HttpPostedFileBase TFile { get; set; }
+       
         public ActionResult SaveUploadedFile()
         {
             bool isSavedSuccessfully = true;
@@ -68,18 +69,24 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             picture.IsNew = true;
             picture.FilePath = Path.GetFileName(TFile.FileName);
             picture.PictureBinary = FileBinary;
-            _pictureRepository.Insert(picture);
+            picture.PictureGuid = Guid.NewGuid();
+           int picId =  _pictureRepository.Insert(picture);
 
             if (isSavedSuccessfully)
             {
-                return Json(new { Message = fName });
+                return Json(new { Message = fName, PictureId = picId });
             }
             else
             {
                 return Json(new { Message = "Error in saving file" });
             }
         }
-        
 
+        public ActionResult RemoveUploadedFile(string Id)
+        {
+            var i = _pictureRepository.Remove(int.Parse(Id));
+            return Json(new { Message = "Success" });
+        }
     }
+
 }

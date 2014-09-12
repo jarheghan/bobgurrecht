@@ -31,7 +31,13 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            return View();
+            if (category != null)
+            {
+                _categoryRepository.Add(category);
+                return RedirectToAction("List");
+            }
+            else
+                return View(category);
         }
 
         public ActionResult Edit(int Id)

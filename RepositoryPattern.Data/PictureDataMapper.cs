@@ -26,6 +26,7 @@ namespace RepositoryPattern.Data
                 SeoFileName = result.pic_seo_filename,
                 IsNew = result.pic_is_new,
                 FilePath = result.pic_file_path,
+                PictureGuid = result.pic_guid,
                 AddUser = result.pic_add_user,
                 AddDate = result.pic_add_date,
                 ChangeDate = result.pic_change_date,
@@ -49,6 +50,7 @@ namespace RepositoryPattern.Data
                 SeoFileName = item.SeoFileName,
                 IsNew = item.IsNew,
                 FilePath = item.FilePath,
+                PictureGuid = item.PictureGuid,
                 AddUser = "Jarheghan",
                 AddDate = DateTime.Now,
                 DeleteFlag = false
@@ -57,12 +59,11 @@ namespace RepositoryPattern.Data
             {
                 conn.Open();
                 var i = conn.Query<int>(@"INSERT INTO Picture 
-                                           (pic_picture_binary,pic_mime_type,pic_seo_filename,pic_is_new,pic_file_path
+                                           (pic_picture_binary,pic_mime_type,pic_seo_filename,pic_is_new,pic_file_path,pic_guid
                                             ,pic_add_user,pic_add_date,pic_delete_flag)
-                                           VALUES(@PictureBinary,@MimeType,@SeoFileName,@IsNew,@FilePath,@AddUser,@AddDate,
-                                               @DeleteFlag)
-                                 select SCOPE_IDENTITY()", param);
-                var j = conn.Query<int>(@"Select pic_id from picture where pic_file_path = @FilePath", new { FilePath = param.FilePath }).FirstOrDefault();
+                                           VALUES(@PictureBinary,@MimeType,@SeoFileName,@IsNew,@FilePath,@PictureGuid,@AddUser,@AddDate,
+                                               @DeleteFlag)", param);
+                var j = conn.Query<int>(@"Select pic_id from picture where pic_guid = @PictureGuid", new { PictureGuid = param.PictureGuid }).FirstOrDefault();
             }
         }
 
@@ -70,6 +71,7 @@ namespace RepositoryPattern.Data
         {
             throw new NotImplementedException();
         }
+
 
         public void Update(Picture item)
         {
@@ -110,6 +112,7 @@ namespace RepositoryPattern.Data
                 SeoFileName = item.SeoFileName,
                 IsNew = item.IsNew,
                 FilePath = item.FilePath,
+                PictureGuid = item.PictureGuid,
                 AddUser = "Jarheghan",
                 AddDate = DateTime.Now,
                 DeleteFlag = false
@@ -118,12 +121,28 @@ namespace RepositoryPattern.Data
             {
                 conn.Open();
                 var i = conn.Query<int>(@"INSERT INTO Picture 
-                                           (pic_picture_binary,pic_mime_type,pic_seo_filename,pic_is_new,pic_file_path
+                                           (pic_picture_binary,pic_mime_type,pic_seo_filename,pic_is_new,pic_file_path,pic_guid
                                             ,pic_add_user,pic_add_date,pic_delete_flag)
-                                           VALUES(@PictureBinary,@MimeType,@SeoFileName,@IsNew,@FilePath,@AddUser,@AddDate,
+                                           VALUES(@PictureBinary,@MimeType,@SeoFileName,@IsNew,@FilePath,@PictureGuid,@AddUser,@AddDate,
                                                @DeleteFlag)", param);
-                 var j = conn.Query<int>(@"select SCOPE_IDENTITY()", null).FirstOrDefault();
+                var j = conn.Query<int>(@"Select pic_id from picture where pic_guid = @PictureGuid", new { PictureGuid = param.PictureGuid }).FirstOrDefault();
                 return j;
+            }
+        }
+
+
+        public int Remove(int Id)
+        {
+            using (SqlCeConnection conn = Connection2)
+            {
+                try
+                {
+                    conn.Open();
+                    var i = conn.Query<int>(@"Delete Picture where pic_id = @Id", new { Id = Id }).FirstOrDefault();
+                    return i;
+                }
+
+                catch { return 0; }
             }
         }
     }
