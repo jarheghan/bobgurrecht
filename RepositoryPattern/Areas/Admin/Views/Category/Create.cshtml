@@ -18,11 +18,11 @@
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
  @{var listItems = new List<SelectListItem>
-                                        {
-                                          new SelectListItem { Text = "Toyoto", Value = "0" },
-                                          new SelectListItem { Text = "Honda", Value = "1" },
-                                          new SelectListItem { Text = "Subaru", Value = "2" }
-                                        };}
+        {
+            new SelectListItem { Text = "Toyoto", Value = "0" },
+            new SelectListItem { Text = "Honda", Value = "1" },
+            new SelectListItem { Text = "Subaru", Value = "2" }
+        };}
 
 
 
@@ -40,12 +40,20 @@
                                     <h3 class="box-title">Create Category</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
+<<<<<<< HEAD
                             @using(Html.BeginForm()){
+=======
+                        @using(Html.BeginForm()){
+>>>>>>> df94b10e5a655a239aa12d77756783813c240391
                                 <div role="form">
                                     <div class="box-body">
                                         <div class="form-group">
                                             @Html.Label("Name", new {@for="" })
+<<<<<<< HEAD
                                             @Html.TextBox("Name",null, new {@class="form-control",placeholder="Name" })
+=======
+                                            @Html.TextBox("Name", null, new {@class="form-control",placeholder="Name" })
+>>>>>>> df94b10e5a655a239aa12d77756783813c240391
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
@@ -64,8 +72,13 @@
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
+<<<<<<< HEAD
                                 </div> <!-- End forms -->
                             }
+=======
+                                </div>
+                        }
+>>>>>>> df94b10e5a655a239aa12d77756783813c240391
                             </div><!-- /.box -->
                           </div>
                     </div>

@@ -1,5 +1,9 @@
-﻿using System;
+﻿using RepositoryPattern.Controllers;
+using RepositoryPattern.Model.Media;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -7,121 +11,36 @@ using System.Web.Mvc;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
-    public class PictureController : Controller
+    public class PictureController : BaseController
     {
         //
         // GET: /Admin/Picture/
-
-        public ActionResult AsyncUpload()
+        private readonly IPictureRepository _pictureRepository;
+        public PictureController(IPictureRepository pictureRepository)
         {
-            return Json(new
-            {
-                success = true,
-                //pictureId = picture.Id,
-                pictureId = 1,
-                //imageUrl = _pictureService.GetPictureUrl(picture, 100)
-                imageUrl = ""
-            });
+            _pictureRepository = pictureRepository;
         }
-        
-        [HttpPost]
-        public ActionResult AsyncUpload(string ss)
-        {
-
-            //we process it distinct ways based on a browser
-            //find more info here http://stackoverflow.com/questions/4884920/mvc3-valums-ajax-file-upload
-            Stream stream = null;
-            var fileName = "";
-            var contentType = "";
-            if (String.IsNullOrEmpty(Request["qqfile"]))
-            {
-                // IE
-                HttpPostedFileBase httpPostedFile = Request.Files[0];
-                if (httpPostedFile == null)
-                    throw new ArgumentException("No file uploaded");
-                stream = httpPostedFile.InputStream;
-                fileName = Path.GetFileName(httpPostedFile.FileName);
-                contentType = httpPostedFile.ContentType;
-            }
-            else
-            {
-                //Webkit, Mozilla
-                stream = Request.InputStream;
-                fileName = Request["qqfile"];
-            }
-
-            var fileBinary = new byte[stream.Length];
-            stream.Read(fileBinary, 0, fileBinary.Length);
-
-            var fileExtension = Path.GetExtension(fileName);
-            if (!String.IsNullOrEmpty(fileExtension))
-                fileExtension = fileExtension.ToLowerInvariant();
-            //contentType is not always available 
-            //that's why we manually update it here
-            //http://www.sfsu.edu/training/mimetype.htm
-            if (String.IsNullOrEmpty(contentType))
-            {
-                switch (fileExtension)
-                {
-                    case ".bmp":
-                        contentType = "image/bmp";
-                        break;
-                    case ".gif":
-                        contentType = "image/gif";
-                        break;
-                    case ".jpeg":
-                    case ".jpg":
-                    case ".jpe":
-                    case ".jfif":
-                    case ".pjpeg":
-                    case ".pjp":
-                        contentType = "image/jpeg";
-                        break;
-                    case ".png":
-                        contentType = "image/png";
-                        break;
-                    case ".tiff":
-                    case ".tif":
-                        contentType = "image/tiff";
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            //var picture = _pictureService.InsertPicture(fileBinary, contentType, null, true);
-            //when returning JSON the mime-type must be set to text/plain
-            //otherwise some browsers will pop-up a "Save As" dialog.
-            return Json(
-                new
-                {
-                    success = true,
-                    //pictureId = picture.Id,
-                    pictureId = 1,
-                    //imageUrl = _pictureService.GetPictureUrl(picture, 100)
-                    imageUrl = ""
-                },
-                "text/plain");
-        }
-
-       
+        public string Paths { get; set; }
+        public HttpPostedFileBase TFile { get; set; }
         public ActionResult SaveUploadedFile()
         {
             bool isSavedSuccessfully = true;
             string fName = "";
+            Picture picture = new Picture();
             foreach (string fileName in Request.Files)
             {
-                HttpPostedFileBase file = Request.Files[fileName];
+                //HttpPostedFileBase file = Request.Files[fileName];
+                TFile = Request.Files[fileName];
                 //Save file content goes here
-                fName = file.FileName;
-                if (file != null && file.ContentLength > 0)
+                fName = TFile.FileName;
+                if (TFile != null && TFile.ContentLength > 0)
                 {
                    
                     var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages", Server.MapPath(@"\")));
 
                     string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
 
-                    var fileName1 = Path.GetFileName(file.FileName);
+                    var fileName1 = Path.GetFileName(TFile.FileName);
                   
 
                     bool isExists = System.IO.Directory.Exists(pathString);
@@ -129,12 +48,27 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                     if (!isExists)
                         System.IO.Directory.CreateDirectory(pathString);
 
-                    var path = string.Format("{0}\\{1}", pathString, file.FileName);
-                    file.SaveAs(path);
+                    var path = string.Format("{0}\\{1}", pathString, TFile.FileName);
+                    Paths = path;
+                    TFile.SaveAs(path);
 
                 }
 
             }
+
+           
+            Stream stream = TFile.InputStream;
+            var FileBinary = new byte[stream.Length/1000];
+            //EncoderParameter param = new EncoderParameter(Encoder.Quality, FileBinary);
+            //Image img = Image.FromStream(stream);
+            //var ss = img.Co
+
+            picture.SeoFileName = null;
+            picture.MimeType = TFile.ContentType;
+            picture.IsNew = true;
+            picture.FilePath = Path.GetFileName(TFile.FileName);
+            picture.PictureBinary = FileBinary;
+            _pictureRepository.Insert(picture);
 
             if (isSavedSuccessfully)
             {
