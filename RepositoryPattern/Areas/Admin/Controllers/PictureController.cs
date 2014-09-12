@@ -85,7 +85,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         public ActionResult RemoveUploadedFile(string Id)
         {
             var i = _pictureRepository.Remove(int.Parse(Id));
-            return Json(new { Message = "Success" });
+            return Json(new { Message = "Success" },JsonRequestBehavior.AllowGet);
         }
     }
 
