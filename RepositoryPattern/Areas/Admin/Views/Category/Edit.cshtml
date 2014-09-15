@@ -60,7 +60,8 @@
                                             @Html.TextBoxFor(x => x.Alias, new {@class="form-control" })
                                         </div>
                                     
-                                          @Html.Partial("Picture")
+                                       <label>Picture</label>  
+                                       <div id="mydropzone" class="dropzone"></div>
                                        
                                     </div><!-- /.box-body -->
 
@@ -78,41 +79,23 @@
 
   @section scripts{
       <script type="text/javascript">
-
-          //File Upload response from the server
-         // Dropzone.options.dropzoneForm = {
-          $("div#dropzoneForm").dropzone({ url: "/Admin/Picture/SaveUploadedFile",
-              maxFiles: 2,
+          $("div#mydropzone").dropzone({
+              url: "#",
+              maxFiles:0,
               init: function () {
-                  this.on("maxfilesexceeded", function (data) {
-                      var res = eval('(' + data.xhr.responseText + ')');
-
-                  });
-                  this.on("addedfile", function (file) {
-
-                      // Create the remove button
-                      var removeButton = Dropzone.createElement("<button>Remove file</button>");
-
-
-                      // Capture the Dropzone instance as closure.
-                      var _this = this;
-
-                      // Listen to the click event
-                      removeButton.addEventListener("click", function (e) {
-                          // Make sure the button click doesn't submit the form:
-                          e.preventDefault();
-                          e.stopPropagation();
-                          // Remove the file preview.
-                          _this.removeFile(file);
-                          // If you want to the delete the file on the server as well,
-                          // you can do the AJAX request here.
-                      });
-
-                      // Add the button to the file preview element.
+                  var mockFile = { name: "IMG_0060.JPG", size: 12345 };
+                  this.emit("addedfile", mockFile)
+                  this.emit("thumbnail", mockFile, "/Images/WallImages/imagepath/" + mockFile.name);
+                  this.createElement('<a href="#" class="btn btn-primary">Remove file</a>');
+                  this.emit("thumbnail", function (file) {
+                      var removeButton = Dropzone.createElement('<a href="#" class="btn btn-primary">Remove file</a>');
                       file.previewElement.appendChild(removeButton);
-                  });
+                  })
+
+               
               }
           });
+         
 
     </script>
 
