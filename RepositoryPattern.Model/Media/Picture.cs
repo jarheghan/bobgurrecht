@@ -21,6 +21,7 @@ namespace RepositoryPattern.Model.Media
         public string SeoFileName { get; set; }
         public bool IsNew { get; set; }
         public string FilePath { get; set; }
+        public Guid PictureGuid { get; set; }
 
 
 

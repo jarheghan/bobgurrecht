@@ -98,8 +98,9 @@ namespace RepositoryPattern.Data
             {
                 var i = cn.Query<int>(@"INSERT INTO CATEGORIES 
                                     (cat_name, cat_description,cat_alias,cat_meta_keyword,cat_parent_category_id,cat_display_order,
+                                     cat_picture_id,
                                      cat_add_date, cat_add_user, cat_delete_flag)
-                                    VALUES(@Name,@Description,@Alias,@MetaKeyword,@ParentCategoryID,@DisplayOrder,@AddDate,@AddUser,@DeleteFlag)"
+                                    VALUES(@Name,@Description,@Alias,@MetaKeyword,@ParentCategoryID,@DisplayOrder,@PictureID,@AddDate,@AddUser,@DeleteFlag)"
                                     ,param);
 
             }

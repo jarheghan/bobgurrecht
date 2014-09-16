@@ -13,5 +13,6 @@ namespace RepositoryPattern.Model.Media
         Picture GetPictureById(int Id);
         Picture Create();
         int Insert(Picture item);
+        int Remove(int Id);
     }
 }
