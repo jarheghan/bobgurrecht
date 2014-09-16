@@ -55,16 +55,11 @@
                                             @Html.Label("Parent Category", new {@for="" })
                                             @Html.DropDownList("ParentCategoryId", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
                                         </div>
-                                         <div class="form-group">
-                                            @Html.Label("Alias", new {@for="" })
-                                            @Html.TextBoxFor(x => x.Alias, new {@class="form-control" })
-                                        </div>
-                                    <div class="form-group">
-                                        <div class="dropzone" id="pictureIdEdit"></div>
-                                    </div>
-                                          @{//Html.Partial("Picture")
-                                            
-                                          }
+                                       
+                                        <input type="hidden" value="@Model.PictureID" id="mypic_id" />
+                                       <label>Picture</label>  
+                                       <div id="mydropzone" class="dropzone"></div>
+
                                        
                                     </div><!-- /.box-body -->
 
@@ -82,27 +77,25 @@
 
   @section scripts{
       <script type="text/javascript">
-          Dropzone.autoDiscover = false;
-          Dropzone.options.myDropzone = {
-              //init: function () {
-              //    var thisDropzone = this;
-              //    $.get('', function (data) {
-              //        var mockfile = { name: data.name, size: data.size };
-              //        thisDropzone.options.addedfile.call(thisDropzone, mockfile);
-              //        thisDropzone.options.thumbnails.call(thisDropzone, mockfile, "/Images/WallImages/imagepath/" + data.name);
-              //    });
-              //}
-       
+        
+          $("div#mydropzone").dropzone({
+              url: "#",
+              maxFiles:0,
               init: function () {
-                  debugger;
-                   thisDropzone = this;
-                      var mockFile = { name:"IMG_0060.JPG", size:12456 };
-                      //thisDropzone.options.addedfile.call(thisDropzone, mockfile);
-                  //thisDropzone.options.thumbnails.call(thisDropzone, mockfile, "/Images/WallImages/imagepath/IMG_0060.JPG");
-                      thisDropzone.emit("addedfile", mockFile);
-                      thisDropzone.emit("thumbnail", mockFile, "/Images/WallImages/imagepath");
+                  var mm = $('#mypic_id').val();
+                  var thiszone = this;
+                  $.getJSON('/Admin/Picture/GetPicture?Id=' + mm, function (data) {
+                      var removeButton = Dropzone.createElement('<a href="#" class="btn btn-primary">Remove file</a>');
+                      var mockFile = { name: data.FilePath, size: 12345 };
+                      thiszone.emit("addedfile", mockFile)
+                      thiszone.emit("thumbnail", mockFile, "/Images/WallImages/imagepath/" + mockFile.name);
+                      mockFile.previewElement.appendChild(removeButton);
+                  })
+                 
+               
               }
-          }
+          });
+         
     </script>
 
      }

@@ -87,6 +87,12 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             var i = _pictureRepository.Remove(int.Parse(Id));
             return Json(new { Message = "Success" },JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult GetPicture(int Id)
+        {
+            var picture = _pictureRepository.GetPictureById(Id);
+            return Json(picture, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }
