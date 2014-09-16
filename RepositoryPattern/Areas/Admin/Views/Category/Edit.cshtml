@@ -40,7 +40,7 @@
                                 <div class="box-header">
                                     <h3 class="box-title">Edit Category</h3>
                                 </div><!-- /.box-header -->
-                                <!-- form start -->
+                         @using(Html.BeginForm()){
                                 <div role="form">
                                     <div class="box-body">
                                         <div class="form-group">
@@ -67,6 +67,7 @@
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
+                         }
                                 </div>
                             </div><!-- /.box -->
                     </div>
@@ -77,20 +78,63 @@
 
   @section scripts{
       <script type="text/javascript">
-        
+         // url: "/Admin/Picture/SaveUploadedFile"
           $("div#mydropzone").dropzone({
-              url: "#",
-              maxFiles:0,
+              url: "/Admin/Picture/SaveUploadedFile",
+              maxFiles:1,
               init: function () {
                   var mm = $('#mypic_id').val();
                   var thiszone = this;
+                  var mockFile = {name:"",size:0};
+                  var removeButton = Dropzone.createElement('<a href="#" class="btn btn-primary">Remove file</a>');
                   $.getJSON('/Admin/Picture/GetPicture?Id=' + mm, function (data) {
-                      var removeButton = Dropzone.createElement('<a href="#" class="btn btn-primary">Remove file</a>');
-                      var mockFile = { name: data.FilePath, size: 12345 };
+                      var addHiddenValue = Dropzone.createElement('<input type="hidden" name="PictureID" id="pic_idx" value="' + mm + '"/>');
+                      mockFile.name = data.FilePath
+                      mockFile.size = 12345;
                       thiszone.emit("addedfile", mockFile)
                       thiszone.emit("thumbnail", mockFile, "/Images/WallImages/imagepath/" + mockFile.name);
                       mockFile.previewElement.appendChild(removeButton);
+                      mockFile.previewElement.appendChild(addHiddenValue);
                   })
+                 
+                  this.on("success", function (file, response) {
+                      var addHiddenValue = Dropzone.createElement('<input type="hidden" name="PictureID" id="pic_idx" value="' + response.PictureId + '"/>');
+                      file.previewElement.appendChild(addHiddenValue);
+                  });
+
+                  removeButton.addEventListener("click", function (e) {
+                      var j = $('#pic_idx').val();
+                      $.ajax({
+                          url: '/Admin/Picture/RemoveUploadedFile?Id=' + j,
+                      }).done(function (data) {
+                          if (data.Message === 'Success') {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              thiszone.removeFile(mockFile);
+                          }
+                      });
+
+                  });
+
+                
+                  thiszone.on("addedfile", function (file) {
+                      //Dropzone.options.url="/Admin/Picture/SaveUploadedFile";
+                      file.previewElement.appendChild(removeButton);
+
+                      removeButton.addEventListener("click", function (e) {
+                          var j = $('#pic_idx').val();
+                          $.ajax({
+                              url: '/Admin/Picture/RemoveUploadedFile?Id=' + j,
+                          }).done(function (data) {
+                              if (data.Message === 'Success') {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  thiszone.removeFile(file);
+                              }
+                          });
+
+                      });
+                      });
                  
                
               }

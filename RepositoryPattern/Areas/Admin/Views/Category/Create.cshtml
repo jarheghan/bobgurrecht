@@ -89,7 +89,6 @@
               maxFiles: 2,
               init: function () {
                   this.on("maxfilesexceeded", function (data) {
-                      debugger;
                       var res = eval('(' + data.xhr.responseText + ')');
 
                   });

@@ -1,4 +1,5 @@
 ﻿using RepositoryPattern.Controllers;
+using RepositoryPattern.Model.Catalog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,14 @@ namespace RepositoryPattern.Areas.Admin.Controllers
     {
         //
         // GET: /Admin/Product/
-
-        public ActionResult Index()
+        public ProductController(IProductRepository productRepository)
         {
+            _productRepository = productRepository;
+        }
+        private readonly IProductRepository _productRepository;
+        public ActionResult List()
+        {
+            _productRepository.
             return View();
         }
 
