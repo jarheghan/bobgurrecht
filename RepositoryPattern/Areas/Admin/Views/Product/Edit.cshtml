@@ -17,6 +17,7 @@
     Html.RequiresJs("admin/app.js", "Content", 99);
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
+@model RepositoryPattern.Model.Catalog.Product
  @{var listItems = new List<SelectListItem>
         {
             new SelectListItem { Text = "Toyoto", Value = "0" },
@@ -47,16 +48,15 @@
                                     <div class="box-body">
                                         <div class="form-group">
                                             @Html.Label("Name", new {@for="" })
-
-                                            @Html.TextBox("Name", null, new {@class="form-control",placeholder="Name" })
+                                            @Html.TextBoxFor(x => x.Name,  new {@class="form-control",placeholder="Name" });
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Short Description",null, new {@for="" })
-                                            @Html.TextBox("ShortDescription",null, new {@class="form-control",placeholder="Description" })
+                                            @Html.TextBoxFor(x => x.ShortDescription, new {@class="form-control",placeholder="Description" })
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
-                                            @Html.TextArea("Description",null, new {@class="form-control",placeholder="Description" })
+                                            @Html.TextAreaFor(x => x.Description, new {@class="form-control",placeholder="Description" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Category", new {@for="" })
@@ -64,19 +64,19 @@
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("SKU", new {@for="" })
-                                            @Html.TextBox("SKU",null, new {@class="form-control",placeholder="SKU" })
+                                            @Html.TextBoxFor(x => x.SKU, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Price", new {@for="" })
-                                            @Html.TextBox("Price",null, new {@class="form-control",placeholder="Price" })
+                                            @Html.TextBoxFor(x => x.Price, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Manufacturer", new {@for="" })
-                                            @Html.TextBox("Manufacturer",null, new {@class="form-control",placeholder="Manufacture No" })
+                                            @Html.TextBoxFor(x => x.ManufacturePartNo, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Quantity", new {@for="" })
-                                            @Html.TextBox("StockQuantity",null, new {@class="form-control",placeholder="Quantity" })
+                                            @Html.TextBoxFor(x => x.StockQuantity, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                           @Html.Partial("Picture")
                                         </div><!-- /.box-body -->
