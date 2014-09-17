@@ -1,6 +1,6 @@
 ﻿@using ClientDependency.Core.Mvc
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Products";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
     Html.RequiresCss("dropzone/css/basic.css", "Content",5);
@@ -37,7 +37,7 @@
                             <!-- general form elements -->
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h3 class="box-title">Create Category</h3>
+                                    <h3 class="box-title">Create Product</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
 
@@ -50,17 +50,33 @@
 
                                             @Html.TextBox("Name", null, new {@class="form-control",placeholder="Name" })
                                         </div>
+                                         <div class="form-group">
+                                            @Html.Label("Short Description",null, new {@for="" })
+                                            @Html.TextBox("ShortDescription",null, new {@class="form-control",placeholder="Description" })
+                                        </div>
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
                                             @Html.TextArea("Description",null, new {@class="form-control",placeholder="Description" })
                                         </div>
                                          <div class="form-group">
-                                            @Html.Label("Parent Category", new {@for="" })
-                                            @Html.DropDownList("ParentCategoryID", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
+                                            @Html.Label("Category", new {@for="" })
+                                            @Html.DropDownList("CategoryID", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
                                         </div>
                                          <div class="form-group">
-                                            @Html.Label("Alias", new {@for="" })
-                                            @Html.TextBox("Alias",null, new {@class="form-control",placeholder="Alias" })
+                                            @Html.Label("SKU", new {@for="" })
+                                            @Html.TextBox("SKU",null, new {@class="form-control",placeholder="Alias" })
+                                        </div>
+                                         <div class="form-group">
+                                            @Html.Label("Price", new {@for="" })
+                                            @Html.TextBox("Price",null, new {@class="form-control",placeholder="Alias" })
+                                        </div>
+                                         <div class="form-group">
+                                            @Html.Label("Manufacturer", new {@for="" })
+                                            @Html.TextBox("Manufacturer",null, new {@class="form-control",placeholder="Alias" })
+                                        </div>
+                                         <div class="form-group">
+                                            @Html.Label("Quantity", new {@for="" })
+                                            @Html.TextBox("Quantity",null, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                           @Html.Partial("Picture")
                                         </div><!-- /.box-body -->

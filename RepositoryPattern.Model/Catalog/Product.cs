@@ -30,6 +30,7 @@ namespace RepositoryPattern.Model.Catalog
         public float? Length { get; set; }
         public float? Width { get; set; }
         public float? Height { get; set; }
+        public int? PictureID { get; set; }
         public int ID
         {
             get;

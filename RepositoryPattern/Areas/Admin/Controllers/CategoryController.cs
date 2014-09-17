@@ -48,9 +48,10 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit()
+        public ActionResult Edit(Category category)
         {
-            return View();
+            _categoryRepository.Update(category);
+            return RedirectToAction("List");
         }
 
         [HttpPost]

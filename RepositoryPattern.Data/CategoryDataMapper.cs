@@ -113,7 +113,33 @@ namespace RepositoryPattern.Data
 
         public void Update(Category item)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                Name = item.Name,
+                Description = item.Description,
+                PictureID = item.PictureID,
+                ParentCategoryID = item.ParentCategoryID,
+                Alias = item.Alias,
+                ChangeUser = "Jarheghan",
+                ChangeDate = DateTime.Now,
+                DeleteFlag = false,
+                ID = item.ID
+            };
+            using (SqlCeConnection cn = Connection2)
+            {
+                var i = cn.Query<int>(@"update CATEGORIES
+                                set cat_name = @Name,
+	                                cat_description = @Description,
+	                                cat_alias = @Alias,
+	                                cat_parent_category_id = @ParentCategoryID,
+	                                cat_picture_id = @PictureID,
+	                                cat_change_date = @ChangeDate,
+	                                cat_change_user = @ChangeUser,
+	                                cat_delete_flag = @DeleteFlag
+                                where cat_id = @ID", param);
+
+            }
+          
         }
 
         public IEnumerable<Category> GetAllCategories()

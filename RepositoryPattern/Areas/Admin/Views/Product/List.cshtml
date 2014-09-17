@@ -3,7 +3,6 @@
     ViewBag.Title = "List";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
-
     Html.RequiresCss("FileUpload/jquery.fileupload-ui.css", "Content", 5);
     Html.RequiresCss("admin/font-awesome.css", "Content", 5);
     Html.RequiresCss("admin/ionicons.css", "Content", 5);
@@ -13,30 +12,30 @@
     Html.RequiresJs("admin/app.js", "Content", 99);
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
+
 @using Telerik.Web.Mvc.UI
 @using RepositoryPattern.Model.Catalog
-@model IEnumerable<Category>
+@model IEnumerable<Product>
 
   @Html.Action("Menu", "Common", new {area="Admin"})
-
- <aside class="right-side">
+<aside class="right-side">
   <section class="col-lg-12 connectedSortable">
   <div class="row">
      <div class="col-sm-10">
          <br />
-            <div class=""> <a href="@Url.Action("Create")" class="btn btn-primary"><span>Add New Category</span></a>  </div>
+            <div class=""> <a href="@Url.Action("Create")" class="btn btn-primary"><span>Add New Product</span></a>  </div>
          <br />
         <div id="clientsDb">
-            @(Html.Telerik().Grid<Category>(Model)
-                .Name("Category")
+            @(Html.Telerik().Grid<Product>(Model)
+                .Name("Product")
                 .Columns(columns =>
                 {
-                    columns.Bound(c => c.Name).Width(190);
-                    columns.Bound(c => c.Description).Width(190);
-                    columns.Bound(c => c.Alias).Width(190);
-                    columns.Bound(c => c.ID).Width(190);
-                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Edit Category", "Edit", new { Id = c.ID }));
-                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Delete", "Delete", new { Id = c.ID }));
+                    columns.Bound(p => p.Name).Width(190);
+                    columns.Bound(p => p.Description).Width(190);
+                    columns.Bound(p => p.Price).Width(190);
+                    columns.Bound(p => p.ID).Width(190);
+                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Edit", "Edit", new { Id = p.ID }));
+                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Delete", "Delete", new { Id = p.ID }));
                 })
                 .HtmlAttributes(new { style = "height: 270px;" })
                 .Scrollable()
@@ -49,4 +48,3 @@
       </div>
   </section>
 </aside>
-    

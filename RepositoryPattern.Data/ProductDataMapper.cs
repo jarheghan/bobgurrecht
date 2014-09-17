@@ -162,7 +162,9 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<Product> GetAllProduct()
         {
-            throw new NotImplementedException();
+            var sql = @"select * from products";
+            return GetProductDataNoJoin(sql);
+            
         }
     }
 }
