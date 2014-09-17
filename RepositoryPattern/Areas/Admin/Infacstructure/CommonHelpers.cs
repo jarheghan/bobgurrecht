@@ -1,13 +1,24 @@
-﻿using System;
+﻿using RepositoryPattern.Data;
+using RepositoryPattern.Model.Catalog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
+using System.Web.Mvc;
 
 namespace RepositoryPattern.Areas.Admin.Infacstructure
 {
     public static class CommonHelpers
     {
+
+        public static ICategoryRepository CategoryRepository
+        {
+            get;
+            set;
+        }
+       
+       
         public static string GenerateRandomDigitCode(int length)
         {
             var random = new Random();
@@ -28,6 +39,16 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             var randomNumberBuffer = new byte[10];
             new RNGCryptoServiceProvider().GetBytes(randomNumberBuffer);
             return new Random(BitConverter.ToInt32(randomNumberBuffer, 0)).Next(min, max);
+        }
+
+
+        public static SelectList GetCategory()
+        {
+            CategoryRepository = new CategoryDataMapper();
+            List<Category> cat = new List<Category>();
+            cat = CategoryRepository.GetAllCategories().ToList();
+            SelectList sl = new SelectList(cat, "ID", "Name");
+            return sl;
         }
     }
 }

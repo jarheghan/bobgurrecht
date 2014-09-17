@@ -1,4 +1,5 @@
 ﻿@using RepositoryPattern.Model.Catalog;
+@using RepositoryPattern.Areas.Admin.Infacstructure
 @using ClientDependency.Core.Mvc
 @{
     ViewBag.Title = "Edit";
@@ -49,11 +50,11 @@
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Description", new {@for="" })
-                                            @Html.TextBoxFor(x => x.Description, new {@class="form-control" })
+                                            @Html.TextAreaFor(x => x.Description, new {@class="form-control" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Parent Category", new {@for="" })
-                                            @Html.DropDownList("ParentCategoryId", new SelectList(listItems, "Value", "Text"), new {@class="form-control" })
+                                            @Html.DropDownList("ParentCategoryId", new SelectList(CommonHelpers.GetCategory(), "Value", "Text"), new {@class="form-control" })
                                         </div>
                                        
                                         <input type="hidden" value="@Model.PictureID" id="mypic_id" />

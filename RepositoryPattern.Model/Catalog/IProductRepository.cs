@@ -13,5 +13,6 @@ namespace RepositoryPattern.Model.Catalog
         Product GetProductByID(int productID);
         IEnumerable<Product> GetProductByPriceValue(int price);
         IEnumerable<Product> GetAllProduct();
+        Product GetProductByGuid(Guid prductGuid);
     }
 }

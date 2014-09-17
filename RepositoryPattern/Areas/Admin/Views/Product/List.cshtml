@@ -26,15 +26,16 @@
             <div class=""> <a href="@Url.Action("Create")" class="btn btn-primary"><span>Add New Product</span></a>  </div>
          <br />
         <div id="clientsDb">
-            @(Html.Telerik().Grid<Category>(Model)
-                .Name("Category")
+            @(Html.Telerik().Grid<Product>(Model)
+                .Name("Product")
                 .Columns(columns =>
                 {
-                    columns.Bound(c => c.Name).Width(190);
-                    columns.Bound(c => c.Description).Width(190);
-                    columns.Bound(c => c.Alias).Width(190);
-                    columns.Bound(c => c.ID).Width(190);
-                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Edit Category", "Edit", new { Id = c.ID }));
+                    columns.Bound(p => p.Name).Width(190);
+                    columns.Bound(p => p.Description).Width(190);
+                    columns.Bound(p => p.Price).Width(190);
+                    columns.Bound(p => p.ID).Width(190);
+                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Edit", "Edit", new { Id = p.ID }));
+                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Delete", "Delete", new { Id = p.ID }));
                 })
                 .HtmlAttributes(new { style = "height: 270px;" })
                 .Scrollable()

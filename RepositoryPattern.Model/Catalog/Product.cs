@@ -13,7 +13,6 @@ namespace RepositoryPattern.Model.Catalog
         public string Name { get; set; }
         public string Description { get; set; }
         public int? Price { get; set; }
-        public int?  Category { get; set; }
         public string ShortDescription { get; set; }
         public string ShowOnHomePage { get; set; }
         public string MetaKeyword { get; set; }
@@ -30,6 +29,9 @@ namespace RepositoryPattern.Model.Catalog
         public float? Length { get; set; }
         public float? Width { get; set; }
         public float? Height { get; set; }
+        public Guid ProductGuid { get; set; }
+        public int PictureID { get; set; }
+        public int CategoryID { get; set; }
         public int ID
         {
             get;

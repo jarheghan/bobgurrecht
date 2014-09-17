@@ -36,6 +36,7 @@
                     columns.Bound(c => c.Alias).Width(190);
                     columns.Bound(c => c.ID).Width(190);
                     columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Edit Category", "Edit", new { Id = c.ID }));
+                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Delete", "Delete", new { Id = c.ID }));
                 })
                 .HtmlAttributes(new { style = "height: 270px;" })
                 .Scrollable()

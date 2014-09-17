@@ -37,24 +37,23 @@ namespace RepositoryPattern.Data
             {
                 var parameter = new
                 {
-                    prd_name = item.Name,
-                    prd_description = item.Description,
-                    prd_price = item.Price,
-                    prd_category = item.Category,
-                    prd_add_user = "jarheghan",
-                    prd_add_date = DateTime.Now,
-                    prd_delete_flag = false
+                    Name = item.Name,
+                    Description = item.Description,
+                    Price = item.Price,
+                    ShortDescription = item.ShortDescription,
+                    SKU = item.SKU,
+                    ManufacturePartNo = item.ManufacturePartNo,
+                    StockQuantity = item.StockQuantity,
+                    AddUser = "jarheghan",
+                    AddDate = DateTime.Now,
+                    DeleteFlag = false
                 };
                 cn.Open();
-//                item.ID = cn.Query<int>(@"INSERT INTO Products (prd_name,prd_description,prd_price,prd_category
-//                                           ,prd_add_user,prd_add_date,prd_delete_flag)  
-//                                        VALUES(@prd_name,@prd_description,@prd_price,@prd_category,@prd_add_user
-//                                                ,@prd_add_date,@prd_delete_flag)", parameter).First();
-
-                var i = cn.Query<int>(@"INSERT INTO Products (prd_name,prd_description,prd_price,prd_category
+                var i = cn.Query<int>(@"INSERT INTO Products (prd_name,prd_description,prd_price,prd_short_description,
+                                            prd_sku,prd_manufacturepart_no,prd_stock_quantity
                                            ,prd_add_user,prd_add_date,prd_delete_flag)  
-                                        VALUES(@prd_name,@prd_description,@prd_price,@prd_category,@prd_add_user
-                                                ,@prd_add_date,@prd_delete_flag)", parameter);
+                                        VALUES(@Name,@Description,@Price,@ShortDescription
+                                                ,@SKU,@ManufacturePartNo,@StockQuantity,@AddUser,@AddDate,@DeleteFlag)", parameter);
             }
         }
 
@@ -76,7 +75,6 @@ namespace RepositoryPattern.Data
                 Name = result.prd_name,
                 Description = result.prd_description,
                 Price = result.prd_price,
-                Category = result.prd_category,
                 ShortDescription = result.prd_short_description,
                 ShowOnHomePage = result.prd_showonhomepage,
                 MetaKeyword = result.prd_meta_keyword,
@@ -93,6 +91,7 @@ namespace RepositoryPattern.Data
                 Width = result.prd_width,
                 Length = result.prd_length,
                 Height = result.prd_height,
+                ProductGuid = result.prd_guid,
                 DeleteFlag = true,
                 AddDate = DateTime.Now,
                 AddUser = "Jarheghan"
@@ -162,7 +161,27 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<Product> GetAllProduct()
         {
-            throw new NotImplementedException();
+            var sql = @"select * from products";
+            return GetProductDataNoJoin(sql);
+            
+        }
+
+
+        public Product GetProductByGuid(Guid prductGuid)
+        {
+            using (SqlCeConnection cn = Connection2)
+            {
+                cn.Open();
+                try
+                {
+                    var product = cn.Query<Product>("select * from products where prd_guid = @prductGuid", new { prductGuid = prductGuid }).FirstOrDefault();
+                    return product;
+                }
+                catch { return null; }
+
+
+            }
+
         }
     }
 }
