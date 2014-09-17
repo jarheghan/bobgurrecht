@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepositoryPattern.Model.Catalog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -8,6 +9,11 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
 {
     public static class CommonHelpers
     {
+        static CommonHelpers(ICategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+        }
+        readonly static ICategoryRepository _categoryRepository;
         public static string GenerateRandomDigitCode(int length)
         {
             var random = new Random();
@@ -28,6 +34,14 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             var randomNumberBuffer = new byte[10];
             new RNGCryptoServiceProvider().GetBytes(randomNumberBuffer);
             return new Random(BitConverter.ToInt32(randomNumberBuffer, 0)).Next(min, max);
+        }
+
+
+        public static Category GetCategory()
+        {
+            var cat = _categoryRepository.GetAllCategories();
+
+            return null;
         }
     }
 }
