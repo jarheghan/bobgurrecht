@@ -44,16 +44,21 @@ namespace RepositoryPattern.Data
                     SKU = item.SKU,
                     ManufacturePartNo = item.ManufacturePartNo,
                     StockQuantity = item.StockQuantity,
+                    ProductGuid = item.ProductGuid,
                     AddUser = "jarheghan",
                     AddDate = DateTime.Now,
                     DeleteFlag = false
                 };
                 cn.Open();
-                var i = cn.Query<int>(@"INSERT INTO Products (prd_name,prd_description,prd_price,prd_short_description,
-                                            prd_sku,prd_manufacturepart_no,prd_stock_quantity
+                try
+                {
+                    var i = cn.Query<int>(@"INSERT INTO Products (prd_name,prd_description,prd_price,prd_short_description,
+                                            prd_sku,prd_manufacturepart_no,prd_stock_quatity, prd_guid
                                            ,prd_add_user,prd_add_date,prd_delete_flag)  
                                         VALUES(@Name,@Description,@Price,@ShortDescription
-                                                ,@SKU,@ManufacturePartNo,@StockQuantity,@AddUser,@AddDate,@DeleteFlag)", parameter);
+                                                ,@SKU,@ManufacturePartNo,@StockQuantity,@ProductGuid,@AddUser,@AddDate,@DeleteFlag)", parameter);
+                }
+                catch { }
             }
         }
 
@@ -91,12 +96,24 @@ namespace RepositoryPattern.Data
                 Width = result.prd_width,
                 Length = result.prd_length,
                 Height = result.prd_height,
-                ProductGuid = result.prd_guid,
+                ProductGuid = result.prd_guid == null ? Guid.Empty : result.prd_guid,
                 DeleteFlag = true,
                 AddDate = DateTime.Now,
                 AddUser = "Jarheghan"
             };
             return product;
+        }
+
+        private ProductPicture MapProductPicture(dynamic result)
+        {
+            var productpicture = new ProductPicture
+            {
+                ID = result.ppm_id,
+                PictureID = result.ppm_pic_id,
+                ProductID = result.ppm_prd_id,
+                DisplayOrder = result.ppm_display_order
+            };
+            return productpicture;
         }
         
 
@@ -182,6 +199,25 @@ namespace RepositoryPattern.Data
 
             }
 
+        }
+
+
+        public int InsertProductPicture(ProductPicture item)
+        {
+            using (SqlCeConnection cn = Connection2)
+            {
+                var param = new {
+                    ProductID = item.ProductID,
+                    PictureID = item.PictureID,
+                    DisplayOrder = item.DisplayOrder
+                };
+                cn.Open();
+                int i = cn.Execute(@"UPDATE ProductPictureMapping 
+                                        set ppm_prd_id = @ProductID,
+                                            ppm_pic_id = @PictureID,
+                                            ppm_display_order = @DisplayOrder", param);
+                return i;
+            }
         }
     }
 }

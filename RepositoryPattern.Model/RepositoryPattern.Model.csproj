@@ -45,6 +45,7 @@
     <Compile Include="Catalog\IProductRepository.cs" />
     <Compile Include="Catalog\Product.cs" />
     <Compile Include="Catalog\ProductCategory.cs" />
+    <Compile Include="Catalog\ProductPicture.cs" />
     <Compile Include="Media\IPictureRepository.cs" />
     <Compile Include="Media\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

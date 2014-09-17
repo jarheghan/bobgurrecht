@@ -40,6 +40,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         {
             Product prd = new Product();
             ProductCategory prdCat = new ProductCategory();
+            ProductPicture picProd = new ProductPicture();
             product.ProductGuid = Guid.NewGuid();
             _productRepository.Add(product);
             prd = _productRepository.GetProductByGuid(product.ProductGuid);
@@ -48,9 +49,15 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             prdCat.ProductID = prd.ID;
             _categoryRepository.InsertProductCategory(prdCat);
 
+            picProd.PictureID = product.PictureID;
+            picProd.ProductID = prd.ID;
+            picProd.DisplayOrder = 1;
+
+            _productRepository.InsertProductPicture(picProd);
+
             return View(product);
         }
-
+       
         public ActionResult Edit()
         {
             return View();
