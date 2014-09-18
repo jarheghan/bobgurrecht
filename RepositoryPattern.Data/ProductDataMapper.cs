@@ -45,7 +45,7 @@ namespace RepositoryPattern.Data
                     ManufacturePartNo = item.ManufacturePartNo,
                     StockQuantity = item.StockQuantity,
                     ProductGuid = item.ProductGuid,
-                    AddUser = "jarheghan",
+                    AddUser = Environment.UserName,
                     AddDate = DateTime.Now,
                     DeleteFlag = false
                 };
@@ -99,7 +99,7 @@ namespace RepositoryPattern.Data
                 ProductGuid = result.prd_guid == null ? Guid.Empty : result.prd_guid,
                 DeleteFlag = true,
                 AddDate = DateTime.Now,
-                AddUser = "Jarheghan"
+                AddUser = Environment.UserName
             };
             return product;
         }
@@ -170,6 +170,18 @@ namespace RepositoryPattern.Data
             }
         }
 
+        public ProductPicture GetProductPictureByID(int productID)
+        {
+
+            using (SqlCeConnection cn = Connection2)
+            {
+                cn.Open();
+                var product = cn.Query<dynamic>("select * from ProductPictureMapping where ppm_prd_id = @ProductID", new { ProductID = productID }).FirstOrDefault();
+                ProductPicture prd = MapProductPicture(product);
+                return prd;
+            }
+        }
+
         public IEnumerable<Product> GetProductByPriceValue(int price)
         {
             throw new NotImplementedException();
@@ -191,8 +203,9 @@ namespace RepositoryPattern.Data
                 cn.Open();
                 try
                 {
-                    var product = cn.Query<Product>("select * from products where prd_guid = @prductGuid", new { prductGuid = prductGuid }).FirstOrDefault();
-                    return product;
+                    var product = cn.Query<dynamic>("select * from products where prd_guid = @prductGuid", new { prductGuid = prductGuid.ToString() }).FirstOrDefault();
+                    Product prd = Map(product);
+                    return prd;
                 }
                 catch { return null; }
 
@@ -212,11 +225,13 @@ namespace RepositoryPattern.Data
                     DisplayOrder = item.DisplayOrder
                 };
                 cn.Open();
-                int i = cn.Execute(@"UPDATE ProductPictureMapping 
-                                        set ppm_prd_id = @ProductID,
-                                            ppm_pic_id = @PictureID,
-                                            ppm_display_order = @DisplayOrder", param);
-                return i;
+                try
+                {
+                    int i = cn.Execute(@"Insert Into ProductPictureMapping(ppm_prd_id,ppm_pic_id,ppm_display_order)
+                                      Values(@ProductID,@PictureID,@DisplayOrder)", param);
+                    return i;
+                }
+                catch { return 0; }
             }
         }
     }

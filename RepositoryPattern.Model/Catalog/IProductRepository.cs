@@ -15,5 +15,6 @@ namespace RepositoryPattern.Model.Catalog
         IEnumerable<Product> GetAllProduct();
         Product GetProductByGuid(Guid prductGuid);
         int InsertProductPicture(ProductPicture item);
+        ProductPicture GetProductPictureByID(int productID);
     }
 }

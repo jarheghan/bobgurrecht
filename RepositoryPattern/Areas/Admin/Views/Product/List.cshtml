@@ -34,8 +34,8 @@
                     columns.Bound(p => p.Description).Width(190);
                     columns.Bound(p => p.Price).Width(190);
                     columns.Bound(p => p.ID).Width(190);
-                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Edit", "Edit", new { Id = p.ID }));
-                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Delete", "Delete", new { Id = p.ID }));
+                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Edit", "Edit", new { Id = p.ID })).Title("");
+                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Delete", "Delete", new { Id = p.ID })).Title("");
                 })
                 .HtmlAttributes(new { style = "height: 270px;" })
                 .Scrollable()

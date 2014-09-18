@@ -55,12 +55,15 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 
             _productRepository.InsertProductPicture(picProd);
 
-            return View(product);
+            return RedirectToAction("List");
         }
        
-        public ActionResult Edit()
+        public ActionResult Edit(int Id)
         {
-            return View();
+            var product = _productRepository.GetProductByID(Id);
+            var prdpic = _productRepository.GetProductPictureByID(Id);
+            product.PictureID = prdpic.PictureID;
+            return View(product);
         }
 
         [HttpPost]
