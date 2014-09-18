@@ -13,6 +13,7 @@
 												{
 													new BasicPath("Content", "~/Content")
 												}).ToString())
+     
     @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
 												{
 													new BasicPath("jquery", "~/Scripts")
@@ -31,6 +32,10 @@
     
    @* @Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundle/bootstrap")
+    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
+												{
+													new BasicPath("Content2", "~/Content")
+												}).ToString())
     @if(IsSectionDefined("scripts"))
     {
     @RenderSection("scripts")

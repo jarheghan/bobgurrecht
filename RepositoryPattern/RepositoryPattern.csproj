@@ -371,6 +371,10 @@
     <Content Include="Content\bootstrap\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\bootstrap\images\ui-icons_d8e7f3_256x240.png" />
     <Content Include="Content\bootstrap\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\bootstrap\bootstrapValidator.css" />
+    <Content Include="Content\bootstrap\bootstrapValidator.min.css" />
+    <Content Include="Content\bootstrap\js\bootstrapValidator.js" />
+    <Content Include="Content\bootstrap\js\bootstrapValidator.min.js" />
     <Content Include="Content\dropzone\css\basic.css" />
     <Content Include="Content\dropzone\css\dropzone.css" />
     <Content Include="Content\dropzone\dropzone-amd-module.js" />

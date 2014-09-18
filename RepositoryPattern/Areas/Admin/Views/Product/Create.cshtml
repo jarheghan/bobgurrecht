@@ -4,6 +4,7 @@
     ViewBag.Title = "Create Products";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
+    Html.RequiresCss("bootstrap/bootstrapValidator.css","Content",5);
     Html.RequiresCss("dropzone/css/basic.css", "Content",5);
     Html.RequiresCss("dropzone/css/dropzone.css", "Content", 5);
     Html.RequiresCss("admin/font-awesome.css", "Content", 5);
@@ -14,6 +15,7 @@
 
     Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
     Html.RequiresJs("jquery-ui-1.8.20.js", "jquery", 2);
+    Html.RequiresJs("bootstrap/js/bootstrapValidator.js", "Content2", 5);
     Html.RequiresJs("dropzone/dropzone.js", "Content", 5);
     Html.RequiresJs("admin/app.js", "Content", 99);
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
@@ -35,7 +37,7 @@
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
 
-                        @using(Html.BeginForm()){
+                        @using(Html.BeginForm("Create","Product",FormMethod.Post,new{id="createProductForm"})){
 
                                 <div role="form">
                                     <div class="box-body">
@@ -138,6 +140,36 @@
                       file.previewElement.appendChild(removeButton);
                   });
               }
+          });
+
+          $(document).ready(function () {
+              $('#createProductForm').bootstrapValidator({
+                  message: 'This value is not valid',
+                  feedbackIcons: {
+                      valid: 'glyphicon glyphicon-ok',
+                      invalid: 'glyphicon glyphicon-remove',
+                      validating: 'glyphicon glyphicon-refresh'
+                  },
+                  fields: {
+                      Name: {
+                          message: 'The text cannot be empty',
+                          validator: {
+                              notEmpty: {
+                                  message: 'The Name is required and cannot be empty'
+                              }
+                          },
+                          stringLength: {
+                              min: 6,
+                              max: 30,
+                              message: 'The username must be more than 6 and less than 30 characters long'
+                          },
+                          regexp: {
+                              regexp: /^[a-zA-Z0-9_]+$/,
+                              message: 'The username can only consist of alphabetical, number and underscore'
+                          }
+                      }
+                  }
+              });
           });
     </script>
 
