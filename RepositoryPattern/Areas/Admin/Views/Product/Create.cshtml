@@ -95,8 +95,35 @@
  
  @section scripts{
       <script type="text/javascript">
-          //File Upload response from the server
-         // Dropzone.options.dropzoneForm = {
+          $(document).ready(function () {
+              $('#createProductForm').bootstrapValidator({
+                  message: 'This value is not valid',
+                  feedbackIcons: {
+                      valid: 'glyphicon glyphicon-ok',
+                      invalid: 'glyphicon glyphicon-remove',
+                      validating: 'glyphicon glyphicon-refresh'
+                  },
+                  fields: {
+                      Name: {
+                          message: 'The text cannot be empty',
+                          validator: {
+                              notEmpty: {
+                                  message: 'The Name is required and cannot be empty'
+                              }
+                          },
+                          stringLength: {
+                              min: 6,
+                              max: 30,
+                              message: 'The username must be more than 6 and less than 30 characters long'
+                          },
+                          regexp: {
+                              regexp: /^[a-zA-Z0-9_]+$/,
+                              message: 'The username can only consist of alphabetical, number and underscore'
+                          }
+                      }
+                  }
+              });
+          });
           $("div#dropzoneForm").dropzone({ url: "/Admin/Picture/SaveUploadedFile",
               maxFiles: 2,
               init: function () {
@@ -142,35 +169,7 @@
               }
           });
 
-          $(document).ready(function () {
-              $('#createProductForm').bootstrapValidator({
-                  message: 'This value is not valid',
-                  feedbackIcons: {
-                      valid: 'glyphicon glyphicon-ok',
-                      invalid: 'glyphicon glyphicon-remove',
-                      validating: 'glyphicon glyphicon-refresh'
-                  },
-                  fields: {
-                      Name: {
-                          message: 'The text cannot be empty',
-                          validator: {
-                              notEmpty: {
-                                  message: 'The Name is required and cannot be empty'
-                              }
-                          },
-                          stringLength: {
-                              min: 6,
-                              max: 30,
-                              message: 'The username must be more than 6 and less than 30 characters long'
-                          },
-                          regexp: {
-                              regexp: /^[a-zA-Z0-9_]+$/,
-                              message: 'The username can only consist of alphabetical, number and underscore'
-                          }
-                      }
-                  }
-              });
-          });
+         
     </script>
 
      }

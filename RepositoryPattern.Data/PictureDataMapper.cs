@@ -88,8 +88,12 @@ namespace RepositoryPattern.Data
                 {
                     conn.Open();
                     var pic = conn.Query<dynamic>(@"select * from picture where pic_id = @Id", new { Id = Id }).FirstOrDefault();
-                    picture = Map(pic);
-                    return picture;
+                    if (picture != null)
+                    {
+                        picture = Map(pic);
+                        return picture;
+                    }
+                    else { return picture; }
                 }
                 catch { return null; }
             }

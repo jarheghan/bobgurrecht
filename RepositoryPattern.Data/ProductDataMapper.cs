@@ -69,7 +69,39 @@ namespace RepositoryPattern.Data
 
         public void Update(Product item)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                ID = item.ID,
+                Name = item.Name,
+                Description = item.Description,
+                Price = item.Price,
+                ShortDescription = item.ShortDescription,
+                SKU = item.SKU,
+                ManufacturePartNo = item.ManufacturePartNo,
+                StockQuantity = item.StockQuantity,
+                ChangeUser = Environment.UserName,
+                ChangeDate = DateTime.Now
+            };
+
+            using (SqlCeConnection cn = Connection2)
+            {
+                try
+                {
+                    var i = cn.Execute(@"update products
+                               set prd_name = @Name,
+                                   prd_description = @Description,
+                                   prd_price = @Price,
+                                   prd_short_description = @ShortDescription,
+                                   prd_sku = @SKU,
+                                   prd_manufacturepart_no = @ManufacturePartNo,
+                                   prd_stock_quatity = @StockQuantity,
+                                   prd_change_user = @ChangeUser,
+                                   prd_change_date = @Changedate
+                                where prd_id = @ID", param);
+                }
+                catch { }
+            }
+           
         }
 
         public override Product Map(dynamic result)
@@ -87,7 +119,7 @@ namespace RepositoryPattern.Data
                 MetaTitle = result.prd_meta_title,
                 SKU = result.prd_sku,
                 ManufacturePartNo = result.prd_manufacturepart_no,
-                StockQuantity = result.prd_stock_quantity,
+                StockQuantity = result.prd_stock_quatity,
                 DisplayStockAvaliable = result.prd_display_stock_avaliable,
                 DisplayStockQuantity = result.prd_display_stock_quatity,
                 CallForPrice = result.prd_call_for_price,
@@ -175,10 +207,16 @@ namespace RepositoryPattern.Data
 
             using (SqlCeConnection cn = Connection2)
             {
+                ProductPicture prd = new ProductPicture();
                 cn.Open();
                 var product = cn.Query<dynamic>("select * from ProductPictureMapping where ppm_prd_id = @ProductID", new { ProductID = productID }).FirstOrDefault();
-                ProductPicture prd = MapProductPicture(product);
-                return prd;
+                if (product != null)
+                {
+                     prd = MapProductPicture(product);
+                    return prd;
+                }
+                else { return prd; }
+               
             }
         }
 
@@ -217,13 +255,14 @@ namespace RepositoryPattern.Data
 
         public int InsertProductPicture(ProductPicture item)
         {
+            var param = new
+            {
+                ProductID = item.ProductID,
+                PictureID = item.PictureID,
+                DisplayOrder = item.DisplayOrder
+            };
             using (SqlCeConnection cn = Connection2)
             {
-                var param = new {
-                    ProductID = item.ProductID,
-                    PictureID = item.PictureID,
-                    DisplayOrder = item.DisplayOrder
-                };
                 cn.Open();
                 try
                 {
@@ -232,6 +271,29 @@ namespace RepositoryPattern.Data
                     return i;
                 }
                 catch { return 0; }
+            }
+        }
+
+
+        public void UpdateProductPicture(ProductPicture item)
+        {
+            
+            using (SqlCeConnection cn = Connection2)
+            {
+                var param = new
+            {
+                ProductID = item.ProductID,
+                PictureID = item.PictureID,
+                DisplayOrder = item.DisplayOrder
+            };
+                try
+                {
+                    var i = cn.Execute(@"update ProductPictureMapping
+                                        set	ppm_pic_id = @PictureID,
+	                                        ppm_display_order = @DisplayOrder
+                                        where ppm_prd_id = @ProductID", param);
+                }
+                catch { }
             }
         }
     }

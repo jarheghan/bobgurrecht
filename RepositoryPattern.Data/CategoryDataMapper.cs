@@ -225,9 +225,33 @@ namespace RepositoryPattern.Data
             }
         }
 
-        public void UpdateProductCategory(int productcategoryId)
+        public void UpdateProductCategory(ProductCategory productCategory)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                ProductID = productCategory.ProductID,
+                CategoryID = productCategory.CategoryID,
+                IsFeaturedProduct = productCategory.IsFeaturedProduct,
+                DisplayOrder = productCategory.DisplayOrder,
+                ChangeUser = "Jarheghan",
+                ChangeDate = DateTime.Now
+            };
+
+            using (SqlCeConnection cn = Connection2)
+            {
+                try
+                {
+                    var i = cn.Execute(@"Update ProductCategoryMapping 
+                                      set   pcm_cat_id = @CategoryID
+		                                    ,pcm_is_featured_product = @IsFeaturedProduct
+		                                    ,pcm_display_order = @DisplayOrder
+                                             ,pcm_change_date = @ChangeDate
+                                             , pcm_change_user = @ChangeUser
+                                          where pcm_prd_id = @ProductID", param);
+                }
+                catch { }
+
+            }
         }
 
         public void DeleteProductCategory(int productcategoryId)

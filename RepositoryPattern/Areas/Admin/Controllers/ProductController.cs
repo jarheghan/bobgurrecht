@@ -47,13 +47,19 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 
             prdCat.CategoryID = product.CategoryID;
             prdCat.ProductID = prd.ID;
-            _categoryRepository.InsertProductCategory(prdCat);
+            if (product.CategoryID != 0)
+            {
+                _categoryRepository.InsertProductCategory(prdCat);
+            }
 
             picProd.PictureID = product.PictureID;
             picProd.ProductID = prd.ID;
             picProd.DisplayOrder = 1;
 
-            _productRepository.InsertProductPicture(picProd);
+            if (picProd.PictureID != 0)
+            {
+                _productRepository.InsertProductPicture(picProd);
+            }
 
             return RedirectToAction("List");
         }
@@ -62,14 +68,38 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         {
             var product = _productRepository.GetProductByID(Id);
             var prdpic = _productRepository.GetProductPictureByID(Id);
-            product.PictureID = prdpic.PictureID;
-            return View(product);
+            if (prdpic != null)
+            {
+                product.PictureID = prdpic.PictureID;
+                return View(product);
+            }
+            else
+            {
+                return View(product);
+            }
+           
         }
 
         [HttpPost]
         public ActionResult Edit(Product product)
         {
-            return View();
+            Product prd = new Product();
+            ProductCategory prdCat = new ProductCategory();
+            ProductPicture picProd = new ProductPicture();
+            _productRepository.Update(product);
+
+            prdCat.ProductID = product.ID;
+            prdCat.CategoryID = product.CategoryID;
+
+            if(product.CategoryID != 0)
+            _categoryRepository.UpdateProductCategory(prdCat);
+
+            picProd.PictureID = product.PictureID;
+            picProd.ProductID = product.ID;
+            if(product.PictureID != 0)
+            _productRepository.UpdateProductPicture(picProd);
+
+            return RedirectToAction("List");
         }
 
         public ActionResult Delete(int Id)
