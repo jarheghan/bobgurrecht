@@ -48,7 +48,7 @@
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Short Description",null, new {@for="" })
-                                            @Html.TextBox("ShortDescription",null, new {@class="form-control",placeholder="Description" })
+                                            @Html.TextBox("ShortDescription",null, new {@class="form-control" })
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
@@ -151,21 +151,12 @@
                       validating: 'glyphicon glyphicon-refresh'
                   },
                   fields: {
-                      Name: {
+                      ShortDescription: {
                           message: 'The text cannot be empty',
-                          validator: {
+                          validators: {
                               notEmpty: {
                                   message: 'The Name is required and cannot be empty'
                               }
-                          },
-                          stringLength: {
-                              min: 6,
-                              max: 30,
-                              message: 'The username must be more than 6 and less than 30 characters long'
-                          },
-                          regexp: {
-                              regexp: /^[a-zA-Z0-9_]+$/,
-                              message: 'The username can only consist of alphabetical, number and underscore'
                           }
                       }
                   }
