@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data;
 
 namespace RepositoryPattern.Data
 {
@@ -13,7 +14,7 @@ namespace RepositoryPattern.Data
     {
         public IEnumerable<Category> GetProductByCategory()
         {
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 cn.Open();
                 var category = cn.Query<Category>("select * from categories");
@@ -94,7 +95,7 @@ namespace RepositoryPattern.Data
                 DeleteFlag = false
             };
 
-            using (SqlCeConnection cn = Connection2) 
+            using (IDbConnection cn = Connection) 
             {
                 var i = cn.Query<int>(@"INSERT INTO CATEGORIES 
                                     (cat_name, cat_description,cat_alias,cat_meta_keyword,cat_parent_category_id,cat_display_order,
@@ -125,7 +126,7 @@ namespace RepositoryPattern.Data
                 DeleteFlag = false,
                 ID = item.ID
             };
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 var i = cn.Query<int>(@"update CATEGORIES
                                 set cat_name = @Name,
@@ -144,7 +145,7 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<Category> GetAllCategories()
         {
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 List<Category> category = new List<Category>();
                 cn.Open();
@@ -161,7 +162,7 @@ namespace RepositoryPattern.Data
         public IEnumerable<ProductCategory> GetProductCategoriesByCategoryID(int categoryId)
         {
             List<ProductCategory> pcm = new List<ProductCategory>();
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 var productcategory = cn.Query<dynamic>("select * from ProductCategoryMapping where pcm_cat_id = @categoryId", 
                     new { categoryId = categoryId });
@@ -181,7 +182,7 @@ namespace RepositoryPattern.Data
 
         public Category GetCategoryById(int categoryId)
         {
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 cn.Open();
                 var categories = cn.Query<dynamic>("select * from categories where cat_id = @categoryId",
@@ -214,7 +215,7 @@ namespace RepositoryPattern.Data
                 DeleteFlag = false
             };
 
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 var i = cn.Query<int>(@"INSERT INTO ProductCategoryMapping 
                                     (pcm_prd_id, pcm_cat_id,pcm_is_featured_product,pcm_display_order,
@@ -225,9 +226,33 @@ namespace RepositoryPattern.Data
             }
         }
 
-        public void UpdateProductCategory(int productcategoryId)
+        public void UpdateProductCategory(ProductCategory productCategory)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                ProductID = productCategory.ProductID,
+                CategoryID = productCategory.CategoryID,
+                IsFeaturedProduct = productCategory.IsFeaturedProduct,
+                DisplayOrder = productCategory.DisplayOrder,
+                ChangeUser = "Jarheghan",
+                ChangeDate = DateTime.Now
+            };
+
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Execute(@"Update ProductCategoryMapping 
+                                      set   pcm_cat_id = @CategoryID
+		                                    ,pcm_is_featured_product = @IsFeaturedProduct
+		                                    ,pcm_display_order = @DisplayOrder
+                                             ,pcm_change_date = @ChangeDate
+                                             , pcm_change_user = @ChangeUser
+                                          where pcm_prd_id = @ProductID", param);
+                }
+                catch { }
+
+            }
         }
 
         public void DeleteProductCategory(int productcategoryId)
@@ -235,5 +260,20 @@ namespace RepositoryPattern.Data
             throw new NotImplementedException();
         }
 
+
+
+        public void DeleteCategory(int Id)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Execute(@"delete Categories
+                                        where cat_id = @Id", new { Id = Id });
+                }
+                catch { }
+
+            }
+        }
     }
 }

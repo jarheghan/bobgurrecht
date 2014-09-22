@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data.SqlServerCe;
+using System.Data.SqlClient;
 
 namespace RepositoryPattern.Data
 {
@@ -21,7 +22,7 @@ namespace RepositoryPattern.Data
        
         public IEnumerable<Product> GetProductByCategory(int prd_category)
         {
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 var products = GetProductDataNoJoin(
                             @"SELECT * from Products WHERE prd_category = @prd_category", new { prd_category });
@@ -33,7 +34,7 @@ namespace RepositoryPattern.Data
         public void Add(Product item)
         {
             //using (IDbConnection cn = Connection)
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 var parameter = new
                 {
@@ -69,7 +70,39 @@ namespace RepositoryPattern.Data
 
         public void Update(Product item)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                ID = item.ID,
+                Name = item.Name,
+                Description = item.Description,
+                Price = item.Price,
+                ShortDescription = item.ShortDescription,
+                SKU = item.SKU,
+                ManufacturePartNo = item.ManufacturePartNo,
+                StockQuantity = item.StockQuantity,
+                ChangeUser = Environment.UserName,
+                ChangeDate = DateTime.Now
+            };
+
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Execute(@"update products
+                               set prd_name = @Name,
+                                   prd_description = @Description,
+                                   prd_price = @Price,
+                                   prd_short_description = @ShortDescription,
+                                   prd_sku = @SKU,
+                                   prd_manufacturepart_no = @ManufacturePartNo,
+                                   prd_stock_quatity = @StockQuantity,
+                                   prd_change_user = @ChangeUser,
+                                   prd_change_date = @Changedate
+                                where prd_id = @ID", param);
+                }
+                catch { }
+            }
+           
         }
 
         public override Product Map(dynamic result)
@@ -87,7 +120,7 @@ namespace RepositoryPattern.Data
                 MetaTitle = result.prd_meta_title,
                 SKU = result.prd_sku,
                 ManufacturePartNo = result.prd_manufacturepart_no,
-                StockQuantity = result.prd_stock_quantity,
+                StockQuantity = result.prd_stock_quatity,
                 DisplayStockAvaliable = result.prd_display_stock_avaliable,
                 DisplayStockQuantity = result.prd_display_stock_quatity,
                 CallForPrice = result.prd_call_for_price,
@@ -122,7 +155,7 @@ namespace RepositoryPattern.Data
         {
             List<Product> product = null;
             //using (IDbConnection cn = Connection)
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 cn.Open();
                 using (var multi = cn.QueryMultiple(sql, (object)param))
@@ -142,7 +175,7 @@ namespace RepositoryPattern.Data
         {
             List<Product> product = new List<Product>();
             //using (IDbConnection cn = Connection)
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 cn.Open();
                 var prd  = cn.Query<dynamic>(sql, (object)param);
@@ -160,8 +193,8 @@ namespace RepositoryPattern.Data
 
         public Product GetProductByID(int productID)
         {
-           
-            using (SqlCeConnection cn = Connection2)
+
+            using (IDbConnection cn = Connection)
             {
                 cn.Open();
                 var product = cn.Query<dynamic>("select * from products where prd_id = @ProductID", new { ProductID = productID }).FirstOrDefault();
@@ -173,12 +206,18 @@ namespace RepositoryPattern.Data
         public ProductPicture GetProductPictureByID(int productID)
         {
 
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
+                ProductPicture prd = new ProductPicture();
                 cn.Open();
                 var product = cn.Query<dynamic>("select * from ProductPictureMapping where ppm_prd_id = @ProductID", new { ProductID = productID }).FirstOrDefault();
-                ProductPicture prd = MapProductPicture(product);
-                return prd;
+                if (product != null)
+                {
+                     prd = MapProductPicture(product);
+                    return prd;
+                }
+                else { return prd; }
+               
             }
         }
 
@@ -198,7 +237,7 @@ namespace RepositoryPattern.Data
 
         public Product GetProductByGuid(Guid prductGuid)
         {
-            using (SqlCeConnection cn = Connection2)
+            using (IDbConnection cn = Connection)
             {
                 cn.Open();
                 try
@@ -217,13 +256,14 @@ namespace RepositoryPattern.Data
 
         public int InsertProductPicture(ProductPicture item)
         {
-            using (SqlCeConnection cn = Connection2)
+            var param = new
             {
-                var param = new {
-                    ProductID = item.ProductID,
-                    PictureID = item.PictureID,
-                    DisplayOrder = item.DisplayOrder
-                };
+                ProductID = item.ProductID,
+                PictureID = item.PictureID,
+                DisplayOrder = item.DisplayOrder
+            };
+            using (IDbConnection cn = Connection)
+            {
                 cn.Open();
                 try
                 {
@@ -232,6 +272,58 @@ namespace RepositoryPattern.Data
                     return i;
                 }
                 catch { return 0; }
+            }
+        }
+
+
+        public void UpdateProductPicture(ProductPicture item)
+        {
+            var param = new
+            {
+                ProductID = item.ProductID,
+                PictureID = item.PictureID,
+                DisplayOrder = item.DisplayOrder
+            };
+
+            using (IDbConnection cn = Connection)
+            {
+           
+                try
+                {
+                    var i = cn.Execute(@"update ProductPictureMapping
+                                        set	ppm_pic_id = @PictureID,
+	                                        ppm_display_order = @DisplayOrder
+                                        where ppm_prd_id = @ProductID", param);
+                }
+                catch { }
+            }
+        }
+
+
+        public void DeleteProduct(int Id)
+        {
+            using (IDbConnection cn = Connection)
+            {
+
+                try
+                {
+                    var i = cn.Query<int>(@"
+                                    delete ProductCategoryMapping
+                                    where pcm_prd_id = @Id
+
+                                    select @picid = ppm_pic_id from ProductPictureMapping
+                                    where ppm_prd_id = @Id
+
+                                    delete ProductPictureMapping
+                                    where ppm_prd_id = @Id
+
+                                    delete Products
+                                    where prd_id = @Id
+
+                                    delete Picture
+                                    where pic_id = @picid", new { Id = Id, picid = 0 }).FirstOrDefault();
+                }
+                catch { }
             }
         }
     }

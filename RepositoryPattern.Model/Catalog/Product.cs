@@ -4,15 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace RepositoryPattern.Model.Catalog
 {
     public class Product : IAggregateRoot
     {
 
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public int? Price { get; set; }
+        [Required]
         public string ShortDescription { get; set; }
         public string ShowOnHomePage { get; set; }
         public string MetaKeyword { get; set; }
@@ -24,6 +29,7 @@ namespace RepositoryPattern.Model.Catalog
         public bool? DisplayStockAvaliable { get; set; }
         public bool? DisplayStockQuantity { get; set; }
         public bool? CallForPrice { get; set; }
+      
         public int? OldPrice { get; set; }
         public float? Weight { get; set; }
         public float? Length { get; set; }
@@ -31,6 +37,7 @@ namespace RepositoryPattern.Model.Catalog
         public float? Height { get; set; }
         public Guid ProductGuid { get; set; }
         public int PictureID { get; set; }
+        [Required]
         public int CategoryID { get; set; }
         public int ID
         {

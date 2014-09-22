@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace RepositoryPattern.Controllers
 {
+    [Authorize]
     public partial class HomeController : BaseController
     {
         //

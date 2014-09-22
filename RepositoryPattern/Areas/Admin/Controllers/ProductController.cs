@@ -38,43 +38,91 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Product product)
         {
-            Product prd = new Product();
-            ProductCategory prdCat = new ProductCategory();
-            ProductPicture picProd = new ProductPicture();
-            product.ProductGuid = Guid.NewGuid();
-            _productRepository.Add(product);
-            prd = _productRepository.GetProductByGuid(product.ProductGuid);
+            if (ModelState.IsValid)
+            {
+                Product prd = new Product();
+                ProductCategory prdCat = new ProductCategory();
+                ProductPicture picProd = new ProductPicture();
+                product.ProductGuid = Guid.NewGuid();
+                _productRepository.Add(product);
+                prd = _productRepository.GetProductByGuid(product.ProductGuid);
 
-            prdCat.CategoryID = product.CategoryID;
-            prdCat.ProductID = prd.ID;
-            _categoryRepository.InsertProductCategory(prdCat);
+                prdCat.CategoryID = product.CategoryID;
+                prdCat.ProductID = prd.ID;
+                if (product.CategoryID != 0)
+                {
+                    _categoryRepository.InsertProductCategory(prdCat);
+                }
 
-            picProd.PictureID = product.PictureID;
-            picProd.ProductID = prd.ID;
-            picProd.DisplayOrder = 1;
+                picProd.PictureID = product.PictureID;
+                picProd.ProductID = prd.ID;
+                picProd.DisplayOrder = 1;
 
-            _productRepository.InsertProductPicture(picProd);
+                if (picProd.PictureID != 0)
+                {
+                    _productRepository.InsertProductPicture(picProd);
+                }
 
-            return RedirectToAction("List");
+                return RedirectToAction("List");
+            }
+            else { return View(product); }
         }
        
         public ActionResult Edit(int Id)
         {
             var product = _productRepository.GetProductByID(Id);
             var prdpic = _productRepository.GetProductPictureByID(Id);
-            product.PictureID = prdpic.PictureID;
-            return View(product);
+            if (prdpic != null)
+            {
+                product.PictureID = prdpic.PictureID;
+                return View(product);
+            }
+            else
+            {
+                return View(product);
+            }
+           
         }
 
         [HttpPost]
         public ActionResult Edit(Product product)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Product prd = new Product();
+                ProductCategory prdCat = new ProductCategory();
+                ProductPicture picProd = new ProductPicture();
+                _productRepository.Update(product);
+
+                prdCat.ProductID = product.ID;
+                prdCat.CategoryID = product.CategoryID;
+
+                if (product.CategoryID != 0)
+                    _categoryRepository.UpdateProductCategory(prdCat);
+
+                picProd.PictureID = product.PictureID;
+                picProd.ProductID = product.ID;
+                if (product.PictureID != 0)
+                    _productRepository.UpdateProductPicture(picProd);
+
+                return RedirectToAction("List");
+            }
+            else { return View(product); }
         }
 
-        public ActionResult Delete(int Id)
+        public ActionResult Delete(int? Id)
         {
-            return View();
+            if (Id != null)
+            {
+                _productRepository.DeleteProduct(Id ?? 0);
+                return RedirectToAction("List");
+            }
+            else
+            { 
+                var val = "Product-page";
+                return RedirectToAction("List", new {val = 2 });
+            }
+            
         }
 
     }

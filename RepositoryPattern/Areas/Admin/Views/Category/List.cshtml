@@ -4,7 +4,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
 
-    Html.RequiresCss("FileUpload/jquery.fileupload-ui.css", "Content", 5);
     Html.RequiresCss("admin/font-awesome.css", "Content", 5);
     Html.RequiresCss("admin/ionicons.css", "Content", 5);
 
@@ -36,7 +35,7 @@
                     columns.Bound(c => c.Alias).Width(190);
                     columns.Bound(c => c.ID).Width(190);
                     columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Edit Category", "Edit", new { Id = c.ID })).Title("");
-                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Delete", "Delete", new { Id = c.ID })).Title("");
+                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Delete", "Remove", new { categoryId = c.ID })).Title("");
                 })
                 .HtmlAttributes(new { style = "height: 270px;" })
                 .Scrollable()

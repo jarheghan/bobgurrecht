@@ -16,5 +16,7 @@ namespace RepositoryPattern.Model.Catalog
         Product GetProductByGuid(Guid prductGuid);
         int InsertProductPicture(ProductPicture item);
         ProductPicture GetProductPictureByID(int productID);
+        void UpdateProductPicture(ProductPicture item);
+        void DeleteProduct(int Id);
     }
 }

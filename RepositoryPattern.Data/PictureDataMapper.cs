@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data;
 
 namespace RepositoryPattern.Data
 {
@@ -55,7 +56,7 @@ namespace RepositoryPattern.Data
                 AddDate = DateTime.Now,
                 DeleteFlag = false
             };
-            using (SqlCeConnection conn = Connection2)
+            using (IDbConnection conn = Connection)
             {
                 conn.Open();
                 var i = conn.Query<int>(@"INSERT INTO Picture 
@@ -82,14 +83,18 @@ namespace RepositoryPattern.Data
         public Picture GetPictureById(int Id)
         {
             Picture picture = new Picture();
-            using (SqlCeConnection conn = Connection2)
+            using (IDbConnection conn = Connection)
             {
                 try
                 {
                     conn.Open();
                     var pic = conn.Query<dynamic>(@"select * from picture where pic_id = @Id", new { Id = Id }).FirstOrDefault();
-                    picture = Map(pic);
-                    return picture;
+                    if (picture != null)
+                    {
+                        picture = Map(pic);
+                        return picture;
+                    }
+                    else { return picture; }
                 }
                 catch { return null; }
             }
@@ -117,7 +122,7 @@ namespace RepositoryPattern.Data
                 AddDate = DateTime.Now,
                 DeleteFlag = false
             };
-            using (SqlCeConnection conn = Connection2)
+            using (IDbConnection conn = Connection)
             {
                 conn.Open();
                 var i = conn.Query<int>(@"INSERT INTO Picture 
@@ -133,7 +138,7 @@ namespace RepositoryPattern.Data
 
         public int Remove(int Id)
         {
-            using (SqlCeConnection conn = Connection2)
+            using (IDbConnection conn = Connection)
             {
                 try
                 {

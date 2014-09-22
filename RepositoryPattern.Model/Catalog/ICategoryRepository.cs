@@ -16,7 +16,8 @@ namespace RepositoryPattern.Model.Catalog
         IEnumerable<Category> GetAllCategoriesDisplayedOnHomePage();
         IEnumerable<Category> GetAllCategoriesByParentCategoryId(int parentCategoryID);
         void InsertProductCategory(ProductCategory productCategory);
-        void UpdateProductCategory(int productcategoryId);
+        void UpdateProductCategory(ProductCategory productCategory);
         void DeleteProductCategory(int productcategoryId);
+        void DeleteCategory(int Id);
     }
 }

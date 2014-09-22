@@ -19,15 +19,6 @@
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
 @model RepositoryPattern.Model.Catalog.Product
- @{var listItems = new List<SelectListItem>
-        {
-            new SelectListItem { Text = "Toyoto", Value = "0" },
-            new SelectListItem { Text = "Honda", Value = "1" },
-            new SelectListItem { Text = "Subaru", Value = "2" }
-        };}
-
-
-
 
   @Html.Action("Menu", "Common", new {area="Admin"})
 
@@ -50,6 +41,7 @@
                                         <div class="form-group">
                                             @Html.Label("Name", new {@for="" })
                                             @Html.TextBoxFor(x => x.Name,  new {@class="form-control",placeholder="Name" })
+                                            @Html.Hidden("ID",@Model.ID)
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Short Description",null, new {@for="" })

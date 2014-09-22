@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace RepositoryPattern.Model.Catalog
 {
     public class Category : IAggregateRoot
     {
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         public string Alias { get; set; }
         public string MetaKeyword { get; set; }

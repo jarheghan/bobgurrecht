@@ -31,7 +31,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Category category)
         {
-            if (category != null)
+            if (ModelState.IsValid)
             {
                 _categoryRepository.Add(category);
                 return RedirectToAction("List");
@@ -50,14 +50,12 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Category category)
         {
-            _categoryRepository.Update(category);
-            return RedirectToAction("List");
-        }
-
-        [HttpPost]
-        public ActionResult Delete(int categoryId)
-        {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _categoryRepository.Update(category);
+                return RedirectToAction("List");
+            }
+            else { return View(category); }
         }
 
         public ActionResult List()
@@ -65,5 +63,20 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             IEnumerable<Category> cat = _categoryRepository.GetAllCategories();
             return View(cat);
         }
+
+        public ActionResult Remove(int? categoryId)
+        {
+            if (categoryId != null)
+            {
+                _categoryRepository.DeleteCategory(categoryId ?? 0);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("List");
+            }
+        }
+
+       
     }
 }
