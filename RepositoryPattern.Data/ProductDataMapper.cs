@@ -46,6 +46,7 @@ namespace RepositoryPattern.Data
                     ManufacturePartNo = item.ManufacturePartNo,
                     StockQuantity = item.StockQuantity,
                     ProductGuid = item.ProductGuid,
+                    ShowOnHomePage = item.ShowOnHomePage,
                     AddUser = Environment.UserName,
                     AddDate = DateTime.Now,
                     DeleteFlag = false
@@ -54,10 +55,10 @@ namespace RepositoryPattern.Data
                 try
                 {
                     var i = cn.Query<int>(@"INSERT INTO Products (prd_name,prd_description,prd_price,prd_short_description,
-                                            prd_sku,prd_manufacturepart_no,prd_stock_quatity, prd_guid
+                                            prd_sku,prd_manufacturepart_no,prd_stock_quatity, prd_guid,prd_showonhomepage
                                            ,prd_add_user,prd_add_date,prd_delete_flag)  
                                         VALUES(@Name,@Description,@Price,@ShortDescription
-                                                ,@SKU,@ManufacturePartNo,@StockQuantity,@ProductGuid,@AddUser,@AddDate,@DeleteFlag)", parameter);
+                                                ,@SKU,@ManufacturePartNo,@StockQuantity,@ProductGuid,@ShowOnHomePage,@AddUser,@AddDate,@DeleteFlag)", parameter);
                 }
                 catch { }
             }
@@ -80,6 +81,7 @@ namespace RepositoryPattern.Data
                 SKU = item.SKU,
                 ManufacturePartNo = item.ManufacturePartNo,
                 StockQuantity = item.StockQuantity,
+                ShowOnHomePage = item.ShowOnHomePage,
                 ChangeUser = Environment.UserName,
                 ChangeDate = DateTime.Now
             };
@@ -96,6 +98,7 @@ namespace RepositoryPattern.Data
                                    prd_sku = @SKU,
                                    prd_manufacturepart_no = @ManufacturePartNo,
                                    prd_stock_quatity = @StockQuantity,
+                                   prd_showonhomepage = @ShowOnHomePage,
                                    prd_change_user = @ChangeUser,
                                    prd_change_date = @Changedate
                                 where prd_id = @ID", param);

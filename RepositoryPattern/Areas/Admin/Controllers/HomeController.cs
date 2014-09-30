@@ -11,7 +11,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
     {
         //
         // GET: /Administration/Home/
-
+        [Authorize]
         public ActionResult Index()
         {
             return View();

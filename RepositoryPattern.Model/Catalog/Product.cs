@@ -19,7 +19,7 @@ namespace RepositoryPattern.Model.Catalog
         public int? Price { get; set; }
         [Required]
         public string ShortDescription { get; set; }
-        public string ShowOnHomePage { get; set; }
+        public bool? ShowOnHomePage { get; set; }
         public string MetaKeyword { get; set; }
         public string MetaDescrption { get; set; }
         public string MetaTitle { get; set; }
