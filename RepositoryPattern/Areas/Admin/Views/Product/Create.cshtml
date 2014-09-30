@@ -54,10 +54,11 @@
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
                                             @Html.TextArea("Description",null, new {@class="form-control",placeholder="Description" })
+                                            @Html.ValidationMessage("Description")
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Category", new {@for="" })
-                                            @Html.DropDownList("CategoryID", new SelectList(CommonHelpers.GetCategory(), "Value", "Text"), new {@class="form-control" })
+                                            @Html.DropDownList("CategoryID", new SelectList(CommonHelpers.GetCategory(), "Value", "Text"),"Parent Category", new { @class = "form-control" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("SKU", new {@for="" })
