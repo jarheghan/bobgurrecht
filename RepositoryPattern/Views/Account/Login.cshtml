@@ -2,23 +2,34 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Root.cshtml";
 }
-
+@model RepositoryPattern.Models.Errors
 <div class="container">
     <div class="row">
         @using(Html.BeginForm()){
         <div class="col-md-6 col-md-offset-3">
-            <h3>Register User</h3>
+            <h3>Sign In</h3>
             <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input type="text" class="form-control" id="username" placeholder="User Name" name="username">
+                @Html.ValidationMessage("Username")
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                @Html.ValidationMessage("Password")
             </div>
             <div class="form-group">
               <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
+            @if(Model != null)
+            {
+                if(Model.Type == "2")
+                {
+             <div class="form-group">
+                 <div class="alert alert-warning" role="alert">@Model.Message</div>
+             </div>
+            }
+            }
         </div>
         }
     </div>

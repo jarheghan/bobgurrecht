@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.Mvc;
 using WebMatrix.WebData;
+using RepositoryPattern.Models;
 
 namespace RepositoryPattern.Controllers
 {
@@ -37,23 +38,35 @@ namespace RepositoryPattern.Controllers
             //{
             //    WebSecurity.InitializeDatabaseConnection("RPConnection", "Users", "Id", "Username", autoCreateTables: true);
             //}
-            return View();
+            Errors err = new Errors();
+            return View(err);
         }
 
         [HttpPost]
-        public ActionResult Login(FormCollection form)
+        public ActionResult Login(Users user)
         {
-            bool success = WebSecurity.Login(form["username"], form["password"]);
-            if (success)
+            if (ModelState.IsValid)
             {
-                string returnurl = Request.QueryString["ReturnUrl"];
-                if (returnurl == null)
+                bool success = WebSecurity.Login(user.Username, user.Password);
+                if (success)
                 {
-                    Response.Redirect("~/Admin/");
+                    string returnurl = Request.QueryString["ReturnUrl"];
+                    if (returnurl == null)
+                    {
+                        Response.Redirect("~/Admin/");
+                    }
+                    else
+                        Response.Redirect(returnurl);
                 }
-                else
-                    Response.Redirect(returnurl);
+                if (!success)
+                {
+                    Errors err = new Errors();
+                    err.Message = "Username or Password may be incorrect. Please enter valid username and password";
+                    err.Type = "2";
+                    return View(err);
+                }
             }
+           
             return View();
         }
         public ActionResult Logout()

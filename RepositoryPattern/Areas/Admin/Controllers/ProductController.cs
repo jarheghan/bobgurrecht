@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ProductController : BaseController
     {
         //
@@ -36,12 +37,12 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, ProductCategory prdCat)
         {
             if (ModelState.IsValid)
             {
                 Product prd = new Product();
-                ProductCategory prdCat = new ProductCategory();
+                //ProductCategory prdCat = new ProductCategory();
                 ProductPicture picProd = new ProductPicture();
                 product.ProductGuid = Guid.NewGuid();
                 _productRepository.Add(product);
@@ -49,6 +50,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 
                 prdCat.CategoryID = product.CategoryID;
                 prdCat.ProductID = prd.ID;
+                prdCat.IsFeaturedProduct = prdCat.IsFeaturedProduct;
                 if (product.CategoryID != 0)
                 {
                     _categoryRepository.InsertProductCategory(prdCat);
