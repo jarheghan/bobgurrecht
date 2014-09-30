@@ -27,6 +27,10 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             return PartialView();
         }
 
+        public ActionResult ProductVariation()
+        {
+            return PartialView();
+        }
 
     }
 }

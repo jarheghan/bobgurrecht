@@ -13,6 +13,11 @@
 												{
 													new BasicPath("Content", "~/Content")
 												}).ToString())
+    
+    @MvcHtmlString.Create(Html.RenderCssHere(new List<IClientDependencyPath>
+												{
+													new BasicPath("jqueryUI", "~/Content/themes/base/")
+												}).ToString())
      
     @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
 												{
@@ -22,10 +27,11 @@
 												{
 													new BasicPath("Content", "~/Content")
 												}).ToString())
-      @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
+    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
 												{
 													new BasicPath("Custom", "~/Scripts/js")
 												}).ToString())
+
     
 </head>
 <body class="skin-blue">
