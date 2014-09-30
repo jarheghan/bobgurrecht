@@ -15,6 +15,8 @@
 
     Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
     Html.RequiresJs("jquery-ui-1.8.20.js", "jquery", 2);
+    Html.RequiresJs("jquery.dialog.js", "jquery", 3);
+    Html.RequiresJs("catalog.js", "Custom", 1);
     //Html.RequiresJs("bootstrap/js/bootstrapValidator.js", "Content2", 5);
     Html.RequiresJs("dropzone/dropzone.js", "Content", 5);
     Html.RequiresJs("admin/app.js", "Content", 99);
@@ -77,6 +79,10 @@
                                             @Html.Label("Quantity", new {@for="" })
                                             @Html.TextBox("StockQuantity",null, new {@class="form-control",placeholder="Quantity" })
                                         </div>
+                                        <div class="form-group">
+                                            @Html.Label("Product Variation", new {@for="" })<br />
+                                           <a href="#" class="btn btn-primary ">Add Product Variation</a>
+                                        </div>
                                          <div class="form-group">
                                             @Html.Label("Is a Feature Product?", new {@for="" })
                                         
@@ -85,7 +91,7 @@
                                           @Html.Partial("Picture")
                                         </div><!-- /.box-body -->
                                     <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary ">Submit</button>
                                     </div>
 
                                 </div> <!-- End forms -->
@@ -99,7 +105,7 @@
                   
               </section>
 </aside>
-
+<div id="productvariation"></div>
  
  @section scripts{
       <script type="text/javascript">
