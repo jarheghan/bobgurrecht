@@ -111,50 +111,7 @@
  
  @section scripts{
       <script type="text/javascript">
-          $("div#dropzoneForm").dropzone({ url: "/Admin/Picture/SaveUploadedFile",
-              maxFiles: 2,
-              init: function () {
-                  this.on("maxfilesexceeded", function (data) {
-                      var res = eval('(' + data.xhr.responseText + ')');
-
-                  });
-                  this.on("success", function (file, response) {
-                      var addHiddenValue = Dropzone.createElement('<input type="hidden" name="PictureID" id="pic_idx" value="' + response.PictureId + '"/>');
-                      file.previewElement.appendChild(addHiddenValue);
-                  });
-                  this.on("addedfile", function (file) {
-
-                      // Create the remove button
-                      var removeButton = Dropzone.createElement('<a href="#" class="btn btn-primary">Remove file</a>');
-
-
-                      // Capture the Dropzone instance as closure.
-                      var _this = this;
-
-                      // Listen to the click event
-                      removeButton.addEventListener("click", function (e) {
-                          // Make sure the button click doesn't submit the form:
-                          var j = $('#pic_idx').val();
-                          $.ajax({
-                              url: '/Admin/Picture/RemoveUploadedFile?Id=' + j ,
-                          }).done(function (data) {
-                              if (data.Message === 'Success') {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  // Remove the file preview.
-                                  _this.removeFile(file);
-                                  // If you want to the delete the file on the server as well,
-                                  // you can do the AJAX request here.
-                              }
-                          });
-                         
-                      });
-
-                      // Add the button to the file preview element.
-                      file.previewElement.appendChild(removeButton);
-                  });
-              }
-          });
+          catalog.prodImage();
     </script>
 
      }
