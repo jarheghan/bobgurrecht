@@ -1,8 +1,8 @@
-﻿/// <reference path="../jquery-2.1.1.intellisense.js" />
-/// <reference path="../jquery.validate.min.js" />
+﻿// <reference path="../jquery-2.1.1.intellisense.js" />
+// <reference path="../jquery.validate.min.js" />
 
 var catalog = (function () {
-    var productVariation = $('#productvariation').dialog({
+ $('#productvariation').dialog({
         title: "Production Variation",
         autoOpen: false,
         buttons: [
@@ -25,7 +25,7 @@ var catalog = (function () {
     });
 
     $('#btnProdVariation').click(function () {
-        productVariation.dialog('open').load('/Admin/Common/ProductVariation');
+        $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
     })
 
    

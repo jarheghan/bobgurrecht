@@ -19,18 +19,8 @@
 													new BasicPath("jqueryUI", "~/Content/themes/base/")
 												}).ToString())
      
-    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
-												{
-													new BasicPath("jquery", "~/Scripts")
-												}).ToString())
-    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
-												{
-													new BasicPath("Content", "~/Content")
-												}).ToString())
-    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
-												{
-													new BasicPath("Custom", "~/Scripts/js")
-												}).ToString())
+
+
 
     
 </head>
@@ -41,10 +31,23 @@
    </div>
     
    @* @Scripts.Render("~/bundles/jquery")*@
+    
+    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
+												{
+													new BasicPath("jquery", "~/Scripts")
+												}).ToString())
     @Scripts.Render("~/bundle/bootstrap")
     @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
 												{
+													new BasicPath("Content", "~/Content")
+												}).ToString())
+    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
+												{
 													new BasicPath("Content2", "~/Content")
+												}).ToString())
+   @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
+												{
+													new BasicPath("Custom", "~/Scripts/js")
 												}).ToString())
     @if(IsSectionDefined("scripts"))
     {
