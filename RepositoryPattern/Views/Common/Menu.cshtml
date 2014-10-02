@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<RepositoryPattern.Model.Catalog.Category>
 @using RepositoryPattern.Model.Catalog;
+@using ClientDependency.Core.Mvc
 @{var csspart = "~/Content/themes/Plumb";} 
 
 @functions{
@@ -13,6 +14,10 @@
        return liClasses.Count > 0 ? string.Join(" ", liClasses) : null; 
     }
 }
+@{
+    Html.RequiresJs("catalog.js", "Custom", 2);
+    Html.RequiresJs("jquery.dialog.js", "Custom", 1);
+ }
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
       <div class="collapse navbar-collapse">
@@ -20,7 +25,7 @@
               <li><a href="about us.html">About Us</a></li>
               <li><a href="contact us.html">Contact Us</a></li>
               <li><a href="#">My List</a></li>
-              <li class="last" data-toggle="modal" data-target="#myModal"><a href="#">Sign In</a></li>
+              <li class="last" data-toggle="modal" data-target="#myModal"><a href="#" id="btnSignIn">Sign In</a></li>
         </ul>
       </div>
     </div>

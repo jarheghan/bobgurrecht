@@ -75,6 +75,32 @@ var catalog = (function () {
             }
         });
     }
+
+    $('#btnSignIn').click(function () {
+        $('#test1').dialog({
+            title: "Production Variation",
+            autoOpen: false,
+            buttons: [
+                {
+                    text: "Save"
+                  , 'class': "btn-primary"
+                  , click: function () {
+                      $(this).dialog("close");
+                  }
+                },
+
+               {
+                   text: "Cancel"
+                  , 'class': "btn-warning"
+                  , click: function () {
+                      $(this).dialog("close");
+                  }
+               }
+            ]
+        })
+
+        $('#test1').dialog('open');
+    });
     var editProductImage = function () {
         $("div#mydropzone").dropzone({
             url: "/Admin/Picture/SaveUploadedFile",

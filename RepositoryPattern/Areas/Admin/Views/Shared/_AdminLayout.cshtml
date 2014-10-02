@@ -30,24 +30,13 @@
         @RenderBody()
    </div>
     
-    
-    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
-												{
-													new BasicPath("jquery", "~/Scripts")
-												}).ToString())
-    @Scripts.Render("~/bundle/bootstrap")
-    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
-												{
-													new BasicPath("Content", "~/Content")
-												}).ToString())
-    @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
-												{
-													new BasicPath("Content2", "~/Content")
-												}).ToString())
-   @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
-												{
-													new BasicPath("Custom", "~/Scripts/js")
-												}).ToString())
+
+
+    @Html.RenderJsHere(new BasicPath("jquery", "~/Scripts"),
+                       new BasicPath("bootstrap","~/Content/bootstrap/js"),
+                       new BasicPath("Content", "~/Content"),
+                       new BasicPath("Custom", "~/Scripts/js"))
+     
     @if(IsSectionDefined("scripts"))
     {
     @RenderSection("scripts")
