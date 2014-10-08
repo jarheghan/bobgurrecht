@@ -22,7 +22,7 @@ namespace RepositoryPattern.Data
             {
                 ID = result.prv_id,
                 ProductID = result.prv_prd_id,
-                Description = result.orv_description,
+                Description = result.prv_description,
                 Size = result.prv_size,
                 Type = result.prv_type,
                 Color = result.prv_color,
@@ -93,6 +93,7 @@ namespace RepositoryPattern.Data
             };
             using (IDbConnection cn = Connection)
             {
+               
                 var i = cn.Execute(@"Update ProductVariation
                                     set prv_description = @Description
                                    ,prv_size = @Size
@@ -102,6 +103,8 @@ namespace RepositoryPattern.Data
                                    ,prv_change_date = @ChangeDate
                                    ,prv_delete_flag = @DeleteFlag where prv_id = @ID
                              ", param);
+
+               
             }
 
         }
@@ -110,8 +113,15 @@ namespace RepositoryPattern.Data
         {
             using (IDbConnection cn = Connection)
             {
-                var prdvariation = cn.Query<ProductVariation>(@"select * from ProductVariation where prv_prd_id = @productId", new {productId = productId });
-                return prdvariation;
+                List<ProductVariation> prdvar = new List<ProductVariation>();
+                var prdvariation = cn.Query<dynamic>(@"select * from ProductVariation where prv_prd_id = @productId", new {productId = productId });
+
+                foreach (var pv in prdvariation)
+                {
+                    prdvar.Add(Map(pv));
+                }
+
+                return prdvar.AsEnumerable(); ;
             }
         }
 
