@@ -20,6 +20,5 @@ namespace RepositoryPattern.Model.Catalog
         public DateTime? AddDate{ get; set; }
         public DateTime? ChangeDate{ get; set; }
         public bool? DeleteFlag{ get; set; }
-        
     }
 }

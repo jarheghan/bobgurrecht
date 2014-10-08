@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryPattern.Model.Catalog
 {
-    public interface IProductVaraition : IRepository<ProductVariation>
+    public interface IProductVariationRepository : IRepository<ProductVariation>
     {
         void InsertProductVariation(ProductVariation prdVariation);
         void DeleteProductVariation(int Id);

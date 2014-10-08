@@ -1,4 +1,5 @@
-﻿using RepositoryPattern.Controllers;
+﻿using RepositoryPattern.Areas.Admin.Models;
+using RepositoryPattern.Controllers;
 using RepositoryPattern.Model.Catalog;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,15 @@ namespace RepositoryPattern.Areas.Admin.Controllers
     {
         //
         // GET: /Admin/Product/
-        public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository, IProductVariationRepository prdVariationRepo)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _prdVariationRepo = prdVariationRepo;
         }
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductVariationRepository _prdVariationRepo;
         public ActionResult List()
         {
             try
@@ -37,7 +40,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product, ProductCategory prdCat)
+        public ActionResult Create(Product product, ProductCategory prdCat, IEnumerable<ProductVariation> prdVariation)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +68,18 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                     _productRepository.InsertProductPicture(picProd);
                 }
 
+                if (prd.ID != 0)
+                {
+                    
+                    foreach( var prdVar in prdVariation)
+                    {
+                        prdVar.ProductID = prd.ID;
+                        prdVar.AddUser = HttpContext.User.Identity.Name;
+                        prdVar.AddDate = DateTime.Now;
+                        _prdVariationRepo.InsertProductVariation(prdVar);
+                    }
+                }
+
                 return RedirectToAction("List");
             }
             else { return View(product); }
@@ -72,16 +87,20 @@ namespace RepositoryPattern.Areas.Admin.Controllers
        
         public ActionResult Edit(int Id)
         {
+            Catalog cat = new Catalog();
             var product = _productRepository.GetProductByID(Id);
             var prdpic = _productRepository.GetProductPictureByID(Id);
+            var prdVariation = _prdVariationRepo.GetAllProductVariation(Id);
+            cat.Product = product;
+            cat.ProductVariation = prdVariation;
             if (prdpic != null)
             {
                 product.PictureID = prdpic.PictureID;
-                return View(product);
+                return View(cat);
             }
             else
             {
-                return View(product);
+                return View(cat);
             }
            
         }

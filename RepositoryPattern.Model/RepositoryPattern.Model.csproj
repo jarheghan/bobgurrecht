@@ -43,9 +43,11 @@
     <Compile Include="Catalog\Category.cs" />
     <Compile Include="Catalog\ICategoryRepository.cs" />
     <Compile Include="Catalog\IProductRepository.cs" />
+    <Compile Include="Catalog\IProductVaraitionRepository.cs" />
     <Compile Include="Catalog\Product.cs" />
     <Compile Include="Catalog\ProductCategory.cs" />
     <Compile Include="Catalog\ProductPicture.cs" />
+    <Compile Include="Catalog\ProductVariation.cs" />
     <Compile Include="Media\IPictureRepository.cs" />
     <Compile Include="Media\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
