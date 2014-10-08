@@ -82,8 +82,14 @@
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Product Variation", new {@for="" })<br />
-                                           <a href="#" class="btn btn-primary" id="btnProdVariation">Add Product Variation</a>
-                                           <div id="tablePrdVariation"></div>
+                                            <div>
+                                           <table class="table table-bordered table-hover">
+                                              <thead><tr><th>Variation Name</th><th>Size</th></tr></thead>
+                                               <tbody id="tablePrdVariation"></tbody>
+                                           </table>
+                                                <br />
+                                              <a href="#" class="btn btn-primary" id="btnProdVariation">Add Product Variation</a>
+                                            </div>
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Is a Feature Product?", new {@for="" })
