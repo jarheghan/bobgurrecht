@@ -68,6 +68,7 @@ namespace RepositoryPattern.App_Start
             kernel.Bind<ICategoryRepository>().To<CategoryDataMapper>().InSingletonScope();
             kernel.Bind<IProductRepository>().To<ProductDataMapper>().InSingletonScope();
             kernel.Bind<IPictureRepository>().To<PictureDataMapper>().InSingletonScope();
+            kernel.Bind<IProductVariationRepository>().To<ProductVariationDataMapper>().InSingletonScope();
         }        
     }
 }

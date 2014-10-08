@@ -4,23 +4,25 @@
     ViewBag.Title = "Create Products";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 
-    Html.RequiresCss("dropzone/css/basic.css", "Content",5);
-    Html.RequiresCss("dropzone/css/dropzone.css", "Content", 5);
-    Html.RequiresCss("admin/font-awesome.css", "Content", 5);
-    Html.RequiresCss("admin/ionicons.css", "Content", 5);
-    
-    
-    
+    Html.RequiresCss("dropzone/css/basic.css", "Content", 5);
+    Html.RequiresCss("dropzone/css/dropzone.css", "Content", 6);
+    Html.RequiresCss("admin/font-awesome.css", "Content", 7);
+    Html.RequiresCss("admin/ionicons.css", "Content", 8);
+    Html.RequiresCss("dialog.css", "jqueryUI", 6);
+
+
+
 
     Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
     Html.RequiresJs("jquery-ui-1.11.1.js", "jquery", 2);
-    Html.RequiresJs("jquery.dialog.js", "Custom", 3);
-    Html.RequiresJs("catalog.js", "Custom", 2);
-    Html.RequiresJs("dropzone/dropzone.js", "Content", 5);
-    Html.RequiresJs("admin/app.js", "Content", 99);
-    Html.RequiresJs("admin/dashboard.js", "Content", 99);
+    Html.RequiresJs("bootstrap.js", "bootstrap", 3);
+    Html.RequiresJs("jquery.dialog.js", "Custom", 4);
+    Html.RequiresJs("catalog.js", "Custom", 5);
+    Html.RequiresJs("dropzone/dropzone.js", "Content", 10);
+    Html.RequiresJs("admin/app.js", "Content", 11);
+    Html.RequiresJs("admin/dashboard.js", "Content", 12);
 }
-@model RepositoryPattern.Model.Catalog.Product
+@model RepositoryPattern.Areas.Admin.Models.Catalog
 
   @Html.Action("Menu", "Common", new {area="Admin"})
 
@@ -42,16 +44,16 @@
                                     <div class="box-body">
                                         <div class="form-group">
                                             @Html.Label("Name", new {@for="" })
-                                            @Html.TextBoxFor(x => x.Name,  new {@class="form-control",placeholder="Name" })
-                                            @Html.Hidden("ID",@Model.ID)
+                                            @Html.TextBoxFor(x => x.Product.Name,  new {@class="form-control",placeholder="Name" })
+                                            @Html.Hidden("ID",@Model.Product.ID)
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Short Description",null, new {@for="" })
-                                            @Html.TextBoxFor(x => x.ShortDescription, new {@class="form-control",placeholder="Description" })
+                                            @Html.TextBoxFor(x => x.Product.ShortDescription, new {@class="form-control",placeholder="Description" })
                                         </div>
                                         <div class="form-group">
                                             @Html.Label("Description",null, new {@for="" })
-                                            @Html.TextAreaFor(x => x.Description, new {@class="form-control",placeholder="Description" })
+                                            @Html.TextAreaFor(x => x.Product.Description, new {@class="form-control",placeholder="Description" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Category", new {@for="" })
@@ -59,21 +61,38 @@
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("SKU", new {@for="" })
-                                            @Html.TextBoxFor(x => x.SKU, new {@class="form-control",placeholder="Alias" })
+                                            @Html.TextBoxFor(x => x.Product.SKU, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Price", new {@for="" })
-                                            @Html.TextBoxFor(x => x.Price, new {@class="form-control",placeholder="Alias" })
+                                            @Html.TextBoxFor(x => x.Product.Price, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Manufacturer", new {@for="" })
-                                            @Html.TextBoxFor(x => x.ManufacturePartNo, new {@class="form-control",placeholder="Alias" })
+                                            @Html.TextBoxFor(x => x.Product.ManufacturePartNo, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Quantity", new {@for="" })
-                                            @Html.TextBoxFor(x => x.StockQuantity, new {@class="form-control",placeholder="Alias" })
+                                            @Html.TextBoxFor(x => x.Product.StockQuantity, new {@class="form-control",placeholder="Alias" })
                                         </div>
-                                         <input type="hidden" value="@Model.PictureID" id="mypic_id" />
+                                         <div class="form-group">
+                                            @Html.Label("Product Variation", new {@for="" })<br />
+                                            <div>
+                                           <table class="table table-bordered table-hover">
+                                              <thead><tr><th>Variation Name</th><th>Size</th></tr></thead>
+                                               <tbody id="tablePrdVariation">
+                                                   @foreach (var prdvar in Model.ProductVariation)
+                                                   {
+                                                       <tr><td>@prdvar.Description</td><td>@prdvar.Size</td><td><a href="@Url.Action("DeleteVariation", new {prdvar.ID })">Remove</a></td></tr>
+                                                   }
+                                               </tbody>
+                                               
+                                           </table>
+                                                <br />
+                                              <a href="#" class="btn btn-primary" id="btnProdVariation">Add Product Variation</a>
+                                            </div>
+                                        </div>
+                                         <input type="hidden" value="@Model.Product.PictureID" id="mypic_id" />
                                        <label>Picture</label>  
                                        <div id="mydropzone" class="dropzone"></div>
                                         </div><!-- /.box-body -->
@@ -83,19 +102,18 @@
 
                                 </div> <!-- End forms -->
                             }
-
                                 </div>
-                        
-
                             </div><!-- /.box -->
                           </div>
                   
               </section>
 </aside>
-
+<div id="productvariation"></div>
   @section scripts{
       <script type="text/javascript">
-          // url: "/Admin/Picture/SaveUploadedFile"
           catalog.editProductImage();
     </script>
       }
+
+
+ 

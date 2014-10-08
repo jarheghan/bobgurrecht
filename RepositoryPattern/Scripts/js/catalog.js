@@ -2,6 +2,7 @@
 // <reference path="../jquery.validate.min.js" />
 
 var catalog = (function () {
+    var i1 = 0;
  $('#productvariation').dialog({
         title: "Production Variation",
         autoOpen: false,
@@ -10,6 +11,12 @@ var catalog = (function () {
                 text: "Save"
               , 'class': "btn-primary"
               , click: function () {
+                  var prodTable = $("#tablePrdVariation");
+                  var des = $('body').find('#description').val();
+                  var size = $('body').find('#size').val();
+                  prodTable.append('<tr id="tr' + i1 + '"><td><input type="hidden" name="[' + i1 + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="[' + i1 + '].Size" value="' + size + '"/>' + size
+                      + '</td><td><a href="#" onclick="catalog.removeVariation(' + i1 + ')">Remove</a></td></tr>');
+                  i1++;
                   $(this).dialog("close");
               }
             },
@@ -164,9 +171,13 @@ var catalog = (function () {
         });
     }
 
+    var removeVariation = function (i) {
+        $('#tr' + i).remove();
+    }
     return {
         prodImage: prodImage,
-        editProductImage: editProductImage
+        editProductImage: editProductImage,
+        removeVariation: removeVariation
     }
 
    
