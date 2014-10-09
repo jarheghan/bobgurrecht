@@ -3,6 +3,7 @@
 
 var catalog = (function () {
     var i1 = 0;
+    var cnt = $('body').find('#pvCount').val();
  $('#productvariation').dialog({
         title: "Production Variation",
         autoOpen: false,
@@ -42,9 +43,10 @@ var catalog = (function () {
                var prodTable = $("#tablePrdVariation");
                var des = $('body').find('#description').val();
                var size = $('body').find('#size').val();
-               prodTable.append('<tr id="tr' + i1 + '"><td><input type="hidden" name="ProductVariation[' + i1 + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + i1 + '].Size" value="' + size + '"/>' + size
-                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + i1 + ')">Remove</a></td></tr>');
-               i1++;
+               
+               prodTable.append('<tr id="tr' + cnt + '"><td><input type="hidden" name="ProductVariation[' + cnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + cnt + '].Size" value="' + size + '"/>' + size
+                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td></tr>');
+               cnt++;
                $(this).dialog("close");
            }
          },

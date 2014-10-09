@@ -82,6 +82,7 @@
                                            <table class="table table-bordered table-hover">
                                               <thead><tr><th>Variation Name</th><th>Size</th></tr></thead>
                                                <tbody id="tablePrdVariation">
+                                                   <input type="hidden" id="pvCount" value="@Model.ProductVariation.Count" />
                                                    @for (int i = 0; i < Model.ProductVariation.Count; i++ )
                                                    {
                                                        <tr>
