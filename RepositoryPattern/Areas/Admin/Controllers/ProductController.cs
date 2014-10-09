@@ -76,6 +76,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                         prdVar.ProductID = prd.ID;
                         prdVar.AddUser = HttpContext.User.Identity.Name;
                         prdVar.AddDate = DateTime.Now;
+                        prdVar.DeleteFlag = false;
                         _prdVariationRepo.InsertProductVariation(prdVar);
                     }
                 }
@@ -92,7 +93,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             var prdpic = _productRepository.GetProductPictureByID(Id);
             var prdVariation = _prdVariationRepo.GetAllProductVariation(Id);
             cat.Product = product;
-            cat.ProductVariation = prdVariation;
+            cat.ProductVariation = prdVariation.ToList();
             if (prdpic != null)
             {
                 product.PictureID = prdpic.PictureID;
@@ -106,7 +107,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, IList<ProductVariation> prdVariation, Catalog cat)
         {
             if (ModelState.IsValid)
             {
@@ -125,6 +126,21 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                 picProd.ProductID = product.ID;
                 if (product.PictureID != 0)
                     _productRepository.UpdateProductPicture(picProd);
+
+                if (product.ID != 0 && cat.ProductVariation != null)
+                {
+                    foreach (var prdVar in cat.ProductVariation)
+                    {
+                        prdVar.ChangeUser = HttpContext.User.Identity.Name;
+                        prdVar.ChangeDate = DateTime.Now;
+                        prdVar.DeleteFlag = false;
+                        prdVar.ProductID = product.ID;
+                        if (prdVar.ID != 0)
+                            _prdVariationRepo.UpdatePrductVariation(prdVar);
+                        else
+                            _prdVariationRepo.InsertProductVariation(prdVar);
+                    }
+                }
 
                 return RedirectToAction("List");
             }

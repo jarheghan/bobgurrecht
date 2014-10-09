@@ -38,14 +38,15 @@
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
 
-                        @using(Html.BeginForm()){
+                        @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { id = "editProductForm" }))
+                        {
 
                                 <div role="form">
                                     <div class="box-body">
                                         <div class="form-group">
                                             @Html.Label("Name", new {@for="" })
                                             @Html.TextBoxFor(x => x.Product.Name,  new {@class="form-control",placeholder="Name" })
-                                            @Html.Hidden("ID",@Model.Product.ID)
+                                            @Html.HiddenFor(x => x.Product.ID)
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Short Description",null, new {@for="" })
@@ -81,15 +82,23 @@
                                            <table class="table table-bordered table-hover">
                                               <thead><tr><th>Variation Name</th><th>Size</th></tr></thead>
                                                <tbody id="tablePrdVariation">
-                                                   @foreach (var prdvar in Model.ProductVariation)
+                                                   @for (int i = 0; i < Model.ProductVariation.Count; i++ )
                                                    {
-                                                       <tr><td>@prdvar.Description</td><td>@prdvar.Size</td><td><a href="@Url.Action("DeleteVariation", new {prdvar.ID })">Remove</a></td></tr>
+                                                       <tr>
+                                                          @* <td> <input type="hidden" name="[@prdvar.ID].Description" value="@prdvar.Description" />@prdvar.Description</td>
+                                                           <td> <input type="hidden" name="[@prdvar.ID].Size" value="@prdvar.Size" />@prdvar.Size</td>*@
+                                                           <td>@Html.HiddenFor(x =>x.ProductVariation[i].Description) @Model.ProductVariation[i].Description</td>
+                                                           <td>@Html.HiddenFor(x =>x.ProductVariation[i].Size)@Model.ProductVariation[i].Size
+                                                           @Html.HiddenFor(x =>x.ProductVariation[i].ID)</td>
+                                                           <td><a href="@Url.Action("DeleteVariation", new {Model.ProductVariation[i].ID})">Remove</a>
+
+                                                           </td></tr>
                                                    }
                                                </tbody>
                                                
                                            </table>
                                                 <br />
-                                              <a href="#" class="btn btn-primary" id="btnProdVariation">Add Product Variation</a>
+                                              <a href="#" class="btn btn-primary" id="btnProdVariationedit">Add Product Variation</a>
                                             </div>
                                         </div>
                                          <input type="hidden" value="@Model.Product.PictureID" id="mypic_id" />
@@ -108,7 +117,7 @@
                   
               </section>
 </aside>
-<div id="productvariation"></div>
+<div id="productvariationedit"></div>
   @section scripts{
       <script type="text/javascript">
           catalog.editProductImage();

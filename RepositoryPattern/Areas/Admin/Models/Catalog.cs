@@ -9,6 +9,6 @@ namespace RepositoryPattern.Areas.Admin.Models
     public class Catalog
     {
         public Product Product { get; set; }
-        public IEnumerable<ProductVariation> ProductVariation { get; set; }
+        public IList<ProductVariation> ProductVariation { get; set; }
     }
 }

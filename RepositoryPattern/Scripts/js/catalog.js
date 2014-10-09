@@ -29,10 +29,41 @@ var catalog = (function () {
               }
            }
         ]
-    });
+ });
+
+ $('#productvariationedit').dialog({
+     title: "Production Variation",
+     autoOpen: false,
+     buttons: [
+         {
+             text: "Save"
+           , 'class': "btn-primary"
+           , click: function () {
+               var prodTable = $("#tablePrdVariation");
+               var des = $('body').find('#description').val();
+               var size = $('body').find('#size').val();
+               prodTable.append('<tr id="tr' + i1 + '"><td><input type="hidden" name="ProductVariation[' + i1 + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + i1 + '].Size" value="' + size + '"/>' + size
+                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + i1 + ')">Remove</a></td></tr>');
+               i1++;
+               $(this).dialog("close");
+           }
+         },
+
+        {
+            text: "Cancel"
+           , 'class': "btn-warning"
+           , click: function () {
+               $(this).dialog("close");
+           }
+        }
+     ]
+ });
 
     $('#btnProdVariation').click(function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
+    })
+    $('#btnProdVariationedit').click(function () {
+        $('#productvariationedit').dialog('open').load('/Admin/Common/ProductVariation');
     })
 
     var prodImage = function () {

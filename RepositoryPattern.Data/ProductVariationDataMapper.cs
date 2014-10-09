@@ -93,8 +93,9 @@ namespace RepositoryPattern.Data
             };
             using (IDbConnection cn = Connection)
             {
-               
-                var i = cn.Execute(@"Update ProductVariation
+                try
+                {
+                    var i = cn.Execute(@"Update ProductVariation
                                     set prv_description = @Description
                                    ,prv_size = @Size
                                    ,prv_type = @Type
@@ -103,6 +104,9 @@ namespace RepositoryPattern.Data
                                    ,prv_change_date = @ChangeDate
                                    ,prv_delete_flag = @DeleteFlag where prv_id = @ID
                              ", param);
+                }
+
+                catch { }
 
                
             }
