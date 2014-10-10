@@ -1,4 +1,5 @@
 ﻿using RepositoryPattern.Model.Catalog;
+using RepositoryPattern.Model.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,15 @@ namespace RepositoryPattern.Controllers
        
       
         public CommonController(ICategoryRepository categoryRepository
-            ,IProductRepository productRepository)
+            ,IProductRepository productRepository, IPictureRepository pictureRepository)
         {
            this._categoryRepository = categoryRepository;
            this._productRepository = productRepository;
+           this._pictureRepository = pictureRepository;
         }
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IPictureRepository _pictureRepository;
         
         public ActionResult Menu()
         {
@@ -36,19 +39,22 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult DisplayFeatureProduct()
         {
-            var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(1);
+            var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(9);
 
             IEnumerable<ProductCategory> prdcat = productCategory
                         .Select(x =>
                         {
                             var product = _productRepository.GetProductByID(x.ProductID ?? default(int));
                             var category = _categoryRepository.GetCategoryById(x.CategoryID ?? default(int));
+                            var prdPic = _productRepository.GetProductPictureByID(x.ProductID??default(int));
+                            var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
                             return new ProductCategory()
                             {
                                 ID = x.ID,
                                 CategoryID = x.CategoryID,
                                 ProductID = x.ProductID,
                                 Product = product,
+                                Picture = pic,
                                 Category = category,
                                 IsFeaturedProduct = x.IsFeaturedProduct,
                                 AddDate = x.AddDate,

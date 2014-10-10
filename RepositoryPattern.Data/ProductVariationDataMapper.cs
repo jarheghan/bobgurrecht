@@ -75,7 +75,17 @@ namespace RepositoryPattern.Data
 
         public void DeleteProductVariation(int Id)
         {
-            throw new NotImplementedException();
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Execute(@" Delete ProductVariation where prv_id = @Id ", new {Id = Id });
+                }
+
+                catch { }
+
+
+            }
         }
 
         public void UpdatePrductVariation(ProductVariation prdVariation)

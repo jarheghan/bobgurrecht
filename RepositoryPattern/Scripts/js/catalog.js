@@ -68,6 +68,10 @@ var catalog = (function () {
         $('#productvariationedit').dialog('open').load('/Admin/Common/ProductVariation');
     })
 
+    var messagealert = function (msg) {
+        $.messager.alert(msg);
+    }
+
     var prodImage = function () {
         $("div#dropzoneForm").dropzone({
             url: "/Admin/Picture/SaveUploadedFile",
@@ -141,6 +145,7 @@ var catalog = (function () {
 
         $('#test1').dialog('open');
     });
+   
     var editProductImage = function () {
         $("div#mydropzone").dropzone({
             url: "/Admin/Picture/SaveUploadedFile",
@@ -204,13 +209,16 @@ var catalog = (function () {
         });
     }
 
+   
+
     var removeVariation = function (i) {
         $('#tr' + i).remove();
     }
     return {
         prodImage: prodImage,
         editProductImage: editProductImage,
-        removeVariation: removeVariation
+        removeVariation: removeVariation,
+        messagealert: messagealert
     }
 
    

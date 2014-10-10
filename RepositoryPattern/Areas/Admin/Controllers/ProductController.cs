@@ -68,7 +68,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                     _productRepository.InsertProductPicture(picProd);
                 }
 
-                if (prd.ID != 0)
+                if (prd.ID != 0 && prdVariation != null)
                 {
                     
                     foreach( var prdVar in prdVariation)
@@ -86,14 +86,18 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             else { return View(product); }
         }
        
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(int? Id)
         {
             Catalog cat = new Catalog();
-            var product = _productRepository.GetProductByID(Id);
-            var prdpic = _productRepository.GetProductPictureByID(Id);
-            var prdVariation = _prdVariationRepo.GetAllProductVariation(Id);
+            ProductCategory prdCat = new ProductCategory();
+            var product = _productRepository.GetProductByID(Id??1);
+            var prdpic = _productRepository.GetProductPictureByID(Id??1);
+            var prdVariation = _prdVariationRepo.GetAllProductVariation(Id??1);
             cat.Product = product;
             cat.ProductVariation = prdVariation.ToList();
+
+            prdCat = _categoryRepository.GetProductCategoryByProductID(product.ID);
+            cat.Product.CategoryID = prdCat.CategoryID??1;
             if (prdpic != null)
             {
                 product.PictureID = prdpic.PictureID;
@@ -116,15 +120,18 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                 ProductPicture picProd = new ProductPicture();
                 _productRepository.Update(product);
 
-                prdCat.ProductID = product.ID;
-                prdCat.CategoryID = product.CategoryID;
+                //prdCat = _categoryRepository.GetProductCategoryByProductID(product.ID);
+                //picProd = _productRepository.GetProductPictureByID(product.ID);
 
-                if (product.CategoryID != 0)
+                prdCat.CategoryID = cat.Product.CategoryID;
+                prdCat.ProductID = cat.Product.ID;
+               
+                if (prdCat.CategoryID != 0)
                     _categoryRepository.UpdateProductCategory(prdCat);
 
-                picProd.PictureID = product.PictureID;
-                picProd.ProductID = product.ID;
-                if (product.PictureID != 0)
+                picProd.PictureID = cat.Product.PictureID;
+                picProd.ProductID = cat.Product.ID;
+                if (picProd.PictureID != 0)
                     _productRepository.UpdateProductPicture(picProd);
 
                 if (product.ID != 0 && cat.ProductVariation != null)
@@ -160,6 +167,16 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                 return RedirectToAction("List", new {val = 2 });
             }
             
+        }
+
+        public ActionResult DeleteVariation(int Id, int prdId)
+        {
+            if (Id != 0)
+            {
+                _prdVariationRepo.DeleteProductVariation(Id);
+                return RedirectToAction("Edit", "Product", new { Id = prdId });
+            }
+            return Content(@"<script language='javascript' type='text/javascript'>catalog.messagealert('The record was not deleted')</script>");
         }
 
     }

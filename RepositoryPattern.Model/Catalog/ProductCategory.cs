@@ -1,4 +1,5 @@
 ﻿using RepositoryPattern.Infrastructure;
+using RepositoryPattern.Model.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace RepositoryPattern.Model.Catalog
         public bool? DeleteFlag { get; set; }
         public Category Category { get; set; }
         public Product Product { get; set; }
+        public ProductPicture ProductPicture { get; set; }
+        public Picture Picture { get; set; }
 
     }
 }

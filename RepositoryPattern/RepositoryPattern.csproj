@@ -393,6 +393,7 @@
     <Content Include="Content\dropzone\dropzone.min.js" />
     <Content Include="Content\dropzone\images\spritemap%402x.png" />
     <Content Include="Content\dropzone\images\spritemap.png" />
+    <Content Include="Content\themes\Plumb\images\minimal.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />

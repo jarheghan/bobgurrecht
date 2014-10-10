@@ -275,5 +275,45 @@ namespace RepositoryPattern.Data
 
             }
         }
+
+
+        //ProductCategory GetProductCategoryByProductID(int productId)
+        //{
+        //    using (IDbConnection cn = Connection)
+        //    {
+        //        ProductCategory prdCat = new ProductCategory();
+        //        try
+        //        {
+        //            var i = cn.Query<dynamic>(@"select * FROM ProductCategoryMapping where pcm_prd_id = @productId"
+        //                                , new { productId = productId }).FirstOrDefault();
+
+        //            prdCat = Map(i, "ProductCategory");
+        //            return prdCat;
+        //        }
+
+        //        catch { };
+        //        return null;
+        //    }
+        //}
+
+
+        ProductCategory ICategoryRepository.GetProductCategoryByProductID(int productId)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                ProductCategory prdCat = new ProductCategory();
+                try
+                {
+                    var i = cn.Query<dynamic>(@"select * FROM ProductCategoryMapping where pcm_prd_id = @productId"
+                                        , new { productId = productId }).FirstOrDefault();
+
+                    prdCat = Map(i, "ProductCategory");
+                    return prdCat;
+                }
+
+                catch { };
+                return null;
+            }
+        }
     }
 }

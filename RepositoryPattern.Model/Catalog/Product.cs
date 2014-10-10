@@ -29,7 +29,6 @@ namespace RepositoryPattern.Model.Catalog
         public bool? DisplayStockAvaliable { get; set; }
         public bool? DisplayStockQuantity { get; set; }
         public bool? CallForPrice { get; set; }
-      
         public int? OldPrice { get; set; }
         public float? Weight { get; set; }
         public float? Length { get; set; }

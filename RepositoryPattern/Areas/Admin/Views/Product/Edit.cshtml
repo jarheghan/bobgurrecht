@@ -58,10 +58,10 @@
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Category", new {@for="" })
-                                            @Html.DropDownList("CategoryID", new SelectList(CommonHelpers.GetCategory(), "Value", "Text"), new {@class="form-control" })
+                                            @Html.DropDownList("Product.CategoryID", new SelectList(CommonHelpers.GetCategory(), "Value", "Text"), new {@class="form-control" })
                                         </div>
                                          <div class="form-group">
-                                            @Html.Label("SKU", new {@for="" })
+                                            @Html.Label("BGSI Part NO", new {@for="" })
                                             @Html.TextBoxFor(x => x.Product.SKU, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
@@ -69,13 +69,18 @@
                                             @Html.TextBoxFor(x => x.Product.Price, new {@class="form-control",placeholder="Alias" })
                                         </div>
                                          <div class="form-group">
-                                            @Html.Label("Manufacturer", new {@for="" })
+                                            @Html.Label("Manufacturer No", new {@for="" })
                                             @Html.TextBoxFor(x => x.Product.ManufacturePartNo, new {@class="form-control",placeholder="Alias" })
+                                        </div>
+                                         <div class="form-group">
+                                            @Html.Label("Is a Feature Product?", new {@for="" })
+                                            @Html.CheckBox("Product.ShowOnHomePage", Model.Product.ShowOnHomePage??false)
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Quantity", new {@for="" })
                                             @Html.TextBoxFor(x => x.Product.StockQuantity, new {@class="form-control",placeholder="Alias" })
                                         </div>
+
                                          <div class="form-group">
                                             @Html.Label("Product Variation", new {@for="" })<br />
                                             <div>
@@ -91,7 +96,7 @@
                                                            <td>@Html.HiddenFor(x =>x.ProductVariation[i].Description) @Model.ProductVariation[i].Description</td>
                                                            <td>@Html.HiddenFor(x =>x.ProductVariation[i].Size)@Model.ProductVariation[i].Size
                                                            @Html.HiddenFor(x =>x.ProductVariation[i].ID)</td>
-                                                           <td><a href="@Url.Action("DeleteVariation", new {Model.ProductVariation[i].ID})">Remove</a>
+                                                           <td><a href="@Url.Action("DeleteVariation", new {Id = Model.ProductVariation[i].ID, prdId = Model.Product.ID})">Remove</a>
 
                                                            </td></tr>
                                                    }
@@ -102,7 +107,8 @@
                                               <a href="#" class="btn btn-primary" id="btnProdVariationedit">Add Product Variation</a>
                                             </div>
                                         </div>
-                                         <input type="hidden" value="@Model.Product.PictureID" id="mypic_id" />
+                                        @* <input type="hidden" value="@Model.Product.PictureID" id="mypic_id" />*@
+                                         @Html.HiddenFor(x => x.Product.PictureID, new { id = "mypic_id" })
                                        <label>Picture</label>  
                                        <div id="mydropzone" class="dropzone"></div>
                                         </div><!-- /.box-body -->
@@ -119,6 +125,7 @@
               </section>
 </aside>
 <div id="productvariationedit"></div>
+<div id="errordiv"></div>
   @section scripts{
       <script type="text/javascript">
           catalog.editProductImage();
