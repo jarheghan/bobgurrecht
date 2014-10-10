@@ -33,9 +33,9 @@
     <div class="col-sm-3">
          @{if(cat.Picture!=null)
          {  
-           <a href="product-page.html"><img class="small-thumbnail" width="170" height="auto" src="@Url.Content(imgpath + "/" + cat.Picture.FilePath)"></a>
+           <a href="product-page.html"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/" + cat.Picture.FilePath)"></a>
          }
-         else{<a href="product-page.html"><img class="small-thumbnail" width="170" height="auto" src="@Url.Content(csspart + "/img/I08000.jpg")"></a>}
+         else{<a href="product-page.html"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(csspart + "/img/I08000.jpg")"></a>}
          }
     <a><label class="plabel">@cat.Product.Name</label></a>
     </div>

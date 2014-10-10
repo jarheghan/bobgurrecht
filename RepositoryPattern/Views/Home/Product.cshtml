@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+<div class="container">
+ @Html.Action("Menu","Common")
+ <div class="row">
+     @Html.Action("SideMenu","Common")
+
+     <!-- Thiis is the begining of the product details information -->
+     <div class="col-sm-4" id="proimg">
+         <img src="http://lorempixel.com/output/technics-h-g-354-427-2.jpg">
+     </div>
+      <div class="col-sm-4">
+         <h3>Olympia K-5340-BN Brushed Nickel Two Handle Gooseneck Kitchen Faucet</h3>
+         <p>SKU I95064</p>
+         <hr>
+         <p class="description">This Pioneer two handle gooseneck kitchen faucet is a PVD brushed nickel finish and of heavy brass construction and brass waterways.</p>
+         <br>
+         <div id="poption">
+             <select class="form-control">
+                 <option>1</option>
+                 <option>2</option>
+                 <option>3</option>
+                 <option>4</option>
+                 <option>5</option>
+             </select>
+             <br>
+             <div class="row">
+                 <div class="col-xs-3">
+                     <label><strong>Qty</strong></label>
+                     <input type="text" class="form-control" placeholder="1">
+                 </div>
+                 <div class="col-xs-7">
+                     <button id="lbtn" type="submit" class="btn btn-primary btn-lg btn-block">Save to List</button>
+                     <br>
+                     <p>Already have a list? <a href="#">Sign In</a></p>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <hr>
+     <div class="container">
+         <div class="row">
+             <div class="col-sm-8 pull-right">
+                 <div class="col-sm-3">
+                     <h4>ADDITIONAL INFO</h4>
+                 </div>
+
+                 <div class="col-sm-6">
+                     <table class="table table-hover">
+                         <tr>
+                             <td>CATALOG PAGE (VOL 17):</td>
+                             <td><strong>579</td>
+                             </strong>
+       
+                         </tr>
+                         <tr>
+                             <td>UPC:</td>
+                             <td><strong>749210000133</td>
+                             </strong>
+       
+                         </tr>
+                         <tr>
+                             <td>MPN:</td>
+                             <td><strong>K-5340-BN</td>
+                             </strong>
+       
+                         </tr>
+                     </table>
+                 </div>
+
+             </div>
+
+         </div>
+
+     </div>
+     <!-- This is the end of the product details page -->
+
+     <hr>
+<div class="container">
+    <div class="row">
+    <div class="col-sm-8 pull-right">
+    <div class="col-sm-3">
+      <h4>ADDITIONAL INFO</h4>
+    </div>
+
+    <div class="col-sm-6">
+      <ul>
+        <li>Heavy brass construction</li>
+        <li>1/2" IPS connection w/ brass supply nuts</li>
+        <li>Brass waterways</li>
+        <li>8" Centers</li>
+        <li>1/4 Turn washerless operation</li>
+        <li>Brass deco handles</li>
+        <li>Contemporary side spray assembly</li>
+      </ul>
+    </div>
+      
+    </div>
+      
+    </div>
+
+</div>
+
+
+ </div>
+</div>
+
+<div id="test1"></div>

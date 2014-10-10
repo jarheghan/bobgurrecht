@@ -97,7 +97,8 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             cat.ProductVariation = prdVariation.ToList();
 
             prdCat = _categoryRepository.GetProductCategoryByProductID(product.ID);
-            cat.Product.CategoryID = prdCat.CategoryID??1;
+            if(prdCat != null)
+                cat.Product.CategoryID = prdCat.CategoryID??1;
             if (prdpic != null)
             {
                 product.PictureID = prdpic.PictureID;
@@ -131,8 +132,11 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 
                 picProd.PictureID = cat.Product.PictureID;
                 picProd.ProductID = cat.Product.ID;
-                if (picProd.PictureID != 0)
+                picProd = _productRepository.GetProductPictureByID(cat.Product.ID);
+                if (picProd != null)
                     _productRepository.UpdateProductPicture(picProd);
+                else
+                    _productRepository.InsertProductPicture(picProd);
 
                 if (product.ID != 0 && cat.ProductVariation != null)
                 {
@@ -151,7 +155,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 
                 return RedirectToAction("List");
             }
-            else { return View(product); }
+            else { return View(cat); }
         }
 
         public ActionResult Delete(int? Id)

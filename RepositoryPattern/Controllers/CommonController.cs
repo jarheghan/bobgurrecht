@@ -67,5 +67,12 @@ namespace RepositoryPattern.Controllers
             return PartialView(prdcat);
         }
 
+        public ActionResult SideMenu()
+        {
+            return PartialView();
+        }
+
+       
+
     }
 }

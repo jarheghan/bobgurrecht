@@ -11,7 +11,7 @@ namespace RepositoryPattern.Model.Catalog
     {
         public int ProductID { get; set; }
         public string Description { get; set; }
-        public int Size { get; set; }
+        public string Size { get; set; }
         public string Type { get; set; }
         public string Color { get; set; }
         public int ID{ get; set; }

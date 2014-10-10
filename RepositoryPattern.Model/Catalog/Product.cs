@@ -15,7 +15,6 @@ namespace RepositoryPattern.Model.Catalog
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
         public int? Price { get; set; }
         [Required]
         public string ShortDescription { get; set; }

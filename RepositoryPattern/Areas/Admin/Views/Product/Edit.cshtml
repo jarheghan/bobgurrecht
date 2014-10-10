@@ -87,8 +87,9 @@
                                            <table class="table table-bordered table-hover">
                                               <thead><tr><th>Variation Name</th><th>Size</th></tr></thead>
                                                <tbody id="tablePrdVariation">
-                                                   <input type="hidden" id="pvCount" value="@Model.ProductVariation.Count" />
-                                                   @for (int i = 0; i < Model.ProductVariation.Count; i++ )
+                                                  @if(Model.ProductVariation != null){
+                                                    <input type="hidden" id="pvCount" value="@Model.ProductVariation.Count" />
+                                                   for (int i = 0; i < Model.ProductVariation.Count; i++ )
                                                    {
                                                        <tr>
                                                           @* <td> <input type="hidden" name="[@prdvar.ID].Description" value="@prdvar.Description" />@prdvar.Description</td>
@@ -100,6 +101,7 @@
 
                                                            </td></tr>
                                                    }
+                                                  }
                                                </tbody>
                                                
                                            </table>
@@ -108,7 +110,9 @@
                                             </div>
                                         </div>
                                         @* <input type="hidden" value="@Model.Product.PictureID" id="mypic_id" />*@
+                                          @if(Model.Product.PictureID != 0){
                                          @Html.HiddenFor(x => x.Product.PictureID, new { id = "mypic_id" })
+                                          }
                                        <label>Picture</label>  
                                        <div id="mydropzone" class="dropzone"></div>
                                         </div><!-- /.box-body -->

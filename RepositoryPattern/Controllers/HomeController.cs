@@ -17,5 +17,10 @@ namespace RepositoryPattern.Controllers
             return View();
         }
 
+        public ActionResult Product()
+        {
+            return View();
+        }
+
     }
 }
