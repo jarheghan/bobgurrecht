@@ -2,6 +2,10 @@
     ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_Root.cshtml";
 }
+@{var csspart = "~/Content/themes/Plumb";
+  var imgpath = "~/Images/WallImages/imagepath";
+  } 
+@model RepositoryPattern.Models.ProductGroup
 
 <div class="container">
  @Html.Action("Menu","Common")
@@ -10,13 +14,13 @@
 
      <!-- Thiis is the begining of the product details information -->
      <div class="col-sm-4" id="proimg">
-         <img src="http://lorempixel.com/output/technics-h-g-354-427-2.jpg">
+         <img src="@Url.Content(imgpath + "/" + @Model.Picture.FilePath)" style="height:auto; width:auto; max-width:170px; max-height:400px;">
      </div>
       <div class="col-sm-4">
-         <h3>Olympia K-5340-BN Brushed Nickel Two Handle Gooseneck Kitchen Faucet</h3>
-         <p>SKU I95064</p>
+         <h3>@Model.Product.Name</h3>
+         <p>@Model.Product.SKU</p>
          <hr>
-         <p class="description">This Pioneer two handle gooseneck kitchen faucet is a PVD brushed nickel finish and of heavy brass construction and brass waterways.</p>
+         <p class="description">@Model.Product.Description</p>
          <br>
          <div id="poption">
              <select class="form-control">
@@ -33,7 +37,7 @@
                      <input type="text" class="form-control" placeholder="1">
                  </div>
                  <div class="col-xs-7">
-                     <button id="lbtn" type="submit" class="btn btn-primary btn-lg btn-block">Save to List</button>
+                     <button id="lbtn" type="submit" class="btn btn-primary btn-lg btn-block">Add To WishList</button>
                      <br>
                      <p>Already have a list? <a href="#">Sign In</a></p>
                  </div>

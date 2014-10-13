@@ -156,7 +156,7 @@ var catalog = (function () {
                 var mockFile = { name: "", size: 0 };
                 var removeButton = Dropzone.createElement('<a href="#" class="btn btn-primary">Remove file</a>');
                 $.getJSON('/Admin/Picture/GetPicture?Id=' + mm, function (data) {
-                    var addHiddenValue = Dropzone.createElement('<input type="hidden" name="PictureID" id="pic_idx" value="' + mm + '"/>');
+                    var addHiddenValue = Dropzone.createElement('<input type="hidden" name="Product.PictureID" id="pic_idx" value="' + mm + '"/>');
                     mockFile.name = data.FilePath
                     mockFile.size = 12345;
                     thiszone.emit("addedfile", mockFile)
@@ -166,7 +166,7 @@ var catalog = (function () {
                 })
 
                 this.on("success", function (file, response) {
-                    var addHiddenValue = Dropzone.createElement('<input type="hidden" name="PictureID" id="pic_idx" value="' + response.PictureId + '"/>');
+                    var addHiddenValue = Dropzone.createElement('<input type="hidden" name="Product.PictureID" id="pic_idx" value="' + response.PictureId + '"/>');
                     file.previewElement.appendChild(addHiddenValue);
                 });
 

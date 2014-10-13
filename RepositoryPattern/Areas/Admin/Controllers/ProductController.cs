@@ -119,6 +119,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                 Product prd = new Product();
                 ProductCategory prdCat = new ProductCategory();
                 ProductPicture picProd = new ProductPicture();
+                ProductPicture picProd1 = new ProductPicture();
                 _productRepository.Update(product);
 
                 //prdCat = _categoryRepository.GetProductCategoryByProductID(product.ID);
@@ -132,8 +133,8 @@ namespace RepositoryPattern.Areas.Admin.Controllers
 
                 picProd.PictureID = cat.Product.PictureID;
                 picProd.ProductID = cat.Product.ID;
-                picProd = _productRepository.GetProductPictureByID(cat.Product.ID);
-                if (picProd != null)
+                picProd1 = _productRepository.GetProductPictureByID(cat.Product.ID);
+                if (picProd1.ProductID != 0)
                     _productRepository.UpdateProductPicture(picProd);
                 else
                     _productRepository.InsertProductPicture(picProd);

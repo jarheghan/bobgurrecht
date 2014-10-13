@@ -13,6 +13,7 @@ namespace RepositoryPattern.Model.Catalog
         Product GetProductByID(int productID);
         IEnumerable<Product> GetProductByPriceValue(int price);
         IEnumerable<Product> GetAllProduct();
+        IEnumerable<Product> GetAllFeatureProduct();
         Product GetProductByGuid(Guid prductGuid);
         int InsertProductPicture(ProductPicture item);
         ProductPicture GetProductPictureByID(int productID);

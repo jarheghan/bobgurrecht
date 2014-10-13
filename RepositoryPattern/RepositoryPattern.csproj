@@ -353,6 +353,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Errors.cs" />
+    <Compile Include="Models\ProductGroup.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -806,6 +807,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Common\SideMenu.cshtml" />
+    <Content Include="Views\Common\DisplayCategoryProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

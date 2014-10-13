@@ -143,7 +143,8 @@ namespace RepositoryPattern.Data
                 try
                 {
                     conn.Open();
-                    var i = conn.Query<int>(@"Delete Picture where pic_id = @Id", new { Id = Id }).FirstOrDefault();
+                    var i = conn.Query<int>(@" delete ProductPictureMapping where ppm_pic_id = @Id
+                                            Delete Picture where pic_id = @Id", new { Id = Id }).FirstOrDefault();
                     return i;
                 }
 

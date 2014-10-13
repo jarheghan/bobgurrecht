@@ -329,5 +329,28 @@ namespace RepositoryPattern.Data
                 catch { }
             }
         }
+
+
+        public IEnumerable<Product> GetAllFeatureProduct()
+        {
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                List<Product> products = new List<Product>();
+                try
+                {
+                    var product = cn.Query<dynamic>("select * from products where prd_showonhomepage = 1");
+                    foreach (var p in product)
+                    {
+                        Product prd = Map(p);
+                        products.Add(prd);
+                    }
+                    return products.AsEnumerable();
+                }
+                catch { return null; }
+
+
+            }
+        }
     }
 }

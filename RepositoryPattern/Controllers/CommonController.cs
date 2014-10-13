@@ -37,7 +37,7 @@ namespace RepositoryPattern.Controllers
             return PartialView();
         }
 
-        public ActionResult DisplayFeatureProduct()
+        public ActionResult DisplayCategoryProduct()
         {
             var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(9);
 
@@ -70,6 +70,24 @@ namespace RepositoryPattern.Controllers
         public ActionResult SideMenu()
         {
             return PartialView();
+        }
+
+        public ActionResult DisplayFeatureProduct()
+        {
+            var feautureProducts = _productRepository.GetAllFeatureProduct();
+            IEnumerable<ProductCategory> prdcat = feautureProducts
+                                        .Select(x => 
+                                            {
+                                                var prdPic = _productRepository.GetProductPictureByID(x.ID);
+                                                var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
+                                                var product = _productRepository.GetProductByID(x.ID);
+                                                return new ProductCategory()
+                                                {
+                                                    Picture = pic,
+                                                    Product = product
+                                                };
+                                            });
+            return View(prdcat);
         }
 
        
