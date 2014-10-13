@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepositoryPattern.Infrastructure.configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -29,6 +30,7 @@ namespace RepositoryPattern
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
+            Log4NetManager.InitializeLog4Net();
         }
     }
 

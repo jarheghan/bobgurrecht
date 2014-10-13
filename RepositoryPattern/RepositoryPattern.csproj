@@ -45,6 +45,10 @@
     <Reference Include="ClientDependency.Core.Mvc">
       <HintPath>..\packages\ClientDependency-Mvc.1.8.0.0\lib\net45\ClientDependency.Core.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\arheghj\Documents\Convention Application\TGI.DataTransformation4.0\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
@@ -358,6 +362,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ClientDependency\JARHEGHAN-PC-100ee8b5e8ff705e08b97afa1e73cd9e-map.xml" />
+    <Content Include="App_Data\ClientDependency\JARHEGHAN-PC-f0d61d5a70118aca5da65e0d03ad3b5e-map.xml" />
+    <Content Include="App_Data\ClientDependency\JARHEGHAN-PC-f6893cf7f3996f35676e69b6a018a71b-map.xml" />
+    <Content Include="App_Data\ClientDependency\LT5072IS6430-0761c1b90d66e062317373dd3957bff2-map.xml" />
+    <Content Include="App_Data\ClientDependency\LT5072IS6430-38245c0a85d4df18a034447de637d8a9-map.xml" />
+    <Content Include="App_Data\ClientDependency\LT5072IS6430-a5d1f80a323407aa4c6b53c86ea476f1-map.xml" />
     <Content Include="App_Data\RPStore.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -767,6 +777,7 @@
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Common\ProductVariation.cshtml" />
+    <Content Include="Log4Net.config" />
     <None Include="Properties\PublishProfiles\BobGarrecht.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

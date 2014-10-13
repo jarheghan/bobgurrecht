@@ -30,7 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>C:\Users\arheghj\Documents\Convention Application\TGI.DataTransformation4.0\lib\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,6 +45,7 @@
   <ItemGroup>
     <Compile Include="configuration\EngineContext.cs" />
     <Compile Include="configuration\IEngine.cs" />
+    <Compile Include="configuration\Log4NetManager.cs" />
     <Compile Include="Domain\IRepository.cs" />
     <Compile Include="IAggregateRoot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

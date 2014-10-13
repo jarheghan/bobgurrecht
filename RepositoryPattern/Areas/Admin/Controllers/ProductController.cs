@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using log4net;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
     [Authorize]
     public class ProductController : BaseController
     {
+        ILog logger = LogManager.GetLogger(typeof(ProductController));
+       
         //
         // GET: /Admin/Product/
         public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository, IProductVariationRepository prdVariationRepo)
@@ -116,45 +119,55 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Product prd = new Product();
-                ProductCategory prdCat = new ProductCategory();
-                ProductPicture picProd = new ProductPicture();
-                ProductPicture picProd1 = new ProductPicture();
-                _productRepository.Update(product);
-
-                //prdCat = _categoryRepository.GetProductCategoryByProductID(product.ID);
-                //picProd = _productRepository.GetProductPictureByID(product.ID);
-
-                prdCat.CategoryID = cat.Product.CategoryID;
-                prdCat.ProductID = cat.Product.ID;
-               
-                if (prdCat.CategoryID != 0)
-                    _categoryRepository.UpdateProductCategory(prdCat);
-
-                picProd.PictureID = cat.Product.PictureID;
-                picProd.ProductID = cat.Product.ID;
-                picProd1 = _productRepository.GetProductPictureByID(cat.Product.ID);
-                if (picProd1.ProductID != 0)
-                    _productRepository.UpdateProductPicture(picProd);
-                else
-                    _productRepository.InsertProductPicture(picProd);
-
-                if (product.ID != 0 && cat.ProductVariation != null)
+                try
                 {
-                    foreach (var prdVar in cat.ProductVariation)
+                    logger.Info("Log Edit for Product Update");
+                    Product prd = new Product();
+                    ProductCategory prdCat = new ProductCategory();
+                    ProductPicture picProd = new ProductPicture();
+                    ProductPicture picProd1 = new ProductPicture();
+                    _productRepository.Update(cat.Product);
+
+                    //prdCat = _categoryRepository.GetProductCategoryByProductID(product.ID);
+                    //picProd = _productRepository.GetProductPictureByID(product.ID);
+
+                    prdCat.CategoryID = cat.Product.CategoryID;
+                    prdCat.ProductID = cat.Product.ID;
+
+                    if (prdCat.CategoryID != 0)
+                        _categoryRepository.UpdateProductCategory(prdCat);
+
+                    picProd.PictureID = cat.Product.PictureID;
+                    picProd.ProductID = cat.Product.ID;
+                    picProd1 = _productRepository.GetProductPictureByID(cat.Product.ID);
+                    if (picProd1.ProductID != 0)
+                        _productRepository.UpdateProductPicture(picProd);
+                    else
+                        _productRepository.InsertProductPicture(picProd);
+
+                    if (product.ID != 0 && cat.ProductVariation != null)
                     {
-                        prdVar.ChangeUser = HttpContext.User.Identity.Name;
-                        prdVar.ChangeDate = DateTime.Now;
-                        prdVar.DeleteFlag = false;
-                        prdVar.ProductID = product.ID;
-                        if (prdVar.ID != 0)
-                            _prdVariationRepo.UpdatePrductVariation(prdVar);
-                        else
-                            _prdVariationRepo.InsertProductVariation(prdVar);
+                        foreach (var prdVar in cat.ProductVariation)
+                        {
+                            prdVar.ChangeUser = HttpContext.User.Identity.Name;
+                            prdVar.ChangeDate = DateTime.Now;
+                            prdVar.DeleteFlag = false;
+                            prdVar.ProductID = product.ID;
+                            if (prdVar.ID != 0)
+                                _prdVariationRepo.UpdatePrductVariation(prdVar);
+                            else
+                                _prdVariationRepo.InsertProductVariation(prdVar);
+                        }
                     }
+
+                    return RedirectToAction("List");
                 }
 
-                return RedirectToAction("List");
+                catch (Exception ex)
+                {
+                    logger.Error("Update Error for Product", ex);
+                    return View(cat);
+                }
             }
             else { return View(cat); }
         }

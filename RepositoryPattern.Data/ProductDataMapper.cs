@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data.SqlServerCe;
 using System.Data.SqlClient;
+using log4net;
+//[assembly:log4net.Config.XmlConfigurator(Watch=true)]
 
 namespace RepositoryPattern.Data
 {
@@ -19,6 +21,8 @@ namespace RepositoryPattern.Data
             get { return "Products"; }
         }
 
+        //private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        ILog log = LogManager.GetLogger(typeof(ProductDataMapper));
        
         public IEnumerable<Product> GetProductByCategory(int prd_category)
         {
@@ -270,11 +274,16 @@ namespace RepositoryPattern.Data
                 cn.Open();
                 try
                 {
+                    log.Info("Insert Product Picture");
                     int i = cn.Execute(@"Insert Into ProductPictureMapping(ppm_prd_id,ppm_pic_id,ppm_display_order)
                                       Values(@ProductID,@PictureID,@DisplayOrder)", param);
                     return i;
                 }
-                catch { return 0; }
+                catch(Exception ex) 
+                {
+                    log.Error("Error Insert ProductPicture:", ex);
+                    return 0; 
+                }
             }
         }
 
@@ -293,12 +302,16 @@ namespace RepositoryPattern.Data
            
                 try
                 {
+                    log.Info("Update Product Picture");
                     var i = cn.Execute(@"update ProductPictureMapping
                                         set	ppm_pic_id = @PictureID,
 	                                        ppm_display_order = @DisplayOrder
                                         where ppm_prd_id = @ProductID", param);
                 }
-                catch { }
+                catch(Exception ex) 
+                {
+                    log.Error("Error Update ProductPicture", ex);
+                }
             }
         }
 
@@ -310,6 +323,7 @@ namespace RepositoryPattern.Data
 
                 try
                 {
+                    log.Info("Log this Delete error");
                     var i = cn.Query<int>(@"
                                     delete ProductCategoryMapping
                                     where pcm_prd_id = @Id
@@ -319,14 +333,20 @@ namespace RepositoryPattern.Data
 
                                     delete ProductPictureMapping
                                     where ppm_prd_id = @Id
-
+                                    
+                                    delete ProductVariation
+                                    where prv_prd_id = @Id
+                                    
                                     delete Products
                                     where prd_id = @Id
 
                                     delete Picture
                                     where pic_id = @picid", new { Id = Id, picid = 0 }).FirstOrDefault();
                 }
-                catch { }
+                catch (Exception ex) 
+                {
+                    log.Error(ex.Message,ex);
+                }
             }
         }
 
