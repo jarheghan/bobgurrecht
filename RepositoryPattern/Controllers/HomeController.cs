@@ -40,11 +40,17 @@ namespace RepositoryPattern.Controllers
             var products = _productRepository.GetProductByID(prd);
             var prdpic = _productRepository.GetProductPictureByID(prd);
             var picture = _pictureRepo.GetPictureById(prdpic.PictureID);
-
+            var prdVariation = _prdVariationRepo.GetAllProductVariation(prd);
             prdGroup.Product = products;
             prdGroup.ProductPic = prdpic;
             prdGroup.Picture = picture;
+            prdGroup.ProductVariation = prdVariation;
             return View(prdGroup);
+        }
+
+        public ActionResult CategoryProduct()
+        {
+            return View();
         }
 
     }

@@ -37,7 +37,7 @@ namespace RepositoryPattern.Controllers
             return PartialView();
         }
 
-        public ActionResult DisplayCategoryProduct()
+        public ActionResult DisplayCategoryProduct(int? Id)
         {
             var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(9);
 

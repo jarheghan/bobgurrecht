@@ -404,6 +404,7 @@
     <Content Include="Content\dropzone\dropzone.min.js" />
     <Content Include="Content\dropzone\images\spritemap%402x.png" />
     <Content Include="Content\dropzone\images\spritemap.png" />
+    <Content Include="Content\themes\Plumb\img\Gift-4-icon.png" />
     <Content Include="Content\themes\Plumb\images\minimal.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -819,6 +820,7 @@
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Common\SideMenu.cshtml" />
     <Content Include="Views\Common\DisplayCategoryProduct.cshtml" />
+    <Content Include="Views\Home\CategoryProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

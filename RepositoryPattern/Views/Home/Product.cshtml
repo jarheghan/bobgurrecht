@@ -4,6 +4,10 @@
 }
 @{var csspart = "~/Content/themes/Plumb";
   var imgpath = "~/Images/WallImages/imagepath";
+
+  List<RepositoryPattern.Model.Catalog.ProductVariation> cat = new List<RepositoryPattern.Model.Catalog.ProductVariation>();
+  var Prdvar = Model.ProductVariation.ToList();
+  SelectList sl = new SelectList(Prdvar, "ID", "Description");
   } 
 @model RepositoryPattern.Models.ProductGroup
 
@@ -23,13 +27,7 @@
              <p class="description">@Model.Product.Description</p>
              <br>
              <div id="poption">
-                 <select class="form-control">
-                     <option>1</option>
-                     <option>2</option>
-                     <option>3</option>
-                     <option>4</option>
-                     <option>5</option>
-                 </select>
+                @Html.DropDownList("ProductVariation", new SelectList(sl, "Value", "Text"), new {@class="form-control" })
                  <br>
              
                      <div class="col-xs-3">

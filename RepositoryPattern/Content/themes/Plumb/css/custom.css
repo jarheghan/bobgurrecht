@@ -208,11 +208,21 @@ width: 30%;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
-.wishlist1
-{
-     margin: 0 0 10px;
+body > #wish-btn > a > .label {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  position: absolute;
+  top: 7px;
+  right: 2px;
+  font-size: 10px;
+  font-weight: normal;
+  width: 15px;
+  height: 15px;
+  line-height: 1.0em;
+  text-align: center;
+  padding: 2px;
 }
-
-/*p {
-  margin: 0 0 0px;
-}*/
+body > #wish-btn > a > .label {
+  top: 3px;
+}
