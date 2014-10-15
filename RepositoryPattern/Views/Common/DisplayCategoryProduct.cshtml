@@ -1,42 +1,35 @@
-﻿<div class="row">
-    <h1>Category Name</h1>
+﻿@using RepositoryPattern.Service.UI
+@model IEnumerable<RepositoryPattern.Model.Catalog.ProductCategory>
+ @{var imgpath = "~/Images/WallImages/imagepath";
+   var catInfo = Model.Select(x => x.Category).FirstOrDefault(); 
+   }
+<div class="row">
+    
+    <h1>@catInfo.Name</h1>
     <p>Category Description Category Description Category Description Category Description Category Description Category Description Category Description Category Description Category Description</p>
     <ul class="pagination">
-  <li><a href="#">&laquo;</a></li>
-  <li><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">&raquo;</a></li>
-</ul>
-  </div>
+        <li><a href="#">&laquo;</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>
+</div>
   <br>
 
- <div class="row">
-    <div class="col-lg-2">
-    <a href="#"><img class="small-thumbnail" src="img/i01049.jpg">
-    <label class="nlabel"><h3>Product Name</h3></label></a>
-     <p class="dlabel">Product Desciption Product Desciption Product Desciption Product Desciption</p></a>
-    </div>
-    <div class="col-lg-2">
-    <a href="#"><img class="small-thumbnail" src="img/I08002.jpg">
-     <label class="nlabel"><h3>Product Name</h3></label></a>
-     <p class="dlabel">Product Desciption Product Desciption Product Desciption Product Desciption</p></a>
-    </div>
-    <div class="col-lg-2">
-    <a href="#"><img class="small-thumbnail" src="img/I08000.jpg">
-     <label class="nlabel"><h3>Product Name</h3></label></a>
-     <p class="dlabel">Product Desciption Product Desciption Product Desciption Product Desciption</p></a>
-    </div>
-    <div class="col-lg-2">
-    <a href="#"><img class="small-thumbnail" src="img/i01049.jpg">
-    <label class="nlabel"><h3>Product Name</h3></label></a>
-    <p class="dlabel">Product Desciption Product Desciption Product Desciption Product Desciption</p></a>
-    </div>
-     <div class="col-lg-2">
-    <a href="#"><img class="small-thumbnail" src="img/I01028.jpg">
-     <label class="nlabel"><h3>Product Name</h3></label></a>
-     <p class="dlabel">Product Desciption Product Desciption Product Desciption Product Desciption</p></a>
-  </div>
+
+<div class="row">
+     @foreach(var cat in Model)
+     {
+         <div class="col-lg-2">
+             <a href="#">
+                 <img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/"+cat.Picture.FilePath)">
+                 <label class="nlabel">
+                     <h3>@cat.Product.Name</h3>
+                 </label></a>
+                 <p class="dlabel">@cat.Product.ShortDescription</p>
+         </div>
+     }
  </div>

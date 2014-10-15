@@ -39,7 +39,7 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult DisplayCategoryProduct(int? Id)
         {
-            var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(9);
+            var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(Id??default(int));
 
             IEnumerable<ProductCategory> prdcat = productCategory
                         .Select(x =>

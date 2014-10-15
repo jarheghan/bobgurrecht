@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\IPageAssetsBuilder.cs" />
     <Compile Include="UI\LayoutExtention.cs" />
+    <Compile Include="UI\LayoutHelpers.cs" />
     <Compile Include="UI\ResourceLocation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

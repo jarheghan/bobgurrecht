@@ -48,8 +48,9 @@ namespace RepositoryPattern.Controllers
             return View(prdGroup);
         }
 
-        public ActionResult CategoryProduct()
+        public ActionResult CategoryProduct(int? Id)
         {
+            ViewBag.CatId = Id ?? default(int);
             return View();
         }
 
