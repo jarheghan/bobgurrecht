@@ -7,6 +7,11 @@ body {
     background-color: #7392c1;
     box-shadow: 0px 5px 5px #888888;
 }
+html
+{
+    font-size:17px;
+}
+
 .navbar-inverse .navbar-nav > li > a {
     color: #fff;
 }
@@ -102,6 +107,17 @@ text-align: left;
 #cform p {
   padding: 10px;
 }
+.nlabel h3 {
+  text-align: left;
+  font-size: 18px;
+  margin-left: 30px
+}
+.dlabel {
+  width:100%;
+  text-align: left;
+  font-size: 12px;
+  margin-left: 30px
+}
 .plabel {
   background-color: #a1abcf;
   text-align: center;
@@ -123,7 +139,7 @@ width: 30%;
 }
 #banner {
   background-color: #ffda51;
-  width: 44%;
+  width: 100%;
   padding: 10px;
   text-align: center;
 }

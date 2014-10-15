@@ -1,12 +1,13 @@
 ﻿@using RepositoryPattern.Service.UI
-@model IEnumerable<RepositoryPattern.Model.Catalog.ProductCategory>
+@using RepositoryPattern.Model.Catalog;
+@model IEnumerable<ProductCategory>
  @{var imgpath = "~/Images/WallImages/imagepath";
    var catInfo = Model.Select(x => x.Category).FirstOrDefault(); 
    }
 <div class="row">
     
     <h1>@catInfo.Name</h1>
-    <p>Category Description Category Description Category Description Category Description Category Description Category Description Category Description Category Description Category Description</p>
+    <p>@catInfo.Description</p>
     <ul class="pagination">
         <li><a href="#">&laquo;</a></li>
         <li><a href="#">1</a></li>
@@ -32,4 +33,7 @@
                  <p class="dlabel">@cat.Product.ShortDescription</p>
          </div>
      }
+     <table>
+         @Html.Repeater<ProductCategory>("hobby", hh => 
+     </table>
  </div>
