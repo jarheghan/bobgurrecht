@@ -9,6 +9,7 @@ using System.Web.Mvc.Html;
 
 namespace RepositoryPattern.Service.UI
 {
+    public delegate MvcHtmlString GetStringFromAction(string viewName, object model); 
     public static class LayoutHelpers
     {
         //public static void Repeater<T>(this HtmlHelper html
@@ -118,10 +119,84 @@ namespace RepositoryPattern.Service.UI
                 action(element);
         }
 
-        public static MvcHtmlString RenderTemplateAsColumns(this HtmlHelper helper, ICollection Items, string partialViewName, int numberOfColumns)
+        public static MvcHtmlString RenderTemplateAsColumns(this HtmlHelper helper,
+           ICollection items,
+           string partialViewName,
+           int numberOfColumns)
         {
+            return RenderTemplateAsColumns(helper, items, partialViewName, numberOfColumns, helper.Partial);
 
-            return RenderTemplateAsColumns(helper, Items, partialViewName, numberOfColumns);
+        }
+        public static MvcHtmlString RenderTemplateAsColumns(this HtmlHelper helper, ICollection items
+            , string partialViewName
+            , int numberOfColumns
+            ,GetStringFromAction getStringMethod)
+        {
+            if (numberOfColumns < 1)
+            {
+                throw new ArgumentOutOfRangeException("numberOfColumns");
+            }
+            if (items == null)
+            {
+                throw new ArgumentOutOfRangeException("items");
+            }
+            StringBuilder builder = new StringBuilder();
+            int columnsInRow = 0;
+            int rowsDone = 0;
+            int numberOfItemsDone = 0;
+            int numberOfExtraColumnInLastRow;
+
+            //calculate the needed table structure
+            int numberOfRows = items.Count / numberOfColumns;
+
+            //create the needed table tag
+            builder.Append("<table>");
+
+            //create the rows and columns
+            foreach (var i in items)
+            {
+                if (columnsInRow == 1)
+                {
+                    builder.Append("<tr>");
+                }
+                builder.Append("<td>");
+                builder.Append(getStringMethod(partialViewName, items));
+                builder.Append("</td>");
+                bool isLastItem = (items.Count == numberOfItemsDone + 1);
+
+                if ((columnsInRow == numberOfColumns) || isLastItem)
+                {
+                    if (isLastItem)
+                    {
+                        numberOfExtraColumnInLastRow = numberOfColumns - columnsInRow;
+                        builder.Append(RenderExtraColumns(numberOfExtraColumnInLastRow));
+                    }
+                    builder.Append("</tr>");
+                    columnsInRow = 1;
+                    rowsDone++;
+
+                }
+                else
+                {
+                    columnsInRow++;
+                }
+                builder.Append("</table>");
+                return MvcHtmlString.Create(builder.ToString());
+            }
+            return MvcHtmlString.Empty;
+        }
+
+        private static string RenderExtraColumns(int numberOfExtraColumnsInLastRow)
+        {
+            if (numberOfExtraColumnsInLastRow > 0)
+            { StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < numberOfExtraColumnsInLastRow; i++)
+                { 
+                    builder.Append("<td></td>"); 
+                }
+                return builder.ToString(); 
+            } 
+            return string.Empty;
         }
 
     }

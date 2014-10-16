@@ -821,6 +821,7 @@
     <Content Include="Views\Common\SideMenu.cshtml" />
     <Content Include="Views\Common\DisplayCategoryProduct.cshtml" />
     <Content Include="Views\Home\CategoryProduct.cshtml" />
+    <Content Include="Views\Shared\_productpartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

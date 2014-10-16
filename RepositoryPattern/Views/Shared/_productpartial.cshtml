@@ -1,0 +1,16 @@
+﻿@using RepositoryPattern.Model.Catalog;
+ @{var imgpath = "~/Images/WallImages/imagepath";}
+@model IEnumerable<ProductCategory>
+
+     @foreach(var cat in Model)
+     {
+         <div class="col-lg-2">
+             <a href="#">
+                 <img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/"+cat.Picture.FilePath)">
+                 <label class="nlabel">
+                     <h3>@cat.Product.Name</h3>
+                 </label></a>
+                 <p class="dlabel">@cat.Product.ShortDescription</p>
+         </div>
+     }
+   
