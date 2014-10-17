@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "About Us";
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+<div class="container">
+ @Html.Action("Menu","Common")
+</div>
+<div class="container">
+    <br>
+    <div class="pagetitle">
+    <h1>About Us</h1>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <br>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6">
+        <img id="slogo"src="@Url.Content("/Content/themes/Plumb/img/logo-small.png")">
+        <br>
+        <br>
+        <div id="abouttext">
+    <p><strong>Bob Garrecht Supply</strong>, a wholesale plumbing parts company, has been doing business in New Mexico since 1971. Oriiginally a plumber, Bob Garrecht began selling parts out of his basement, making deliveries in VW. He then had a crew traveling the state with parts in step vans. Today Bob Garrecht Supply clients include federal, state and local government agencies, as well as well as institutional and commercial organizations. With a 10,000-square-foot warehouse on Albuquerque, the company serves the and surrounding region with outside sales consultants, inside sales consultants, and a wide selection of commercial carriers for the shippingand delivery of parts.</p>
+  </div>
+      </div>
+      <div class="col-sm-6">
+        <h1>Working With Bob Garrecht Supply Pays Off</h1>
+        <br>
+        <p>If you do business with, our sales consultant will become familar with your systems, equipment and people.<br>
+          <br>
+        By knowing your requirements, and combining that with their wide range of plumbing knowlege, they help you.</p>
+        <br>
+        <u>
+            <li>Stock Inventory at the appropriate levels</li>
+            <li>Solve plumbing dilemmas</li>
+            <li>Keep up with the latest plumbing developments</li>
+            <li>Offer cost-saving solutions</li>
+            <li>Source unusual and dated parts</li>
+          </u>
+      </div>
+    </div>
+  </div>
+  

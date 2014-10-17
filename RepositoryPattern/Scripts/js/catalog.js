@@ -9,6 +9,7 @@ var catalog = (function () {
         var $ss = $(this);
         var i = $ss.data("id");
         var dis = $ss.data("des")
+        var pvid = $('body').find('#ProductVariation_' + i + '__ID').val();
         var OriginalContent = $ss.text();
 
         $ss.addClass("cellEditing");
@@ -20,6 +21,7 @@ var catalog = (function () {
                 $(this).parent().text(newContent);
                 $(this).parent().removeClass("cellEditing");
                 $ss.append('<input type="hidden" name="ProductVariation[' + i + '].' + dis + '" value="' + newContent + '" />');
+                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
             }
         });
        
