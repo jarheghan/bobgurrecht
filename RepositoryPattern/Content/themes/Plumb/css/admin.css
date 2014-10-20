@@ -3564,3 +3564,14 @@ fieldset[disabled] .btn-vk.active {
     display: none;
 }
 
+
+/*Added by John for editing Product Variation*/
+.cellEditing {
+    padding: 0;
+}
+ 
+.cellEditing input[type=text]{
+    width:100%;
+    border:0;
+    background-color:rgb(255,253,210);  
+}

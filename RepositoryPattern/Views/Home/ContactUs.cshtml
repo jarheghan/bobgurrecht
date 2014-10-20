@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+<div class="container">
+ @Html.Action("Menu","Common")
+</div>
+
+
+ <div class="container">
+
+    <div class="row">
+    <!-- section -->
+      <section class="col-sm-4" id="sidebar">
+        <h3>Bob Garrecht Supply Inc.</h3>
+        <hr>
+    <address><h3>2432 Claremont Ave NE,<br>
+    Albuquerque, NM 87107</h3></address>
+    <h3><a href="tel:5058840133">(505) 884-0133</a></h3>
+    <hr>
+    <div id="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m10!1m3!1d1631.882302531313!2d-106.61522545767212!3d35.11258836086564!2m1!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872274b1ba1670b5%3A0xe1f59fb061022c67!2s2432+Claremont+Ave+NE%2C+Albuquerque%2C+NM+87107!5e0!3m2!1sen!2sus!4v1407271252633" width="350" height="300" frameborder="0" style="border:0"></iframe>
+    </div>
+      </section>
+      <!-- end section -->
+      <section class="col-sm-7">
+        <form class="form-horizontal" role="form">
+        <div id="cform">
+        <p>Do you have questions or comments? Please submitt the form below and someone from our customer service would be happy to assist you.</p><br>
+        <div class="form-group">
+          <label for="inputname" class="col-sm-2 control-label">Name</label>
+          <div class="col-sm-10">
+          <input type="test" class="form-control" id="inputname" placeholder="Name">
+        </div>
+      </div><br>
+      <div class="form-group">
+          <label for="inputname" class="col-sm-2 control-label">Company Name</label>
+          <div class="col-sm-10">
+          <input type="test" class="form-control" id="inputname" placeholder="Company Name">
+        </div>
+      </div><br>
+      <div class="form-group">
+          <label for="inputname" class="col-sm-2 control-label">Phone</label>
+          <div class="col-sm-10">
+          <input type="test" class="form-control" id="inputname" placeholder="Phone">
+        </div>
+      </div><br>
+      <div class="form-group">
+          <label for="inputname" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+          <input type="test" class="form-control" id="inputname" placeholder="Email">
+        </div>
+      </div><br>
+      <div class="form-group">
+          <label for="inputname" class="col-sm-2 control-label">Comments</label>
+          <div class="col-sm-10">
+          <textarea class="form-control" rows="3"></textarea>
+        </div><br>
+        <div class="form-group pull-right" id="btnsubmit">
+        <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+      </section><!-- end section -->
+      
+    </div><!-- end row -->
+  </div>

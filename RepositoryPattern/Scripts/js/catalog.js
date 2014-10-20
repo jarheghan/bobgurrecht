@@ -4,6 +4,35 @@
 var catalog = (function () {
     var i1 = 0;
     var cnt = $('body').find('#pvCount').val();
+
+    $("td.mmm").dblclick(function () {
+        var $ss = $(this);
+        var i = $ss.data("id");
+        var dis = $ss.data("des")
+        var pvid = $('body').find('#ProductVariation_' + i + '__ID').val();
+        var OriginalContent = $ss.text();
+
+        $ss.addClass("cellEditing");
+        $ss.html("<input type='text' value='" + OriginalContent + "' />");
+        $ss.children().first().focus();
+        $ss.children().first().keypress(function (e) {
+            if (e.which === 13) {
+                var newContent = $(this).val();
+                $(this).parent().text(newContent);
+                $(this).parent().removeClass("cellEditing");
+                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].' + dis + '" value="' + newContent + '" />');
+                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
+            }
+        });
+       
+
+        $ss.children().first().blur(function () {
+            $(this).parent().text(OriginalContent);
+            $(this).parent().removeClass("cellEditing");
+        });
+    });
+
+
  $('#productvariation').dialog({
         title: "Production Variation",
         autoOpen: false,
@@ -214,11 +243,17 @@ var catalog = (function () {
     var removeVariation = function (i) {
         $('#tr' + i).remove();
     }
+
+  
+     
+  
+
+
     return {
         prodImage: prodImage,
         editProductImage: editProductImage,
         removeVariation: removeVariation,
-        messagealert: messagealert
+        messagealert: messagealert,
     }
 
    

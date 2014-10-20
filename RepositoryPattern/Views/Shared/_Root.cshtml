@@ -23,13 +23,28 @@
             </div>
         </section>
     </div>
+    @if (IsSectionDefined("beforeFooter"))
+     {
+         @RenderSection("beforeFooter")
+     }
+        else{
+        <br /> <br />
+            <div  class="container" id="banner"><h3>“We have many items for sale that are not shown on our web site, please call our sales department <a href="tel:5058840133">505-884-0133</a> for help.”</h3></div><br>
+     }
      @if (IsSectionDefined("footer"))
      {
          @RenderSection("footer")
      }
         else{
             <div id="footer-wrapper">
-                <!-- fill with other footer information -->
+                <footer>
+                    <div class="container">
+                        <div class="panel-footer">
+                            <p>&copy; Copyright, 2014 Bob Garrecht Supply Inc.</p>
+                            <a href="http://nashvillecomputerwebdesign.com/">Web Design BY Nashville Computer</a>
+                        </div>
+                    </div>
+                </footer>
             </div>
      }
 </div>

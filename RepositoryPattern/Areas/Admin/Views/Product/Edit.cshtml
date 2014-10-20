@@ -94,8 +94,8 @@
                                                        <tr>
                                                           @* <td> <input type="hidden" name="[@prdvar.ID].Description" value="@prdvar.Description" />@prdvar.Description</td>
                                                            <td> <input type="hidden" name="[@prdvar.ID].Size" value="@prdvar.Size" />@prdvar.Size</td>*@
-                                                           <td>@Html.HiddenFor(x =>x.ProductVariation[i].Description) @Model.ProductVariation[i].Description</td>
-                                                           <td>@Html.HiddenFor(x =>x.ProductVariation[i].Size)@Model.ProductVariation[i].Size
+                                                           <td class="mmm" data-id="@i" data-des="Description">@Html.HiddenFor(x =>x.ProductVariation[i].Description) @Model.ProductVariation[i].Description</td>
+                                                           <td class="mmm" data-id="@i"data-des="Size">@Html.HiddenFor(x =>x.ProductVariation[i].Size)@Model.ProductVariation[i].Size
                                                            @Html.HiddenFor(x =>x.ProductVariation[i].ID)</td>
                                                            <td><a href="@Url.Action("DeleteVariation", new {Id = Model.ProductVariation[i].ID, prdId = Model.Product.ID})">Remove</a>
 
