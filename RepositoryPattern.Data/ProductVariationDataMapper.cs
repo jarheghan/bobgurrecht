@@ -124,6 +124,43 @@ namespace RepositoryPattern.Data
 
         }
 
+        public int UpdatePrductVariationWithOutput(ProductVariation prdVariation)
+        {
+            var param = new
+            {
+                ID = prdVariation.ID,
+                Description = prdVariation.Description,
+                Size = prdVariation.Size,
+                Type = prdVariation.Type,
+                Color = prdVariation.Color,
+                ChangeUser = prdVariation.ChangeUser,
+                ChangeDate = prdVariation.ChangeDate,
+                DeleteFlag = prdVariation.DeleteFlag
+            };
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    int i = cn.Query<int>(@"DECLARE @TmpTable TABLE(ID int)
+                                    Update ProductVariation
+                                    set prv_description = @Description
+                                   ,prv_size = @Size
+                                   ,prv_change_user = @ChangeUser
+                                   ,prv_change_date = @ChangeDate
+                                   ,prv_delete_flag = @DeleteFlag OUTPUT INSERTED.prv_prd_id into @TmpTable  where prv_id = @ID
+                                    select ID from @TmpTable
+                             ", param).FirstOrDefault();
+                    return i;
+                }
+
+                catch { return 0; }
+
+
+            }
+
+        }
+
+
         public IEnumerable<ProductVariation> GetAllProductVariation(int productId)
         {
             using (IDbConnection cn = Connection)

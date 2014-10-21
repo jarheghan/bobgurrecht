@@ -5,7 +5,7 @@ var catalog = (function () {
     var i1 = 0;
     var cnt = parseInt($('body').find('#pvCount').val());
 
-<<<<<<< HEAD
+
     //$("td.mmm").dblclick(function () {
     //    var $ss = $(this);
     //    var i = $ss.data("id");
@@ -25,27 +25,7 @@ var catalog = (function () {
     //            $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
     //        }
     //    });
-=======
-    $("td.mmm1").dblclick(function () {
-        var $ss = $(this);
-        var i = $ss.data("id");
-        var dis = $ss.data("des")
-        var pvid = $('body').find('#ProductVariation_' + i + '__ID').val();
-        var OriginalContent = $ss.text();
 
-        $ss.addClass("cellEditing");
-        $ss.html("<input type='text' value='" + OriginalContent + "' />");
-        $ss.children().first().focus();
-        $ss.children().first().keypress(function (e) {
-            if (e.which === 13) {
-                var newContent = $(this).val();
-                $(this).parent().text(newContent);
-                $(this).parent().removeClass("cellEditing");
-                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].' + dis + '" value="' + newContent + '" />');
-                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
-            }
-        });
->>>>>>> ed9b11dc932cf17a6faec16608f1556c49e6a0b0
        
 
     //    $ss.children().first().blur(function () {
@@ -84,21 +64,25 @@ var catalog = (function () {
         ]
  });
 
- $('#productvariationedit').dialog({
+ var dialogEditProductVariation1 = $('#productvariationedit1').dialog({
      title: "Production Variation",
      autoOpen: false,
      buttons: [
          {
-             text: "Save"
+             text: "Insert"
            , 'class': "btn-primary"
            , click: function () {
+               var mycnt;
                var prodTable = $("#tablePrdVariation");
+               prodTable.find('td').each(function (index) {
+                   mycnt = index;
+               })
                var des = $('body').find('#description').val();
                var size = $('body').find('#size').val();
                debugger;
-               cnt = cnt++;
-               prodTable.append('<tr id="tr' + cnt + '"><td><input type="hidden" name="ProductVariation[' + cnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + cnt + '].Size" value="' + size + '"/>' + size
-                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + cnt + ')">Edit</a></td></tr>');
+                mycnt++;
+                prodTable.append('<tr id="tr' + mycnt + '"><td><input id="ProductVariation_' + mycnt + '__Description" type="hidden" name="ProductVariation[' + mycnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + mycnt + '].Size" value="' + size + '"/>' + size
+                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + mycnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + mycnt + ')">Edit</a></td></tr>');
                
                $(this).dialog("close");
            }
@@ -122,13 +106,30 @@ var catalog = (function () {
                                          text: "Save"
                                        , 'class': "btn-primary"
                                        , click: function () {
-                                           var prodTable = $("#tablePrdVariation");
-                                           var des = $('body').find('#description').val();
-                                           var size = $('body').find('#size').val();
+                                           var data = {
+                                               Description: $('body').find('#descriptionedit').val(),
+                                               Size: $('body').find('#sizeedit').val(),
+                                               ID: $('body').find('#prdVariationIDedit').val(),
+                                           }
+                                           $.ajax({
+                                               url: "/Admin/Common/ProductVariationUpdate",
+                                               type: "POST",
+                                               datatype: 'json',
+                                               contentType: 'application/json',
+                                               data: JSON.stringify(data),
+                                               cache: false,
+                                               async: false,
+                                               success: function (val1) {
+                                                   if (val1.Message === "success") {
+                                                       window.location.href = "/Admin/Product/Edit/" + val1.OutputID;
+                                                       $.messager.alert("hello");
+                                                   }
+                                                   if (val1.Message === "error") {
+                                                       $.messager.alert("Product Variation was not updated. Please call Technical Administrator.");
+                                                   }
+                                               }
 
-                                           prodTable.append('<tr id="tr' + cnt + '"><td><input type="hidden" name="ProductVariation[' + cnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + cnt + '].Size" value="' + size + '"/>' + size
-                                               + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + cnt + ')">Edit</a></td></tr>');
-                                           cnt++;
+                                           })
                                            $(this).dialog("close");
                                        }
                                      },
@@ -147,7 +148,7 @@ var catalog = (function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
     })
     $('#btnProdVariationedit').click(function () {
-        $('#productvariationedit').dialog('open').load('/Admin/Common/ProductVariation');
+        dialogEditProductVariation1.dialog('open').load('/Admin/Common/ProductVariation');
     })
 
     var messagealert = function (msg) {
@@ -291,9 +292,9 @@ var catalog = (function () {
         });
     };
 
-    var tableedit = function () {
-        $('#tblProductVariation').editableTableWidget({addProperties:'mmm'});
-    }
+    //var tableedit = function () {
+    //    $('#tblProductVariation').editableTableWidget({addProperties:'mmm'});
+    //}
 
 
     var removeVariation = function (i) {
@@ -312,11 +313,7 @@ var catalog = (function () {
         editProductImage: editProductImage,
         removeVariation: removeVariation,
         messagealert: messagealert,
-<<<<<<< HEAD
-        tableedit: tableedit
-=======
         editProdtionVartion: editProdtionVartion
->>>>>>> ed9b11dc932cf17a6faec16608f1556c49e6a0b0
     }
 
    

@@ -40,7 +40,7 @@
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
 
-                        @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { id = "editProductForm" }))
+                        @using (Html.BeginForm("EditProduct", "Product", FormMethod.Get, new { id = "editProductForm" }))
                         {
 
                                 <div role="form">
@@ -49,6 +49,7 @@
                                             @Html.Label("Name", new { @for = "" })
                                             @Html.TextBoxFor(x => x.Product.Name, new { @class = "form-control", placeholder = "Name" })
                                             @Html.HiddenFor(x => x.Product.ID)
+                                            @Html.Hidden("pvProductID",Model.Product.ID)
                                         </div>
                                          <div class="form-group">
                                             @Html.Label("Short Description", null, new { @for = "" })
@@ -92,34 +93,19 @@
                                                    @{int cnt1 = 0;}
                                                   @if (Model.ProductVariation != null)
                                                   {
-                                                      var cnt = Model.ProductVariation.Count;
-                                                      
-                                                   
+                                                      var cnt = 0;
                                                       
                                                       foreach (var prdvar in Model.ProductVariation)
                                                       {
-                                                       <tr>
-<<<<<<< HEAD
-                                                          @* <td> <input type="hidden" name="[@prdvar.ID].Description" value="@prdvar.Description" />@prdvar.Description</td>
-                                                           <td> <input type="hidden" name="[@prdvar.ID].Size" value="@prdvar.Size" />@prdvar.Size</td>*@
-                                                           <td class="mmm" data-id="@i" data-des="Description">@Html.HiddenFor(x =>x.ProductVariation[i].Description) @Model.ProductVariation[i].Description</td>
-                                                           <td class="mmm" data-id="@i"data-des="Size">@Html.HiddenFor(x =>x.ProductVariation[i].Size)@Model.ProductVariation[i].Size
-                                                           @Html.HiddenFor(x =>x.ProductVariation[i].ID)</td>
-                                                           <td><a href="@Url.Action("DeleteVariation", new {Id = Model.ProductVariation[i].ID, prdId = Model.Product.ID})">Remove</a>
-                                                           </td>
-                                                       </tr>
-                                                   }
-=======
-                                                       <td> <input type="hidden" name="ProductVariation.[@cnt].Description" value="@prdvar.Description" />@prdvar.Description</td>
-                                                       <td> <input type="hidden" name="ProductVariation.[@cnt].Size" value="@prdvar.Size" />@prdvar.Size</td>
+                                                      <tr>
+                                                       <td>@Html.HiddenFor(x =>x.ProductVariation[cnt].Description) @prdvar.Description</td>
+                                                       <td>@Html.HiddenFor(x =>x.ProductVariation[cnt].Size) @Html.HiddenFor(x =>x.ProductVariation[cnt].ID) @prdvar.Size</td>
                                                        <td><a href="@Url.Action("DeleteVariation", new { Id = prdvar.ID, prdId = Model.Product.ID })">Remove</a>
                                                        <td><a href="#" onclick="catalog.editProdtionVartion(@prdvar.ID)">Edit</a>
                                                         </td></tr>
-                                                         cnt1 = cnt++;
+                                                        cnt++;
                                                       }
-                                                      
-                                                      
->>>>>>> ed9b11dc932cf17a6faec16608f1556c49e6a0b0
+
                                                   }
                                                
                                                </tbody>
@@ -151,11 +137,11 @@
               </section>
 </aside>
 <div id="productvariationedit"></div>
+<div id="productvariationedit1"></div>
 <div id="errordiv"></div>
   @section scripts{
       <script type="text/javascript">
           catalog.editProductImage();
-          catalog.tableedit();
     </script>
       }
 

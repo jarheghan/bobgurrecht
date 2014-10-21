@@ -356,6 +356,7 @@
     <Compile Include="Areas\Admin\Infacstructure\HtmlAttributeExtension.cs" />
     <Compile Include="Areas\Admin\Models\Catalog.cs" />
     <Compile Include="Areas\Admin\Models\ProductVariationInfo.cs" />
+    <Compile Include="Areas\Admin\Models\SuccessInfo.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommonController.cs" />

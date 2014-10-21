@@ -14,5 +14,6 @@ namespace RepositoryPattern.Model.Catalog
         void UpdatePrductVariation(ProductVariation prdVariation);
         IEnumerable<ProductVariation> GetAllProductVariation(int productId);
         ProductVariation GetSingeProductVariation(int Id);
+        int UpdatePrductVariationWithOutput(ProductVariation prdVariation);
     }
 }
