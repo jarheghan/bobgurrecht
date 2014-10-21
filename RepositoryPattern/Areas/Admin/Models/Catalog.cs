@@ -10,5 +10,6 @@ namespace RepositoryPattern.Areas.Admin.Models
     {
         public Product Product { get; set; }
         public IList<ProductVariation> ProductVariation { get; set; }
+        //public IEnumerable<ProductVariation> ProductVariation { get; set; }
     }
 }

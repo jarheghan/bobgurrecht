@@ -66,5 +66,24 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult ProductVariationInsert(ProductVariation productVariation)
+        {
+            try
+            {
+                int prdId = _prdVariationRepo.InsertProductVariationSpecial(productVariation);
+                SuccessInfo info = new SuccessInfo();
+                info.OutputID = prdId;
+                info.Message = "success";
+                return Json(info, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                SuccessInfo info1 = new SuccessInfo();
+                info1.OutputID = 0;
+                info1.Message = "error";
+                return Json(info1, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

@@ -79,11 +79,30 @@ var catalog = (function () {
                })
                var des = $('body').find('#description').val();
                var size = $('body').find('#size').val();
-               debugger;
-                mycnt++;
-                prodTable.append('<tr id="tr' + mycnt + '"><td><input id="ProductVariation_' + mycnt + '__Description" type="hidden" name="ProductVariation[' + mycnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + mycnt + '].Size" value="' + size + '"/>' + size
-                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + mycnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + mycnt + ')">Edit</a></td></tr>');
-               
+               var data = {
+                   Description: $('body').find('#description').val(),
+                   Size: $('body').find('#size').val(),
+                   ProductID: $('body').find('#pvProductID').val(),
+               }
+               $.ajax({
+                   url: "/Admin/Common/ProductVariationInsert",
+                   type: "POST",
+                   datatype: 'json',
+                   contentType: 'application/json',
+                   data: JSON.stringify(data),
+                   cache: false,
+                   async: false,
+                   success: function (val1) {
+                       if (val1.Message === "success") {
+                           window.location.href = "/Admin/Product/Edit/" + val1.OutputID;
+                           $.messager.alert("hello");
+                       }
+                       if (val1.Message === "error") {
+                           $.messager.alert("Product Variation was not updated. Please call Technical Administrator.");
+                       }
+                   }
+
+               })
                $(this).dialog("close");
            }
          },

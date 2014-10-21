@@ -2,7 +2,7 @@
 @using RepositoryPattern.Model.Catalog;
 @model IEnumerable<ProductCategory>
  @{var imgpath = "~/Images/WallImages/imagepath";
-   var catInfo = Model.Select(x => x.Category).FirstOrDefault();
+   var catInfo = Model.Select(x => x.Product).FirstOrDefault();
    Category cat = ViewBag.Category;
    }
 <div class="row">
@@ -20,10 +20,10 @@
     </ul>
 </div>
   <br>
-@if(catInfo != null)
+@if (catInfo != null)
 {
 <div class="row">
-   @Html.RenderTemplateAsColumns(Model.ToList(),"_productpartial",3) 
+   @Html.RenderTemplateAsColumns(Model.ToList(),"_productpartial",4) 
 </div>
 }
  

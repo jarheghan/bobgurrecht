@@ -74,6 +74,51 @@ namespace RepositoryPattern.Data
 
         }
 
+        public int InsertProductVariationSpecial(ProductVariation prdVariation)
+        {
+            var param = new
+            {
+                ProductID = prdVariation.ProductID,
+                Description = prdVariation.Description,
+                Size = prdVariation.Size,
+                Type = prdVariation.Type,
+                Color = prdVariation.Color,
+                AddUser = prdVariation.AddUser,
+                AddDate = prdVariation.AddDate,
+                DeleteFlag = prdVariation.DeleteFlag
+            };
+
+            try
+            {
+                using (IDbConnection cn = Connection)
+                {
+                    int i = cn.Query<int>(@"DECLARE @TmpTable TABLE(ID int)
+                                    INSERT INTO ProductVariation
+                                   (prv_prd_id
+                                   ,prv_description
+                                   ,prv_size
+                                   ,prv_type
+                                   ,prv_color
+                                   ,prv_add_user
+                                   ,prv_add_date
+                                   ,prv_delete_flag) OUTPUT Inserted.prv_prd_id INTO @TmpTable
+                             VALUES
+                                   (@ProductID
+                                   ,@Description
+                                   ,@Size
+                                   ,@Type
+                                   ,@Color
+                                   ,@AddUser
+                                   ,@AddDate
+                                   ,@DeleteFlag) select ID from @TmpTable", param).FirstOrDefault();
+                    return i;
+                }
+               
+            }
+            catch { return 0; }
+
+        }
+
         public void DeleteProductVariation(int Id)
         {
             using (IDbConnection cn = Connection)
