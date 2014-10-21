@@ -15,6 +15,7 @@
 
     Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
     Html.RequiresJs("jquery-ui-1.11.1.js", "jquery", 2);
+    Html.RequiresJs("editabletable.js", "jquery", 14);
     Html.RequiresJs("bootstrap.js", "bootstrap", 3);
     Html.RequiresJs("jquery.dialog.js", "Custom", 4);
     Html.RequiresJs("catalog.js", "Custom", 5);
@@ -84,7 +85,7 @@
                                          <div class="form-group">
                                             @Html.Label("Product Variation", new {@for="" })<br />
                                             <div>
-                                           <table class="table table-bordered table-hover">
+                                           <table class="table table-bordered table-hover" id="tblProductVariation">
                                               <thead><tr><th>Variation Name</th><th>Size</th></tr></thead>
                                                <tbody id="tablePrdVariation">
                                                   @if(Model.ProductVariation != null){
@@ -98,8 +99,8 @@
                                                            <td class="mmm" data-id="@i"data-des="Size">@Html.HiddenFor(x =>x.ProductVariation[i].Size)@Model.ProductVariation[i].Size
                                                            @Html.HiddenFor(x =>x.ProductVariation[i].ID)</td>
                                                            <td><a href="@Url.Action("DeleteVariation", new {Id = Model.ProductVariation[i].ID, prdId = Model.Product.ID})">Remove</a>
-
-                                                           </td></tr>
+                                                           </td>
+                                                       </tr>
                                                    }
                                                   }
                                                </tbody>
@@ -133,6 +134,7 @@
   @section scripts{
       <script type="text/javascript">
           catalog.editProductImage();
+          catalog.tableedit();
     </script>
       }
 

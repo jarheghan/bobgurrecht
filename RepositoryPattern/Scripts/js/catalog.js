@@ -5,33 +5,34 @@ var catalog = (function () {
     var i1 = 0;
     var cnt = $('body').find('#pvCount').val();
 
-    $("td.mmm").dblclick(function () {
-        var $ss = $(this);
-        var i = $ss.data("id");
-        var dis = $ss.data("des")
-        var pvid = $('body').find('#ProductVariation_' + i + '__ID').val();
-        var OriginalContent = $ss.text();
+    //$("td.mmm").dblclick(function () {
+    //    var $ss = $(this);
+    //    var i = $ss.data("id");
+    //    var dis = $ss.data("des")
+    //    var pvid = $('body').find('#ProductVariation_' + i + '__ID').val();
+    //    var OriginalContent = $ss.text();
 
-        $ss.addClass("cellEditing");
-        $ss.html("<input type='text' value='" + OriginalContent + "' />");
-        $ss.children().first().focus();
-        $ss.children().first().keypress(function (e) {
-            if (e.which === 13) {
-                var newContent = $(this).val();
-                $(this).parent().text(newContent);
-                $(this).parent().removeClass("cellEditing");
-                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].' + dis + '" value="' + newContent + '" />');
-                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
-            }
-        });
+    //    $ss.addClass("cellEditing");
+    //    $ss.html("<input type='text' value='" + OriginalContent + "' />");
+    //    $ss.children().first().focus();
+    //    $ss.children().first().keypress(function (e) {
+    //        if (e.which === 13) {
+    //            var newContent = $(this).val();
+    //            $(this).parent().text(newContent);
+    //            $(this).parent().removeClass("cellEditing");
+    //            $ss.append('<input type="hidden" name="ProductVariation[' + i + '].' + dis + '" value="' + newContent + '" />');
+    //            $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
+    //        }
+    //    });
        
 
-        $ss.children().first().blur(function () {
-            $(this).parent().text(OriginalContent);
-            $(this).parent().removeClass("cellEditing");
-        });
-    });
-
+    //    $ss.children().first().blur(function () {
+    //        $(this).parent().text(OriginalContent);
+    //        $(this).parent().removeClass("cellEditing");
+    //    });
+    //});
+    
+   
 
  $('#productvariation').dialog({
         title: "Production Variation",
@@ -236,9 +237,12 @@ var catalog = (function () {
 
             }
         });
+    };
+
+    var tableedit = function () {
+        $('#tblProductVariation').editableTableWidget({addProperties:'mmm'});
     }
 
-   
 
     var removeVariation = function (i) {
         $('#tr' + i).remove();
@@ -254,6 +258,7 @@ var catalog = (function () {
         editProductImage: editProductImage,
         removeVariation: removeVariation,
         messagealert: messagealert,
+        tableedit: tableedit
     }
 
    
