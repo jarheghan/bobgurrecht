@@ -2,12 +2,13 @@
 @using RepositoryPattern.Model.Catalog;
 @model IEnumerable<ProductCategory>
  @{var imgpath = "~/Images/WallImages/imagepath";
-   var catInfo = Model.Select(x => x.Category).FirstOrDefault(); 
+   var catInfo = Model.Select(x => x.Category).FirstOrDefault();
+   Category cat = ViewBag.Category;
    }
 <div class="row">
     
-    <h1>@catInfo.Name</h1>
-    <p>@catInfo.Description</p>
+    <h1>@cat.Name</h1>
+    <p>@cat.Description</p>
     <ul class="pagination">
         <li><a href="#">&laquo;</a></li>
         <li><a href="#">1</a></li>
@@ -19,7 +20,10 @@
     </ul>
 </div>
   <br>
+@if(catInfo != null)
+{
 <div class="row">
    @Html.RenderTemplateAsColumns(Model.ToList(),"_productpartial",3) 
 </div>
+}
  

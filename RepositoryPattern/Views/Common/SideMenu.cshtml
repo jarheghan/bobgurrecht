@@ -1,10 +1,16 @@
-﻿<div class="col-sm-2" id="msidebar">
+﻿@model IEnumerable<RepositoryPattern.Model.Catalog.Category>
+<div class="col-sm-2" id="msidebar">
         <div>
-          <h5>Side Menu</h5>
+          <h5>Category</h5>
           <ul class="nav">
-            <li><a>People</a></li>
-            <li><a>Times</a></li>
-            <li><a>Place</a></li>
+          @if (Model != null)
+            {
+                foreach (var cat in Model)
+                {
+                <li><a href="@Url.Action("CategoryProduct","Home",new{Id = cat.ID})">@cat.Name</a></li>
+                }
+            }
+            <li class="divider"></li>
           </ul>
       </div>
     </div>

@@ -3,9 +3,9 @@
 
 var catalog = (function () {
     var i1 = 0;
-    var cnt = $('body').find('#pvCount').val();
+    var cnt = parseInt($('body').find('#pvCount').val());
 
-    $("td.mmm").dblclick(function () {
+    $("td.mmm1").dblclick(function () {
         var $ss = $(this);
         var i = $ss.data("id");
         var dis = $ss.data("des")
@@ -72,10 +72,11 @@ var catalog = (function () {
                var prodTable = $("#tablePrdVariation");
                var des = $('body').find('#description').val();
                var size = $('body').find('#size').val();
-               
+               debugger;
+               cnt = cnt++;
                prodTable.append('<tr id="tr' + cnt + '"><td><input type="hidden" name="ProductVariation[' + cnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + cnt + '].Size" value="' + size + '"/>' + size
-                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td></tr>');
-               cnt++;
+                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + cnt + ')">Edit</a></td></tr>');
+               
                $(this).dialog("close");
            }
          },
@@ -89,6 +90,35 @@ var catalog = (function () {
         }
      ]
  });
+
+ var dialogEditProductVariation = $('#productvariationedit').dialog({
+                                 title: "Production Variation",
+                                 autoOpen: false,
+                                 buttons: [
+                                     {
+                                         text: "Save"
+                                       , 'class': "btn-primary"
+                                       , click: function () {
+                                           var prodTable = $("#tablePrdVariation");
+                                           var des = $('body').find('#description').val();
+                                           var size = $('body').find('#size').val();
+
+                                           prodTable.append('<tr id="tr' + cnt + '"><td><input type="hidden" name="ProductVariation[' + cnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + cnt + '].Size" value="' + size + '"/>' + size
+                                               + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + cnt + ')">Edit</a></td></tr>');
+                                           cnt++;
+                                           $(this).dialog("close");
+                                       }
+                                     },
+
+                                    {
+                                        text: "Cancel"
+                                       , 'class': "btn-warning"
+                                       , click: function () {
+                                           $(this).dialog("close");
+                                       }
+                                    }
+                                 ]
+             });
 
     $('#btnProdVariation').click(function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
@@ -244,7 +274,9 @@ var catalog = (function () {
         $('#tr' + i).remove();
     }
 
-  
+    var editProdtionVartion = function (id) {
+        dialogEditProductVariation.dialog('open').load('/Admin/Common/ProductVariationEdit?id=' + id);
+    }
      
   
 
@@ -254,6 +286,7 @@ var catalog = (function () {
         editProductImage: editProductImage,
         removeVariation: removeVariation,
         messagealert: messagealert,
+        editProdtionVartion: editProdtionVartion
     }
 
    

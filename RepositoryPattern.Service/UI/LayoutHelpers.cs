@@ -12,61 +12,6 @@ namespace RepositoryPattern.Service.UI
     public delegate MvcHtmlString GetStringFromAction(string viewName, object model); 
     public static class LayoutHelpers
     {
-        //public static void Repeater<T>(this HtmlHelper html
-        //                      , IEnumerable<T> items
-        //                      , string className
-        //                      , string classNameAlt
-        //                                , Action<T, string> render)
-        //{
-        //    if (items == null)
-        //    return;
-
-        //    int i = 0;
-        //    //items.ForEach(item =>
-        //    //{
-        //    //    render(item, (i++ % 2 == 0) ? className : classNameAlt);
-        //    //});
-        //    foreach (var item in items)
-        //    {
-        //        render(item, (i++ % 2 == 0) ? className : classNameAlt);
-        //    }
-        //}
-
-        //public static void Repeater<T>(this HtmlHelper html
-        //  , string viewDataKey
-        //  , string cssClass
-        //  , string altCssClass
-        //  , Action<T, string> render)
-        //{
-        //    var items = GetViewDataAsEnumerable<T>(html, viewDataKey);
-
-        //    int i = 0;
-        //    //items.ForEach(item =>
-        //    //{
-        //    //    render(item, (i++ % 2 == 0) ? cssClass : altCssClass);
-        //    //});
-        //    foreach (var item in items)
-        //    {
-        //        render(item, (i++ % 2 == 0) ? cssClass : altCssClass);
-        //    }
-        //}
-
-        //static IEnumerable<T> GetViewDataAsEnumerable<T>(HtmlHelper html, string viewDataKey)
-        //{
-        //    var items = html.ViewContext.ViewData as IEnumerable<T>;
-        //    var viewData = html.ViewContext.ViewData as IDictionary<string, object>;
-        //    if (viewData != null)
-        //    {
-        //        items = viewData[viewDataKey] as IEnumerable<T>;
-        //    }
-        //    else
-        //    {
-        //        items = new ViewPage().ViewContext.ViewData[viewDataKey]
-        //          as IEnumerable<T>;
-        //    }
-        //    return items;
-        //}
-
         public static void Repeater<T>(this HtmlHelper html
                               , IEnumerable<T> items
                               , Action<T> render
@@ -140,51 +85,57 @@ namespace RepositoryPattern.Service.UI
             {
                 throw new ArgumentOutOfRangeException("items");
             }
-            StringBuilder builder = new StringBuilder();
-            int columnsInRow = 0;
-            int rowsDone = 0;
-            int numberOfItemsDone = 0;
-            int numberOfExtraColumnInLastRow;
-
-            //calculate the needed table structure
-            int numberOfRows = items.Count / numberOfColumns;
-
-            //create the needed table tag
-            builder.Append("<table>");
-
-            //create the rows and columns
-            foreach (var i in items)
+            if (items == null || items.Count > 0)
             {
-                if (columnsInRow == 1)
-                {
-                    builder.Append("<tr>");
-                }
-                builder.Append("<td>");
-                builder.Append(getStringMethod(partialViewName, items));
-                builder.Append("</td>");
-                bool isLastItem = (items.Count == numberOfItemsDone + 1);
+                StringBuilder builder = new StringBuilder();
+                int columnsInRow = 1;
+                int rowsDone = 0;
+                int numberOfItemsDone = 0;
+                int numberOfExtraColumnInLastRow;
 
-                if ((columnsInRow == numberOfColumns) || isLastItem)
+                //calculate the needed table structure
+                int numberOfRows = items.Count / numberOfColumns;
+
+                //create the needed table tag
+                builder.Append("<table>");
+
+                //create the rows and columns
+                foreach (var item in items)
                 {
-                    if (isLastItem)
+                    if (columnsInRow == 1)
                     {
-                        numberOfExtraColumnInLastRow = numberOfColumns - columnsInRow;
-                        builder.Append(RenderExtraColumns(numberOfExtraColumnInLastRow));
+                        builder.Append("<tr>");
                     }
-                    builder.Append("</tr>");
-                    columnsInRow = 1;
-                    rowsDone++;
+                    builder.Append("<td>");
+                    builder.Append(getStringMethod(partialViewName, item));
+                    builder.Append("</td>");
+                    bool isLastItem = (items.Count == numberOfItemsDone + 1);
 
-                }
-                else
-                {
-                    columnsInRow++;
+                    if ((columnsInRow == numberOfColumns) || isLastItem)
+                    {
+                        if (isLastItem)
+                        {
+                            numberOfExtraColumnInLastRow = numberOfColumns - columnsInRow;
+                            builder.Append(RenderExtraColumns(numberOfExtraColumnInLastRow));
+                        }
+                        builder.Append("</tr>");
+                        columnsInRow = 1;
+                        rowsDone++;
+
+                    }
+                    else
+                    {
+                        columnsInRow++;
+                    }
+                    numberOfItemsDone++;
                 }
                 builder.Append("</table>");
                 return MvcHtmlString.Create(builder.ToString());
             }
+            
             return MvcHtmlString.Empty;
         }
+
 
         private static string RenderExtraColumns(int numberOfExtraColumnsInLastRow)
         {

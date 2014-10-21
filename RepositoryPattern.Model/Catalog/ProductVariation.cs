@@ -14,6 +14,7 @@ namespace RepositoryPattern.Model.Catalog
         public string Size { get; set; }
         public string Type { get; set; }
         public string Color { get; set; }
+        public string DesciptSize { get; set; }
         public int ID{ get; set; }
         public string AddUser{ get; set; }
         public string ChangeUser{ get; set; }
