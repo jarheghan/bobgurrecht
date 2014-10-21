@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data;
+using log4net;
 
 namespace RepositoryPattern.Data
 {
     public class CategoryDataMapper : AbstractDataMapper<Category>, ICategoryRepository
     {
+        ILog log = LogManager.GetLogger(typeof(CategoryDataMapper));
         public IEnumerable<Category> GetProductByCategory()
         {
             using (IDbConnection cn = Connection)
@@ -164,14 +166,22 @@ namespace RepositoryPattern.Data
             List<ProductCategory> pcm = new List<ProductCategory>();
             using (IDbConnection cn = Connection)
             {
-                var productcategory = cn.Query<dynamic>("select * from ProductCategoryMapping where pcm_cat_id = @categoryId", 
-                    new { categoryId = categoryId });
-                foreach (var pc in productcategory)
+                try
                 {
-                    ProductCategory p = Map(pc,"");
-                    pcm.Add(p);
+                    var productcategory = cn.Query<dynamic>("select * from ProductCategoryMapping where pcm_cat_id = @categoryId",
+                        new { categoryId = categoryId });
+                    foreach (var pc in productcategory)
+                    {
+                        ProductCategory p = Map(pc, "");
+                        pcm.Add(p);
+                    }
+                    return pcm.AsEnumerable();
                 }
-                return pcm.AsEnumerable();
+                catch(Exception ex)
+                {
+                    log.Error("Category Error:", ex);
+                    return null;
+                }
             }
         }
 

@@ -7,7 +7,7 @@
 
   List<RepositoryPattern.Model.Catalog.ProductVariation> cat = new List<RepositoryPattern.Model.Catalog.ProductVariation>();
   var Prdvar = Model.ProductVariation.ToList();
-  SelectList sl = new SelectList(Prdvar, "ID", "Description");
+  SelectList sl = new SelectList(Prdvar, "ID", "DesciptSize");
   } 
 @model RepositoryPattern.Models.ProductGroup
 
@@ -41,9 +41,7 @@
                      </div>
                 </div>
            </div>
-         </div>
          <!-- This is the end of the product details page -->
-        <div class="row">
              <div class="col-sm-8 pull-right">
                  <div class="col-sm-3">
                      <h4>ADDITIONAL INFO</h4>
@@ -68,7 +66,7 @@
 
              </div>
 
-   </div>
+  
     </div>
 
 <div id="test1"></div>

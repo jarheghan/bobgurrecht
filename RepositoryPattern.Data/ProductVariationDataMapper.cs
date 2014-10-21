@@ -25,6 +25,7 @@ namespace RepositoryPattern.Data
                 Description = result.prv_description,
                 Size = result.prv_size,
                 Type = result.prv_type,
+                DesciptSize = result.prv_description + " - " + result.prv_size,
                 Color = result.prv_color,
                 AddUser = result.prv_add_user,
                 AddDate = result.prv_add_date,
@@ -136,6 +137,20 @@ namespace RepositoryPattern.Data
                 }
 
                 return prdvar.AsEnumerable(); ;
+            }
+        }
+
+        public ProductVariation GetSingeProductVariation(int Id)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                ProductVariation prdvar = new ProductVariation();
+                var prdvariation = cn.Query<dynamic>(@"select * from ProductVariation where prv_id = @Id", new { Id = Id }).FirstOrDefault();
+
+                prdvar = Map(prdvariation);
+               
+
+                return prdvar; ;
             }
         }
 

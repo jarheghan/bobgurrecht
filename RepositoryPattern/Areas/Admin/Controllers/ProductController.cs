@@ -115,7 +115,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, IList<ProductVariation> prdVariation, Catalog cat)
+        public ActionResult Edit(Product product, IEnumerable<ProductVariation> prdVariation, Catalog cat)
         {
             if (ModelState.IsValid)
             {

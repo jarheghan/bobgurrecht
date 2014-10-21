@@ -3,8 +3,9 @@
 
 var catalog = (function () {
     var i1 = 0;
-    var cnt = $('body').find('#pvCount').val();
+    var cnt = parseInt($('body').find('#pvCount').val());
 
+<<<<<<< HEAD
     //$("td.mmm").dblclick(function () {
     //    var $ss = $(this);
     //    var i = $ss.data("id");
@@ -24,6 +25,27 @@ var catalog = (function () {
     //            $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
     //        }
     //    });
+=======
+    $("td.mmm1").dblclick(function () {
+        var $ss = $(this);
+        var i = $ss.data("id");
+        var dis = $ss.data("des")
+        var pvid = $('body').find('#ProductVariation_' + i + '__ID').val();
+        var OriginalContent = $ss.text();
+
+        $ss.addClass("cellEditing");
+        $ss.html("<input type='text' value='" + OriginalContent + "' />");
+        $ss.children().first().focus();
+        $ss.children().first().keypress(function (e) {
+            if (e.which === 13) {
+                var newContent = $(this).val();
+                $(this).parent().text(newContent);
+                $(this).parent().removeClass("cellEditing");
+                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].' + dis + '" value="' + newContent + '" />');
+                $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
+            }
+        });
+>>>>>>> ed9b11dc932cf17a6faec16608f1556c49e6a0b0
        
 
     //    $ss.children().first().blur(function () {
@@ -73,10 +95,11 @@ var catalog = (function () {
                var prodTable = $("#tablePrdVariation");
                var des = $('body').find('#description').val();
                var size = $('body').find('#size').val();
-               
+               debugger;
+               cnt = cnt++;
                prodTable.append('<tr id="tr' + cnt + '"><td><input type="hidden" name="ProductVariation[' + cnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + cnt + '].Size" value="' + size + '"/>' + size
-                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td></tr>');
-               cnt++;
+                   + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + cnt + ')">Edit</a></td></tr>');
+               
                $(this).dialog("close");
            }
          },
@@ -90,6 +113,35 @@ var catalog = (function () {
         }
      ]
  });
+
+ var dialogEditProductVariation = $('#productvariationedit').dialog({
+                                 title: "Production Variation",
+                                 autoOpen: false,
+                                 buttons: [
+                                     {
+                                         text: "Save"
+                                       , 'class': "btn-primary"
+                                       , click: function () {
+                                           var prodTable = $("#tablePrdVariation");
+                                           var des = $('body').find('#description').val();
+                                           var size = $('body').find('#size').val();
+
+                                           prodTable.append('<tr id="tr' + cnt + '"><td><input type="hidden" name="ProductVariation[' + cnt + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="ProductVariation[' + cnt + '].Size" value="' + size + '"/>' + size
+                                               + '</td><td><a href="#" onclick="catalog.removeVariation(' + cnt + ')">Remove</a></td><td><a href="#" onclick="catalog.editVariation(' + cnt + ')">Edit</a></td></tr>');
+                                           cnt++;
+                                           $(this).dialog("close");
+                                       }
+                                     },
+
+                                    {
+                                        text: "Cancel"
+                                       , 'class': "btn-warning"
+                                       , click: function () {
+                                           $(this).dialog("close");
+                                       }
+                                    }
+                                 ]
+             });
 
     $('#btnProdVariation').click(function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
@@ -248,7 +300,9 @@ var catalog = (function () {
         $('#tr' + i).remove();
     }
 
-  
+    var editProdtionVartion = function (id) {
+        dialogEditProductVariation.dialog('open').load('/Admin/Common/ProductVariationEdit?id=' + id);
+    }
      
   
 
@@ -258,7 +312,11 @@ var catalog = (function () {
         editProductImage: editProductImage,
         removeVariation: removeVariation,
         messagealert: messagealert,
+<<<<<<< HEAD
         tableedit: tableedit
+=======
+        editProdtionVartion: editProdtionVartion
+>>>>>>> ed9b11dc932cf17a6faec16608f1556c49e6a0b0
     }
 
    

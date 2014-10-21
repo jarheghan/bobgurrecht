@@ -1,4 +1,5 @@
-﻿using RepositoryPattern.Model.Catalog;
+﻿using log4net;
+using RepositoryPattern.Model.Catalog;
 using RepositoryPattern.Model.Media;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace RepositoryPattern.Controllers
         //
         // GET: /Common/
         //public CommonController() { }
-       
-      
+
+        ILog log = LogManager.GetLogger(typeof(CommonController));
         public CommonController(ICategoryRepository categoryRepository
             ,IProductRepository productRepository, IPictureRepository pictureRepository)
         {
@@ -39,37 +40,45 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult DisplayCategoryProduct(int? Id)
         {
-            var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(Id??default(int));
+            try
+            {
+                var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(Id ?? default(int));
+                var catg = _categoryRepository.GetCategoryById(Id ?? default(int));
 
-            IEnumerable<ProductCategory> prdcat = productCategory
-                        .Select(x =>
-                        {
-                            var product = _productRepository.GetProductByID(x.ProductID ?? default(int));
-                            var category = _categoryRepository.GetCategoryById(x.CategoryID ?? default(int));
-                            var prdPic = _productRepository.GetProductPictureByID(x.ProductID??default(int));
-                            var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
-                            return new ProductCategory()
+                IEnumerable<ProductCategory> prdcat = productCategory
+                            .Select(x =>
                             {
-                                ID = x.ID,
-                                CategoryID = x.CategoryID,
-                                ProductID = x.ProductID,
-                                Product = product,
-                                Picture = pic,
-                                Category = category,
-                                IsFeaturedProduct = x.IsFeaturedProduct,
-                                AddDate = x.AddDate,
-                                AddUser = x.AddUser,
-                                ChangeDate = x.ChangeDate,
-                                ChangeUser = x.ChangeUser,
-                                DeleteFlag = x.DeleteFlag
-                            };
-                        });
-            return PartialView(prdcat);
+                                var product = _productRepository.GetProductByID(x.ProductID ?? default(int));
+                                var category = _categoryRepository.GetCategoryById(x.CategoryID ?? default(int));
+                                var prdPic = _productRepository.GetProductPictureByID(x.ProductID ?? default(int));
+                                var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
+                                return new ProductCategory()
+                                {
+                                    ID = x.ID,
+                                    CategoryID = x.CategoryID,
+                                    ProductID = x.ProductID,
+                                    Product = product,
+                                    Picture = pic,
+                                    Category = category,
+                                    IsFeaturedProduct = x.IsFeaturedProduct,
+                                    AddDate = x.AddDate,
+                                    AddUser = x.AddUser,
+                                    ChangeDate = x.ChangeDate,
+                                    ChangeUser = x.ChangeUser,
+                                    DeleteFlag = x.DeleteFlag
+                                };
+                            });
+                ViewBag.Category = catg;
+
+                return PartialView(prdcat);
+            }
+            catch (Exception ex) { log.Error("Common Error:", ex); return PartialView(); }
         }
 
         public ActionResult SideMenu()
         {
-            return PartialView();
+            IEnumerable<Category> cat = _categoryRepository.GetAllCategories();
+            return PartialView(cat);
         }
 
         public ActionResult DisplayFeatureProduct()

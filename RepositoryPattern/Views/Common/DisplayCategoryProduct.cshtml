@@ -2,12 +2,13 @@
 @using RepositoryPattern.Model.Catalog;
 @model IEnumerable<ProductCategory>
  @{var imgpath = "~/Images/WallImages/imagepath";
-   var catInfo = Model.Select(x => x.Category).FirstOrDefault(); 
+   var catInfo = Model.Select(x => x.Category).FirstOrDefault();
+   Category cat = ViewBag.Category;
    }
 <div class="row">
     
-    <h1>@catInfo.Name</h1>
-    <p>@catInfo.Description</p>
+    <h1>@cat.Name</h1>
+    <p>@cat.Description</p>
     <ul class="pagination">
         <li><a href="#">&laquo;</a></li>
         <li><a href="#">1</a></li>
@@ -19,21 +20,10 @@
     </ul>
 </div>
   <br>
-
-
+@if(catInfo != null)
+{
 <div class="row">
-     @foreach(var cat in Model)
-     {
-         <div class="col-lg-2">
-             <a href="#">
-                 <img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/"+cat.Picture.FilePath)">
-                 <label class="nlabel">
-                     <h3>@cat.Product.Name</h3>
-                 </label></a>
-                 <p class="dlabel">@cat.Product.ShortDescription</p>
-         </div>
-     }
-     <table>
-         @Html.Repeater<ProductCategory>("hobby", hh => 
-     </table>
- </div>
+   @Html.RenderTemplateAsColumns(Model.ToList(),"_productpartial",3) 
+</div>
+}
+ 

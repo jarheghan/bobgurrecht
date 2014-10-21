@@ -13,5 +13,6 @@ namespace RepositoryPattern.Model.Catalog
         void DeleteProductVariation(int Id);
         void UpdatePrductVariation(ProductVariation prdVariation);
         IEnumerable<ProductVariation> GetAllProductVariation(int productId);
+        ProductVariation GetSingeProductVariation(int Id);
     }
 }
