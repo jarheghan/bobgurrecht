@@ -789,6 +789,8 @@
     <Content Include="Areas\Admin\Views\Common\ProductVariation.cshtml" />
     <Content Include="Log4Net.config" />
     <Content Include="Areas\Admin\Views\Common\ProductVariationEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\WishList.cshtml" />
+    <Content Include="Areas\Admin\Views\Common\MiniWishList.cshtml" />
     <None Include="Properties\PublishProfiles\BobGarrecht.pubxml" />
     <None Include="Properties\PublishProfiles\jpcBobGarrecht.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

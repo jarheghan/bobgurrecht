@@ -85,5 +85,14 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult WishList()
+        {
+            return PartialView();
+        }
+        public ActionResult MiniWishList()
+        {
+            return PartialView();
+        }
+
     }
 }

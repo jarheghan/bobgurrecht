@@ -51,6 +51,8 @@
     <Compile Include="AbstractDataMapper.cs" />
     <Compile Include="CategoryDataMapper.cs" />
     <Compile Include="IProductData.cs" />
+    <Compile Include="OrderDataMapper.cs" />
+    <Compile Include="OrderItemsDataMapper.cs" />
     <Compile Include="PictureDataMapper.cs" />
     <Compile Include="ProductDataMapper.cs" />
     <Compile Include="ProductVariationDataMapper.cs" />
