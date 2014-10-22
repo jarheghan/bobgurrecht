@@ -16,10 +16,6 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult Register()
         {
-            //if (!WebSecurity.Initialized)
-            //{
-            //    WebSecurity.InitializeDatabaseConnection("RPConnection", "Users", "Id", "Username", autoCreateTables: true);
-            //}
             return View();
         }
 
@@ -34,10 +30,6 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult Login()
         {
-            //if (!WebSecurity.Initialized)
-            //{
-            //    WebSecurity.InitializeDatabaseConnection("RPConnection", "Users", "Id", "Username", autoCreateTables: true);
-            //}
             Errors err = new Errors();
             return View(err);
         }
