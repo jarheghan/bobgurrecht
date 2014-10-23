@@ -46,7 +46,21 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
         {
             CategoryRepository = new CategoryDataMapper();
             List<Category> cat = new List<Category>();
-            cat = CategoryRepository.GetAllCategories().ToList();
+            var category = CategoryRepository.GetAllCategories();
+            var subCat = category.Where(x => x.ParentCategoryID != null);
+            foreach (var mycat in category)
+            {
+                if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == true)
+                {
+                      var mysubcat =  subCat.Where(x => x.ParentCategoryID == mycat.ID).FirstOrDefault();
+                      cat.Add(mysubcat);
+                }
+                if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == false)
+                {
+                    cat.Add(mycat);
+                }
+            }
+
             SelectList sl = new SelectList(cat, "ID", "Name");
             return sl;
         }

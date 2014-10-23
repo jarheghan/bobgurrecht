@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using log4net;
 
 namespace RepositoryPattern.Data
 {
     public class ProductVariationDataMapper : AbstractDataMapper<ProductVariation>, IProductVariationRepository
     {
+        ILog log = LogManager.GetLogger(typeof(ProductDataMapper));
         protected override string TableName
         {
             get { return "ProductionVariation"; }
@@ -90,6 +92,7 @@ namespace RepositoryPattern.Data
 
             try
             {
+                log.Info("Insert Special Variation by Ajax");
                 using (IDbConnection cn = Connection)
                 {
                     int i = cn.Query<int>(@"DECLARE @TmpTable TABLE(ID int)
@@ -115,7 +118,7 @@ namespace RepositoryPattern.Data
                 }
                
             }
-            catch { return 0; }
+            catch (Exception ex) { log.Error("Error Ajax Special Insert", ex); return 0; }
 
         }
 

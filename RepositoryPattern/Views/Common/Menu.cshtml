@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RepositoryPattern.Model.Catalog.Category>
+﻿@model IEnumerable<Category>
 @using RepositoryPattern.Model.Catalog;
 @using ClientDependency.Core.Mvc
 @{var csspart = "~/Content/themes/Plumb";} 
@@ -17,6 +17,10 @@
 @{
     Html.RequiresJs("catalog.js", "Custom", 2);
     Html.RequiresJs("jquery.dialog.js", "Custom", 1);
+
+    var mainmenu = Model.Where(x => x.ParentCategoryID == null);
+    var submenu = Model.Where(x => x.ParentCategoryID != null);
+    
  }
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -75,10 +79,23 @@
           <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
             @if (Model != null)
             {
-                foreach (var cat in Model)
+                foreach (var cat in mainmenu)
                 {
-                <li><a href="@Url.Action("CategoryProduct","Home",new{Id = cat.ID})">@cat.Name</a></li>
-                }
+                   if(submenu.Any(x => x.ParentCategoryID == cat.ID) == false){
+                  <li><a href="@Url.Action("CategoryProduct","Home",new{Id = cat.ID})">@cat.Name</a></li>
+                     }
+                     
+                      if(submenu.Any(x => x.ParentCategoryID == cat.ID) == true){
+                  <li class="dropdown-submenu"><a href="#" tabindex="-1">@cat.Name</a>
+                       <ul class="dropdown-menu">
+                           @foreach(var subcat in submenu){
+                            <li><a href="@Url.Action("CategoryProduct","Home",new{Id = subcat.ID})">@subcat.Name</a></li>
+                           }
+                      </ul>
+                  </li>
+                     }
+                 }
+             
             }
             <li class="divider"></li>
           </ul>
@@ -98,3 +115,5 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
