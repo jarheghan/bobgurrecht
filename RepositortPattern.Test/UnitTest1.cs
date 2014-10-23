@@ -124,5 +124,12 @@ namespace RepositortPattern.Test
 
             Assert.AreEqual(3, productCategory.Count());
         }
+
+        [TestMethod]
+        public void test_to_see_form_identity_when_a_user_login()
+        {
+
+
+        }
     }
 }

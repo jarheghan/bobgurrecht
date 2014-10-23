@@ -55,5 +55,5 @@ namespace RepositoryPattern.Model.Customers
         }
         public bool? DeleteFlag { get; set; }
     }
-    }
 }
+

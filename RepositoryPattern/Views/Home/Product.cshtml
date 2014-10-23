@@ -27,15 +27,15 @@
              <p class="description">@Model.Product.Description</p>
              <br>
              <div id="poption">
-                @Html.DropDownList("ProductVariation", new SelectList(sl, "Value", "Text"), new {@class="form-control" })
+                @Html.DropDownList("ddlProductVariation", new SelectList(sl, "Value", "Text"), new {@class="form-control" })
                  <br>
              
                      <div class="col-xs-3">
                          <label><strong>Qty</strong></label>
-                         <input type="text" class="form-control" placeholder="1">
+                         <input type="text" class="form-control" id="txtQuantity">
                      </div>
                      <div class="col-xs-7">
-                         <button id="lbtn" type="submit" class="btn btn-primary btn-lg btn-block">Add To WishList</button>
+                         <button id="lbtn" onclick="catalog.addWishList(@Model.Product.ID)" type="submit" class="btn btn-primary btn-lg btn-block">Add To WishList</button>
                          <br>
                          <p>Already have a list? <a href="#">Sign In</a></p>
                      </div>
@@ -70,3 +70,4 @@
     </div>
 
 <div id="test1"></div>
+<div id="authentication"></div>

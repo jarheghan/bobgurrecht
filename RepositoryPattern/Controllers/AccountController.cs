@@ -42,10 +42,11 @@ namespace RepositoryPattern.Controllers
                 bool success = WebSecurity.Login(user.Username, user.Password);
                 if (success)
                 {
+                    var username = HttpContext.User.Identity;
                     string returnurl = Request.QueryString["ReturnUrl"];
                     if (returnurl == null)
                     {
-                        Response.Redirect("~/Admin/");
+                        Response.Redirect("~/");
                     }
                     else
                         Response.Redirect(returnurl);

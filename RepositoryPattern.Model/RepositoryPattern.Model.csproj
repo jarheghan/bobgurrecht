@@ -48,6 +48,10 @@
     <Compile Include="Catalog\ProductCategory.cs" />
     <Compile Include="Catalog\ProductPicture.cs" />
     <Compile Include="Catalog\ProductVariation.cs" />
+    <Compile Include="Customers\CustomerInfo.cs" />
+    <Compile Include="Customers\ICustomerInfoRepository.cs" />
+    <Compile Include="Customers\IUserRepository.cs" />
+    <Compile Include="Customers\UsersMain.cs" />
     <Compile Include="Media\IPictureRepository.cs" />
     <Compile Include="Media\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cart\" />
-    <Folder Include="Customers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RepositoryPattern.Infrastructure\RepositoryPattern.Infrastructure.csproj">

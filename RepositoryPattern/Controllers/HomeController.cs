@@ -30,6 +30,7 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult Index()
         {
+            var username = HttpContext.User.Identity;
             return View();
         }
 

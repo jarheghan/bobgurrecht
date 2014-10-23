@@ -13,6 +13,7 @@ namespace RepositoryPattern.App_Start
     using RepositoryPattern.Model.Catalog;
     using RepositoryPattern.Data;
     using RepositoryPattern.Model.Media;
+    using RepositoryPattern.Model.Customers;
 
     public static class NinjectWebCommon 
     {
@@ -69,6 +70,7 @@ namespace RepositoryPattern.App_Start
             kernel.Bind<IProductRepository>().To<ProductDataMapper>().InSingletonScope();
             kernel.Bind<IPictureRepository>().To<PictureDataMapper>().InSingletonScope();
             kernel.Bind<IProductVariationRepository>().To<ProductVariationDataMapper>().InSingletonScope();
+            kernel.Bind<IUserRepository>().To<UsersDataMapper>().InSingletonScope();
         }        
     }
 }

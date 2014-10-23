@@ -161,7 +161,30 @@ var catalog = (function () {
                                        }
                                     }
                                  ]
-             });
+ });
+
+
+ dialogauthentication = $('#authentication').dialog({
+     title: "Register Customer/Sign In",
+     autoOpen: false,
+     buttons: [
+         {
+             text: "Save"
+           , 'class': "btn-primary"
+           , click: function () {
+               $(this).dialog("close");
+           }
+         },
+
+        {
+            text: "Cancel"
+           , 'class': "btn-warning"
+           , click: function () {
+               $(this).dialog("close");
+           }
+        }
+     ]
+ })
 
     $('#btnProdVariation').click(function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
@@ -323,8 +346,37 @@ var catalog = (function () {
     var editProdtionVartion = function (id) {
         dialogEditProductVariation.dialog('open').load('/Admin/Common/ProductVariationEdit?id=' + id);
     }
-     
-  
+   
+    var addWishList = function (prodID) {
+        var wishList = {};
+        wishList.ProductVariationID = $('#ddlProductVariation').val();
+        wishList.ProductID = prodID;
+        wishList.Quantity = $('#txtQuantity').val();
+
+        $.ajax({
+            url: "/Order/AddToWishList",
+            type: "POST",
+            datatype: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(wishList),
+            cache: false,
+            async: false,
+            success: function (val) {
+                if (val.Message === "success") {
+                    $.messager.alert("Nice one!! Update is Comming");
+                }
+                if (val.Message === "error") {
+                    $.messager.alert("Product Variation was not updated. Please call Technical Administrator.");
+                }
+
+                if (val.Message === "authenticate") {
+                    dialogauthentication.dialog('open');
+                }
+            }
+
+        })
+    }
+   
 
 
     return {
@@ -332,7 +384,8 @@ var catalog = (function () {
         editProductImage: editProductImage,
         removeVariation: removeVariation,
         messagealert: messagealert,
-        editProdtionVartion: editProdtionVartion
+        editProdtionVartion: editProdtionVartion,
+        addWishList: addWishList
     }
 
    
