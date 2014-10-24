@@ -40,6 +40,11 @@ namespace RepositoryPattern.Controllers
             if (ModelState.IsValid)
             {
                 bool success = WebSecurity.Login(user.Username, user.Password);
+                SimpleRoleProvider roles = new SimpleRoleProvider();
+                if (!roles.RoleExists("Admin"))
+                {
+                    roles.CreateRole("Admin");
+                }
                 if (success)
                 {
                     var username = HttpContext.User.Identity;

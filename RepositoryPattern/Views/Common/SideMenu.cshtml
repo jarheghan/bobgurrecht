@@ -1,16 +1,40 @@
 ﻿@model IEnumerable<RepositoryPattern.Model.Catalog.Category>
+@{
+    var mainmenu = Model.Where(x => x.ParentCategoryID == null);
+    var submenu = Model.Where(x => x.ParentCategoryID != null);
+}
+
 <div class="col-sm-2" id="msidebar">
         <div>
           <h5>Category</h5>
-          <ul class="nav">
-          @if (Model != null)
-            {
-                foreach (var cat in Model)
-                {
-                <li><a href="@Url.Action("CategoryProduct","Home",new{Id = cat.ID})">@cat.Name</a></li>
+         
+                  <ul class="nav navbar-nav" >
+                      @if (Model != null)
+                      {
+                          foreach (var cat in mainmenu)
+                          {
+                              if (submenu.Any(x => x.ParentCategoryID == cat.ID) == false)
+                              {
+                          <li><a href="@Url.Action("CategoryProduct", "Home", new { Id = cat.ID })">@cat.Name</a></li>
+                   }
+
+                   if (submenu.Any(x => x.ParentCategoryID == cat.ID) == true)
+                   {
+                          <li class="dropdown-submenu"><a href="#" tabindex="-1">@cat.Name</a>
+                              <ul class="dropdown-menu">
+                                  @foreach (var subcat in submenu)
+                                  {
+
+                                      <li><a href="@Url.Action("CategoryProduct", "Home", new { Id = subcat.ID })">@subcat.Name</a></li>
+                                  }
+                              </ul>
+                          </li>
+                      }
                 }
+
             }
-            <li class="divider"></li>
-          </ul>
+                      <li class="divider"></li>
+                  </ul>
+    
       </div>
     </div>

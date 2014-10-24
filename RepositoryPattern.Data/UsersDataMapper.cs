@@ -1,9 +1,11 @@
 ﻿using RepositoryPattern.Model.Customers;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
 
 namespace RepositoryPattern.Data
 {
@@ -17,12 +19,27 @@ namespace RepositoryPattern.Data
 
         public override UserMain Map(dynamic result)
         {
-            throw new NotImplementedException();
+
+            var users = new UserMain
+            {
+                ID = result.Id,
+                Username = result.Username,
+                DisplayName = result.DisplayName,
+                Country = result.Country
+            };
+            return users;
         }
 
         public UserMain GetSingleUser(string username)
         {
-            throw new NotImplementedException();
+            UserMain usermain = new UserMain();
+            using (IDbConnection cn = Connection)
+            {
+                var users = cn.Query<dynamic>("select * from Users where Username = @username", new { username = username }).FirstOrDefault();
+
+                usermain = Map(users);
+                return usermain;
+            }
         }
 
         public UserMain GetSingleUser(int Id)

@@ -1,4 +1,5 @@
 ﻿using RepositoryPattern.Model.Catalog;
+using RepositoryPattern.Model.Customers;
 using RepositoryPattern.Model.Media;
 using RepositoryPattern.Models;
 using System;
@@ -15,23 +16,28 @@ namespace RepositoryPattern.Controllers
         // GET: /Order/
 
         public OrderController(IProductRepository productRepository, ICategoryRepository categoryRepository,
-            IProductVariationRepository prdVariationRepo, IPictureRepository pictureRepository)
+            IProductVariationRepository prdVariationRepo, IPictureRepository pictureRepository, IUserRepository userRepository)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
             _prdVariationRepo = prdVariationRepo;
             _pictureRepo = pictureRepository;
+            _userRepo = userRepository;
         }
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductVariationRepository _prdVariationRepo;
         private readonly IPictureRepository _pictureRepo;
+        private readonly IUserRepository _userRepo;
 
         public ActionResult AddToWishList(WishListItems items)
         {
             var user = HttpContext.User.Identity;
             if (user.IsAuthenticated == true)
             {
+                //First let get the User ID
+                var usermain = _userRepo.GetSingleUser(user.Name);
+
                 Errors err = new Errors();
                 err.Message = "success";
                 return Json(err, JsonRequestBehavior.AllowGet);

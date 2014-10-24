@@ -40,7 +40,7 @@ namespace RepositoryPattern
         {
 
             if (!WebSecurity.Initialized)
-                WebSecurity.InitializeDatabaseConnection("RPConnection", "Users", "Id", "Username", autoCreateTables: true);
+                WebSecurity.InitializeDatabaseConnection("RPConnection", "Roles", "RoleId", "RoleName", autoCreateTables: true);
         }
     }
 }
