@@ -36,7 +36,6 @@ namespace RepositoryPattern.Data
             using (IDbConnection cn = Connection)
             {
                 var users = cn.Query<dynamic>("select * from Users where Username = @username", new { username = username }).FirstOrDefault();
-
                 usermain = Map(users);
                 return usermain;
             }

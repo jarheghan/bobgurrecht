@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "CreateRole";
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+@using(Html.BeginForm())
+{
+  <div class="col-md-8">
+    <div class="form-group">
+        <h4>CreateRole</h4>
+        <label for="rolename">Role Name</label>
+        <input type="text" class="form-control" id="rolename" placeholder="Role Name" name="rolename">
+    </div>
+     <button type="submit" class="btn btn-default">Submit</button>
+ </div>
+}
+
+        </div>
+  </div>

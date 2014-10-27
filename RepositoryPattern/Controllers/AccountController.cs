@@ -34,17 +34,33 @@ namespace RepositoryPattern.Controllers
             return View(err);
         }
 
+        public ActionResult CreateRole()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateRole(string rolename)
+        {
+            if (!WebSecurity.Initialized)
+                WebSecurity.InitializeDatabaseConnection("RPConnection", "Roles", "RoleId", "RoleName", autoCreateTables: true);
+            var roles = (SimpleRoleProvider)Roles.Provider;
+            if (!roles.RoleExists(rolename))
+            {
+                roles.CreateRole(rolename);
+
+            }
+            return View();
+        }
+
+
         [HttpPost]
         public ActionResult Login(Users user)
         {
             if (ModelState.IsValid)
             {
+               
                 bool success = WebSecurity.Login(user.Username, user.Password);
-                SimpleRoleProvider roles = new SimpleRoleProvider();
-                if (!roles.RoleExists("Admin"))
-                {
-                    roles.CreateRole("Admin");
-                }
+               
                 if (success)
                 {
                     var username = HttpContext.User.Identity;

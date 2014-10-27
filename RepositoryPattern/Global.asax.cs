@@ -17,7 +17,7 @@ namespace RepositoryPattern
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        private static SimpleMembershipInitializer _initializer;
+        private static SimpleMembershipInitialize _initializer;
         private static object _initializerLock = new object();
         private static bool _isInitialized;
         protected void Application_Start()
@@ -34,13 +34,16 @@ namespace RepositoryPattern
         }
     }
 
-    public class SimpleMembershipInitializer
-    {
-        public SimpleMembershipInitializer()
-        {
 
+    public class SimpleMembershipInitialize
+    {
+        public SimpleMembershipInitialize()
+        {
             if (!WebSecurity.Initialized)
-                WebSecurity.InitializeDatabaseConnection("RPConnection", "Roles", "RoleId", "RoleName", autoCreateTables: true);
+            {
+                WebSecurity.InitializeDatabaseConnection("RPConnection", "Users", "Id", "Username", autoCreateTables: true);
+                //WebSecurity.InitializeDatabaseConnection("RPConnection", "Roles", "RoleId", "RoleName", autoCreateTables: true);
+            }
         }
     }
 }

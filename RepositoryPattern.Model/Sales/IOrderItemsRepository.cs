@@ -9,5 +9,8 @@ namespace RepositoryPattern.Model.Sales
 {
     public interface IOrderItemsRepository : IRepository<OrderItems>
     {
+        int InsertOrderItems(OrderItems items);
+        IEnumerable<OrderItems> GetAllOrderItems();
+        IEnumerable<OrderItems> GetOrderItemsByOrderID(int Id);
     }
 }
