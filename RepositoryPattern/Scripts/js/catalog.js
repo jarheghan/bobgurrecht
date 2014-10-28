@@ -249,25 +249,7 @@ var catalog = (function () {
         $('#test1').dialog({
             title: "Sign In",
             autoOpen: false,
-            buttons: [
-                {
-                    text: "Sign in"
-                  , 'class': "btn-primary"
-                  , click: function () {
-                      $(this).dialog("close");
-                  }
-                },
-
-               {
-                   text: "Cancel"
-                  , 'class': "btn-warning"
-                  , click: function () {
-                      $(this).dialog("close");
-                  }
-               }
-            ]
         })
-        $('body').ad
         $('#test1').dialog('open').load('/Account/SignInModal');
     });
    

@@ -1,5 +1,6 @@
 ﻿
-<form role="form">
+@using (Html.BeginForm("LoginModal", "Account"))
+{
   <div class="form-group">
     @Html.Label("Email Address")
     @Html.TextBox("username",null,new{@class="form-control",placeholder="Email Address"})
@@ -9,4 +10,8 @@
     @Html.Label("Password")
     @Html.Password("password",null,new{@class="form-control",placeholder="Password"})
   </div>
-</form>
+   <div class="form-group">
+      <input type="submit" value="Submit" class="btn btn-primary" />
+   </div>
+
+}

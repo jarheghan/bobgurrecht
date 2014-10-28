@@ -86,7 +86,7 @@ namespace RepositoryPattern.Controllers
         public ActionResult Logout()
         {
             WebSecurity.Logout();
-            Response.Redirect("~/Account/Login");
+            Response.Redirect("~/");
             return View();
         }
 
