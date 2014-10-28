@@ -67,17 +67,23 @@ namespace RepositoryPattern.Controllers
                         orderItems.AddUser = user.Name;
                         orderItems.AddDate = DateTime.Now;
                         orderItems.DeleteFlag = false;
-                        _orderItemsRepo.InsertOrderItems(orderItems);
+                        if (_orderItemsRepo.OrderItemWithSameProductIDAndVariationIDAndOrderID(orderItems) == false)
+                        {
+                            _orderItemsRepo.InsertOrderItems(orderItems);
+                            err.Message = "success";
+                            return Json(err, JsonRequestBehavior.AllowGet);
+                        }
+
+                        err.Message = "Duplicate";
+                        return Json(err, JsonRequestBehavior.AllowGet);
                     }
-                   
-                    err.Message = "success";
-                    return Json(err, JsonRequestBehavior.AllowGet);
                 }
                 if (orderExist)
                 {
                     orders = _orderRepo.GetOrderByUserID(usermain.ID);
                     if (orders.ID != 0)
                     {
+                       
                         orderItems.OrderItemGuid = Guid.NewGuid();
                         orderItems.OrderID = orders.ID;
                         orderItems.ProductID = items.ProductID;
@@ -86,12 +92,18 @@ namespace RepositoryPattern.Controllers
                         orderItems.AddUser = user.Name;
                         orderItems.AddDate = DateTime.Now;
                         orderItems.DeleteFlag = false;
-                        _orderItemsRepo.InsertOrderItems(orderItems);
+                        if (_orderItemsRepo.OrderItemWithSameProductIDAndVariationIDAndOrderID(orderItems) == false)
+                        {
+                            _orderItemsRepo.InsertOrderItems(orderItems);
+                            var orderItems1 = _orderItemsRepo.GetOrderItemsByOrderID(orders.ID);
+                            return PartialView("MiniWishList", orderItems1.Count());
+                            //err.Message = "success";
+                            //return Json(err, JsonRequestBehavior.AllowGet);
+                        }
+                        err.Message = "Duplicate";
+                        return Json(err, JsonRequestBehavior.AllowGet);
                     }
-                    err.Message = "success";
-                    return Json(err, JsonRequestBehavior.AllowGet);
                 }
-            
             }
             if (user.IsAuthenticated == false)
             {

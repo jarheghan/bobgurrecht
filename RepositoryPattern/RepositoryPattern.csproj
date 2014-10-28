@@ -841,6 +841,10 @@
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Account\CreateRole.cshtml" />
+    <Content Include="Views\Common\MiniWishlist.cshtml" />
+    <Content Include="Views\Common\MainWishList.cshtml" />
+    <Content Include="Views\Shared\MiniWishlist.cshtml" />
+    <Content Include="Views\Account\SignInModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

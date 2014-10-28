@@ -6,10 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data;
-<<<<<<< HEAD
-=======
 using log4net;
->>>>>>> e812653b5e84c782ea14f3835df456d318a98267
+
 
 namespace RepositoryPattern.Data
 {
@@ -59,11 +57,8 @@ namespace RepositoryPattern.Data
         {
             var param = new
             {
-<<<<<<< HEAD
-                OrderItemGuid = Guid.NewGuid(),
-=======
+
                 OrderItemGuid = items.OrderItemGuid,
->>>>>>> e812653b5e84c782ea14f3835df456d318a98267
                 OrderID = items.OrderID,
                 ProductID = items.ProductID,
                 Quantity = items.Quantity,
@@ -71,15 +66,10 @@ namespace RepositoryPattern.Data
                 AddUser = items.AddUser,
                 AddDate = items.AddDate,
                 DeleteFlag = items.DeleteFlag
-<<<<<<< HEAD
+
 
             };
-            using (IDbConnection cn = Connection)
-            {
-                var i = cn.Query("", param);
-=======
-            };
-
+  
             var sql = @"Insert into OrderItem(ort_guid, ort_ord_id,ort_prd_id,ort_quantity,ort_prv_id
                           ,ort_add_user, ort_add_date, ort_delete_flag)
                         Values(@OrderItemGuid,@OrderID,@ProductID,@Quantity,@ProductVariationID,@AddUser,
@@ -98,7 +88,6 @@ namespace RepositoryPattern.Data
                     log.Error("Error Message", ex);
                     return -2;
                 }
->>>>>>> e812653b5e84c782ea14f3835df456d318a98267
             }
         }
 
@@ -109,7 +98,58 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<OrderItems> GetOrderItemsByOrderID(int Id)
         {
-            throw new NotImplementedException();
+            List<OrderItems> orderItems = new List<OrderItems>();
+            var sql = @"select * from orderItem where ort_ord_id = @Id";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Query<dynamic>(sql, new {Id = Id });
+                    foreach (var orditem in i)
+                    {
+                        orderItems.Add(Map(orditem));
+                    }
+                    return orderItems.AsEnumerable();
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return null;
+                }
+            }
+        }
+
+
+        public bool OrderItemWithSameProductIDAndVariationIDAndOrderID(OrderItems items)
+        {
+            var param = new
+            {
+                OrderID = items.OrderID,
+                ProductID = items.ProductID,
+                ProductVariationID = items.ProductVariationID,
+            };
+            var sql = @"  select * from OrderItem
+                          where ort_ord_id = @OrderID
+	                        and ort_prd_id = @ProductID
+	                        and ort_prv_id = @ProductVariationID ";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Query<dynamic>(sql, param).FirstOrDefault();
+                    
+                    if(i != null)
+                        return true;
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return false;
+                }
+            }
+            return false;
         }
     }
 }

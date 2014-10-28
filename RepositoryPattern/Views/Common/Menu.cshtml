@@ -108,7 +108,8 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li id="wish-btn"><a href="#"><img src="@Url.Content(csspart + "/img/Gift-4-icon.png")" /><span class="label label-success">42</span></a>
+        <li id="wish-btn">
+           @Html.Action("MiniWishList","Common")
         </li>
         <li class="divider"></li>
       </ul>

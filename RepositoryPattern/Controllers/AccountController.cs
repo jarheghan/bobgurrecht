@@ -58,9 +58,9 @@ namespace RepositoryPattern.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 bool success = WebSecurity.Login(user.Username, user.Password);
-               
+
                 if (success)
                 {
                     var username = HttpContext.User.Identity;
@@ -80,7 +80,7 @@ namespace RepositoryPattern.Controllers
                     return View(err);
                 }
             }
-           
+
             return View();
         }
         public ActionResult Logout()
@@ -90,5 +90,40 @@ namespace RepositoryPattern.Controllers
             return View();
         }
 
+        public ActionResult SignInModal()
+        {
+            return PartialView();
+        }
+
+        public ActionResult LoginModal(Users user)
+        {
+            if (ModelState.IsValid)
+            {
+
+                bool success = WebSecurity.Login(user.Username, user.Password);
+
+                if (success)
+                {
+                    var username = HttpContext.User.Identity;
+                    string returnurl = Request.QueryString["ReturnUrl"];
+                    if (returnurl == null)
+                    {
+                        Response.Redirect("~/");
+                    }
+                    else
+                        Response.Redirect(returnurl);
+                }
+                if (!success)
+                {
+                    Errors err = new Errors();
+                    err.Message = "Username or Password may be incorrect. Please enter valid username and password";
+                    err.Type = "2";
+                    return View(err);
+                }
+            }
+
+            return null;
+
+        }
     }
 }

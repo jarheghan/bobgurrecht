@@ -12,5 +12,6 @@ namespace RepositoryPattern.Model.Sales
         int InsertOrderItems(OrderItems items);
         IEnumerable<OrderItems> GetAllOrderItems();
         IEnumerable<OrderItems> GetOrderItemsByOrderID(int Id);
+        bool OrderItemWithSameProductIDAndVariationIDAndOrderID(OrderItems items);
     }
 }

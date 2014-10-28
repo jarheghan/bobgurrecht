@@ -247,11 +247,11 @@ var catalog = (function () {
 
     $('#btnSignIn').click(function () {
         $('#test1').dialog({
-            title: "Production Variation",
+            title: "Sign In",
             autoOpen: false,
             buttons: [
                 {
-                    text: "Save"
+                    text: "Sign in"
                   , 'class': "btn-primary"
                   , click: function () {
                       $(this).dialog("close");
@@ -267,8 +267,8 @@ var catalog = (function () {
                }
             ]
         })
-
-        $('#test1').dialog('open');
+        $('body').ad
+        $('#test1').dialog('open').load('/Account/SignInModal');
     });
    
     var editProductImage = function () {
@@ -363,15 +363,21 @@ var catalog = (function () {
             async: false,
             success: function (val) {
                 if (val.Message === "success") {
-                    $.messager.alert("Nice one!! Update is Comming");
+                    $.messager.alert('<div><span class="alert alert-success">Item has been added to the WishList</span></div>');
+                   
                 }
                 if (val.Message === "error") {
                     $.messager.alert("Product Variation was not updated. Please call Technical Administrator.");
+                }
+                if (val.Message === "Duplicate") {
+                    $.messager.alert("<b>The Product and the Product Variation already exist in the WishList!</b>");
                 }
 
                 if (val.Message === "authenticate") {
                     dialogauthentication.dialog('open');
                 }
+                $('#wish-btn').empty();
+                $('#wish-btn').html(val)
             }
 
         })
