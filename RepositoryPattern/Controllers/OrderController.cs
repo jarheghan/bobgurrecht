@@ -18,13 +18,15 @@ namespace RepositoryPattern.Controllers
 
         public OrderController(IProductRepository productRepository, ICategoryRepository categoryRepository,
             IProductVariationRepository prdVariationRepo, IPictureRepository pictureRepository, 
-            IOrderRepository orderRepositor, IOrderItemsRepository orderItemsRepository, IUserRepository userRepository)
+            IOrderRepository orderRepository, IOrderItemsRepository orderItemsRepository, IUserRepository userRepository)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
             _prdVariationRepo = prdVariationRepo;
             _pictureRepo = pictureRepository;
             _userRepo = userRepository;
+            _orderItemsRepo = orderItemsRepository;
+            _orderRepo = orderRepository;
         }
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
@@ -41,6 +43,8 @@ namespace RepositoryPattern.Controllers
             {
                 //First let get the User ID
                 Order orders = new Order();
+                OrderItems orderItems = new OrderItems();
+                Errors err = new Errors();
                 int orderID;
                 var usermain = _userRepo.GetSingleUser(user.Name);
                 bool orderExist = _orderRepo.OrderUserExist(usermain.ID);
@@ -52,15 +56,42 @@ namespace RepositoryPattern.Controllers
                     orders.AddDate = DateTime.Now;
                     orders.DeleteFlag = false;
                     orderID =  _orderRepo.InsertOrders(orders);
+
+                    if (orderID != 0)
+                    {
+                        orderItems.OrderItemGuid = Guid.NewGuid();
+                        orderItems.OrderID = orderID;
+                        orderItems.ProductID = items.ProductID;
+                        orderItems.ProductVariationID = items.ProductVariationID;
+                        orderItems.Quantity = items.Quantity;
+                        orderItems.AddUser = user.Name;
+                        orderItems.AddDate = DateTime.Now;
+                        orderItems.DeleteFlag = false;
+                        _orderItemsRepo.InsertOrderItems(orderItems);
+                    }
+                   
+                    err.Message = "success";
+                    return Json(err, JsonRequestBehavior.AllowGet);
                 }
                 if (orderExist)
                 {
-
+                    orders = _orderRepo.GetOrderByUserID(usermain.ID);
+                    if (orders.ID != 0)
+                    {
+                        orderItems.OrderItemGuid = Guid.NewGuid();
+                        orderItems.OrderID = orders.ID;
+                        orderItems.ProductID = items.ProductID;
+                        orderItems.ProductVariationID = items.ProductVariationID;
+                        orderItems.Quantity = items.Quantity;
+                        orderItems.AddUser = user.Name;
+                        orderItems.AddDate = DateTime.Now;
+                        orderItems.DeleteFlag = false;
+                        _orderItemsRepo.InsertOrderItems(orderItems);
+                    }
+                    err.Message = "success";
+                    return Json(err, JsonRequestBehavior.AllowGet);
                 }
-
-                Errors err = new Errors();
-                err.Message = "success";
-                return Json(err, JsonRequestBehavior.AllowGet);
+            
             }
             if (user.IsAuthenticated == false)
             {

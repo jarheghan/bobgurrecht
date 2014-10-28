@@ -25,7 +25,7 @@ namespace RepositoryPattern.Data
                 OrderGuid = result.ord_guid,
                 OrderNumber = result.ord_number,
                 Active = result.ord_active,
-                UserID = result.ord_use_id,
+                UserID = result.ord_usr_id,
                 AddUser = result.ord_add_user,
                 AddDate = result.ord_add_date,
                 ChangeDate = result.ord_change_date,
@@ -54,7 +54,7 @@ namespace RepositoryPattern.Data
         {
             using (IDbConnection cn = Connection)
             {
-                var i = cn.Query<dynamic>("select * from order where ord_usr_id = @UserId", new { UserId = UserId }).FirstOrDefault();
+                var i = cn.Query<dynamic>("select * from [order] where ord_usr_id = @UserId", new { UserId = UserId }).FirstOrDefault();
                 if (i == null)
                     return false;
                 else return true;
@@ -79,7 +79,7 @@ namespace RepositoryPattern.Data
             using (IDbConnection cn = Connection)
             {
                 int i = cn.Query<dynamic>(@"DECLARE @TmpTable TABLE(ID int)
-                                    Insert into order(ord_guid, ord_active, ord_usr_id,ord_add_date, ord_add_user, ord_delete_flag)
+                                    Insert into [order](ord_guid, ord_active, ord_usr_id,ord_add_user, ord_add_date, ord_delete_flag)
                                     OUTPUT Inserted.ord_id INTO @TmpTable
                                     Values(@OrderGuid,@Active,@UserID,@AddUser,@AddDate,@DeleteFlag)
                                     select ID from @TmpTable
@@ -98,7 +98,7 @@ namespace RepositoryPattern.Data
         {
             using (IDbConnection cn = Connection)
             {
-                var i = cn.Query<dynamic>("select * from order where ord_id = @Id", new { Id = Id }).FirstOrDefault();
+                var i = cn.Query<dynamic>("select * from [order] where ord_id = @Id", new { Id = Id }).FirstOrDefault();
                 return i;
 
             }
@@ -111,7 +111,7 @@ namespace RepositoryPattern.Data
             {
                 using (IDbConnection cn = Connection)
                 {
-                    var orders = cn.Query<dynamic>("select * from order where ord_usr_id = @Id", new { Id = Id });
+                    var orders = cn.Query<dynamic>("select * from [order] where ord_usr_id = @Id", new { Id = Id });
 
                     foreach (var ord in orders)
                     {
@@ -131,7 +131,25 @@ namespace RepositoryPattern.Data
 
         public Order GetOrderByUserID(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (IDbConnection cn = Connection)
+                {
+                    Order orderSingle = new Order();
+
+                    var orders = cn.Query<dynamic>("select * from [order] where ord_usr_id = @Id", new { Id = Id }).FirstOrDefault();
+
+                    orderSingle = Map(orders);
+                   
+                    return orderSingle;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error Message", ex);
+                return null;
+            }
         }
     }
 }

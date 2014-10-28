@@ -67,9 +67,9 @@ namespace RepositoryPattern.Data
             };
 
             var sql = @"Insert into OrderItem(ort_guid, ort_ord_id,ort_prd_id,ort_quantity,ort_prv_id
-                          ,ort_add_user, ort_add_date, ort_deleflag
+                          ,ort_add_user, ort_add_date, ort_delete_flag)
                         Values(@OrderItemGuid,@OrderID,@ProductID,@Quantity,@ProductVariationID,@AddUser,
-                        @AddDate, @DeleteFlag
+                        @AddDate, @DeleteFlag)
                         Select @@IDENTITY";
             using (IDbConnection cn = Connection)
             {
