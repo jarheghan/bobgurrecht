@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using log4net;
 namespace RepositoryPattern.Data
 {
     public class OrderDataMapper : AbstractDataMapper<Order>, IOrderRepository
     {
+        ILog log = LogManager.GetLogger(typeof(OrderDataMapper));
         protected override string TableName
         {
             get { throw new NotImplementedException(); }
@@ -58,7 +60,7 @@ namespace RepositoryPattern.Data
                 else return true;
 
             }
-            throw new NotImplementedException();
+          
         }
 
 
@@ -94,12 +96,37 @@ namespace RepositoryPattern.Data
 
         public Order GetSingleOrderByOrderID(int Id)
         {
-            throw new NotImplementedException();
+            using (IDbConnection cn = Connection)
+            {
+                var i = cn.Query<dynamic>("select * from order where ord_id = @Id", new { Id = Id }).FirstOrDefault();
+                return i;
+
+            }
         }
 
         public IEnumerable<Order> GetOrdersByUserId(int Id)
         {
-            throw new NotImplementedException();
+            List<Order> orderList = new List<Order>();
+            try
+            {
+                using (IDbConnection cn = Connection)
+                {
+                    var orders = cn.Query<dynamic>("select * from order where ord_usr_id = @Id", new { Id = Id });
+
+                    foreach (var ord in orders)
+                    {
+                        orderList.Add(Map(ord));
+                    }
+                    return orderList.AsEnumerable();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error Message", ex);
+                return null;
+            }
+
         }
 
         public Order GetOrderByUserID(int Id)

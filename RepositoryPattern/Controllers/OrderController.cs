@@ -1,6 +1,7 @@
 ﻿using RepositoryPattern.Model.Catalog;
 using RepositoryPattern.Model.Customers;
 using RepositoryPattern.Model.Media;
+using RepositoryPattern.Model.Sales;
 using RepositoryPattern.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace RepositoryPattern.Controllers
         // GET: /Order/
 
         public OrderController(IProductRepository productRepository, ICategoryRepository categoryRepository,
-            IProductVariationRepository prdVariationRepo, IPictureRepository pictureRepository, IUserRepository userRepository)
+            IProductVariationRepository prdVariationRepo, IPictureRepository pictureRepository, 
+            IOrderRepository orderRepositor, IOrderItemsRepository orderItemsRepository, IUserRepository userRepository)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
@@ -29,6 +31,8 @@ namespace RepositoryPattern.Controllers
         private readonly IProductVariationRepository _prdVariationRepo;
         private readonly IPictureRepository _pictureRepo;
         private readonly IUserRepository _userRepo;
+        private readonly IOrderRepository _orderRepo;
+        private readonly IOrderItemsRepository _orderItemsRepo;
 
         public ActionResult AddToWishList(WishListItems items)
         {
@@ -36,7 +40,23 @@ namespace RepositoryPattern.Controllers
             if (user.IsAuthenticated == true)
             {
                 //First let get the User ID
+                Order orders = new Order();
+                int orderID;
                 var usermain = _userRepo.GetSingleUser(user.Name);
+                bool orderExist = _orderRepo.OrderUserExist(usermain.ID);
+                if (!orderExist)
+                {
+                    orders.Active = true;
+                    orders.UserID = usermain.ID;
+                    orders.AddUser = user.Name;
+                    orders.AddDate = DateTime.Now;
+                    orders.DeleteFlag = false;
+                    orderID =  _orderRepo.InsertOrders(orders);
+                }
+                if (orderExist)
+                {
+
+                }
 
                 Errors err = new Errors();
                 err.Message = "success";

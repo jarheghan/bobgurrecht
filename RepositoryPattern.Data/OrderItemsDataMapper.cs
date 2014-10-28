@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data;
+using log4net;
 
 namespace RepositoryPattern.Data
 {
     public class OrderItemsDataMapper : AbstractDataMapper<OrderItems>, IOrderItemsRepository
     {
+        ILog log = LogManager.GetLogger(typeof(OrderItemsDataMapper));
         protected override string TableName
         {
             get { throw new NotImplementedException(); }
@@ -45,6 +48,51 @@ namespace RepositoryPattern.Data
         }
 
         public void Update(OrderItems item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int InsertOrderItems(OrderItems items)
+        {
+            var param = new
+            {
+                OrderItemGuid = items.OrderItemGuid,
+                OrderID = items.OrderID,
+                ProductID = items.ProductID,
+                Quantity = items.Quantity,
+                ProductVariationID = items.ProductVariationID,
+                AddUser = items.AddUser,
+                AddDate = items.AddDate,
+                DeleteFlag = items.DeleteFlag
+            };
+
+            var sql = @"Insert into OrderItem(ort_guid, ort_ord_id,ort_prd_id,ort_quantity,ort_prv_id
+                          ,ort_add_user, ort_add_date, ort_deleflag
+                        Values(@OrderItemGuid,@OrderID,@ProductID,@Quantity,@ProductVariationID,@AddUser,
+                        @AddDate, @DeleteFlag
+                        Select @@IDENTITY";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    int i = cn.Query<dynamic>(sql, param).FirstOrDefault();
+                    return i;
+                }
+
+                catch(Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return -2;
+                }
+            }
+        }
+
+        public IEnumerable<OrderItems> GetAllOrderItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<OrderItems> GetOrderItemsByOrderID(int Id)
         {
             throw new NotImplementedException();
         }
