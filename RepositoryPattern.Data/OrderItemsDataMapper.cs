@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using System.Data;
 
 namespace RepositoryPattern.Data
 {
@@ -45,6 +46,36 @@ namespace RepositoryPattern.Data
         }
 
         public void Update(OrderItems item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int InsertOrderItems(OrderItems items)
+        {
+            var param = new
+            {
+                OrderItemGuid = Guid.NewGuid(),
+                OrderID = items.OrderID,
+                ProductID = items.ProductID,
+                Quantity = items.Quantity,
+                ProductVariationID = items.ProductVariationID,
+                AddUser = items.AddUser,
+                AddDate = items.AddDate,
+                DeleteFlag = items.DeleteFlag
+
+            };
+            using (IDbConnection cn = Connection)
+            {
+                var i = cn.Query("", param);
+            }
+        }
+
+        public IEnumerable<OrderItems> GetAllOrderItems()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<OrderItems> GetOrderItemsByOrderID(int Id)
         {
             throw new NotImplementedException();
         }
