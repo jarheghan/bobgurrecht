@@ -6,11 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using System.Data;
+<<<<<<< HEAD
+=======
+using log4net;
+>>>>>>> e812653b5e84c782ea14f3835df456d318a98267
 
 namespace RepositoryPattern.Data
 {
     public class OrderItemsDataMapper : AbstractDataMapper<OrderItems>, IOrderItemsRepository
     {
+        ILog log = LogManager.GetLogger(typeof(OrderItemsDataMapper));
         protected override string TableName
         {
             get { throw new NotImplementedException(); }
@@ -54,7 +59,11 @@ namespace RepositoryPattern.Data
         {
             var param = new
             {
+<<<<<<< HEAD
                 OrderItemGuid = Guid.NewGuid(),
+=======
+                OrderItemGuid = items.OrderItemGuid,
+>>>>>>> e812653b5e84c782ea14f3835df456d318a98267
                 OrderID = items.OrderID,
                 ProductID = items.ProductID,
                 Quantity = items.Quantity,
@@ -62,11 +71,34 @@ namespace RepositoryPattern.Data
                 AddUser = items.AddUser,
                 AddDate = items.AddDate,
                 DeleteFlag = items.DeleteFlag
+<<<<<<< HEAD
 
             };
             using (IDbConnection cn = Connection)
             {
                 var i = cn.Query("", param);
+=======
+            };
+
+            var sql = @"Insert into OrderItem(ort_guid, ort_ord_id,ort_prd_id,ort_quantity,ort_prv_id
+                          ,ort_add_user, ort_add_date, ort_delete_flag)
+                        Values(@OrderItemGuid,@OrderID,@ProductID,@Quantity,@ProductVariationID,@AddUser,
+                        @AddDate, @DeleteFlag)
+                        Select @@IDENTITY";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    int i = cn.Query<dynamic>(sql, param).FirstOrDefault();
+                    return i;
+                }
+
+                catch(Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return -2;
+                }
+>>>>>>> e812653b5e84c782ea14f3835df456d318a98267
             }
         }
 
