@@ -213,7 +213,7 @@ namespace RepositoryPattern.Data
             using (IDbConnection cn = Connection)
             {
                 cn.Open();
-                var categories = cn.Query<dynamic>("select * from categories where cat_id = @parentCategoryID",
+                var categories = cn.Query<dynamic>("select * from categories where cat_parent_category_id = @parentCategoryID",
                                 new { parentCategoryID = parentCategoryID });
                 foreach (var mycat in categories)
                 {

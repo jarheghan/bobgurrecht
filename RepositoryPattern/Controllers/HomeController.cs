@@ -54,6 +54,12 @@ namespace RepositoryPattern.Controllers
             return View();
         }
 
+        public ActionResult CategorySubCategory(int? Id)
+        {
+            ViewBag.CatId = Id ?? default(int);
+            return View();
+        }
+
         public ActionResult AboutUs()
         {
             return View();

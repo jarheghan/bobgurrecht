@@ -5,7 +5,7 @@
 
 
 <div class="container">
- @Html.Action("Menu","Common")
+ @Html.Action("Menu","Common",new{Id = ViewBag.CatId})
      <div class="row">
     </div>
     @Html.Action("DisplayCategoryProduct", "Common", new{Id = ViewBag.CatId})

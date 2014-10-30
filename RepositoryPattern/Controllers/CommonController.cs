@@ -85,9 +85,50 @@ namespace RepositoryPattern.Controllers
             catch (Exception ex) { log.Error("Common Error:", ex); return PartialView(); }
         }
 
-        public ActionResult SideMenu()
+
+        public ActionResult DisplayCategorySubCategory(int? Id)
+        {
+            try
+            {
+                var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(Id ?? default(int));
+                var catg = _categoryRepository.GetAllCategoriesByParentCategoryId(Id ?? default(int));
+                var catparent = _categoryRepository.GetCategoryById(Id ?? default(int));
+
+                //IEnumerable<ProductCategory> prdcat = productCategory
+                //            .Select(x =>
+                //            {
+                //                var product = _productRepository.GetProductByID(x.ProductID ?? default(int));
+                //                var category = _categoryRepository.GetCategoryById(x.CategoryID ?? default(int));
+                //                var prdPic = _productRepository.GetProductPictureByID(x.ProductID ?? default(int));
+                //                var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
+                //                return new ProductCategory()
+                //                {
+                //                    ID = x.ID,
+                //                    CategoryID = x.CategoryID,
+                //                    ProductID = x.ProductID,
+                //                    Product = product,
+                //                    Picture = pic,
+                //                    Category = category,
+                //                    IsFeaturedProduct = x.IsFeaturedProduct,
+                //                    AddDate = x.AddDate,
+                //                    AddUser = x.AddUser,
+                //                    ChangeDate = x.ChangeDate,
+                //                    ChangeUser = x.ChangeUser,
+                //                    DeleteFlag = x.DeleteFlag
+                //                };
+                //            });
+
+                ViewBag.Category = catparent;
+
+                return PartialView(catg);
+            }
+            catch (Exception ex) { log.Error("Common Error:", ex); return PartialView(); }
+        }
+
+        public ActionResult SideMenu(int Id)
         {
             IEnumerable<Category> cat = _categoryRepository.GetAllCategories();
+            ViewBag.catId = Id;
             return PartialView(cat);
         }
 

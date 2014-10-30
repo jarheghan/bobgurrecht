@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "CategorySubCategory";
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+<div class="container">
+ @Html.Action("Menu","Common")
+    <div class="row">
+         @Html.Action("SideMenu", "Common", new {Id = ViewBag.CatId })
+         @Html.Action("DisplayCategorySubCategory", "Common", new{Id = ViewBag.CatId})
+    </div>
+
+   
+  </div>

@@ -86,10 +86,12 @@
                      }
                      
                       if(submenu.Any(x => x.ParentCategoryID == cat.ID) == true){
+                          var mysubMenu = submenu.Where(y => y.ParentCategoryID == cat.ID);
                   <li class="dropdown-submenu"><a href="#" tabindex="-1">@cat.Name</a>
                        <ul class="dropdown-menu">
-                           @foreach(var subcat in submenu){
-                            <li><a href="@Url.Action("CategoryProduct","Home",new{Id = subcat.ID})">@subcat.Name</a></li>
+                           @foreach (var subcat in mysubMenu)
+                           {
+                            <li><a href="@Url.Action("CategorySubCategory","Home",new{Id = subcat.ID})">@subcat.Name</a></li>
                            }
                       </ul>
                   </li>
