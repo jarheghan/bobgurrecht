@@ -49,21 +49,6 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             var category = CategoryRepository.GetAllCategories();
             var subCat = category.Where(x => x.ParentCategoryID != null);
             var parentCategory = category.Where(x => x.ParentCategoryID == null);
-            //foreach (var mycat in category)
-            //{
-            //    if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == true)
-            //    {
-            //          var mysubcat =  subCat.Where(x => x.ParentCategoryID == mycat.ID).FirstOrDefault();
-            //          var parentCategory = CategoryRepository.GetCategoryById(mysubcat.ParentCategoryID ?? default(int));
-            //          mysubcat.Name = parentCategory.Name + ">>" + mysubcat.Name;
-            //          cat.Add(mysubcat);
-            //    }
-            //    if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == false)
-            //    {
-                   
-            //        cat.Add(mycat);
-            //    }
-            //}
             foreach (var parentcat in parentCategory)
             {
                 cat.Add(parentcat);
@@ -76,9 +61,16 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
 
                         if (category.Any(x => x.ParentCategoryID == mysubcat.ID) == true)
                         {
-                            var subsubCat = category.Where(y => y.ParentCategoryID == mysubcat.ID).FirstOrDefault();
-                            subsubCat.Name = mysubcat.Name +" >> " + subsubCat.Name;
-                            cat.Add(subsubCat);
+                            var subsubCat = category.Where(y => y.ParentCategoryID == mysubcat.ID);
+                            foreach (var s in subsubCat)
+                            {
+                                if(cat.Exists(x => x.ID != s.ID))
+                                {
+                                s.Name = mysubcat.Name + " >> " + s.Name;
+                                cat.Add(s);
+                                }
+                            }
+                           
                         }
                     }
 
@@ -86,6 +78,44 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             }
             SelectList sl = new SelectList(cat, "ID", "Name");
             return sl;
+        }
+
+        public static List<Category> GetAllCategory()
+        {
+            CategoryRepository = new CategoryDataMapper();
+            List<Category> cat = new List<Category>();
+            var category = CategoryRepository.GetAllCategories();
+            var subCat = category.Where(x => x.ParentCategoryID != null);
+            var parentCategory = category.Where(x => x.ParentCategoryID == null);
+            foreach (var parentcat in parentCategory)
+            {
+                cat.Add(parentcat);
+                foreach (var mysubcat in subCat)
+                {
+                    if (mysubcat.ParentCategoryID == parentcat.ID)
+                    {
+                        mysubcat.Name = parentcat.Name + " >> " + mysubcat.Name;
+                        cat.Add(mysubcat);
+
+                        if (category.Any(x => x.ParentCategoryID == mysubcat.ID) == true)
+                        {
+                            var subsubCat = category.Where(y => y.ParentCategoryID == mysubcat.ID);
+                            foreach (var s in subsubCat)
+                            {
+                                if (cat.Exists(x => x.ID != s.ID))
+                                {
+                                    s.Name = mysubcat.Name + " >> " + s.Name;
+                                    cat.Add(s);
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
+            return cat;
         }
     }
 }

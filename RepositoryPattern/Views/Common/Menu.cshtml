@@ -49,7 +49,7 @@
 <div class="row">
   <div class="container">
     <div class="logo col-lg-4">
-      <img src="@Url.Content(csspart + "/img/plumbing-parts-albuquerque-new-mexico.png")"alt="Plumbing Parts albuquerque New Mexico">
+      <a href="@Url.Action("Index","Home")"><img src="@Url.Content(csspart + "/img/plumbing-parts-albuquerque-new-mexico.png")"alt="Plumbing Parts albuquerque New Mexico"></a>
     </div>
     <div class="help-container col-md-4 pull-right">
       <h3>Need Help? Call <strong><a href="tel:5058840133">(505) 884-0133</a></strong></h3>
@@ -91,7 +91,15 @@
                        <ul class="dropdown-menu">
                            @foreach (var subcat in mysubMenu)
                            {
+                              var subsubCat = Model.Where(x => x.ParentCategoryID == subcat.ID).Count();
+                            if(subsubCat > 0)
+                             {
                             <li><a href="@Url.Action("CategorySubCategory","Home",new{Id = subcat.ID})">@subcat.Name</a></li>
+                            }
+                             if(subsubCat ==  0 || subsubCat == null)
+                             {
+                                  <li><a href="@Url.Action("CategoryProduct","Home",new{Id = subcat.ID})">@subcat.Name</a></li>
+                             }
                            }
                       </ul>
                   </li>
