@@ -48,19 +48,42 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             List<Category> cat = new List<Category>();
             var category = CategoryRepository.GetAllCategories();
             var subCat = category.Where(x => x.ParentCategoryID != null);
-            foreach (var mycat in category)
+            var parentCategory = category.Where(x => x.ParentCategoryID == null);
+            //foreach (var mycat in category)
+            //{
+            //    if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == true)
+            //    {
+            //          var mysubcat =  subCat.Where(x => x.ParentCategoryID == mycat.ID).FirstOrDefault();
+            //          var parentCategory = CategoryRepository.GetCategoryById(mysubcat.ParentCategoryID ?? default(int));
+            //          mysubcat.Name = parentCategory.Name + ">>" + mysubcat.Name;
+            //          cat.Add(mysubcat);
+            //    }
+            //    if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == false)
+            //    {
+                   
+            //        cat.Add(mycat);
+            //    }
+            //}
+            foreach (var parentcat in parentCategory)
             {
-                if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == true)
+                cat.Add(parentcat);
+                foreach (var mysubcat in subCat)
                 {
-                      var mysubcat =  subCat.Where(x => x.ParentCategoryID == mycat.ID).FirstOrDefault();
-                      cat.Add(mysubcat);
-                }
-                if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == false)
-                {
-                    cat.Add(mycat);
+                    if (mysubcat.ParentCategoryID == parentcat.ID)
+                    {
+                        mysubcat.Name = parentcat.Name + " >> " + mysubcat.Name;
+                        cat.Add(mysubcat);
+
+                        if (category.Any(x => x.ParentCategoryID == mysubcat.ID) == true)
+                        {
+                            var subsubCat = category.Where(y => y.ParentCategoryID == mysubcat.ID).FirstOrDefault();
+                            subsubCat.Name = mysubcat.Name +" >> " + subsubCat.Name;
+                            cat.Add(subsubCat);
+                        }
+                    }
+
                 }
             }
-
             SelectList sl = new SelectList(cat, "ID", "Name");
             return sl;
         }
