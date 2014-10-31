@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Catalog\Category.cs" />
+    <Compile Include="Catalog\CategoryExtention.cs" />
     <Compile Include="Catalog\ICategoryRepository.cs" />
     <Compile Include="Catalog\IProductRepository.cs" />
     <Compile Include="Catalog\IProductVaraitionRepository.cs" />

@@ -1,0 +1,29 @@
+﻿@using RepositoryPattern.Service.UI
+@using RepositoryPattern.Model.Catalog;
+@model IEnumerable<Category>
+ @{var imgpath = "~/Images/WallImages/imagepath";
+  // var catInfo = Model.Select(x => x.Name).FirstOrDefault();
+   Category cat = ViewBag.Category;
+   }
+<div class="col-sm-4">
+    
+    <h1>@cat.Name</h1>
+    <p>@cat.Description</p>
+   @* <ul class="pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>*@
+
+@if (Model != null)
+{
+
+   @Html.RenderTemplateAsColumns(Model.ToList(),"_categorypartial",4) 
+
+}
+</div>
+ 

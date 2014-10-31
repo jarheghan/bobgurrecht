@@ -209,7 +209,19 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<Category> GetAllCategoriesByParentCategoryId(int parentCategoryID)
         {
-            throw new NotImplementedException();
+            List<Category> categoryList = new List<Category>();
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                var categories = cn.Query<dynamic>("select * from categories where cat_parent_category_id = @parentCategoryID",
+                                new { parentCategoryID = parentCategoryID });
+                foreach (var mycat in categories)
+                {
+                    categoryList.Add(Map(mycat));
+                }
+
+                return categoryList.AsEnumerable();
+            }
         }
 
         public void InsertProductCategory(ProductCategory productCategory)

@@ -750,6 +750,7 @@
     <Content Include="Areas\Admin\Views\Shared\Picture.cshtml" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Images\WallImages\imagepath\categoryPlaceholder.png" />
     <Content Include="Scripts\2013.2.611\jquery-1.7.1.min.js" />
     <Content Include="Scripts\2013.2.611\jquery.validate.min.js" />
     <Content Include="Scripts\2013.2.611\telerik.all.min.js" />
@@ -845,11 +846,13 @@
     <Content Include="Views\Common\MainWishList.cshtml" />
     <Content Include="Views\Shared\MiniWishlist.cshtml" />
     <Content Include="Views\Account\SignInModal.cshtml" />
+    <Content Include="Views\Home\CategorySubCategory.cshtml" />
+    <Content Include="Views\Common\DisplayCategorySubCategory.cshtml" />
+    <Content Include="Views\Shared\_categorypartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />
     <Folder Include="Areas\Admin\Scripts\" />
-    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

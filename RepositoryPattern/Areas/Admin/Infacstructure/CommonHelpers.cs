@@ -48,21 +48,74 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             List<Category> cat = new List<Category>();
             var category = CategoryRepository.GetAllCategories();
             var subCat = category.Where(x => x.ParentCategoryID != null);
-            foreach (var mycat in category)
+            var parentCategory = category.Where(x => x.ParentCategoryID == null);
+            foreach (var parentcat in parentCategory)
             {
-                if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == true)
+                cat.Add(parentcat);
+                foreach (var mysubcat in subCat)
                 {
-                      var mysubcat =  subCat.Where(x => x.ParentCategoryID == mycat.ID).FirstOrDefault();
-                      cat.Add(mysubcat);
+                    if (mysubcat.ParentCategoryID == parentcat.ID)
+                    {
+                        mysubcat.Name = parentcat.Name + " >> " + mysubcat.Name;
+                        cat.Add(mysubcat);
+
+                        if (category.Any(x => x.ParentCategoryID == mysubcat.ID) == true)
+                        {
+                            var subsubCat = category.Where(y => y.ParentCategoryID == mysubcat.ID);
+                            foreach (var s in subsubCat)
+                            {
+                                if(cat.Exists(x => x.ID != s.ID))
+                                {
+                                s.Name = mysubcat.Name + " >> " + s.Name;
+                                cat.Add(s);
+                                }
+                            }
+                           
+                        }
+                    }
+
                 }
-                if (subCat.Any(x => x.ParentCategoryID == mycat.ID) == false)
+            }
+            SelectList sl = new SelectList(cat, "ID", "Name");
+            return sl;
+        }
+
+        public static List<Category> GetAllCategory()
+        {
+            CategoryRepository = new CategoryDataMapper();
+            List<Category> cat = new List<Category>();
+            var category = CategoryRepository.GetAllCategories();
+            var subCat = category.Where(x => x.ParentCategoryID != null);
+            var parentCategory = category.Where(x => x.ParentCategoryID == null);
+            foreach (var parentcat in parentCategory)
+            {
+                cat.Add(parentcat);
+                foreach (var mysubcat in subCat)
                 {
-                    cat.Add(mycat);
+                    if (mysubcat.ParentCategoryID == parentcat.ID)
+                    {
+                        mysubcat.Name = parentcat.Name + " >> " + mysubcat.Name;
+                        cat.Add(mysubcat);
+
+                        if (category.Any(x => x.ParentCategoryID == mysubcat.ID) == true)
+                        {
+                            var subsubCat = category.Where(y => y.ParentCategoryID == mysubcat.ID);
+                            foreach (var s in subsubCat)
+                            {
+                                if (cat.Exists(x => x.ID != s.ID))
+                                {
+                                    s.Name = mysubcat.Name + " >> " + s.Name;
+                                    cat.Add(s);
+                                }
+                            }
+
+                        }
+                    }
+
                 }
             }
 
-            SelectList sl = new SelectList(cat, "ID", "Name");
-            return sl;
+            return cat;
         }
     }
 }

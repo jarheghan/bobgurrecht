@@ -33,7 +33,7 @@ namespace RepositoryPattern.Controllers
             return View();
         }
 
-        public ActionResult Product(int prd)
+        public ActionResult Product(int prd, int catID)
         {
             ProductGroup prdGroup = new ProductGroup();
             
@@ -45,10 +45,17 @@ namespace RepositoryPattern.Controllers
             prdGroup.ProductPic = prdpic;
             prdGroup.Picture = picture;
             prdGroup.ProductVariation = prdVariation;
+            ViewBag.catID = catID;
             return View(prdGroup);
         }
 
         public ActionResult CategoryProduct(int? Id)
+        {
+            ViewBag.CatId = Id ?? default(int);
+            return View();
+        }
+
+        public ActionResult CategorySubCategory(int? Id)
         {
             ViewBag.CatId = Id ?? default(int);
             return View();

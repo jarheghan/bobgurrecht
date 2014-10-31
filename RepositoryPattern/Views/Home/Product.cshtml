@@ -1,4 +1,6 @@
-﻿@{
+﻿@using RepositoryPattern.Areas.Admin.Infacstructure
+@{
+   
     ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_Root.cshtml";
 }
@@ -8,13 +10,16 @@
   List<RepositoryPattern.Model.Catalog.ProductVariation> cat = new List<RepositoryPattern.Model.Catalog.ProductVariation>();
   var Prdvar = Model.ProductVariation.ToList();
   SelectList sl = new SelectList(Prdvar, "ID", "DesciptSize");
+   var category =  CommonHelpers.GetAllCategory();
+   var catID = category.Where(c => c.ID == ViewBag.catID).Select(x =>x.ParentCategoryID).FirstOrDefault();
+   int ss = catID ?? default(int);
   } 
 @model RepositoryPattern.Models.ProductGroup
 
 <div class="container">
  @Html.Action("Menu","Common")
      <div class="row">
-         @Html.Action("SideMenu","Common")
+         @Html.Action("SideMenu","Common",new{Id= ss})
 
          <!-- Thiis is the begining of the product details information -->
          <div class="col-sm-4" id="proimg">
