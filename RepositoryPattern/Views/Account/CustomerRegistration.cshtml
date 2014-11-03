@@ -2,7 +2,7 @@
 
 <form id="containerForm">
     <div class="panel panel-default">
-        <div class="panel-heading">Login Information</div>
+        <div class="panel-heading"><h4>Login Information</h4></div>
         <div class="panel-body">
             <div class="form-group">
                 @Html.Label("Email Address", new { @class = "sr-only" })
@@ -16,15 +16,13 @@
                 @Html.Label("Re-Enter Password", new { @class = "sr-only" })
                 @Html.Password("confirmPassword", null, new { @class = "form-control", placeholder = "Re-Enter Password" })
             </div>
-            @*<div class="form-group">
-                 <button type="submit" class="btn btn-default">Validate</button>
-            </div>*@
+          
         </div>
     </div>
 
 
     <div class="panel panel-default">
-        <div class="panel-heading">Customer Information</div>
+        <div class="panel-heading"><h4>Customer Information</h4></div>
         <div class="panel-body">
             <div class="form-group">
                 @Html.Label("First Name", new { @class = "sr-only" })
@@ -62,8 +60,13 @@
                 @Html.Label("Phone", new { @class = "sr-only" })
                 @Html.TextBox("phone", null, new { @class = "form-control", placeholder = "Phone(Mobile)" })
             </div>
+             
         </div>
     </div>
+     <div class="form-group">
+                 <button type="submit" id="validatebtn" class="btn btn-primary">Register</button>
+                 <button type="button" id="cancelBtn" class="btn btn-warning">Cancel</button>
+         </div>
 </form>
 
  <script type="text/javascript">

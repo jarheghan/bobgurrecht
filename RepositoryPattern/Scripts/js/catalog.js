@@ -137,27 +137,17 @@ var catalog = (function () {
                                  ]
  });
 
+ function getSubmit() {
+     $('#containerForm').submit(function () {
+         $.post("/Account/LoginModal", $('#containerForm').serialize(), function (data) {
+             if (data.Success) { alert("This is good"); }
+         });
+     });
+ }
 
  dialogauthentication = $('#authentication').dialog({
      title: "Register Customer/Sign In",
      autoOpen: false,
-     buttons: [
-         {
-             text: "Register"
-           , 'class': "btn-primary"
-           , click: function () {
-               // $(this).dialog("close");
-           }
-         },
-
-        {
-            text: "Cancel"
-           , 'class': "btn-warning"
-           , click: function () {
-               $(this).dialog("close");
-           }
-        }
-     ]
  })
 
     $('#btnProdVariation').click(function () {
@@ -447,7 +437,12 @@ var catalog = (function () {
                     }
                 },
             }
+        }).on('success.form.bv', function (e) {
+            e.preventDefault();
+            alert("Praise God");
+            //getSubmit();
         });
+        
     }
    
 
