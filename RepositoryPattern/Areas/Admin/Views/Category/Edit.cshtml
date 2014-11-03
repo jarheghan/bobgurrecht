@@ -21,13 +21,6 @@
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
 @model Category
- @{var listItems = new List<SelectListItem>
-                                        {
-                                          new SelectListItem { Text = "Toyoto", Value = "0" },
-                                          new SelectListItem { Text = "Honda", Value = "1" },
-                                          new SelectListItem { Text = "Subaru", Value = "2" }
-                                        };}
-
 
 @Html.Action("Menu", "Common", new {area="Admin"})
 

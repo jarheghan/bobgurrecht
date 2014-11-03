@@ -5,34 +5,8 @@ var catalog = (function () {
     var i1 = 0;
     var cnt = parseInt($('body').find('#pvCount').val());
 
+  
 
-    //$("td.mmm").dblclick(function () {
-    //    var $ss = $(this);
-    //    var i = $ss.data("id");
-    //    var dis = $ss.data("des")
-    //    var pvid = $('body').find('#ProductVariation_' + i + '__ID').val();
-    //    var OriginalContent = $ss.text();
-
-    //    $ss.addClass("cellEditing");
-    //    $ss.html("<input type='text' value='" + OriginalContent + "' />");
-    //    $ss.children().first().focus();
-    //    $ss.children().first().keypress(function (e) {
-    //        if (e.which === 13) {
-    //            var newContent = $(this).val();
-    //            $(this).parent().text(newContent);
-    //            $(this).parent().removeClass("cellEditing");
-    //            $ss.append('<input type="hidden" name="ProductVariation[' + i + '].' + dis + '" value="' + newContent + '" />');
-    //            $ss.append('<input type="hidden" name="ProductVariation[' + i + '].ID value="' + pvid + '" id="ProductVariation_' + i + '__ID" />');
-    //        }
-    //    });
-
-       
-
-    //    $ss.children().first().blur(function () {
-    //        $(this).parent().text(OriginalContent);
-    //        $(this).parent().removeClass("cellEditing");
-    //    });
-    //});
     
    
 
@@ -169,10 +143,10 @@ var catalog = (function () {
      autoOpen: false,
      buttons: [
          {
-             text: "Save"
+             text: "Register"
            , 'class': "btn-primary"
            , click: function () {
-               $(this).dialog("close");
+               // $(this).dialog("close");
            }
          },
 
@@ -356,13 +330,124 @@ var catalog = (function () {
                 }
 
                 if (val.Message === "authenticate") {
-                    dialogauthentication.dialog('open');
+                    dialogauthentication.dialog('open').load('/Account/CustomerRegistration');
                 }
                 $('#wish-btn').empty();
                 $('#wish-btn').html(val)
             }
 
         })
+    }
+
+    var LoginModal = function () {
+        //btnLoginModal
+        var data = {
+            Username: $('#username').val(),
+            Password: $('#password').val()
+        }
+        $.ajax({
+            url: "/Account/LoginModal",
+            type: "POST",
+            datatype: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            cache: false,
+            async: false,
+            success: function (val) {
+                debugger;
+                if (val.Type === "2") {
+                    var $error = $('body').find('#divErrorMessage');
+                    $error.empty();
+                    $error.append('<div class="alert alert-warning" role="alert">' + val.Message + '</div>');
+                }
+                if (val.Type === "1") {
+                    window.location.href = val.Message;
+                }
+            }
+        });
+    }
+
+    var validation = function () {
+        $('#containerForm').bootstrapValidator({
+            container: 'tooltip',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The usernamee is required'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                confirmPassword: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                firstname: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                lastname: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                address1: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                address2: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                city: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                zipcode: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+                phone: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required'
+                        }
+                    }
+                },
+            }
+        });
     }
    
 
@@ -373,7 +458,9 @@ var catalog = (function () {
         removeVariation: removeVariation,
         messagealert: messagealert,
         editProdtionVartion: editProdtionVartion,
-        addWishList: addWishList
+        addWishList: addWishList,
+        LoginModal: LoginModal,
+        validation: validation
     }
 
    

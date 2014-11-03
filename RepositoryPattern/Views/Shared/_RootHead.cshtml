@@ -9,15 +9,21 @@
     @Styles.Render("~/Bootstrap/css")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @MvcHtmlString.Create(Html.RenderCssHere(new List<IClientDependencyPath>
+												{
+													new BasicPath("Content", "~/Content")
+												}).ToString())
 </head>
 <body>
     @RenderBody()
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundle/bootstrap")
     @MvcHtmlString.Create(Html.RenderJsHere(new List<IClientDependencyPath>
 	    {
 		    new BasicPath("Custom", "~/Scripts/js")
 	    }).ToString())
-    @RenderSection("scripts", required: false)
+    
+  
 </body>
 </html>

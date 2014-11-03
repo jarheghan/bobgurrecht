@@ -9,5 +9,11 @@ namespace RepositoryPattern.Model.Customers
 {
     public interface ICustomerInfoRepository : IRepository<CustomerInfo>
     {
+        Country MapCountry(dynamic items);
+        State MapState(dynamic items);
+        int InsertCustomerInfo(CustomerInfo items);
+        IEnumerable<CustomerInfo> GetAllCustomersInfo();
+        IEnumerable<Country> GetAllCountries();
+        IEnumerable<State> GetAllStates();
     }
 }

@@ -97,6 +97,7 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult LoginModal(Users user)
         {
+            Errors err = new Errors();
             if (ModelState.IsValid)
             {
 
@@ -108,22 +109,34 @@ namespace RepositoryPattern.Controllers
                     string returnurl = Request.QueryString["ReturnUrl"];
                     if (returnurl == null)
                     {
-                        Response.Redirect("~/");
+                        // Response.Redirect("~/");
+                        err.Type = "1";
+                        err.Message = "/Home/Index";
+                        return Json(err, JsonRequestBehavior.AllowGet);
                     }
                     else
-                        Response.Redirect(returnurl);
+                    {
+                        err.Type = "1";
+                        err.Message = returnurl;
+                        return Json(err, JsonRequestBehavior.AllowGet);
+                    }
                 }
                 if (!success)
                 {
-                    Errors err = new Errors();
+                   
                     err.Message = "Username or Password may be incorrect. Please enter valid username and password";
                     err.Type = "2";
-                    return View(err);
+                    return Json(err,JsonRequestBehavior.AllowGet);
                 }
             }
 
             return null;
 
+        }
+
+        public ActionResult CustomerRegistration()
+        {
+            return PartialView();
         }
     }
 }

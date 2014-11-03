@@ -49,4 +49,9 @@
      }
 </div>
 <div id="test1"></div>
+
+  @if(IsSectionDefined("scripts"))
+    {
+     @RenderSection("scripts")
+    }
 <!-- You could add a widget to this after the footer -->
