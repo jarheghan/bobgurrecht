@@ -1,5 +1,6 @@
 ﻿using RepositoryPattern.Data;
 using RepositoryPattern.Model.Catalog;
+using RepositoryPattern.Model.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             get;
             set;
         }
+        public static ICustomerInfoRepository CustomerInfoRepo { get; set; }
        
        
         public static string GenerateRandomDigitCode(int length)
@@ -116,6 +118,23 @@ namespace RepositoryPattern.Areas.Admin.Infacstructure
             }
 
             return cat;
+        }
+
+
+        public static SelectList GetAllCountry()
+        {
+            CustomerInfoRepo = new CustomerInfoDataMapper();
+            var country = CustomerInfoRepo.GetAllCountries().OrderBy(x => x.Name);
+            SelectList sl = new SelectList(country, "ISO3", "Name");
+            return sl;
+        }
+
+        public static SelectList GetAllStates()
+        {
+            CustomerInfoRepo = new CustomerInfoDataMapper();
+            var country = CustomerInfoRepo.GetAllStates().OrderBy(x => x.Name);
+            SelectList sl = new SelectList(country, "AbbreviatedName", "Name");
+            return sl;
         }
     }
 }

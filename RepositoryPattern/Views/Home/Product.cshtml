@@ -1,4 +1,9 @@
 ﻿@using RepositoryPattern.Areas.Admin.Infacstructure
+@using ClientDependency.Core.Mvc
+@{
+    Html.RequiresCss("bootstrap/bootstrapValidator.css", "Content", 5);
+    Html.RequiresJs("bootstrapValidator.js", "Custom", 1);
+}
 @{
    
     ViewBag.Title = "Product";
@@ -76,3 +81,6 @@
 
 <div id="test1"></div>
 <div id="authentication"></div>
+@section scripts{
+   
+}

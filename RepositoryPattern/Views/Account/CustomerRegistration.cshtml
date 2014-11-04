@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
     <div class="panel panel-default">
         <div class="panel-heading">Login Information </div>
@@ -58,3 +59,79 @@
                 </div>
         </div>
     </div>
+=======
+﻿@using RepositoryPattern.Areas.Admin.Infacstructure
+
+<form id="containerForm">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Login Information</h4></div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Label("Email Address", new { @class = "sr-only" })
+                @Html.TextBox("username", null, new { @class = "form-control", placeholder = "Email Address" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Password", new { @class = "sr-only" })
+                @Html.Password("password", null, new { @class = "form-control", placeholder = "Password" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Re-Enter Password", new { @class = "sr-only" })
+                @Html.Password("confirmPassword", null, new { @class = "form-control", placeholder = "Re-Enter Password" })
+            </div>
+          
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Customer Information</h4></div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Label("First Name", new { @class = "sr-only" })
+                @Html.TextBox("firstname", null, new { @class = "form-control", placeholder = "FirstName" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Last Name", new { @class = "sr-only" })
+                @Html.TextBox("lastname", null, new { @class = "form-control", placeholder = "Last Name" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Address 1", new { @class = "sr-only" })
+                @Html.TextBox("address1", null, new { @class = "form-control", placeholder = "Address 1" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Address 2", new { @class = "sr-only" })
+                @Html.TextBox("address2", null, new { @class = "form-control", placeholder = "Address 2" })
+            </div>
+            <div class="form-group">
+                @Html.Label("City", new { @class = "sr-only" })
+                @Html.TextBox("city", null, new { @class = "form-control", placeholder = "City" })
+            </div>
+            <div class="form-group">
+                @Html.Label("State", new { @class = "sr-only" })
+                @Html.DropDownList("ParentCategoryId", new SelectList(CommonHelpers.GetAllStates(), "Value", "Text"), "US States", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Country", new { @class = "sr-only" })
+                @Html.DropDownList("ParentCategoryId", new SelectList(CommonHelpers.GetAllCountry(), "Value", "Text"), "Countries", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("ZipCode/Postal Code", new { @class = "sr-only" })
+                @Html.TextBox("zipcode", null, new { @class = "form-control", placeholder = "ZipCode" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Phone", new { @class = "sr-only" })
+                @Html.TextBox("phone", null, new { @class = "form-control", placeholder = "Phone(Mobile)" })
+            </div>
+             
+        </div>
+    </div>
+     <div class="form-group">
+                 <button type="submit" id="validatebtn" class="btn btn-primary">Register</button>
+                 <button type="button" id="cancelBtn" class="btn btn-warning">Cancel</button>
+         </div>
+</form>
+
+ <script type="text/javascript">
+     catalog.validation();
+ </script>
+>>>>>>> cf0353d509962a7868507524c61e78d556d91bc9

@@ -49,9 +49,11 @@
     <Compile Include="Catalog\ProductCategory.cs" />
     <Compile Include="Catalog\ProductPicture.cs" />
     <Compile Include="Catalog\ProductVariation.cs" />
+    <Compile Include="Customers\Country.cs" />
     <Compile Include="Customers\CustomerInfo.cs" />
     <Compile Include="Customers\ICustomerInfoRepository.cs" />
     <Compile Include="Customers\IUserRepository.cs" />
+    <Compile Include="Customers\State.cs" />
     <Compile Include="Customers\UsersMain.cs" />
     <Compile Include="Media\IPictureRepository.cs" />
     <Compile Include="Media\Picture.cs" />
