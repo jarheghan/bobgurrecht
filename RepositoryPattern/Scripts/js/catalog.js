@@ -169,7 +169,7 @@ var catalog = (function () {
      autoOpen: false,
      buttons: [
          {
-             text: "Save"
+             text: "Register"
            , 'class': "btn-primary"
            , click: function () {
                $(this).dialog("close");
@@ -356,7 +356,7 @@ var catalog = (function () {
                 }
 
                 if (val.Message === "authenticate") {
-                    dialogauthentication.dialog('open');
+                    dialogauthentication.dialog('open').load('/Account/CustomerRegistration');
                 }
                 $('#wish-btn').empty();
                 $('#wish-btn').html(val)

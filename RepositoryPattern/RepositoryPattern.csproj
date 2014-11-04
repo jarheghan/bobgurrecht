@@ -849,6 +849,7 @@
     <Content Include="Views\Home\CategorySubCategory.cshtml" />
     <Content Include="Views\Common\DisplayCategorySubCategory.cshtml" />
     <Content Include="Views\Shared\_categorypartial.cshtml" />
+    <Content Include="Views\Account\CustomerRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

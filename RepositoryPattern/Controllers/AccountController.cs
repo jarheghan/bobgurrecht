@@ -125,5 +125,10 @@ namespace RepositoryPattern.Controllers
             return null;
 
         }
+
+        public ActionResult CustomerRegistration()
+        {
+            return PartialView();
+        }
     }
 }
