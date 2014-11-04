@@ -74,6 +74,7 @@ namespace RepositoryPattern.App_Start
             kernel.Bind<IUserRepository>().To<UsersDataMapper>().InSingletonScope();
             kernel.Bind<IOrderRepository>().To<OrderDataMapper>().InSingletonScope();
             kernel.Bind<IOrderItemsRepository>().To<OrderItemsDataMapper>().InSingletonScope();
+            kernel.Bind<ICustomerInfoRepository>().To<CustomerInfoDataMapper>().InSingletonScope();
         }        
     }
 }

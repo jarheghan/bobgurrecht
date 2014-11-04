@@ -41,7 +41,11 @@
                    <li class="last" ><a href="@Url.Content("/Admin/")" id="btnadmin">Administration</a></li>
              }
              }
+            
         </ul>
+          @if(user.IsAuthenticated == true){
+           <ul class="nav navbar-nav navbar-left"><li><a href="#"> Login User @user.Name</a></li></ul>
+          }
       </div>
     </div>
   </div>

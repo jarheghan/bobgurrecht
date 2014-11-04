@@ -137,13 +137,9 @@ var catalog = (function () {
                                  ]
  });
 
- function getSubmit() {
-     $('#containerForm').submit(function () {
-         $.post("/Account/LoginModal", $('#containerForm').serialize(), function (data) {
-             if (data.Success) { alert("This is good"); }
-         });
-     });
- }
+ $('body').on("click", "#cancelBtn", function () {
+     dialogauthentication.dialog('close');
+ })
 
  dialogauthentication = $('#authentication').dialog({
      title: "Register Customer/Sign In",
@@ -366,81 +362,102 @@ var catalog = (function () {
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-                username: {
+                Username: {
                     validators: {
                         notEmpty: {
-                            message: 'The usernamee is required'
+                            message: 'The username is required'
+                        },
+                        emailAddress: {
+                            message: 'Wrong Email Format'
                         }
                     }
                 },
-                password: {
+                Password: {
                     validators: {
                         notEmpty: {
                             message: 'The password is required'
                         }
                     }
                 },
-                confirmPassword: {
+                ConfirmPassword: {
                     validators: {
                         notEmpty: {
                             message: 'The password is required'
                         }
                     }
                 },
-                firstname: {
+                FirstName: {
                     validators: {
                         notEmpty: {
-                            message: 'The password is required'
+                            message: 'The First Name is required'
                         }
                     }
                 },
-                lastname: {
+                LastName: {
                     validators: {
                         notEmpty: {
-                            message: 'The password is required'
+                            message: 'The Last Name is required'
                         }
                     }
                 },
-                address1: {
+                Address1: {
                     validators: {
                         notEmpty: {
-                            message: 'The password is required'
+                            message: 'The Address 1 is required'
                         }
                     }
                 },
-                address2: {
+               
+                City: {
                     validators: {
                         notEmpty: {
-                            message: 'The password is required'
+                            message: 'The City is required'
                         }
                     }
                 },
-                city: {
+                ZipCode: {
                     validators: {
                         notEmpty: {
-                            message: 'The password is required'
+                            message: 'The ZipCode is required'
                         }
                     }
                 },
-                zipcode: {
+                Phone: {
+                    threshold: 5,
                     validators: {
                         notEmpty: {
-                            message: 'The password is required'
-                        }
-                    }
-                },
-                phone: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The password is required'
+                            message: 'The phone number is required'
+                        },
+                        phone: {
+                            message: 'The phone number is not valid',
+                            country: 'US'
                         }
                     }
                 },
             }
         }).on('success.form.bv', function (e) {
             e.preventDefault();
-            alert("Praise God");
-            //getSubmit();
+            debugger;
+            var $form = $(e.target).serialize();
+            $.ajax({
+                url: "/Account/RegisterCustomer",
+                type: "POST",
+                data: $form, //JSON.stringify($form),
+                cache: false,
+                async: false,
+                success: function (val) {
+                    if (val.Type === "2") {
+                        dialogauthentication.dialog('close');
+                        $.messager.alert(val.Message);
+                    }
+                    if (val.Type === "5") {
+                        $.messager.alert(val.Message);
+                    }
+                    if (val.Type === "1") {
+                        window.location.href = val.Message;
+                    }
+                }
+            });
         });
         
     }
