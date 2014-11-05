@@ -148,26 +148,6 @@ var catalog = (function () {
  dialogauthentication = $('#authentication').dialog({
      title: "Register Customer/Sign In",
      autoOpen: false,
-<<<<<<< HEAD
-     buttons: [
-         {
-             text: "Register"
-           , 'class': "btn-primary"
-           , click: function () {
-               $(this).dialog("close");
-           }
-         },
-
-        {
-            text: "Cancel"
-           , 'class': "btn-warning"
-           , click: function () {
-               $(this).dialog("close");
-           }
-        }
-     ]
-=======
->>>>>>> cf0353d509962a7868507524c61e78d556d91bc9
  })
 
     $('#btnProdVariation').click(function () {
