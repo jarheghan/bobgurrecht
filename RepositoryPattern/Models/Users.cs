@@ -12,6 +12,7 @@ namespace RepositoryPattern.Models
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
+        public String ConfirmPassword { get; set; }
         public bool Ok { get; set; }
     }
 }

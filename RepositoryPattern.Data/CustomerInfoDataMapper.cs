@@ -98,7 +98,42 @@ namespace RepositoryPattern.Data
 
         public int InsertCustomerInfo(CustomerInfo items)
         {
-            throw new NotImplementedException();
+            var param = new CustomerInfo
+            {
+                ID = items.ID,
+                CustomerGuid = items.CustomerGuid,
+                FirstName = items.FirstName,
+                LastName = items.LastName,
+                Address1 = items.Address1,
+                Address2 = items.Address2,
+                Address3 = items.Address3,
+                Active = items.Active,
+                Company = items.Company,
+                City = items.City,
+                State = items.State,
+                Country = items.Country,
+                Email = items.Email,
+                ZipCode = items.ZipCode,
+                Phone = items.Phone,
+                AdminComment = items.AdminComment,
+                AddDate = items.AddDate,
+                AddUser = items.AddUser,
+                ChangeDate = items.ChangeDate,
+                ChangeUser = items.ChangeUser,
+                DeleteFlag = items.DeleteFlag
+
+            };
+            using (IDbConnection cn = Connection)
+            {
+                var sql = @"INSERT INTO CustomerInfo (cus_id, cus_guid, cus_email, cus_first_name, cus_last_name, cus_address1, cus_address2,
+                                                        cus_city,cus_state,cus_country,cus_zip,cus_phone,cus_active,cus_add_user,cus_add_date,cus_delete_flag)
+                                                       Values(@ID,@CustomerGuid,@Email,@FirstName,@LastName,@Address1,@Address2,@City,@State
+                                                               ,@Country,@ZipCode,@Phone,@Active,@AddUser,@AddDate,@DeleteFlag)
+                                                            select @@ROWCOUNT";
+                            
+                var i = cn.Query<int>(sql, param).FirstOrDefault();
+                return (int)i;
+            }
         }
 
         public IEnumerable<CustomerInfo> GetAllCustomersInfo()
