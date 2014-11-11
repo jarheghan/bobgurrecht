@@ -10,7 +10,7 @@
      <div class="row">
          @Html.Action("SideMenu", "Common", new {Id = 0 })
          <div class="col-sm-8">
-             <table class="table table-bordered ">
+             <table class="table table-bordered" id="tblWishList">
                  <thead>
                      <tr class="success">
                          <th>Picture</th><th>Name</th><th>Variation</th><th>Quantity</th><th>Remove</th>
@@ -30,7 +30,10 @@
                          {
                              <td>@Html.Label(" ")</td>
                          }
-                         <td>@Html.TextBox("Quantity-" + items.OrderItems.ID,items.OrderItems.Quantity)</td>
+                         <td>
+                             @Html.TextBox("Quantity-" + items.OrderItems.ID,items.OrderItems.Quantity)
+                             @Html.Hidden("hidOrderItems",items.OrderItems.ID)
+                         </td>
                          <td><a href="#" id="btnWishlist" onclick="catalog.removeWishList(@items.OrderItems.ID)"><span class="glyphicon glyphicon-trash"></span></a></td>
                      </tr>
                      }
@@ -39,7 +42,7 @@
              <div class="col-sm-8">
                  <a href="@Url.Action("Index","Home")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Continue Shopping</a>
                  <span class="mynewspace"></span>
-                 <button class="btn btn-primary">Update WishList</button></div>
+                 <button class="btn btn-primary" id="updateWishList">Update WishList</button></div>
           </div>
      </div>
 </div>

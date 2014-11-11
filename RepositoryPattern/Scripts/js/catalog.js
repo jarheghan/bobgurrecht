@@ -145,7 +145,9 @@ var catalog = (function () {
      title: "Register Customer/Sign In",
      autoOpen: false,
  })
-
+ $('#updateWishList').click(function () {
+     catalog.updateWishList();
+ })
     $('#btnProdVariation').click(function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
     })
@@ -376,6 +378,30 @@ var catalog = (function () {
         
     }
 
+    var updateWishList = function () {
+        var $textbox = $('#tblWishList').find('tr');
+        $.each($textbox, function (key, value) {
+            alert($(value).find('input:text').val() + ', ' + 'Hidded ID ' + $(value).find('input:hidden').val());
+        })
+        //$.ajax({
+        //    url: "/Order/RemoveFromWishList11?Id=" + i,
+        //    type: "POST",
+        //    datatype: 'json',
+        //    contentType: 'application/json',
+        //    data: JSON.stringify(data),
+        //    cache: false,
+        //    async: false,
+        //    success: function (val) {
+               
+        //        if (val === "success") {
+                   
+        //        }
+        //        if (val === "failure") {
+        //            $.messager.alert("The record was not deleted");
+        //        }
+        //    }
+        //});
+    }
 
     var validation = function () {
         $('#containerForm').bootstrapValidator({
@@ -497,7 +523,8 @@ var catalog = (function () {
         addWishList: addWishList,
         LoginModal: LoginModal,
         validation: validation,
-        removeWishList: removeWishList
+        removeWishList: removeWishList,
+        updateWishList: updateWishList
     }
 
    
