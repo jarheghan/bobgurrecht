@@ -37,8 +37,9 @@ namespace RepositoryPattern.Controllers
         private readonly IOrderItemsRepository _orderItemRepository;
         private readonly IUserRepository _userRepository;
         
-        public ActionResult Menu()
+        public ActionResult Menu(bool removeWL = false)
         {
+            ViewBag.RemoveWL = removeWL;
             IEnumerable<Category> cat = _categoryRepository.GetAllCategories();
             return PartialView(cat);
         }

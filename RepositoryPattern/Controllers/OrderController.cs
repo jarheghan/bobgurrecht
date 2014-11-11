@@ -132,7 +132,7 @@ namespace RepositoryPattern.Controllers
         }
 
 
-        public string RenderRazorViewToString(string viewName, object model)
+        private string RenderRazorViewToString(string viewName, object model)
         {
             ViewData.Model = model;
             using (var sw = new StringWriter())

@@ -6,7 +6,7 @@
 }
 
 <div class="container">
- @Html.Action("Menu", "Common", new {name ="nominiwl" })
+ @Html.Action("Menu", "Common", new {removeWL=true})
      <div class="row">
          @Html.Action("SideMenu", "Common", new {Id = 0 })
          <div class="col-sm-8">
@@ -30,14 +30,14 @@
                          {
                              <td>@Html.Label(" ")</td>
                          }
-                         <td>@Html.TextBox("Quantity",items.OrderItems.Quantity)</td>
+                         <td>@Html.TextBox("Quantity-" + items.OrderItems.ID,items.OrderItems.Quantity)</td>
                          <td><a href="#" id="btnWishlist" onclick="catalog.removeWishList(@items.OrderItems.ID)"><span class="glyphicon glyphicon-trash"></span></a></td>
                      </tr>
                      }
                  </tbody>
             </table>
              <div class="col-sm-8">
-                 <button class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Continue Shopping</button>
+                 <a href="@Url.Action("Index","Home")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Continue Shopping</a>
                  <span class="mynewspace"></span>
                  <button class="btn btn-primary">Update WishList</button></div>
           </div>
