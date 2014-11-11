@@ -1,0 +1,45 @@
+﻿@model IEnumerable<RepositoryPattern.Models.WishListDisplay>
+@{
+    ViewBag.Title = "WishListCart";
+    Layout = "~/Views/Shared/_Root.cshtml";
+    var imgpath = "~/Images/WallImages/imagepath/";
+}
+
+<div class="container">
+ @Html.Action("Menu", "Common", new {name ="nominiwl" })
+     <div class="row">
+         @Html.Action("SideMenu", "Common", new {Id = 0 })
+         <div class="col-sm-8">
+             <table class="table table-bordered ">
+                 <thead>
+                     <tr class="success">
+                         <th>Picture</th><th>Name</th><th>Variation</th><th>Quantity</th><th>Remove</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     @foreach(var items in Model)
+                     {
+                     <tr id="rwWishlist_@items.OrderItems.ID">
+                         <td><img  style="height:auto; width:auto; max-width:40px; max-height:40px;" src="@Url.Content(imgpath + items.Picture.FilePath)"></td>
+                         <td>@Html.Label(items.Product.Name)</td>
+                         @if(items.ProductVariation.ID > 0)
+                         {
+                         <td>@Html.Label(items.ProductVariation.Description)</td>
+                         }
+                         @if (items.ProductVariation.ID == 0)
+                         {
+                             <td>@Html.Label(" ")</td>
+                         }
+                         <td>@Html.TextBox("Quantity",items.OrderItems.Quantity)</td>
+                         <td><a href="#" id="btnWishlist" onclick="catalog.removeWishList(@items.OrderItems.ID)"><span class="glyphicon glyphicon-trash"></span></a></td>
+                     </tr>
+                     }
+                 </tbody>
+            </table>
+             <div class="col-sm-8">
+                 <button class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Continue Shopping</button>
+                 <span class="mynewspace"></span>
+                 <button class="btn btn-primary">Update WishList</button></div>
+          </div>
+     </div>
+</div>

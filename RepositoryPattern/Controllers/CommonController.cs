@@ -94,30 +94,6 @@ namespace RepositoryPattern.Controllers
                 var catg = _categoryRepository.GetAllCategoriesByParentCategoryId(Id ?? default(int));
                 var catparent = _categoryRepository.GetCategoryById(Id ?? default(int));
 
-                //IEnumerable<ProductCategory> prdcat = productCategory
-                //            .Select(x =>
-                //            {
-                //                var product = _productRepository.GetProductByID(x.ProductID ?? default(int));
-                //                var category = _categoryRepository.GetCategoryById(x.CategoryID ?? default(int));
-                //                var prdPic = _productRepository.GetProductPictureByID(x.ProductID ?? default(int));
-                //                var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
-                //                return new ProductCategory()
-                //                {
-                //                    ID = x.ID,
-                //                    CategoryID = x.CategoryID,
-                //                    ProductID = x.ProductID,
-                //                    Product = product,
-                //                    Picture = pic,
-                //                    Category = category,
-                //                    IsFeaturedProduct = x.IsFeaturedProduct,
-                //                    AddDate = x.AddDate,
-                //                    AddUser = x.AddUser,
-                //                    ChangeDate = x.ChangeDate,
-                //                    ChangeUser = x.ChangeUser,
-                //                    DeleteFlag = x.DeleteFlag
-                //                };
-                //            });
-
                 ViewBag.Category = catparent;
 
                 return PartialView(catg);

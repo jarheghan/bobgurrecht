@@ -151,5 +151,50 @@ namespace RepositoryPattern.Data
             }
             return false;
         }
+
+
+        public OrderItems GetSingleOrderItems(int OrderItemID)
+        {
+            var sql = @"select * from orderItem where ort_id = @OrderItemID";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Query<dynamic>(sql, new { OrderItemID = OrderItemID });
+                   
+                      var orderitem = Map(i);
+
+                      return orderitem;
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return null;
+                }
+            }
+        }
+
+
+        public int DeleteOrderItems(int Id)
+        {
+            var sql = @"DECLARE @TmpTable TABLE(ID int)
+                        delete from OrderItem OUTPUT DELETED.ort_id into @TmpTable 
+                        where ort_id = @Id   Select ID from @TmpTable";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Query<int>(sql, new {Id =Id }).FirstOrDefault();
+                    return i;
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return -2;
+                }
+            }
+        }
     }
 }

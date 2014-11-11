@@ -305,7 +305,9 @@ var catalog = (function () {
             async: false,
             success: function (val) {
                 if (val.Message === "success") {
-                    $.messager.alert('<div><span class="alert alert-success">Item has been added to the WishList</span></div>');
+                    $('#wish-btn').html(val.View);
+                    //$('body').find('#wish-btn').html('<a href="#">This is cool </a>');
+                    //alert($('#wish-btn').contents())
                    
                 }
                 if (val.Message === "error") {
@@ -318,8 +320,6 @@ var catalog = (function () {
                 if (val.Message === "authenticate") {
                     dialogauthentication.dialog('open').load('/Account/CustomerRegistration');
                 }
-                $('#wish-btn').empty();
-                $('#wish-btn').html(val)
             }
 
         })
@@ -352,6 +352,30 @@ var catalog = (function () {
             }
         });
     }
+
+    var removeWishList = function (i) {
+        $.ajax({
+            url: "/Order/RemoveFromWishList?Id="+ i,
+            type: "GET",
+            //datatype: 'json',
+            //contentType: 'application/json',
+            //data: JSON.stringify(data),
+            cache: false,
+            async: false,
+            success: function (val) {
+                debugger;
+                if (val === "success") {
+                    $('#rwWishlist_' + i).remove();
+                }
+                if (val === "failure") {
+                    $.messager.alert("The record was not deleted");
+                }
+            }
+        });
+
+        
+    }
+
 
     var validation = function () {
         $('#containerForm').bootstrapValidator({
@@ -472,7 +496,8 @@ var catalog = (function () {
         editProdtionVartion: editProdtionVartion,
         addWishList: addWishList,
         LoginModal: LoginModal,
-        validation: validation
+        validation: validation,
+        removeWishList: removeWishList
     }
 
    
