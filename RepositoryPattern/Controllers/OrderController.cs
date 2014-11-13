@@ -131,6 +131,30 @@ namespace RepositoryPattern.Controllers
                 return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult UpdateWishList(IEnumerable<OrderItems> items)
+        {
+            int cnt = 0;
+            if(items.Count() > 0)
+            {
+                 foreach( var item in items)
+                 {
+                     int result = _orderItemsRepo.UpdateOrderItems(item);
+                     cnt++;
+                 }
+                 if (cnt == items.Count())
+                 {
+                     return Json("success", JsonRequestBehavior.AllowGet);
+                 }
+                 if (cnt != items.Count())
+                 {
+                     return Json("error", JsonRequestBehavior.AllowGet);
+                 }
+                 return Json("error", JsonRequestBehavior.AllowGet);
+            }
+            else 
+                return Json("empty", JsonRequestBehavior.AllowGet); 
+        }
+
 
         private string RenderRazorViewToString(string viewName, object model)
         {

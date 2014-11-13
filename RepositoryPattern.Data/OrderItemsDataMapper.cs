@@ -50,7 +50,7 @@ namespace RepositoryPattern.Data
 
         public void Update(OrderItems item)
         {
-            throw new NotImplementedException();
+            
         }
 
         public int InsertOrderItems(OrderItems items)
@@ -186,6 +186,36 @@ namespace RepositoryPattern.Data
                 try
                 {
                     var i = cn.Query<int>(sql, new {Id =Id }).FirstOrDefault();
+                    return i;
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return -2;
+                }
+            }
+        }
+
+
+        public int UpdateOrderItems(OrderItems items)
+        {
+            var param = new
+            {
+                ID = items.ID,
+                Quantity = items.Quantity,
+            };
+
+            var sql = @"DECLARE @MyTableVar table(ID int)
+                        UPDATE OrderItem
+                        SET ort_quantity = @Quantity OUTPUT inserted.ort_id into @MyTableVar
+                        WHERE ort_id = @ID
+                        Select ID from  @MyTableVar";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    int i = cn.Query<int>(sql, param).FirstOrDefault();
                     return i;
                 }
 

@@ -1,1 +1,47 @@
-﻿
+﻿@model IEnumerable<RepositoryPattern.Models.WishListDisplay>
+@{
+    var imgpath = "~/Images/WallImages/imagepath/";
+} 
+<div class="col-sm-8">
+             <table class="table table-bordered" id="tblWishList">
+                 <thead>
+                     <tr class="success">
+                         <th>Picture</th><th>Name</th><th>Variation</th><th>Quantity</th><th>Remove</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    @if(Model != null)
+                    {
+                     foreach(var items in Model)
+                     {
+                     <tr id="rwWishlist_@items.OrderItems.ID">
+                         <td><img  style="height:auto; width:auto; max-width:40px; max-height:40px;" src="@Url.Content(imgpath + items.Picture.FilePath)"></td>
+                         <td>@Html.Label(items.Product.Name)</td>
+                         @if(items.ProductVariation.ID > 0)
+                         {
+                         <td>@Html.Label(items.ProductVariation.Description)</td>
+                         }
+                         @if (items.ProductVariation.ID == 0)
+                         {
+                             <td>@Html.Label(" ")</td>
+                         }
+                         <td>
+                             @Html.TextBox("Quantity-" + items.OrderItems.ID,items.OrderItems.Quantity)
+                             @Html.Hidden("hidOrderItems",items.OrderItems.ID)
+                         </td>
+                         <td><a href="#" id="btnWishlist" onclick="catalog.removeWishList(@items.OrderItems.ID)"><span class="glyphicon glyphicon-trash"></span></a></td>
+                     </tr>
+                     }
+                  }
+                 
+                 </tbody>
+            </table>
+              @if (Model == null)
+                  {
+                       <div>No Product In Wish List</div> <br />
+                  }
+             <div class="col-sm-8">
+                 <a href="@Url.Action("Index","Home")" class="btn btn-primary"><span class="glyphicon glyphicon-backward"></span> Continue Shopping</a>
+                 <span class="mynewspace"></span>
+                 <button class="btn btn-primary" id="updateWishList">Update WishList</button></div>
+          </div>

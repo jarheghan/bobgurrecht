@@ -27,10 +27,10 @@
          @Html.Action("SideMenu","Common",new{Id= ss})
 
          <!-- Thiis is the begining of the product details information -->
-         <div class="col-sm-4" id="proimg">
+         <div class="col-lg-4" id="proimg">
              <img src="@Url.Content(imgpath + "/" + @Model.Picture.FilePath)" >
          </div>
-         <div class="col-sm-4">
+         <div class="col-lg-4" id="proinfo">
              <h3>@Model.Product.Name</h3>
              <p>@Model.Product.SKU</p>
              <hr>
@@ -53,8 +53,8 @@
            	</div>
            	</div>
          <!-- This is the end of the product details page -->
-         <br>
              <div class="col-sm-8 pull-right">
+             <br>
                  <div class="col-sm-3">
                      <h4>ADDITIONAL INFO</h4>
                  </div>

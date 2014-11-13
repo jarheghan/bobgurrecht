@@ -56,9 +56,13 @@ html
     padding-left: 15px;
     font-size:18px;
 }
+#footer-wrapper {
+width:100%;
+}
 
 footer {
   width: 100%;
+  background-color: #7392c1;
 }
 
 .panel-footer {
@@ -98,7 +102,9 @@ text-align: left;
   margin-right: 90px;
 }
 #cform {
-  margin-left: 100px;
+  width:100%;
+  margin-left: 85px;
+  padding:20px;
   border-style: solid;
   border-padding: 5px;
   border-color: #d1d3d4;
@@ -134,11 +140,15 @@ width: 30%;
 .col-md-3 {
 width: 30%;
 }
-#banner {
+#banner h3 {
   background-color: #ffda51;
-  width: 100%;
+  margin-top: 1px;
   padding: 10px;
   text-align: center;
+  border-style: solid;
+  border-color: #ffda51;
+  border-width: 1px;
+  border-radius: 10px;
 }
 #msidebar{
   background-color: #f1f2f2;
@@ -151,10 +161,11 @@ width: 30%;
   margin-top: 20px;
 }
 #proimg {
+  width: 340px;
   margin-left: 70px;
-  padding:2px;
-  border:1px solid;
-  border-color: #7793bc;
+}
+#proinfo {
+margin-left: 70px;
 }
 #poption {
   background-color: #edeef1;
@@ -257,4 +268,18 @@ font-size: 12px;
 }
 #bottom {
 background-color: #e6eaef;
+padding:10px;
+}
+#bottom p {
+margin-left: 15px;
+}
+#bottom h1 {
+margin-left: 15px;
+text-align: center;
+}
+#mdimg {
+margin-left: -17px;
+}
+#lady {
+margin-top: 20px;
 }

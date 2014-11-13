@@ -145,7 +145,7 @@ var catalog = (function () {
      title: "Register Customer/Sign In",
      autoOpen: false,
  })
- $('#updateWishList').click(function () {
+ $('body').on('click','#updateWishList',function () {
      catalog.updateWishList();
  })
     $('#btnProdVariation').click(function () {
@@ -166,7 +166,6 @@ var catalog = (function () {
             init: function () {
                 this.on("maxfilesexceeded", function (data) {
                     var res = eval('(' + data.xhr.responseText + ')');
-
                 });
                 this.on("success", function (file, response) {
                     var addHiddenValue = Dropzone.createElement('<input type="hidden" name="PictureID" id="pic_idx" value="' + response.PictureId + '"/>');
@@ -342,7 +341,6 @@ var catalog = (function () {
             cache: false,
             async: false,
             success: function (val) {
-                debugger;
                 if (val.Type === "2") {
                     var $error = $('body').find('#divErrorMessage');
                     $error.empty();
@@ -380,27 +378,46 @@ var catalog = (function () {
 
     var updateWishList = function () {
         var $textbox = $('#tblWishList').find('tr');
+        var myitems = [];
+        var OrderItem = {};
         $.each($textbox, function (key, value) {
-            alert($(value).find('input:text').val() + ', ' + 'Hidded ID ' + $(value).find('input:hidden').val());
+            var txt = $(value).find('input:hidden').val();
+            var id = $(value).find('input:text').val()
+            if (txt !== undefined && id !== undefined) {
+                var OrderItem = {
+                    ID: txt,
+                    Quantity: id,
+                };
+                myitems.push(OrderItem);
+            }
+           
         })
-        //$.ajax({
-        //    url: "/Order/RemoveFromWishList11?Id=" + i,
-        //    type: "POST",
-        //    datatype: 'json',
-        //    contentType: 'application/json',
-        //    data: JSON.stringify(data),
-        //    cache: false,
-        //    async: false,
-        //    success: function (val) {
-               
-        //        if (val === "success") {
-                   
-        //        }
-        //        if (val === "failure") {
-        //            $.messager.alert("The record was not deleted");
-        //        }
-        //    }
-        //});
+
+        var datas = {
+            items: myitems
+        }
+       
+        $.ajax({
+            url: "/Order/UpdateWishList",
+            type: "POST",
+            datatype: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(datas),
+            cache: false,
+            async: false,
+            success: function (val) {
+                if (val === "success") {
+                    $.get('/Common/MainWishList', function (data) {
+                        $('#wlContainer').empty();
+                        $('#wlContainer').html(data);
+                    })
+                    $.messager.alert("WishList was successfully updated.");
+                }
+                if (val === "error") {
+                    $.messager.alert("The record was not Updated");
+                }
+            }
+        });
     }
 
     var validation = function () {
