@@ -125,9 +125,9 @@ namespace RepositoryPattern.Data
             };
             using (IDbConnection cn = Connection)
             {
-                var sql = @"INSERT INTO CustomerInfo (cus_id, cus_guid, cus_email, cus_first_name, cus_last_name, cus_address1, cus_address2,
+                var sql = @"INSERT INTO CustomerInfo (cus_id, cus_guid, cus_email, cus_first_name, cus_last_name, cus_address1, cus_address2,cus_company,
                                                         cus_city,cus_state,cus_country,cus_zip,cus_phone,cus_active,cus_add_user,cus_add_date,cus_delete_flag)
-                                                       Values(@ID,@CustomerGuid,@Email,@FirstName,@LastName,@Address1,@Address2,@City,@State
+                                                       Values(@ID,@CustomerGuid,@Email,@FirstName,@LastName,@Address1,@Address2,@Company    ,@City,@State
                                                                ,@Country,@ZipCode,@Phone,@Active,@AddUser,@AddDate,@DeleteFlag)
                                                             select @@ROWCOUNT";
                             

@@ -25,6 +25,10 @@
     <div class="panel panel-default">
         <div class="panel-heading"><h4>Customer Information</h4></div>
         <div class="panel-body">
+             <div class="form-group">
+                @Html.Label("Company Name", new { @class = "sr-only" })
+                @Html.TextBox("Company", null, new { @class = "form-control", placeholder = "Company Name" })
+            </div>
             <div class="form-group">
                 @Html.Label("First Name", new { @class = "sr-only" })
                 @Html.TextBox("FirstName", null, new { @class = "form-control", placeholder = "FirstName" })
