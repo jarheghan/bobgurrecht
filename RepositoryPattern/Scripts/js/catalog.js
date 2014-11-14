@@ -145,7 +145,9 @@ var catalog = (function () {
      title: "Register Customer/Sign In",
      autoOpen: false,
  })
-
+ $('body').on('click','#updateWishList',function () {
+     catalog.updateWishList();
+ })
     $('#btnProdVariation').click(function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
     })
@@ -164,7 +166,6 @@ var catalog = (function () {
             init: function () {
                 this.on("maxfilesexceeded", function (data) {
                     var res = eval('(' + data.xhr.responseText + ')');
-
                 });
                 this.on("success", function (file, response) {
                     var addHiddenValue = Dropzone.createElement('<input type="hidden" name="PictureID" id="pic_idx" value="' + response.PictureId + '"/>');
@@ -305,7 +306,9 @@ var catalog = (function () {
             async: false,
             success: function (val) {
                 if (val.Message === "success") {
-                    $.messager.alert('<div><span class="alert alert-success">Item has been added to the WishList</span></div>');
+                    $('#wish-btn').html(val.View);
+                    //$('body').find('#wish-btn').html('<a href="#">This is cool </a>');
+                    //alert($('#wish-btn').contents())
                    
                 }
                 if (val.Message === "error") {
@@ -318,8 +321,6 @@ var catalog = (function () {
                 if (val.Message === "authenticate") {
                     dialogauthentication.dialog('open').load('/Account/CustomerRegistration');
                 }
-                $('#wish-btn').empty();
-                $('#wish-btn').html(val)
             }
 
         })
@@ -340,7 +341,6 @@ var catalog = (function () {
             cache: false,
             async: false,
             success: function (val) {
-                debugger;
                 if (val.Type === "2") {
                     var $error = $('body').find('#divErrorMessage');
                     $error.empty();
@@ -348,6 +348,73 @@ var catalog = (function () {
                 }
                 if (val.Type === "1") {
                     window.location.href = val.Message;
+                }
+            }
+        });
+    }
+
+    var removeWishList = function (i) {
+        $.ajax({
+            url: "/Order/RemoveFromWishList?Id="+ i,
+            type: "GET",
+            //datatype: 'json',
+            //contentType: 'application/json',
+            //data: JSON.stringify(data),
+            cache: false,
+            async: false,
+            success: function (val) {
+                debugger;
+                if (val === "success") {
+                    $('#rwWishlist_' + i).remove();
+                }
+                if (val === "failure") {
+                    $.messager.alert("The record was not deleted");
+                }
+            }
+        });
+
+        
+    }
+
+    var updateWishList = function () {
+        var $textbox = $('#tblWishList').find('tr');
+        var myitems = [];
+        var OrderItem = {};
+        $.each($textbox, function (key, value) {
+            var txt = $(value).find('input:hidden').val();
+            var id = $(value).find('input:text').val()
+            if (txt !== undefined && id !== undefined) {
+                var OrderItem = {
+                    ID: txt,
+                    Quantity: id,
+                };
+                myitems.push(OrderItem);
+            }
+           
+        })
+
+        var datas = {
+            items: myitems
+        }
+       
+        $.ajax({
+            url: "/Order/UpdateWishList",
+            type: "POST",
+            datatype: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(datas),
+            cache: false,
+            async: false,
+            success: function (val) {
+                if (val === "success") {
+                    $.get('/Common/MainWishList', function (data) {
+                        $('#wlContainer').empty();
+                        $('#wlContainer').html(data);
+                    })
+                    $.messager.alert("WishList was successfully updated.");
+                }
+                if (val === "error") {
+                    $.messager.alert("The record was not Updated");
                 }
             }
         });
@@ -472,7 +539,9 @@ var catalog = (function () {
         editProdtionVartion: editProdtionVartion,
         addWishList: addWishList,
         LoginModal: LoginModal,
-        validation: validation
+        validation: validation,
+        removeWishList: removeWishList,
+        updateWishList: updateWishList
     }
 
    

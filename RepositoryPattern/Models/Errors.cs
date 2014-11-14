@@ -9,5 +9,6 @@ namespace RepositoryPattern.Models
     {
         public string Type { get; set; }
         public string Message { get; set; }
+        public object View { get; set; }
     }
 }

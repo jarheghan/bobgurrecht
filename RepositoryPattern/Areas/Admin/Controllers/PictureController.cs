@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class PictureController : BaseController
     {
         //

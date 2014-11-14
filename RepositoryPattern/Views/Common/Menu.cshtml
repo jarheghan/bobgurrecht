@@ -22,9 +22,9 @@
     var submenu = Model.Where(x => x.ParentCategoryID != null);
     
  }
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
          <ul class="nav navbar-nav navbar-right">
               <li><a href="@Url.Action("AboutUs","Home")">About Us</a></li>
               <li><a href="@Url.Action("ContactUs","Home")">Contact Us</a></li>
@@ -57,7 +57,7 @@
     </div>
     <div class="help-container col-md-4 pull-right">
       <h3>Need Help? Call <strong><a href="tel:5058840133">(505) 884-0133</a></strong></h3>
-      <p>(Mon-Fri 7am-5pm)</p>
+      <p id="hours">(Mon-Fri 8am-5pm)</p>
     </div>
     </div>
   </div>
@@ -122,9 +122,17 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+          @if(ViewBag.RemoveWL == false)
+          {
         <li id="wish-btn">
            @Html.Action("MiniWishList","Common")
         </li>
+          }
+          @if(ViewBag.RemoveWL == true)
+          {
+        <li id="wish-btn">
+        </li>
+          }
         <li class="divider"></li>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -5,6 +5,7 @@ using RepositoryPattern.Model.Sales;
 using RepositoryPattern.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -96,9 +97,11 @@ namespace RepositoryPattern.Controllers
                         {
                             _orderItemsRepo.InsertOrderItems(orderItems);
                             var orderItems1 = _orderItemsRepo.GetOrderItemsByOrderID(orders.ID);
-                            return PartialView("MiniWishList", orderItems1.Count());
-                            //err.Message = "success";
-                            //return Json(err, JsonRequestBehavior.AllowGet);
+                            string html = RenderRazorViewToString("MiniWishList", orderItems1.Count());
+                            
+                            err.Message = "success";
+                            err.View = html;
+                            return Json(err, JsonRequestBehavior.AllowGet);
                         }
                         err.Message = "Duplicate";
                         return Json(err, JsonRequestBehavior.AllowGet);
@@ -119,6 +122,54 @@ namespace RepositoryPattern.Controllers
             }
         }
 
+        public ActionResult RemoveFromWishList(int Id)
+        {
+            int result = _orderItemsRepo.DeleteOrderItems(Id);
+            if(result > 0)
+             return Json("success", JsonRequestBehavior.AllowGet);
+            else
+                return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UpdateWishList(IEnumerable<OrderItems> items)
+        {
+            int cnt = 0;
+            if(items.Count() > 0)
+            {
+                 foreach( var item in items)
+                 {
+                     int result = _orderItemsRepo.UpdateOrderItems(item);
+                     cnt++;
+                 }
+                 if (cnt == items.Count())
+                 {
+                     return Json("success", JsonRequestBehavior.AllowGet);
+                 }
+                 if (cnt != items.Count())
+                 {
+                     return Json("error", JsonRequestBehavior.AllowGet);
+                 }
+                 return Json("error", JsonRequestBehavior.AllowGet);
+            }
+            else 
+                return Json("empty", JsonRequestBehavior.AllowGet); 
+        }
+
+
+        private string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
+        }
 
     }
 }

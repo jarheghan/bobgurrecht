@@ -1,0 +1,15 @@
+﻿@model IEnumerable<RepositoryPattern.Models.WishListDisplay>
+@{
+    ViewBag.Title = "WishListCart";
+    Layout = "~/Views/Shared/_Root.cshtml";
+    var imgpath = "~/Images/WallImages/imagepath/";
+}
+
+<div class="container">
+ @Html.Action("Menu", "Common", new {removeWL=true})
+     <div class="row">
+         @Html.Action("SideMenu", "Common", new {Id = 0 })
+         <div id="wlContainer">@Html.Action("MainWishList", "Common")</div>
+     </div>
+</div>
+<br />

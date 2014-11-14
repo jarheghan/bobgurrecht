@@ -50,7 +50,7 @@ namespace RepositoryPattern.Data
 
         public void Update(OrderItems item)
         {
-            throw new NotImplementedException();
+            
         }
 
         public int InsertOrderItems(OrderItems items)
@@ -150,6 +150,81 @@ namespace RepositoryPattern.Data
                 }
             }
             return false;
+        }
+
+
+        public OrderItems GetSingleOrderItems(int OrderItemID)
+        {
+            var sql = @"select * from orderItem where ort_id = @OrderItemID";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Query<dynamic>(sql, new { OrderItemID = OrderItemID });
+                   
+                      var orderitem = Map(i);
+
+                      return orderitem;
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return null;
+                }
+            }
+        }
+
+
+        public int DeleteOrderItems(int Id)
+        {
+            var sql = @"DECLARE @TmpTable TABLE(ID int)
+                        delete from OrderItem OUTPUT DELETED.ort_id into @TmpTable 
+                        where ort_id = @Id   Select ID from @TmpTable";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Query<int>(sql, new {Id =Id }).FirstOrDefault();
+                    return i;
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return -2;
+                }
+            }
+        }
+
+
+        public int UpdateOrderItems(OrderItems items)
+        {
+            var param = new
+            {
+                ID = items.ID,
+                Quantity = items.Quantity,
+            };
+
+            var sql = @"DECLARE @MyTableVar table(ID int)
+                        UPDATE OrderItem
+                        SET ort_quantity = @Quantity OUTPUT inserted.ort_id into @MyTableVar
+                        WHERE ort_id = @ID
+                        Select ID from  @MyTableVar";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    int i = cn.Query<int>(sql, param).FirstOrDefault();
+                    return i;
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return -2;
+                }
+            }
         }
     }
 }

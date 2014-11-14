@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : BaseController
     {
         public CategoryController(ICategoryRepository categoryRepository

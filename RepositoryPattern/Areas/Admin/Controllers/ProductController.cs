@@ -10,7 +10,7 @@ using log4net;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductController : BaseController
     {
         ILog logger = LogManager.GetLogger(typeof(ProductController));
