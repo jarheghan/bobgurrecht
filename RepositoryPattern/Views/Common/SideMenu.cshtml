@@ -3,11 +3,11 @@
     var mainmenu = Model.Where(x => x.ParentCategoryID == ViewBag.catId);
 }
 
-<div class="col-sm-2" id="msidebar">
-        <div>
-          <h5>Category</h5>
-         
-                  <ul class="nav navbar-nav" >
+<!--<div class="col-sm-2" id="msidebar">-->
+<div class="col-sm-2 category-products">
+     <h4 class="">Category</h4>
+          <div class="single-nav">
+                  <ul class="nav" >
                       @if (Model != null)
                       {
                           foreach (var cat in mainmenu)
@@ -17,8 +17,7 @@
                           }
 
                      }
-                      <li class="divider"></li>
+                     @* <li class="divider"></li>*@
                   </ul>
-    
       </div>
     </div>
