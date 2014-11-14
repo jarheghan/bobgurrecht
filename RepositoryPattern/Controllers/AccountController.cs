@@ -222,7 +222,7 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult RecoverForgottenPassword()
         {
-            WebSecurity.UserExists(
+            //WebSecurity.UserExists(
             return null;
         }
     }

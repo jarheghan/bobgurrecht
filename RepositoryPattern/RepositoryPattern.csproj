@@ -853,6 +853,7 @@
     <Content Include="Views\Shared\_categorypartial.cshtml" />
     <Content Include="Views\Account\CustomerRegistration.cshtml" />
     <Content Include="Views\Home\WishListCart.cshtml" />
+    <Content Include="Views\Common\SideMenuFullCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />
