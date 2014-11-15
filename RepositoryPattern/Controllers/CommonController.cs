@@ -112,6 +112,13 @@ namespace RepositoryPattern.Controllers
             return PartialView(cat);
         }
 
+
+        public ActionResult SideMenuFullCategory()
+        {
+            IEnumerable<Category> cat = _categoryRepository.GetAllCategories();
+            return PartialView(cat);
+        }
+
         public ActionResult DisplayFeatureProduct()
         {
             var feautureProducts = _productRepository.GetAllFeatureProduct();

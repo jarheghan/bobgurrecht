@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<RepositoryPattern.Model.Catalog.Category>
 @{
-    var mainmenu = Model.Where(x => x.ParentCategoryID == ViewBag.catId);
+    //var mainmenu = Model.Where(x => x.ParentCategoryID == ViewBag.catId);
+    var mainmenu = Model.Where(x => x.ParentCategoryID == null);
+    var submenu = Model.Where(x => x.ParentCategoryID != null);
+    var subsubmenu = from p in submenu
+                     group p by p.ParentCategoryID into g
+                     where g.All(p => p.ParentCategoryID != p.ID)
+                     select new { Category = g.Key, SubCategory = g };
 }
 
 <!--<div class="col-sm-2" id="msidebar">-->

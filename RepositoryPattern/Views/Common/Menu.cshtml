@@ -20,12 +20,27 @@
 
     var mainmenu = Model.Where(x => x.ParentCategoryID == null);
     var submenu = Model.Where(x => x.ParentCategoryID != null);
+    var mainmenu1 = Model.Where(x => x.ParentCategoryID == null).Select(x => x.ID);
+    var realSubMenu = from c in mainmenu
+                      join p in Model on c.ID equals p.ParentCategoryID into rs
+                      select new { sub = (rs.Where(x => x.ID != 0)) };
+                      
+                                      
+    var subsubmenu = from p in submenu
+                     group p by p.ParentCategoryID into g
+                     where g.All(p => p.ParentCategoryID != p.ID)
+                     select new { Category = g.Key, SubCategory = g };
+                     
     
  }
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
+<<<<<<< HEAD
            <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
+=======
+      <div class="navbar-header">
+>>>>>>> adeca7751c026df5cdfcd94c694643714612249e
       <button type="button" class="navbar-toggle active" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>

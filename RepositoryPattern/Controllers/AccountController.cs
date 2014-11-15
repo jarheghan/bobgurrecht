@@ -219,5 +219,11 @@ namespace RepositoryPattern.Controllers
             }
             return null;
         }
+
+        public ActionResult RecoverForgottenPassword()
+        {
+            //WebSecurity.UserExists(
+            return null;
+        }
     }
 }
