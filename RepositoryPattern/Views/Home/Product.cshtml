@@ -17,14 +17,15 @@
   SelectList sl = new SelectList(Prdvar, "ID", "DesciptSize");
    var category =  CommonHelpers.GetAllCategory();
    var catID = category.Where(c => c.ID == ViewBag.catID).Select(x =>x.ParentCategoryID).FirstOrDefault();
-   int ss = catID ?? default(int);
+   int ss = ViewBag.catID ?? default(int);
   } 
 @model RepositoryPattern.Models.ProductGroup
 
 <div class="container">
  @Html.Action("Menu","Common")
      <div class="row">
-         @Html.Action("SideMenu","Common",new{Id= ss})
+           @*Html.Action("SideMenu","Common",new{Id= ss})*@
+         @Html.Action("SideMenuFullCategory","Common",new{Id= ss})
 
          <!-- Thiis is the begining of the product details information -->
          <div class="col-lg-4" id="proimg">

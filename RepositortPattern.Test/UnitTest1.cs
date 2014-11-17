@@ -6,6 +6,9 @@ using RepositoryPattern.Model;
 using System.Collections.Generic;
 using RepositoryPattern.Model.Catalog;
 using System.Linq;
+using RepositoryPattern.Model.Media;
+using RepositoryPattern.Model.Sales;
+using RepositoryPattern.Model.Customers;
 namespace RepositortPattern.Test
 {
     [TestClass]
@@ -13,6 +16,15 @@ namespace RepositortPattern.Test
     {
         public IProductRepository _productRepo;
         public ICategoryRepository _categoryRepo;
+
+       
+        private readonly IProductRepository _productRepository;
+        private  ICategoryRepository _categoryRepository;
+        private readonly IProductVariationRepository _prdVariationRepo;
+        private readonly IPictureRepository _pictureRepo;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IOrderItemsRepository _orderItemRepository;
+        private readonly IUserRepository _userRepository;
 
         //[TestMethod]
         //public void insert_product_into_the_product_table()
@@ -126,9 +138,19 @@ namespace RepositortPattern.Test
         }
 
         [TestMethod]
-        public void test_to_see_form_identity_when_a_user_login()
+        public void test_to_grt_all_category()
         {
-
+            _categoryRepository = new CategoryDataMapper();
+            var category = _categoryRepository.GetAllCategories();
+            var mainmenu = category.Where(x => x.ParentCategoryID == null);
+            var submenu = from c in category
+                          from m in mainmenu
+                          where m.ID == c.ParentCategoryID
+                          select new { c };
+            var subsubMenu = from d in category
+                             from s in submenu
+                             where s.c.ID == d.ParentCategoryID
+                             select new { d };
 
         }
     }

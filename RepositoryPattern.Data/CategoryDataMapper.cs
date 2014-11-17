@@ -185,9 +185,27 @@ namespace RepositoryPattern.Data
             }
         }
 
-        public IEnumerable<ProductCategory> GetProductCategoriesByProductID(int productId)
+        public ProductCategory GetProductCategoriesByProductID(int productId)
         {
-            throw new NotImplementedException();
+            ProductCategory pcm = new ProductCategory();
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var productcategory = cn.Query<dynamic>("select * from ProductCategoryMapping where pcm_prd_id = @productId",
+                        new { productId = productId }).FirstOrDefault();
+
+                    if(productcategory != null)
+                     pcm = Map(productcategory, "");
+                    
+                    return pcm;
+                }
+                catch (Exception ex)
+                {
+                    log.Error("Category Error:", ex);
+                    return null;
+                }
+            }
         }
 
         public Category GetCategoryById(int categoryId)

@@ -113,10 +113,14 @@ namespace RepositoryPattern.Controllers
         }
 
 
-        public ActionResult SideMenuFullCategory()
+        public ActionResult SideMenuFullCategory(int Id)
         {
-            IEnumerable<Category> cat = _categoryRepository.GetAllCategories();
-            return PartialView(cat);
+            ProductSideMenu psm = new ProductSideMenu();
+            Category cat = _categoryRepository.GetCategoryById(Id);
+            var multipleCat = _categoryRepository.GetAllCategories();
+            psm.SingleCategory = cat;
+            psm.MultipleCategory = multipleCat;
+            return PartialView(psm);
         }
 
         public ActionResult DisplayFeatureProduct()
@@ -128,10 +132,12 @@ namespace RepositoryPattern.Controllers
                                                 var prdPic = _productRepository.GetProductPictureByID(x.ID);
                                                 var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
                                                 var product = _productRepository.GetProductByID(x.ID);
+                                                var prdCat1 = _categoryRepository.GetProductCategoriesByProductID(x.ID);
                                                 return new ProductCategory()
                                                 {
                                                     Picture = pic,
-                                                    Product = product
+                                                    Product = product,
+                                                    CategoryID = prdCat1.CategoryID
                                                 };
                                             });
             return View(prdcat);
@@ -213,7 +219,26 @@ namespace RepositoryPattern.Controllers
             }
             return PartialView();
         }
-       
+
+        public ActionResult DisplayTopProductRequested()
+        {
+            var feautureProducts = _productRepository.GetAllProduct();
+            IEnumerable<ProductCategory> prdcat = feautureProducts
+                                        .Select(x =>
+                                        {
+                                            var prdPic = _productRepository.GetProductPictureByID(x.ID);
+                                            var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
+                                            var product = _productRepository.GetProductByID(x.ID);
+                                            var prdCat1 = _categoryRepository.GetProductCategoriesByProductID(x.ID);
+                                            return new ProductCategory()
+                                            {
+                                                Picture = pic,
+                                                Product = product,
+                                                CategoryID = prdCat1.CategoryID
+                                            };
+                                        });
+            return View(prdcat);
+        }
 
     }
 }

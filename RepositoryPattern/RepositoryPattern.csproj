@@ -367,6 +367,7 @@
     </Compile>
     <Compile Include="Models\Errors.cs" />
     <Compile Include="Models\ProductGroup.cs" />
+    <Compile Include="Models\ProductSideMenu.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\WishListDisplay.cs" />
     <Compile Include="Models\WishListItems.cs" />
@@ -854,6 +855,7 @@
     <Content Include="Views\Account\CustomerRegistration.cshtml" />
     <Content Include="Views\Home\WishListCart.cshtml" />
     <Content Include="Views\Common\SideMenuFullCategory.cshtml" />
+    <Content Include="Views\Order\WishListPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

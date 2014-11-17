@@ -1,12 +1,14 @@
-﻿@model IEnumerable<RepositoryPattern.Model.Catalog.Category>
+﻿@model RepositoryPattern.Models.ProductSideMenu
 @{
-    //var mainmenu = Model.Where(x => x.ParentCategoryID == ViewBag.catId);
-    var mainmenu = Model.Where(x => x.ParentCategoryID == null);
-    var submenu = Model.Where(x => x.ParentCategoryID != null);
-    var subsubmenu = from p in submenu
-                     group p by p.ParentCategoryID into g
-                     where g.All(p => p.ParentCategoryID != p.ID)
-                     select new { Category = g.Key, SubCategory = g };
+
+    var mainmenu = Model.SingleCategory;
+    var submenu = from c in Model.MultipleCategory
+                  where mainmenu.ID == c.ParentCategoryID
+                  select new { c };
+    var subsubMenu = from d in Model.MultipleCategory
+                     from s in submenu
+                     where s.c.ID == d.ParentCategoryID
+                     select new { d };
 }
 
 <!--<div class="col-sm-2" id="msidebar">-->
@@ -14,13 +16,29 @@
      <h4 class="">Category</h4>
           <div class="single-nav">
                   <ul class="nav" >
-                      @if (Model != null)
+                      @{if (Model != null)
                       {
-                          foreach (var cat in mainmenu)
-                          {
+                        
                              
-                          <li><a href="@Url.Action("CategoryProduct", "Home", new { Id = cat.ID })">@cat.Name</a></li>
+                          <li><a href="@Url.Action("CategoryProduct", "Home", new { Id = mainmenu.ID })">@mainmenu.Name </a>
+                              <div>
+                                  @if (submenu.Any(a => a.c.ParentCategoryID == mainmenu.ID) == true)
+                                  {
+                                     foreach ( var s in submenu)
+                                     {
+                                     <span><a href="@Url.Action("CategoryProduct", "Home", new { Id = s.c.ID})">@s.c.Name</a>
+                                         @if(subsubMenu.Any(a => a.d.ParentCategoryID == s.c.ID) == true){
+                                             foreach(var sub in subsubMenu){
+                                            <span><a href="@Url.Action("CategoryProduct", "Home", new { Id = sub.d.ID})">@sub.d.Name</a></span>
+                                             }
+                                         }
+                                     </span> 
+                                     }
+                                  }
+                              </div>
+                          </li>
                           }
+                      
 
                      }
                      @* <li class="divider"></li>*@

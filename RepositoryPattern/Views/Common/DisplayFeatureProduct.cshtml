@@ -35,7 +35,7 @@
     <div class="col-sm-3">
          @{ if(cat.Picture!=null)
          {  
-           <a href="@Url.Action("Product", "Home", new {prd=cat.Product.ID, catID = default(int) })"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/" + cat.Picture.FilePath)"></a>
+           <a href="@Url.Action("Product", "Home", new {prd=cat.Product.ID, catID =cat.CategoryID??default(int)})"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/" + cat.Picture.FilePath)"></a>
          }
          else{<a href="#"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(csspart + "/img/I08000.jpg")"></a>}
          }
