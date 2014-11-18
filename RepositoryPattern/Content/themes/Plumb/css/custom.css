@@ -52,7 +52,7 @@ html
   max-height:240px;
   max-width: 150px
 }
-  /*style="height:auto; width:auto; max-width:300px; max-height:100px;" */
+  
 .col-md-4 h3{
     position: relative;
     min-height: 10px;
@@ -331,7 +331,7 @@ margin-top: 20px;
 padding:5px;
 }
 .nlabel {
-margin-left: 80px;
+margin-left: 90px;
 }
 .dlabel {
 width: 100%;

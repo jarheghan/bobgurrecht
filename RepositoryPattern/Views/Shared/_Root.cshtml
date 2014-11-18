@@ -1,5 +1,10 @@
-﻿@{
+﻿@using ClientDependency.Core.Mvc
+@{
     Layout = "~/Views/Shared/_RootHead.cshtml";
+}
+@{
+    Html.RequiresCss("bootstrap/bootstrapValidator.css", "Content", 5);
+    Html.RequiresJs("bootstrapValidator.js", "Custom", 1);
 }
 
 <div id="page">
@@ -58,6 +63,7 @@
      }
 </div>
 <div id="test1"></div>
+<div id="authentication"></div>
 
   @if(IsSectionDefined("scripts"))
     {

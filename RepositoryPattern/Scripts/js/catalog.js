@@ -144,6 +144,12 @@ var catalog = (function () {
  dialogauthentication = $('#authentication').dialog({
      title: "Register Customer/Sign In",
      autoOpen: false,
+     modal: true,
+ })
+ dialogauthentication1 = $('<div></div>').dialog({
+     title: "Register Customer/Sign In",
+     autoOpen: false,
+     modal: true,
  })
  $('body').on('click','#updateWishList',function () {
      catalog.updateWishList();
@@ -152,7 +158,7 @@ var catalog = (function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
     })
     $('#btnProdVariationedit').click(function () {
-        dialogEditProductVariation1.dialog('open').load('/Admin/Common/ProductVariation');
+        dialogEditProductVariation.dialog('open').load('/Admin/Common/ProductVariation');
     })
 
     var messagealert = function (msg) {
@@ -214,6 +220,11 @@ var catalog = (function () {
         $('#test1').dialog('open').load('/Account/SignInModal');
     });
    
+    $(document).on('click', '#btnRegisterCustomer', function () {
+        dialogauthentication1.dialog('open').load('/Account/CustomerRegistration');
+        $('#test1').dialog('close');
+    })
+
     var editProductImage = function () {
         $("div#mydropzone").dropzone({
             url: "/Admin/Picture/SaveUploadedFile",
@@ -504,7 +515,6 @@ var catalog = (function () {
             }
         }).on('success.form.bv', function (e) {
             e.preventDefault();
-            debugger;
             var $form = $(e.target).serialize();
             $.ajax({
                 url: "/Account/RegisterCustomer",
