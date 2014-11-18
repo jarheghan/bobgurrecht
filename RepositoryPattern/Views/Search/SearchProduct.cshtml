@@ -1,0 +1,36 @@
+﻿@model IEnumerable<RepositoryPattern.Model.Catalog.ProductCategory>
+@{
+    ViewBag.Title = "Search Product Results";
+    Layout = "~/Views/Shared/_Root.cshtml";
+    var csspart = "~/Content/themes/Plumb";
+    var imgpath = "~/Images/WallImages/imagepath";
+}
+
+
+<div class="container">
+ @Html.Action("Menu","Common")
+     @foreach(var prd in Model){
+    <div class="row">
+        <div class="col-md-3">
+            <div class="thumbnail">
+                @{if(prd.Picture != null){
+                <a href="@Url.Action("Product", "Home", new {prd=prd.Product.ID, catID =prd.CategoryID??default(int)})">
+                    <img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(imgpath + "/" + @prd.Picture.FilePath)">
+                </a>
+                }
+                else{<a href="@Url.Action("Product", "Home", new {prd=prd.Product.ID, catID =prd.CategoryID??default(int)})"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(csspart + "/img/I08000.jpg")"></a>}
+                }
+                
+            </div>
+        </div>
+        <div class="col-md-8 pull-right">
+            <div class="caption">
+                <h4>@prd.Product.Name</h4>
+                <p>@prd.Product.Description</p>
+                <p>@prd.Product.SKU</p>
+            </div>
+        </div>
+        
+    </div>
+     }
+</div>

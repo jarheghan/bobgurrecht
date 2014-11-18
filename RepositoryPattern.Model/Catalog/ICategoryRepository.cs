@@ -13,6 +13,7 @@ namespace RepositoryPattern.Model.Catalog
         IEnumerable<ProductCategory> GetProductCategoriesByCategoryID(int categoryId);
         ProductCategory GetProductCategoriesByProductID(int productId);
         ProductCategory GetProductCategoryByProductID(int productId);
+        bool ProdductCateogryExitByProductID(int productId);
         Category GetCategoryById(int categoryId);
         IEnumerable<Category> GetAllCategoriesDisplayedOnHomePage();
         IEnumerable<Category> GetAllCategoriesByParentCategoryId(int parentCategoryID);

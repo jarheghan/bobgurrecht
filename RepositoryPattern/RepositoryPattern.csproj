@@ -362,6 +362,7 @@
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -856,6 +857,8 @@
     <Content Include="Views\Home\WishListCart.cshtml" />
     <Content Include="Views\Common\SideMenuFullCategory.cshtml" />
     <Content Include="Views\Order\WishListPage.cshtml" />
+    <Content Include="Views\Common\DisplayTopProductRequested.cshtml" />
+    <Content Include="Views\Search\SearchProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

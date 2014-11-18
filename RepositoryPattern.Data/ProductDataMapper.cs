@@ -372,5 +372,29 @@ namespace RepositoryPattern.Data
 
             }
         }
+
+
+        public IEnumerable<Product> SearchProductByCriteria(string prdName)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                cn.Open();
+                List<Product> products = new List<Product>();
+                try
+                {
+                    var product = cn.Query<dynamic>(@" select * FROM Products
+                                                        where prd_name Like '%' + @prdName +  '%'", new { prdName = prdName });
+                    foreach (var p in product)
+                    {
+                        Product prd = Map(p);
+                        products.Add(prd);
+                    }
+                    return products.AsEnumerable();
+                }
+                catch { return null; }
+
+
+            }
+        }
     }
 }

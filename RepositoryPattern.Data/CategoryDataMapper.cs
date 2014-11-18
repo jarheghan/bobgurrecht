@@ -295,6 +295,8 @@ namespace RepositoryPattern.Data
             }
         }
 
+
+
         public void DeleteProductCategory(int productcategoryId)
         {
             throw new NotImplementedException();
@@ -353,6 +355,28 @@ namespace RepositoryPattern.Data
 
                 catch { };
                 return null;
+            }
+        }
+
+
+        public bool ProdductCateogryExitByProductID(int productId)
+        {
+            using (IDbConnection cn = Connection)
+            {
+                ProductCategory prdCat = new ProductCategory();
+                try
+                {
+                    var i = cn.Query<int>(@"select count(*) as cnt FROM ProductCategoryMapping where pcm_prd_id = @productId"
+                                        , new { productId = productId }).FirstOrDefault();
+
+                    if (i > 0)
+                        return true;
+                    else
+                    return false;
+                }
+
+                catch { };
+                return false;
             }
         }
     }

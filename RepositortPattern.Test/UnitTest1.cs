@@ -18,13 +18,13 @@ namespace RepositortPattern.Test
         public ICategoryRepository _categoryRepo;
 
        
-        private readonly IProductRepository _productRepository;
+        private  IProductRepository _productRepository;
         private  ICategoryRepository _categoryRepository;
-        private readonly IProductVariationRepository _prdVariationRepo;
-        private readonly IPictureRepository _pictureRepo;
-        private readonly IOrderRepository _orderRepository;
-        private readonly IOrderItemsRepository _orderItemRepository;
-        private readonly IUserRepository _userRepository;
+        private  IProductVariationRepository _prdVariationRepo;
+        private  IPictureRepository _pictureRepo;
+        private  IOrderRepository _orderRepository;
+        private  IOrderItemsRepository _orderItemRepository;
+        private  IUserRepository _userRepository;
 
         //[TestMethod]
         //public void insert_product_into_the_product_table()
@@ -152,6 +152,18 @@ namespace RepositortPattern.Test
                              where s.c.ID == d.ParentCategoryID
                              select new { d };
 
+        }
+
+        [TestMethod]
+        public void test_to_get_top_10_requested_product()
+        {
+            _orderItemRepository = new OrderItemsDataMapper();
+            var allOrderItem = _orderItemRepository.GetAllOrderItems();
+            var top10OrderItem = from p in allOrderItem
+                                 group p by p.ProductID into g
+                                 select new { ProductID = g.Key, ProductCount = g.Count()};
+
+            var sstop10 = top10OrderItem.Where(x => x.ProductCount > 2).Take(10);
         }
     }
 }

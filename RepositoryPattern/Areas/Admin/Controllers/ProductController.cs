@@ -135,7 +135,13 @@ namespace RepositoryPattern.Areas.Admin.Controllers
                     prdCat.ProductID = cat.Product.ID;
 
                     if (prdCat.CategoryID != 0)
+                    {
+                        bool result = _categoryRepository.ProdductCateogryExitByProductID(prdCat.ProductID??0);
+                        if(result == true)
                         _categoryRepository.UpdateProductCategory(prdCat);
+                        if (result == false)
+                            _categoryRepository.InsertProductCategory(prdCat);
+                    }
 
                     picProd.PictureID = cat.Product.PictureID;
                     picProd.ProductID = cat.Product.ID;

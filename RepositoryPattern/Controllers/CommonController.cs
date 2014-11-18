@@ -223,13 +223,21 @@ namespace RepositoryPattern.Controllers
         public ActionResult DisplayTopProductRequested()
         {
             var feautureProducts = _productRepository.GetAllProduct();
-            IEnumerable<ProductCategory> prdcat = feautureProducts
+            var allOrderItem = _orderItemRepository.GetAllOrderItems();
+            var top10OrderItem = from p in allOrderItem
+                                 group p by p.ProductID into g
+                                 select new { ProductID = g.Key, ProductCount = g.Count() };
+
+            var sstop10 = top10OrderItem.Where(x => x.ProductCount > 2).Take(10);
+
+
+            IEnumerable<ProductCategory> prdcat = sstop10
                                         .Select(x =>
                                         {
-                                            var prdPic = _productRepository.GetProductPictureByID(x.ID);
+                                            var prdPic = _productRepository.GetProductPictureByID(x.ProductID);
                                             var pic = _pictureRepository.GetPictureById(prdPic.PictureID);
-                                            var product = _productRepository.GetProductByID(x.ID);
-                                            var prdCat1 = _categoryRepository.GetProductCategoriesByProductID(x.ID);
+                                            var product = _productRepository.GetProductByID(x.ProductID);
+                                            var prdCat1 = _categoryRepository.GetProductCategoriesByProductID(x.ProductID);
                                             return new ProductCategory()
                                             {
                                                 Picture = pic,

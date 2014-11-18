@@ -93,7 +93,26 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<OrderItems> GetAllOrderItems()
         {
-            throw new NotImplementedException();
+            List<OrderItems> orderItems = new List<OrderItems>();
+            var sql = @"select * from orderItem";
+            using (IDbConnection cn = Connection)
+            {
+                try
+                {
+                    var i = cn.Query<dynamic>(sql);
+                    foreach (var orditem in i)
+                    {
+                        orderItems.Add(Map(orditem));
+                    }
+                    return orderItems.AsEnumerable();
+                }
+
+                catch (Exception ex)
+                {
+                    log.Error("Error Message", ex);
+                    return null;
+                }
+            }
         }
 
         public IEnumerable<OrderItems> GetOrderItemsByOrderID(int Id)
