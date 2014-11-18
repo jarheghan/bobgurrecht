@@ -859,6 +859,8 @@
     <Content Include="Views\Order\WishListPage.cshtml" />
     <Content Include="Views\Common\DisplayTopProductRequested.cshtml" />
     <Content Include="Views\Search\SearchProduct.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Error500.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Content\" />

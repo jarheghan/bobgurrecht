@@ -47,8 +47,12 @@ html
   margin-right: 30px;
   border:1px solid;
   border-color: #7793bc;
+  height:auto;
+  width:auto;
+  max-height:240px;
+  max-width: 150px
 }
-  
+  /*style="height:auto; width:auto; max-width:300px; max-height:100px;" */
 .col-md-4 h3{
     position: relative;
     min-height: 10px;

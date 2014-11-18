@@ -80,6 +80,17 @@ namespace RepositoryPattern.Controllers
             return View();
 
         }
+        public ActionResult Error()
+        {
+            ViewBag.Error404 = "404";
+            return View();
+        }
+        public ActionResult Error500()
+        {
+            ViewBag.Error500 = "500";
+            return View();
+        }
+
         public ActionResult WishListCart()
         {
             IEnumerable<OrderItems> orderitems;
