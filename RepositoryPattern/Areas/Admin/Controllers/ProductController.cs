@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
+using Telerik.Web.Mvc;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
@@ -26,6 +27,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductVariationRepository _prdVariationRepo;
+        
         public ActionResult List()
         {
             try
@@ -37,6 +39,19 @@ namespace RepositoryPattern.Areas.Admin.Controllers
           
         }
 
+        [HttpPost, GridAction(EnableCustomBinding=true)]
+        public ActionResult SearchProductList(string searchname)
+        {
+            var product = _productRepository.GetAllProduct();
+            var filterproduct = product.Where(x => x.Name.StartsWith(searchname));
+            var gridModel = new GridModel();
+            gridModel.Data = filterproduct;
+
+            return new JsonResult
+            {
+                Data = gridModel
+            };
+        }
         public ActionResult Create()
         {
             return View();

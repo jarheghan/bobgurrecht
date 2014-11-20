@@ -48,9 +48,12 @@ namespace RepositoryPattern
             bundles.Add(new StyleBundle("~/adminBootstrap/css").Include("~/Content/bootstrap/bootstrap.css"
                    , "~/Content/bootstrap/bootstrap.theme.css"
                    , "~/Content/themes/Plumb/css/admin.css"
+                   , "~/Content/themes/Plumb/css/bootstrap-table.css"
                    , "~/Content/themes/Plumb/css/normalize.css"
                    , "~/Content/themes/Plumb/css/telerik.css"
+                   , "~/Content/themes/Plumb/css/telerik.common.css"
                    ,"~/Content/themes/Plumb/css/telerik.rtl.css"
+                   ,"~/Content/themes/Plumb/css/telerik.office2010silver.css"
                    ));
         }
     }

@@ -39,7 +39,7 @@ var catalog = (function () {
  });
 
  var dialogEditProductVariation1 = $('#productvariationedit1').dialog({
-     title: "Production Variation",
+     title: "Production Variation 1",
      autoOpen: false,
      buttons: [
          {
@@ -158,7 +158,7 @@ var catalog = (function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
     })
     $('#btnProdVariationedit').click(function () {
-        dialogEditProductVariation.dialog('open').load('/Admin/Common/ProductVariation');
+        dialogEditProductVariation1.dialog('open').load('/Admin/Common/ProductVariation');
     })
 
     var messagealert = function (msg) {

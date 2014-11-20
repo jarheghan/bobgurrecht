@@ -8,43 +8,88 @@
     Html.RequiresCss("admin/ionicons.css", "Content", 5);
 
     Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
-    Html.RequiresJs("jquery-ui-1.8.20.js", "jquery", 2);
+   // Html.RequiresJs("jquery.migrate.js", "jquery", 2);
+    Html.RequiresJs("jquery-ui-1.11.1.js", "jquery", 2);
     Html.RequiresJs("admin/app.js", "Content", 99);
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
+    
 }
 
 @using Telerik.Web.Mvc.UI
 @using RepositoryPattern.Model.Catalog
 @model IEnumerable<Product>
 
-  @Html.Action("Menu", "Common", new {area="Admin"})
+ @Html.Action("Menu", "Common", new {area="Admin"})
+ 
 <aside class="right-side">
   <section class="col-lg-12 connectedSortable">
+  
   <div class="row">
      <div class="col-sm-10">
          <br />
             <div class=""> <a href="@Url.Action("Create")" class="btn btn-primary"><span>Add New Product</span></a>  </div>
          <br />
-        <div id="clientsDb">
-            @(Html.Telerik().Grid<Product>(Model)
-                .Name("Product")
+   
+            <div class="col-sm-10"">
+                <div class="col-sm-5">@Html.TextBox("Search",null, new {id="searchname"})</div><div class="col-sm-5"><button id="btnSearchProduct" class="btn btn-primary">Search</button></div>
+            </div>
+ 
+         <br />
+          <br />
+
+        <table class="adminContent">
+        <tr>
+            <td>
+             @(Html.Telerik().Grid<Product>(Model)
+                .Name("Grid")
                 .Columns(columns =>
                 {
-                    columns.Bound(p => p.Name).Width(190);
+                    columns.Bound(p => p.Name).Width(190).Title("Full Product Name");
                     columns.Bound(p => p.Description).Width(190);
                     columns.Bound(p => p.Price).Width(190);
-                    columns.Bound(p => p.ID).Width(190);
-                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Edit", "Edit", new { Id = p.ID })).Title("");
-                    columns.Bound(p => p.ID).Width(100).Template(p => Html.ActionLink("Delete", "Delete", new { Id = p.ID })).Title("");
+                    columns.Bound(p => p.ID).Width(190).Filterable(false);
+                    columns.Bound(p => p.ID).Width(100).Filterable(false).Template(p => Html.ActionLink("Edit", "Edit", new { Id = p.ID })).Title("");
+                    columns.Bound(p => p.ID).Width(100).Filterable(false).Template(p => Html.ActionLink("Delete", "Delete", new { Id = p.ID })).Title("");
                 })
-                .HtmlAttributes(new { style = "height: 270px;" })
+                .TableHtmlAttributes(new {style="height: 40px;"})
+                .HtmlAttributes(new { style = "height: 470px;" })
                 .Scrollable()
-                //.Groupable()
                 .Sortable()
                 .Pageable()
+                .DataBinding(q => q
+                    .Ajax()
+                    .Select("SearchProductList", "Product")
+                    )
+             .ClientEvents(events => events.OnLoad("getProductCriteria"))
+            //.ClientEvents(events => events.OnDataBinding("getProductCriteria"))
+            .EnableCustomBinding(true)
             )
-           </div>
+                </td>
+                </tr>
+        </table>
          </div>
       </div>
+    
+   
   </section>
 </aside>
+ <script>
+        $('#btnSearchProduct').click(function () {
+            var grid = $('#Grid').data('tGrid');
+            //var grid = $('#Grid');
+            //grid.currentPage = 1;
+            //grid.ajaxRequest();
+            //return false;
+            alert(grid);
+        })
+     
+        function getProductCriteria(e) {
+            var grid = $(this).data('tGrid');
+            alert(grid);
+            //e.data = $('#searchname').val();
+        }
+    </script>
+@section scripts
+{
+   
+}

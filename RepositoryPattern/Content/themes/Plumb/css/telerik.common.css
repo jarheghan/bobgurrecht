@@ -1,6 +1,4 @@
-/* base stylesheet */
-
-.t-reset
+base stylesheet .t-reset
 {
     margin: 0;
     padding: 0;
@@ -66,7 +64,8 @@
 
 html body .t-button
 {
-    text-decoration: none; /*Site.css*/
+    text-decoration: none;
+    Site .css;
 }
 
 .t-button
@@ -114,14 +113,16 @@ html body .t-button
 {
     line-height: 1.7;
     padding-left: 7px;
-    padding-right: 7px; /*+1*/
+    padding-right: 7px;
+    +1;
 }
 
 * html a.t-button
 {
     line-height: 1.7;
     padding-left: 7px;
-    padding-right: 7px; /*+1*/
+    padding-right: 7px;
+    +1;
 }
 
 * + html a.t-button-icon
@@ -185,7 +186,8 @@ body .t-button-icon
 .t-button-icontext
 {
     padding-right: 8px;
-    overflow: visible; /*IE9*/
+    overflow: visible;
+    IE9;
 }
 
     .t-button-icontext .t-icon
@@ -206,8 +208,8 @@ body .t-button-icon
 
 html body .t-button-bare
 {
-    background: none!important; /*spares long selectors*/
-    border-width: 0;
+    background: none!important;
+    spares long selectorsborder-width:0;
 }
 
 .t-icon, .t-editor-button .t-tool-icon
@@ -283,7 +285,8 @@ html body .t-button-bare
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-/* Icons */ .t-expand
+
+Icons .t-expand
 {
     background-position: 0 -160px;
 }
@@ -522,7 +525,8 @@ html body .t-button-bare
 {
     background-position: -64px -272px;
 }
-/* Inputs */ .t-autocomplete, .t-input[type="text"], .t-input[type="password"]
+
+Inputs .t-autocomplete, .t-input[type="text"], .t-input[type="password"]
 {
     padding: 2px 1px 3px;
 }
@@ -531,15 +535,16 @@ html body .t-button-bare
 {
     padding: 2px 1px 3px;
 }
-/* Window */ div.t-window
+
+Window div.t-window
 {
     display: inline-block;
     *display: inline;
     zoom: 1;
     z-index: 10001;
     position: absolute;
-    border-width: 2px; /*ie8*/
-    -moz-border-radius: 5px;
+    border-width: 2px;
+    ie8-moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -moz-box-shadow: 0 0 5px 2px #aaa;
@@ -766,17 +771,18 @@ div.t-window-content
 {
     z-index: 10002;
 }
-/* TabStrip */ .t-tabstrip
+
+TabStrip .t-tabstrip
 {
     margin: 0;
     padding: 0;
     zoom: 1;
 }
 
-    .t-tabstrip .t-tabstrip-items
-    {
-        padding: 0 .3em;
-    }
+.t-tabstrip .t-tabstrip-items
+{
+    padding: 0 .3em;
+}
 
 .t-tabstrip-items .t-item, .t-panelbar .t-tabstrip-items .t-item
 {
@@ -862,59 +868,60 @@ div.t-window-content
     {
         display: block;
     }
-/* PanelBar */ .t-panelbar
+
+PanelBar .t-panelbar
 {
     zoom: 1;
 }
 
-    .t-panelbar .t-item
-    {
-        list-style-type: none;
-        display: block;
-        zoom: 1;
-        margin: 0;
-        top: 0;
-        border-width: 0;
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-        border-radius: 0;
-    }
+.t-panelbar .t-item
+{
+    list-style-type: none;
+    display: block;
+    zoom: 1;
+    margin: 0;
+    top: 0;
+    border-width: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
 
-    .t-panelbar .t-image, .t-panelbar .t-sprite
-    {
-        vertical-align: middle;
-        margin-right: 5px;
-        margin-top: 4px;
-        float: left;
-    }
+.t-panelbar .t-image, .t-panelbar .t-sprite
+{
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-top: 4px;
+    float: left;
+}
 
-    .t-panelbar .t-group .t-image, .t-panelbar .t-group .t-sprite
-    {
-        margin-top: 1px;
-    }
+.t-panelbar .t-group .t-image, .t-panelbar .t-group .t-sprite
+{
+    margin-top: 1px;
+}
 
-    .t-panelbar .t-link
-    {
-        line-height: 2.05em;
-        padding: 0 1em;
-        border-bottom: 1px solid;
-        display: block;
-        position: relative;
-        text-decoration: none;
-        zoom: 1;
-    }
+.t-panelbar .t-link
+{
+    line-height: 2.05em;
+    padding: 0 1em;
+    border-bottom: 1px solid;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    zoom: 1;
+}
 
-    .t-panelbar .k-link:after
-    {
-        content: "";
-        display: block;
-        clear: both;
-    }
+.t-panelbar .k-link:after
+{
+    content: "";
+    display: block;
+    clear: both;
+}
 
-    .t-panelbar .t-state-hover
-    {
-        background-image: none;
-    }
+.t-panelbar .t-state-hover
+{
+    background-image: none;
+}
 
 .t-panelbar-expand, .t-panelbar-collapse
 {
@@ -959,34 +966,35 @@ div.t-window-content
 {
     border-bottom: 0;
 }
-/* Menu */ .t-menu
+
+Menu .t-menu
 {
     cursor: default;
 }
 
-    .t-menu, .t-menu .t-group
+.t-menu, .t-menu .t-group
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    zoom: 1;
+}
+
+    .t-menu .t-group .t-link
     {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        zoom: 1;
+        padding-right: 2em;
     }
 
-        .t-menu .t-group .t-link
-        {
-            padding-right: 2em;
-        }
-
-        .t-menu .t-item
-        {
-            position: relative;
-            display: inline-block;
-            *display: inline;
-            zoom: 1;
-            border-width: 0 1px 0 0;
-            border-style: solid;
-            vertical-align: top;
-        }
+    .t-menu .t-item
+    {
+        position: relative;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        border-width: 0 1px 0 0;
+        border-style: solid;
+        vertical-align: top;
+    }
 
 .t-menu-vertical .t-item
 {
@@ -1075,19 +1083,20 @@ div.t-window-content
     left: auto;
     top: auto;
 }
-/* Grid */ .t-grid
+
+Grid .t-grid
 {
     position: relative;
     zoom: 1;
 }
 
-    .t-grid table
-    {
-        width: 100%;
-        border-collapse: separate;
-        empty-cells: show;
-        border: 0;
-    }
+.t-grid table
+{
+    width: 100%;
+    border-collapse: separate;
+    empty-cells: show;
+    border: 0;
+}
 
 .t-grid-header .t-header
 {
@@ -1107,8 +1116,8 @@ div.t-window-content
 
     .t-grid-header .t-header .t-link
     {
-        line-height: 18px; /* due to sorting icons*/
-        height: 28px;
+        line-height: 18px;
+        due to sorting iconsheight:18px;
         display: block;
         margin: -.3em -.6em;
         padding: .3em 2.4em .3em .6em;
@@ -1159,8 +1168,8 @@ div.t-window-content
 
 div.t-grid-header, div.t-grid-footer
 {
-    padding-right: 17px; /* width of scrollbar. may vary across operating systems. can be calculated. */
-    zoom: 1;
+    padding-right: 17px;
+    width of scrollbar. may vary across operating systems. can be calculated. zoom:1;
     border-bottom-width: 1px;
     border-bottom-style: solid;
 }
@@ -1177,7 +1186,6 @@ div.t-grid-header, div.t-grid-footer
     overflow-x: auto;
     overflow-y: scroll;
     width: 100%;
-    height:400px;
     zoom: 1;
 }
 
@@ -1206,7 +1214,8 @@ div.t-grid-header, div.t-grid-footer
 {
     border-left-width: 0;
 }
-/* Grid ::paging */ .t-grid-pager
+
+Grid ::paging .t-grid-pager
 {
     padding: .2em .6em;
     line-height: 1.8em;
@@ -1215,10 +1224,10 @@ div.t-grid-header, div.t-grid-footer
     border-style: solid;
 }
 
-    .t-grid-pager:first-child, .t-grouping-header + .t-grid-pager, .t-grid-toolbar:first-child, .t-grouping-header + .t-grid-toolbar, .t-grid-toolbar + .t-grid-pager
-    {
-        border-width: 0 0 1px;
-    }
+.t-grid-pager:first-child, .t-grouping-header + .t-grid-pager, .t-grid-toolbar:first-child, .t-grouping-header + .t-grid-toolbar, .t-grid-toolbar + .t-grid-pager
+{
+    border-width: 0 0 1px;
+}
 
 * html .t-grid .t-grid-pager
 {
@@ -1349,7 +1358,8 @@ div.t-grid-header, div.t-grid-footer
     vertical-align: top;
     margin-top: 3px;
 }
-/* Grid ::filtering */ .t-grid-filter
+
+Grid ::filtering .t-grid-filter
 {
     float: right;
     height: 18px;
@@ -1361,10 +1371,10 @@ div.t-grid-header, div.t-grid-footer
     margin: -1.8em -.6em -.3em 3px;
 }
 
-    .t-grid-filter .t-icon
-    {
-        vertical-align: top;
-    }
+.t-grid-filter .t-icon
+{
+    vertical-align: top;
+}
 
 .t-grid .t-animation-container
 {
@@ -1413,7 +1423,8 @@ div.t-grid-header, div.t-grid-footer
 {
     width: 5em;
 }
-/* Grid ::grouping */ .t-grouping-row .t-icon
+
+Grid ::grouping .t-grouping-row .t-icon
 {
     margin: 0 4px;
 }
@@ -1503,7 +1514,8 @@ div.t-grid-header, div.t-grid-footer
     zoom: 1;
     vertical-align: middle;
 }
-/* Grid ::editing */ .t-dirty
+
+Grid ::editing .t-dirty
 {
     width: 0;
     height: 0;
@@ -1551,16 +1563,16 @@ div.t-grid-header, div.t-grid-footer
     vertical-align: middle;
     width: 5em;
     max-width: 90%;
-    min-width: 90%; /* IE8 calculates width:90% wrong,so we have to trick it */
-    margin: -.4em -.3em -.15em;
+    min-width: 90%;
+    IE8 calculates width:90% wrong,so we have to trick it margin:-.4em -.3em -.15em;
 }
 
 .t-grid-edit-row .t-dropdown, .t-grid-edit-row .t-combobox
 {
     width: 5em;
     max-width: 90%;
-    min-width: 90%; /* IE8 calculates width:90% wrong,so we have to trick it */
-    line-height: normal;
+    min-width: 90%;
+    IE8 calculates width:90% wrong,so we have to trick it line-height:normal;
     margin: -.1em -.3em -.45em;
 }
 
@@ -1617,17 +1629,20 @@ div.t-grid-header, div.t-grid-footer
 
 .t-grid tbody .t-button
 {
-    min-width: 64px; /*main setting*/
+    min-width: 64px;
+    main setting;
 }
 
 .t-grid tbody button.t-button, #ie8#skips
 {
-    min-width: 78px; /*+14 for buttons,except IE8*/
+    min-width: 78px;
+    +14 for buttons,except IE8;
 }
 
 * + html .t-grid tbody a.t-button
 {
-    min-width: 62px; /*-2 for links for IE7*/
+    min-width: 62px;
+    -2 for links for IE7;
 }
 
 html body div.t-grid tbody .t-button-icon
@@ -1645,7 +1660,8 @@ html body div.t-grid tbody .t-button-icon
 {
     overflow: visible;
 }
-/* Grid ::resizing */ .t-grid-resize-indicator
+
+Grid ::resizing .t-grid-resize-indicator
 {
     position: absolute;
     width: 2px;
@@ -1658,7 +1674,8 @@ html body div.t-grid tbody .t-button-icon
     position: absolute;
     height: 25px;
 }
-/* ComboBox & Drop-down*/ .t-combobox, .t-dropdown, .t-selectbox
+
+ComboBox & Drop-down.t-combobox, .t-dropdown, .t-selectbox
 {
     display: inline-block;
     *display: inline;
@@ -1674,7 +1691,8 @@ html body div.t-grid tbody .t-button-icon
 {
     overflow: visible;
 }
-/*positions icon properly*/ * html .t-combobox
+
+positions icon properly* html .t-combobox
 {
     overflow: visible;
 }
@@ -1693,14 +1711,15 @@ html body div.t-grid tbody .t-button-icon
 
 .t-dropdown-wrap
 {
-    padding-right: 16px; /* icon width*/
-    border-width: 1px;
+    padding-right: 16px;
+    icon widthborder-width:1px;
     border-style: solid;
 }
 
 .t-combobox > .t-dropdown-wrap
 {
-    padding-right: 22px; /* icon width+input paddings,except IE6 */
+    padding-right: 22px;
+    icon width+input paddings,except IE6;
 }
 
 * html .t-combobox .t-dropdown-wrap
@@ -1730,7 +1749,8 @@ html body div.t-grid tbody .t-button-icon
 {
     background: transparent;
 }
-/*removes excessive spacing in IE6-7*/ * + html .t-combobox .t-input
+
+removes excessive spacing in IE6-7* + html .t-combobox .t-input
 {
     margin: -1px 0;
 }
@@ -1754,8 +1774,8 @@ html body div.t-grid tbody .t-button-icon
     *display: inline;
     zoom: 1;
     cursor: default;
-    position: absolute; /* icon positioning */
-    top: 0;
+    position: absolute;
+    icon positioning top:0;
     right: 0;
 }
 
@@ -1769,7 +1789,8 @@ html body div.t-grid tbody .t-button-icon
 {
     border-width: 0 0 0 1px;
     border-style: solid;
-    border-color: inherit; /* will be skin-related,inherit does not work in ie7- */
+    border-color: inherit;
+    will be skin-related,inherit does not work in ie7-;
 }
 
 .t-combobox .t-icon
@@ -1840,7 +1861,8 @@ html body div.t-grid tbody .t-button-icon
         padding: 1px 5px 1px 3px;
         cursor: default;
     }
-/* Calendar */ .t-calendar
+
+Calendar .t-calendar
 {
     display: inline-block;
     *display: inline;
@@ -1850,24 +1872,24 @@ html body div.t-grid tbody .t-button-icon
     overflow: hidden;
 }
 
-    .t-calendar .t-link
-    {
-        text-decoration: none;
-    }
+.t-calendar .t-link
+{
+    text-decoration: none;
+}
 
-    .t-calendar .t-action-link
-    {
-        text-decoration: underline;
-    }
+.t-calendar .t-action-link
+{
+    text-decoration: underline;
+}
 
-    .t-calendar .t-header, .t-calendar .t-footer
-    {
-        clear: both;
-        padding: .4em 0;
-        text-align: center;
-        position: relative;
-        zoom: 1;
-    }
+.t-calendar .t-header, .t-calendar .t-footer
+{
+    clear: both;
+    padding: .4em 0;
+    text-align: center;
+    position: relative;
+    zoom: 1;
+}
 
 .t-footer .t-nav-today:hover
 {
@@ -1957,7 +1979,8 @@ html body div.t-grid tbody .t-button-icon
     padding: .25em 0 .3em;
     text-align: center;
 }
-/* Date/Time Pickers */ .t-timepicker, .t-datetimepicker, .t-datepicker
+
+Date/Time Pickers .t-timepicker, .t-datetimepicker, .t-datepicker
 {
     border: 0;
     white-space: nowrap;
@@ -1971,10 +1994,9 @@ html body div.t-grid tbody .t-button-icon
 
 div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 {
-    background: none transparent; /* don't allow t-widget to add background-color */
-}
+    background: none transparent;
+    don 't allow t-widget to add background-color } .t-datetimepicker .t-picker-wrap;
 
-.t-datetimepicker .t-picker-wrap
 {
     padding-right: 44px;
 }
@@ -2026,7 +2048,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 {
     padding: 1px 3px;
 }
-/* TreeView */ div.t-treeview
+
+TreeView div.t-treeview
 {
     border-width: 0;
     background: 0;
@@ -2069,9 +2092,9 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 {
     margin-left: -16px;
     margin-top: 2px;
-    float: left; /* required for Opera */
-    *float: none; /* IE6 does not like it as node text wraps */
-    cursor: pointer;
+    float: left;
+    required for Opera *float:none;
+    IE6 does not like it as node text wraps cursor:pointer;
 }
 
 .t-treeview .t-plus-disabled, .t-treeview .t-minus-disabled
@@ -2119,7 +2142,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     background-color: transparent;
     background-repeat: no-repeat;
 }
-/* TreeView ::node lines */ .t-treeview-lines .t-top, .t-treeview-lines .t-mid, .t-treeview-lines .t-bot
+
+TreeView ::node lines .t-treeview-lines .t-top, .t-treeview-lines .t-mid, .t-treeview-lines .t-bot
 {
     background-repeat: no-repeat;
     margin-left: -16px;
@@ -2161,7 +2185,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     background-repeat: no-repeat;
     background-position: 0 16px;
 }
-/* NumericTextBox */ div.t-numerictextbox
+
+NumericTextBox div.t-numerictextbox
 {
     display: inline-block;
     *display: inline;
@@ -2173,7 +2198,7 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     background: transparent;
 }
 
-.t-numerictextbox .t-input /*alignment of arrows in WebKit*/
+.t-numerictextbox .t-input alignment of arrows in WebKit
 {
     margin: 0;
 }
@@ -2229,7 +2254,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
         border: 1px solid;
     }
 }
-/* ColorPicker */ .t-colorpicker
+
+ColorPicker .t-colorpicker
 {
     display: inline-block;
     *display: inline;
@@ -2237,32 +2263,32 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     vertical-align: middle;
 }
 
-    .t-colorpicker .t-tool-icon
-    {
-        display: inline-block;
-        *display: inline;
-        zoom: 1;
-        vertical-align: top;
-        padding: 2px 3px;
-        font-size: 0;
-        line-height: 0;
-    }
+.t-colorpicker .t-tool-icon
+{
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: top;
+    padding: 2px 3px;
+    font-size: 0;
+    line-height: 0;
+}
 
-    .t-colorpicker .t-selected-color
-    {
-        display: block;
-        height: 16px;
-        width: 16px;
-        -moz-border-radius: 2px;
-        -webkit-border-radius: 2px;
-        border-radius: 2px;
-    }
+.t-colorpicker .t-selected-color
+{
+    display: block;
+    height: 16px;
+    width: 16px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
 
-    .t-colorpicker .t-icon
-    {
-        vertical-align: middle;
-        margin-top: 2px;
-    }
+.t-colorpicker .t-icon
+{
+    vertical-align: middle;
+    margin-top: 2px;
+}
 
 .t-colorpicker-popup
 {
@@ -2303,7 +2329,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
         margin: 0 1px 1px 0;
         border: 1px solid #000;
     }
-/* Editor */ .t-editor
+
+Editor .t-editor
 {
     border-width: 1px;
     border-style: solid;
@@ -2315,11 +2342,11 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     width: 100%;
 }
 
-    .t-editor .t-editor-toolbar-wrap
-    {
-        border: 0;
-        padding: 0;
-    }
+.t-editor .t-editor-toolbar-wrap
+{
+    border: 0;
+    padding: 0;
+}
 
 .t-editor-toolbar
 {
@@ -2332,8 +2359,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 
     .t-editor-toolbar li
     {
-        display: inline; /* would have been inline-block,if not for IE */
-        vertical-align: middle;
+        display: inline;
+        would have been inline-block,if not for IE vertical-align:middle;
     }
 
     .t-editor-toolbar .t-editor-dropdown, .t-editor-toolbar .t-editor-combobox, .t-editor-toolbar .t-editor-selectbox, .t-editor-toolbar .t-editor-colorpicker
@@ -2501,7 +2528,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 {
     background-position: -442px 0;
 }
-/* default tool widths */ .t-fontName
+
+default tool widths .t-fontName
 {
     width: 110px;
 }
@@ -2555,7 +2583,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 .t-editor iframe.t-content
 {
     display: inline;
-    vertical-align: top; /*fixes missing top border caused by the inline display*/
+    vertical-align: top;
+    fixes missing top border caused by the inline display;
 }
 
 .t-editor .t-raw-content
@@ -2642,7 +2671,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     *display: inline;
     zoom: 1;
 }
-/* drag&drop module */ .t-drag-clue
+
+drag&drop module .t-drag-clue
 {
     border-width: 1px;
     border-style: solid;
@@ -2690,7 +2720,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
         bottom: -4px;
         background-position: -20px -166px;
     }
-/* Slider */ div.t-slider
+
+Slider div.t-slider
 {
     position: relative;
     border-width: 0;
@@ -2704,14 +2735,16 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 .t-slider-vertical
 {
     width: 22px;
-    height: 200px; /* default height */
+    height: 200px;
+    default height;
 }
 
 .t-slider-horizontal
 {
     display: inline-block;
     height: 22px;
-    width: 200px; /* default width */
+    width: 200px;
+    default width;
 }
 
 * + html .t-slider-horizontal
@@ -2911,7 +2944,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 {
     background-position: -32px -432px;
 }
-/* float clearing start */ .t-slider-items
+
+float clearing start .t-slider-items
 {
     display: inline-block;
 }
@@ -2929,7 +2963,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
         height: 0;
         visibility: hidden;
     }
-/* float clearing end */ .t-slider-buttons .t-slider-items
+
+float clearing end .t-slider-buttons .t-slider-items
 {
     margin-left: 27px;
 }
@@ -2972,7 +3007,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     text-align: center;
     height: 100%;
 }
-/* fixes ticks position and removes spacing between them in IE6-7 */ * + html .t-slider-vertical .t-tick
+
+fixes ticks position and removes spacing between them in IE6-7 * + html .t-slider-vertical .t-tick
 {
     float: left;
     clear: left;
@@ -2985,7 +3021,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     clear: left;
     width: 100%;
 }
-/*ticks backgrounds*/ .t-slider-horizontal .t-tick
+
+ticks backgrounds.t-slider-horizontal .t-tick
 {
     background-position: center -94px;
 }
@@ -3230,7 +3267,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     left: auto;
     right: 120%;
 }
-/* Tooltip */ .t-tooltip
+
+Tooltip .t-tooltip
 {
     position: absolute;
     border-width: 1px;
@@ -3241,8 +3279,9 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    min-width: 10px; /*slider tooltip only*/
-    text-align: center; /*slider tooltip only*/
+    min-width: 10px;
+    slider tooltip onlytext-align:center;
+    slider tooltip only;
 }
 
 .t-callout
@@ -3293,29 +3332,30 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     margin-top: -4px;
     background-position: -64px -416px;
 }
-/* Splitter */ .t-splitter
+
+Splitter .t-splitter
 {
     position: relative;
     height: 300px;
 }
 
-    .t-splitter .t-pane
-    {
-        overflow: hidden;
-    }
+.t-splitter .t-pane
+{
+    overflow: hidden;
+}
 
-    .t-splitter .t-scrollable
-    {
-        overflow: auto;
-    }
+.t-splitter .t-scrollable
+{
+    overflow: auto;
+}
 
-    .t-splitter .t-pane-loading
-    {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin: -8px 0 0 -8px;
-    }
+.t-splitter .t-pane-loading
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -8px 0 0 -8px;
+}
 
 .t-ghost-splitbar, .t-splitbar
 {
@@ -3509,10 +3549,11 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 {
     background-position: -16px -522px;
 }
-/* Upload */ html .t-upload
+
+Upload html .t-upload
 {
-    position: relative; /*possibly unneeded as the style is applied to an inner element as well*/
-    border-width: 0;
+    position: relative;
+    possibly unneeded as the style is applied to an inner element as wellborder-width:0;
     background: 0;
 }
 
@@ -3568,13 +3609,14 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     width: 86px;
     position: relative;
     direction: ltr;
-    overflow: hidden!important; /* important required by IE7 */
+    overflow: hidden!important;
+    important required by IE7;
 }
 
     .t-upload-button input
     {
-        font: 200px monospace!important; /* The input font size and family are critical for the operation of the Upload */
-        opacity: 0;
+        font: 200px monospace!important;
+        The input font size and family are critical for the operation of the Upload opacity:0;
         filter: alpha(opacity=0);
         position: absolute;
         padding: 0;
@@ -3613,11 +3655,13 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
     {
         line-height: 1;
     }
-    /*IE7*/ * html .t-upload-files .t-button
-    {
-        line-height: 1;
-    }
-/*IE6*/ .t-upload .t-delete, .t-upload .t-cancel, .t-upload .t-retry
+
+IE7* html .t-upload-files .t-button
+{
+    line-height: 1;
+}
+
+IE6.t-upload .t-delete, .t-upload .t-cancel, .t-upload .t-retry
 {
     height: 8px;
     vertical-align: baseline;
@@ -3705,7 +3749,8 @@ div.t-timepicker, div.t-datetimepicker, div.t-datepicker
 {
     min-width: 100px;
 }
-/* ImageBrowser */ .t-toolbar-wrap .t-dropzone em, .t-toolbar-wrap .t-upload-files
+
+ImageBrowser .t-toolbar-wrap .t-dropzone em, .t-toolbar-wrap .t-upload-files
 {
     display: none;
 }
@@ -3804,7 +3849,8 @@ html input.t-breadcrumbs-input
     padding: 2px 0 3px;
     background-repeat: repeat-x;
     line-height: 23px;
-    white-space: nowrap; /*required by WebKit*/
+    white-space: nowrap;
+    required by WebKit;
 }
 
 .t-imagebrowser .t-upload
@@ -4001,9 +4047,18 @@ html input.t-breadcrumbs-input
 {
     width: 628px;
 }
-/* * html .t-imagebrowser .t-form-text-row input{width:610px}
-*+html .t-imagebrowser .t-form-text-row input{width:610px}
-*/ .t-tile-empty
+
+* html .t-imagebrowser .t-form-text-row input
+{
+    width: 610px;
+}
+
+* + html .t-imagebrowser .t-form-text-row input
+{
+    width: 610px;
+}
+
+.t-tile-empty
 {
     margin: 160px 0 0;
 }
@@ -4050,7 +4105,8 @@ html input.t-breadcrumbs-input
         -webkit-border-radius: 7px;
     }
 }
-/* Chart */ div.t-chart
+
+Chart div.t-chart
 {
     border: 0;
     background-color: transparent;

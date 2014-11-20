@@ -20,7 +20,7 @@
 												}).ToString())
      
 
-
+    @Html.RenderJsHere(new BasicPath("jquery", "~/Scripts"))
 
     
 </head>
@@ -32,7 +32,7 @@
     
 
 
-    @Html.RenderJsHere(new BasicPath("jquery", "~/Scripts"),
+    @Html.RenderJsHere(//new BasicPath("jquery", "~/Scripts"),
                        new BasicPath("bootstrap","~/Content/bootstrap/js"),
                        new BasicPath("Content", "~/Content"),
                        new BasicPath("Custom", "~/Scripts/js"))
@@ -41,5 +41,10 @@
     {
     @RenderSection("scripts")
     }
+   @(Html.Telerik().ScriptRegistrar()
+           
+            .jQuery(false)
+            .jQueryValidation(false)
+            )
 </body>
 </html>
