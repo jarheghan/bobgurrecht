@@ -12,15 +12,19 @@
     Html.RequiresJs("jquery-ui-1.11.1.js", "jquery", 2);
     Html.RequiresJs("admin/app.js", "Content", 99);
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
+
     
 }
 
-@using Telerik.Web.Mvc.UI
-@using RepositoryPattern.Model.Catalog
-@model IEnumerable<Product>
+@using PagedList.Mvc
+@using RepositoryPattern.Areas.Admin.Models
+@model ProductSearchModel
 
  @Html.Action("Menu", "Common", new {area="Admin"})
  
+@{ //var grid = new MvcWebGrid. (Model.SearchResult, defaultSort: "Name");
+ 
+}}
 <aside class="right-side">
   <section class="col-lg-12 connectedSortable">
   
@@ -37,59 +41,37 @@
          <br />
           <br />
 
-        <table class="adminContent">
-        <tr>
-            <td>
-             @(Html.Telerik().Grid<Product>(Model)
-                .Name("Grid")
-                .Columns(columns =>
-                {
-                    columns.Bound(p => p.Name).Width(190).Title("Full Product Name");
-                    columns.Bound(p => p.Description).Width(190);
-                    columns.Bound(p => p.Price).Width(190);
-                    columns.Bound(p => p.ID).Width(190).Filterable(false);
-                    columns.Bound(p => p.ID).Width(100).Filterable(false).Template(p => Html.ActionLink("Edit", "Edit", new { Id = p.ID })).Title("");
-                    columns.Bound(p => p.ID).Width(100).Filterable(false).Template(p => Html.ActionLink("Delete", "Delete", new { Id = p.ID })).Title("");
-                })
-                .TableHtmlAttributes(new {style="height: 40px;"})
-                .HtmlAttributes(new { style = "height: 470px;" })
-                .Scrollable()
-                .Sortable()
-                .Pageable()
-                .DataBinding(q => q
-                    .Ajax()
-                    .Select("SearchProductList", "Product")
+        <div class="adminContent">
+            @if (Model.SearchResult != null && Model.SearchResult.Count() > 0)
+            {
+               var ss = new MvcWebGrid(Model.SearchResult, defaultSort: "Name");
+                @ss.GetHtml(tableStyle:"table table-striped"
+                //,headerStyle:"gvHeading"
+                //,rowStyle:"gridrow"
+                //,alternatingRowStyle:""
+                ,columns: ss.Columns(
+                    ss.Column("Name","Product Name"),
+                    ss.Column("Description"),
+                    ss.Column("ID"),
+                    ss.Column(header:"", format:@<a href="@Html.Action("Edit", new { Id = "" })">Edit</a>)
                     )
-             .ClientEvents(events => events.OnLoad("getProductCriteria"))
-            //.ClientEvents(events => events.OnDataBinding("getProductCriteria"))
-            .EnableCustomBinding(true)
-            )
-                </td>
-                </tr>
-        </table>
+                    )
+            }
+            <div class="pagination">            
+    @Html.PagedListPager(Model.SearchResult
+    , page => Url.Action("List", new RouteValueDictionary() 
+    {
+            { "Page", page },
+            { "ProductName", Model.ProductName },
+            { "Price", Model.SKU }
+
+    }),
+    PagedListRenderOptions.PageNumbersOnly)
+    </div>
+        </div>
          </div>
       </div>
     
    
   </section>
 </aside>
- <script>
-        $('#btnSearchProduct').click(function () {
-            var grid = $('#Grid').data('tGrid');
-            //var grid = $('#Grid');
-            //grid.currentPage = 1;
-            //grid.ajaxRequest();
-            //return false;
-            alert(grid);
-        })
-     
-        function getProductCriteria(e) {
-            var grid = $(this).data('tGrid');
-            alert(grid);
-            //e.data = $('#searchname').val();
-        }
-    </script>
-@section scripts
-{
-   
-}

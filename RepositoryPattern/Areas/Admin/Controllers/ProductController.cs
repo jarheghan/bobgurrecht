@@ -7,7 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using log4net;
-using Telerik.Web.Mvc;
+using PagedList;
+//using MvcWebGrid
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
@@ -30,26 +31,28 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         
         public ActionResult List()
         {
+            ProductSearchModel prodSeachModel = new ProductSearchModel();
+            var pageIndex = prodSeachModel.Page ?? 1;
+            const int RecordPerPage = 10;
             try
             {
-                var product = _productRepository.GetAllProduct();
-                return View(product);
+                prodSeachModel.SearchResult = _productRepository.GetAllProduct().ToPagedList(pageIndex, RecordPerPage);
+                return View(prodSeachModel);
             }
             catch { return View(); };
           
         }
 
-        [HttpPost, GridAction(EnableCustomBinding=true)]
-        public ActionResult SearchProductList(string searchname)
+        [HttpPost]
+        public ActionResult SearchProductList(ProductSearchModel searchModel)
         {
             var product = _productRepository.GetAllProduct();
-            var filterproduct = product.Where(x => x.Name.StartsWith(searchname));
-            var gridModel = new GridModel();
-            gridModel.Data = filterproduct;
+            var filterproduct = product.Where(x => x.Name.StartsWith(searchModel.ProductName));
 
+            var ss = new MvcWebGrid.MvcWebGrid(searchModel.SearchResult, defaultSort: "Name");
             return new JsonResult
             {
-                Data = gridModel
+                Data = product
             };
         }
         public ActionResult Create()

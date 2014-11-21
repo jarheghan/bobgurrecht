@@ -45,11 +45,17 @@
     <Reference Include="ClientDependency.Core.Mvc">
       <HintPath>..\packages\ClientDependency-Mvc.1.8.0.0\lib\net45\ClientDependency.Core.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\MvcWebGrid.1.0.13\lib\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcWebGrid">
+      <HintPath>..\packages\MvcWebGrid.1.0.13\lib\MvcWebGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -76,6 +82,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -355,6 +362,7 @@
     <Compile Include="Areas\Admin\Infacstructure\CommonHelpers.cs" />
     <Compile Include="Areas\Admin\Infacstructure\HtmlAttributeExtension.cs" />
     <Compile Include="Areas\Admin\Models\Catalog.cs" />
+    <Compile Include="Areas\Admin\Models\ProductSearchModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductVariationInfo.cs" />
     <Compile Include="Areas\Admin\Models\SuccessInfo.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -389,7 +397,6 @@
     <Content Include="Content\admin\dashboard.js" />
     <Content Include="Content\admin\font-awesome.css" />
     <Content Include="Content\admin\ionicons.css" />
-    <Content Include="Content\bootstrap\bootstrap-table.css" />
     <Content Include="Content\bootstrap\images\animated-overlay.gif" />
     <Content Include="Content\bootstrap\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\bootstrap\images\ui-bg_flat_55_fbec88_40x100.png" />
@@ -855,7 +862,6 @@
     <None Include="Properties\PublishProfiles\BobGarrecht.pubxml" />
     <None Include="Properties\PublishProfiles\jpcBobGarrecht.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap-table.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
