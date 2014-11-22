@@ -1,12 +1,26 @@
 ﻿
 @using RepositoryPattern.Model.Catalog;
 @model Category
- @{ var imgpath = "~/Images/WallImages/imagepath";
+ @{ 
+     var imgpath = "~/Images/WallImages/imagepath";
+     RepositoryPattern.Model.Media.IPictureRepository picRepo = new RepositoryPattern.Data.PictureDataMapper();
+     RepositoryPattern.Model.Media.Picture pic = new RepositoryPattern.Model.Media.Picture();
+     if (pic != null){
+         pic = picRepo.GetPictureById(Model.PictureID ?? default(int));
+     }
+  
     }
      
          <div class="col-sm-12">
+              @if( pic!= null){
              <div class=""><a href="@Url.Action("CategoryProduct","Home",new{Id= Model.ID})">
+             <img class="small-thumbnail" src="@Url.Content(imgpath + "/" + @pic.FilePath)" /></a></div>
+                }
+                   @if(pic == null){
+             <div class=""><a href="@Url.Action("CategoryProduct","Home",new{Id= Model.ID})">     
              <img class="small-thumbnail" src="@Url.Content(imgpath + "/pro-test.png")" /></a></div>
+                   }
+                    
              <div><h5> <label class="nlabel">  @Model.Name</label></h5></div>
                  
                 <div> <p class="dlabel">@Model.Description</p></div>

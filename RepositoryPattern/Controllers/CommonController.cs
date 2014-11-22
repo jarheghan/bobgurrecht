@@ -92,15 +92,20 @@ namespace RepositoryPattern.Controllers
 
         public ActionResult DisplayCategorySubCategory(int? Id)
         {
+            CategoryModel catModel = new CategoryModel();
+            Picture picture = new Picture();
             try
             {
                 var productCategory = _categoryRepository.GetProductCategoriesByCategoryID(Id ?? default(int));
                 var catg = _categoryRepository.GetAllCategoriesByParentCategoryId(Id ?? default(int));
                 var catparent = _categoryRepository.GetCategoryById(Id ?? default(int));
+                catModel.Category = catparent;
+                picture = _pictureRepository.GetPictureById(catModel.Category.PictureID ?? default(int));
+                catModel.Picture = picture;
+                ViewBag.Category = catModel;
+                catModel.Categories = catg;
 
-                ViewBag.Category = catparent;
-
-                return PartialView(catg);
+                return PartialView(catModel);
             }
             catch (Exception ex) { log.Error("Common Error:", ex); return PartialView(); }
         }

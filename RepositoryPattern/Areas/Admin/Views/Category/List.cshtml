@@ -12,39 +12,58 @@
     Html.RequiresJs("admin/app.js", "Content", 99);
     Html.RequiresJs("admin/dashboard.js", "Content", 99);
 }
-@using Telerik.Web.Mvc.UI
-@using RepositoryPattern.Model.Catalog
-@model IEnumerable<Category>
+@using PagedList.Mvc
+@using RepositoryPattern.Areas.Admin.Models
+@model CategorySearchModel
 
   @Html.Action("Menu", "Common", new {area="Admin"})
 
  <aside class="right-side">
   <section class="col-lg-12 connectedSortable">
   <div class="row">
+         @using(Html.BeginForm()){
      <div class="col-sm-10">
          <br />
             <div class=""> <a href="@Url.Action("Create")" class="btn btn-primary"><span>Add New Category</span></a>  </div>
          <br />
+          <div class="col-sm-10">
+                <div class="col-sm-5">@Html.TextBox("CategoryName", Model.CategoryName, new {placeholder="Category Name",@class = "form-control"})</div>
+                <div class="col-sm-5"><input type="submit" name="SearchButton" class="btn btn-primary" value="Search"></div>
+            </div>
+             
+         <br />
+          <br />
         <div id="clientsDb">
-            @(Html.Telerik().Grid<Category>(Model)
-                .Name("Category")
-                .Columns(columns =>
-                {
-                    columns.Bound(c => c.Name).Width(190);
-                    columns.Bound(c => c.Description).Width(190);
-                    columns.Bound(c => c.Alias).Width(190);
-                    columns.Bound(c => c.ID).Width(190);
-                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Edit Category", "Edit", new { Id = c.ID })).Title("");
-                    columns.Bound(c => c.ID).Width(100).Template(c => Html.ActionLink("Delete", "Remove", new { categoryId = c.ID })).Title("");
-                })
-                .HtmlAttributes(new { style = "height: 270px;" })
-                .Scrollable()
-                //.Groupable()
-                .Sortable()
-                .Pageable()
-            )
+            @if (Model.SearchResult != null && Model.SearchResult.Count() > 0)
+             {
+                 var ss = new MvcWebGrid(Model.SearchResult, defaultSort: "Name");
+                 @ss.GetHtml(tableStyle: "table table-bordered table-striped"
+                    //,headerStyle:"gvHeading"
+                    //,rowStyle:"gridrow"
+                    //,alternatingRowStyle:""
+                , columns: ss.Columns(
+                    ss.Column("Name", "Category Name"),
+                    ss.Column("Description"),
+                    ss.Column("Alias", "Product Number"),
+                    ss.Column(header: "", format: @<a href="@Url.Action("Edit", new { Id = item.Id })">Edit</a>),
+                   ss.Column(header:"", format:@<a href="@Url.Action("Remove", new { categoryId = item.ID })">Delete</a>)
+                               )
+                               )
+            }
+             <div class="pagination">
+                 @Html.PagedListPager(Model.SearchResult
+    , page => Url.Action("List", new RouteValueDictionary() 
+    {
+            { "Page", page },
+            { "ProductName", Model.CategoryName },   
+            { "SKU", Model.SKU }
+
+    }),
+    PagedListRenderOptions.PageNumbersOnly)
            </div>
          </div>
+      </div>
+         }
       </div>
   </section>
 </aside>

@@ -1,14 +1,14 @@
 ﻿@using RepositoryPattern.Service.UI
 @using RepositoryPattern.Model.Catalog;
-@model IEnumerable<Category>
+@model RepositoryPattern.Models.CategoryModel
  @{var imgpath = "~/Images/WallImages/imagepath";
   // var catInfo = Model.Select(x => x.Name).FirstOrDefault();
-   Category cat = ViewBag.Category;
+   RepositoryPattern.Models.CategoryModel cat = ViewBag.Category;
    }
 <div class="col-sm-4">
     
-    <h1>@cat.Name</h1>
-    <p>@cat.Description</p>
+    <h1>@cat.Category.Name</h1>
+    <p>@cat.Category.Description</p>
    @* <ul class="pagination">
         <li><a href="#">&laquo;</a></li>
         <li><a href="#">1</a></li>
@@ -22,7 +22,7 @@
 @if (Model != null)
 {
 
-   @Html.RenderTemplateAsColumns(Model.ToList(),"_categorypartial",4) 
+   @Html.RenderTemplateAsColumns(Model.Categories.ToList(),"_categorypartial",4) 
 
 }
 </div>

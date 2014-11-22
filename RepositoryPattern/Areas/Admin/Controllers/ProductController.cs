@@ -28,32 +28,41 @@ namespace RepositoryPattern.Areas.Admin.Controllers
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductVariationRepository _prdVariationRepo;
-        
-        public ActionResult List()
+
+        public ActionResult List(ProductSearchModel searchModel)
         {
-            ProductSearchModel prodSeachModel = new ProductSearchModel();
-            var pageIndex = prodSeachModel.Page ?? 1;
+            var pageIndex = searchModel.Page ?? 1;
             const int RecordPerPage = 10;
             try
             {
-                prodSeachModel.SearchResult = _productRepository.GetAllProduct().ToPagedList(pageIndex, RecordPerPage);
-                return View(prodSeachModel);
+                searchModel.SearchResult = _productRepository.GetAllProduct().ToPagedList(pageIndex, RecordPerPage);
+                return View(searchModel);
             }
             catch { return View(); };
           
         }
 
         [HttpPost]
-        public ActionResult SearchProductList(ProductSearchModel searchModel)
+        public ActionResult List(ProductSearchModel searchModel, string ss = null)
         {
-            var product = _productRepository.GetAllProduct();
-            var filterproduct = product.Where(x => x.Name.StartsWith(searchModel.ProductName));
-
-            var ss = new MvcWebGrid.MvcWebGrid(searchModel.SearchResult, defaultSort: "Name");
-            return new JsonResult
+             const int RecordsPerPage = 10;
+            if (!string.IsNullOrEmpty(searchModel.SearchButton) || searchModel.Page.HasValue)
             {
-                Data = product
-            };
+                var product = _productRepository.GetAllProduct();
+                var filterproduct = product.Where(x => (x.Name.Contains(searchModel.ProductName)
+                                       || searchModel.ProductName == null)
+                    ).OrderBy(p => p.Name);
+               
+                var pageIndex = 1;
+                if(searchModel.ProductName != null)
+                searchModel.SearchResult = filterproduct.ToPagedList(pageIndex, RecordsPerPage);
+                if (searchModel.ProductName == null)
+                    searchModel.SearchResult = product.ToPagedList(pageIndex, RecordsPerPage);
+            }
+            return View(searchModel);
+
+               
+               
         }
         public ActionResult Create()
         {
