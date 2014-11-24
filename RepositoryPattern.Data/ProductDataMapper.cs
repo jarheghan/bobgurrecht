@@ -136,6 +136,7 @@ namespace RepositoryPattern.Data
                 Width = result.prd_width,
                 Length = result.prd_length,
                 Height = result.prd_height,
+                ProductNameSku = result.ProductNameSku,
                 ProductGuid = result.prd_guid == null ? Guid.Empty : result.prd_guid,
                 DeleteFlag = true,
                 AddDate = DateTime.Now,
@@ -382,8 +383,11 @@ namespace RepositoryPattern.Data
                 List<Product> products = new List<Product>();
                 try
                 {
-                    var product = cn.Query<dynamic>(@" select * FROM Products
-                                                        where prd_name Like '%' + @prdName +  '%'", new { prdName = prdName });
+                    var product = cn.Query<dynamic>(@" select *,prd_name + '-' + prd_SKU as ProductNameSku into #temp1 from products
+                                                select * FROM #temp1
+                                                where ProductNameSku Like '%' + @prdName +  '%'
+                                                drop table #temp1"
+                                            , new { prdName = prdName });
                     foreach (var p in product)
                     {
                         Product prd = Map(p);
