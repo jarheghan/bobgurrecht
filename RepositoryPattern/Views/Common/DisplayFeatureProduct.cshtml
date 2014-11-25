@@ -4,7 +4,12 @@
   }
   <br> 
   <div class="container" id="intro">
-   <img  src="@Url.Content(imgpath + "/plumbing-parts.png")" /><br>
+  	<div class="row">
+  		<div class="col-lg-4"><img  src="@Url.Content(imgpath + "/image002.jpg")" /></div>
+  		<div class="col-lg-4"><img  src="@Url.Content(imgpath + "/image003.jpg")" /></div>
+  		<div class="col-lg-4"><img  src="@Url.Content(imgpath + "/image004.jpg")" /></div>
+    </div>
+   <br>
    <br>
    <p>Stop running around searching for parts and get what you need fast. Ninety-Five percent of orders are shipped the same day, and usually arrive the next day. Bob Garrecht Supply carries a vast array of plumbing parts. Whether you need parts for a fairly new toilet or a valve for a 1950's faucet. We probably have it. If we we don't, we can get it for you. Call, email or place your order right here on our website.</p>
   </div>
@@ -19,11 +24,10 @@
     //var ss = Model.Select(x => x.Category.Name).FirstOrDefault();
 <div class="col-md-4">
     <div class="thumbnail">
-      <img src="@Url.Content(csspart + "/img/kitchen-faucets.jpg")" alt="...">
+      <img src="@Url.Content(csspart + "/img/featured-products.jpg")" alt="...">
       <div class="caption">
         <h3>Feature Produts</h3>
         <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-        <p><a href="#" class="btn btn-default" role="button">Shop All Products</a></p>
       </div>
     </div>
   </div>

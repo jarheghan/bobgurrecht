@@ -83,7 +83,7 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(searchModel.SearchButton) || searchModel.Page.HasValue)
             {
                 var category = _categoryRepository.GetAllCategories();
-                var filtercategory = category.Where(x => (x.Name.Contains(searchModel.CategoryName)
+                var filtercategory = category.Where(x => (x.Name.ToUpper().Contains(searchModel.CategoryName.ToUpper())
                                        || searchModel.CategoryName == null)
                     ).OrderBy(p => p.Name);
 
