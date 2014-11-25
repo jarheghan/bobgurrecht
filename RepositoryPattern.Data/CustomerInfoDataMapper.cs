@@ -138,7 +138,17 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<CustomerInfo> GetAllCustomersInfo()
         {
-            throw new NotImplementedException();
+            List<CustomerInfo> cusInfo = new List<CustomerInfo>();
+            using (IDbConnection cn = Connection)
+            {
+                var customer = cn.Query<dynamic>(@"select * from CustomerInfo");
+                if (customer != null)
+                    foreach (var cus in customer)
+                    {
+                        cusInfo.Add(Map(cus));
+                    }
+                return cusInfo;
+            }
         }
 
 
@@ -167,6 +177,19 @@ namespace RepositoryPattern.Data
                     state.Add(MapState(sta));
                 }
                 return state.AsEnumerable();
+            }
+        }
+
+
+        public CustomerInfo GetSingleCustomerInfo(int cusId)
+        {
+            CustomerInfo cusInfo = new CustomerInfo();
+            using (IDbConnection cn = Connection)
+            {
+                var customer = cn.Query<dynamic>(@"select * from CustomerInfo where cus_id = @cusId", new {cusId = cusId}).FirstOrDefault();
+                if(customer != null)
+                    cusInfo = Map(customer);
+                return cusInfo;
             }
         }
     }

@@ -1,0 +1,76 @@
+﻿@using ClientDependency.Core.Mvc
+@{
+    ViewBag.Title = "Customer Wish List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+    Html.RequiresCss("admin/font-awesome.css", "Content", 5);
+    Html.RequiresCss("admin/ionicons.css", "Content", 5);
+
+    Html.RequiresJs("jquery-2.1.1.js", "jquery", 1);
+    Html.RequiresJs("jquery-ui-1.8.20.js", "jquery", 2);
+    Html.RequiresJs("admin/app.js", "Content", 99);
+    Html.RequiresJs("admin/dashboard.js", "Content", 99);
+}
+
+@using PagedList.Mvc
+@using RepositoryPattern.Areas.Admin.Models
+@model AdminWishList
+
+@Html.Action("Menu", "Common", new {area="Admin"})
+
+
+<aside class="right-side">
+  <section class="col-lg-12 connectedSortable">
+  <div class="row">
+         @using(Html.BeginForm()){
+     <div class="col-sm-10">
+         <br />
+         <div class=""><h4>List of Current Wish List</h4></div>
+             
+         <br />
+          <br />
+        <div id="clientsDb">
+            @{
+             var grid = new MvcWebGrid(
+                 source: Model.CustomerWishList,
+                 columnNames: new List<string>() { "Title" },
+                 defaultSort: "Name",
+                 canPage: false,
+                 canSort: true,
+                 rowsPerPage: 5
+                 );
+                 grid.SortDirection = SortDirection.Ascending;
+             }
+           
+            @if (Model.CustomerWishList != null && Model.CustomerWishList.Count() > 0)
+             {
+                
+                 @grid.GetHtml(tableStyle: "table table-bordered table-striped"
+                    //,headerStyle:"gvHeading"
+                    //,rowStyle:"gridrow"
+                    //,alternatingRowStyle:""
+                , columns: grid.Columns(
+                    grid.Column("FullName", "Customer Name"),
+                    grid.Column("ProductName", "Product Name"),
+                    grid.Column("ProductVariationDesc", "Product Variation"),
+                    grid.Column("Quantity"),
+                    grid.Column("OrderItemDate", "Date Requested"),
+                   grid.Column(header:"", format:@<a href="@Url.Action("RemoveWishList", new { OrderItemId = item.OrderItemID })">Delete</a>)
+                               )
+                               )
+            }
+             <div class="pagination">
+                 @Html.PagedListPager(Model.CustomerWishList
+    , page => Url.Action("List", new RouteValueDictionary() 
+    {
+            { "Page", page },
+
+    }),
+    PagedListRenderOptions.PageNumbersOnly)
+           </div>
+         </div>
+      </div>
+         }
+      </div>
+  </section>
+</aside>

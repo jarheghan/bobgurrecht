@@ -15,5 +15,6 @@ namespace RepositoryPattern.Model.Customers
         IEnumerable<CustomerInfo> GetAllCustomersInfo();
         IEnumerable<Country> GetAllCountries();
         IEnumerable<State> GetAllStates();
+        CustomerInfo GetSingleCustomerInfo(int cusId);
     }
 }

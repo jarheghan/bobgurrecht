@@ -96,11 +96,14 @@ namespace RepositoryPattern.Data
 
         public Order GetSingleOrderByOrderID(int Id)
         {
+            Order order = new Order();
             using (IDbConnection cn = Connection)
             {
                 var i = cn.Query<dynamic>("select * from [order] where ord_id = @Id", new { Id = Id }).FirstOrDefault();
-                return i;
 
+                order = Map(i);
+                return order;
+                
             }
         }
 

@@ -14,8 +14,9 @@
 }
 
  @Html.Action("Menu", "Common", new {area="Admin"})
-
- <aside class="right-side">
+ @model RepositoryPattern.Areas.Admin.Models.HomeDisplay
+ 
+<aside class="right-side">
   <section class="col-lg-12 connectedSortable">
   <div class="row">
        <aside class="right-side">
@@ -27,7 +28,7 @@
                     </h1>
                     <ol class="breadcrumb">
                           <li><a href="@Url.Action("Logout", "Account", new {@area="" })">
-                            <i class="fa fa-table"></i> <span>Logout</span>
+                            <i class="glyphicon glyphicon-user"></i> <span>Logout</span>
                          </a></li>
                       @*  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li class="active">Dashboard</li>*@
@@ -39,82 +40,65 @@
 
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <div class="col-lg-3 col-xs-6">
+                        <div class="col-lg-4 col-xs-6">
                             <!-- small box -->
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        150
+                                        @Model.WishListCount
                                     </h3>
                                     <p>
-                                        New Orders
+                                        Total Items in WishList
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-bag"></i>
+                                    <i class="glyphicon glyphicon-gift"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
+                        <div class="col-lg-4 col-xs-6">
                             <!-- small box -->
                             <div class="small-box bg-green">
                                 <div class="inner">
                                     <h3>
-                                        53<sup style="font-size: 20px">%</sup>
+                                        @*53<sup style="font-size: 20px">%</sup>*@
+                                        @Model.ProductCount
                                     </h3>
                                     <p>
-                                        Bounce Rate
+                                        Total Number of Products
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
+                                    <i class="glyphicon glyphicon-briefcase"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
+                        <div class="col-lg-4 col-xs-6">
                             <!-- small box -->
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>
-                                        44
+                                       @Model.CustomerCount
                                     </h3>
                                     <p>
                                         User Registrations
                                     </p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="glyphicon glyphicon-user"></i>
                                 </div>
                                 <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                  More Info
                                 </a>
                             </div>
                         </div><!-- ./col -->
-                        <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                            <div class="small-box bg-red">
-                                <div class="inner">
-                                    <h3>
-                                        65
-                                    </h3>
-                                    <p>
-                                        Unique Visitors
-                                    </p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    More info <i class="fa fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div><!-- ./col -->
+                        
                     </div><!-- /.row -->
                 </section>
         </aside>

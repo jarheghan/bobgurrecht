@@ -171,10 +171,13 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\PictureController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WishListController.cs" />
     <Compile Include="Areas\Admin\Infacstructure\CommonHelpers.cs" />
     <Compile Include="Areas\Admin\Infacstructure\HtmlAttributeExtension.cs" />
+    <Compile Include="Areas\Admin\Models\AdminWishList.cs" />
     <Compile Include="Areas\Admin\Models\Catalog.cs" />
     <Compile Include="Areas\Admin\Models\CategorySearchModel.cs" />
+    <Compile Include="Areas\Admin\Models\HomeDisplay.cs" />
     <Compile Include="Areas\Admin\Models\ProductSearchModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductVariationInfo.cs" />
     <Compile Include="Areas\Admin\Models\SuccessInfo.cs" />
@@ -643,6 +646,7 @@
     <Content Include="Areas\Admin\Views\Common\ProductVariationEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Common\WishList.cshtml" />
     <Content Include="Areas\Admin\Views\Common\MiniWishList.cshtml" />
+    <Content Include="Areas\Admin\Views\WishList\List.cshtml" />
     <None Include="Properties\PublishProfiles\BobGarrecht.pubxml" />
     <None Include="Properties\PublishProfiles\jpcBobGarrecht.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
