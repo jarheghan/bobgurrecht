@@ -140,7 +140,8 @@ namespace RepositoryPattern.Data
                 ProductGuid = result.prd_guid == null ? Guid.Empty : result.prd_guid,
                 DeleteFlag = true,
                 AddDate = DateTime.Now,
-                AddUser = Environment.UserName
+                AddUser = Environment.UserName,
+                ProductNameSKU = result.ProductNameSKU
             };
             return product;
         }
@@ -237,7 +238,7 @@ namespace RepositoryPattern.Data
 
         public IEnumerable<Product> GetAllProduct()
         {
-            var sql = @"select * from products";
+            var sql = @"select *,prd_name + '-' + prd_sku as ProductNameSKU from products";
             return GetProductDataNoJoin(sql);
             
         }

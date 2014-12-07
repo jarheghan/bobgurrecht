@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mvc.Mailer;
+using RepositoryPattern.Mailers;
 
 namespace RepositoryPattern.Controllers
 {
@@ -39,7 +41,14 @@ namespace RepositoryPattern.Controllers
         private readonly IOrderItemsRepository _orderItemRepository;
         private readonly IUserRepository _userRepository;
         private readonly IProductVariationRepository _prdVariationRepo;
-        
+
+        private IUserMailer _userMailer = new UserMailer();
+        public IUserMailer UserMailer
+        {
+            get { return _userMailer; }
+            set { _userMailer = value; }
+        }
+
         public ActionResult Menu(bool removeWL = false)
         {
             ViewBag.RemoveWL = removeWL;
@@ -253,5 +262,6 @@ namespace RepositoryPattern.Controllers
             return View(prdcat);
         }
 
+        
     }
 }

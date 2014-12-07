@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Email\EmailProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\IPageAssetsBuilder.cs" />
     <Compile Include="UI\LayoutExtention.cs" />

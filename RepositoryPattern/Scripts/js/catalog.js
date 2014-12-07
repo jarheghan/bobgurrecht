@@ -154,6 +154,9 @@ var catalog = (function () {
  $('body').on('click','#updateWishList',function () {
      catalog.updateWishList();
  })
+ $('body').on('click', '#completeWishList', function () {
+     catalog.processWishList();
+ })
     $('#btnProdVariation').click(function () {
         $('#productvariation').dialog('open').load('/Admin/Common/ProductVariation');
     })
@@ -431,6 +434,47 @@ var catalog = (function () {
         });
     }
 
+    var processWishList = function () {
+        var $textbox = $('#tblWishList').find('tr');
+        var myitems = [];
+        var OrderItem = {};
+        $.each($textbox, function (key, value) {
+            var txt = $(value).find('input:hidden').val();
+            var id = $(value).find('input:text').val()
+            if (txt !== undefined && id !== undefined) {
+                var OrderItem = {
+                    ID: txt,
+                    Quantity: id,
+                };
+                myitems.push(OrderItem);
+            }
+
+        })
+
+        var datas = {
+            items: myitems
+        }
+
+        $.ajax({
+            url: "/WishListProcess/WishListProcessEmail",
+            type: "POST",
+            datatype: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(datas),
+            cache: false,
+            async: false,
+            success: function (val) {
+                if (val === "success") {
+                   
+                    $.messager.alert("Message has been Sent");
+                }
+                if (val === "error") {
+                    $.messager.alert("The record was not Updated");
+                }
+            }
+        });
+    }
+
     var validation = function () {
         $('#containerForm').bootstrapValidator({
             container: 'tooltip',
@@ -551,7 +595,8 @@ var catalog = (function () {
         LoginModal: LoginModal,
         validation: validation,
         removeWishList: removeWishList,
-        updateWishList: updateWishList
+        updateWishList: updateWishList,
+        processWishList: processWishList
     }
 
    

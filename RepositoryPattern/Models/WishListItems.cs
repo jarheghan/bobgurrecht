@@ -11,4 +11,15 @@ namespace RepositoryPattern.Models
         public int ProductVariationID { get; set; }
         public int Quantity { get; set; }
     }
+
+    public class EmailWishList
+    {
+        public string FullName { get; set; }
+        public string ProductName { get; set; }
+        public string ProductVariationDesc { get; set; }
+        public int Quantity { get; set; }
+        public string Picture { get; set; }
+        public int OrderItemID { get; set; }
+        public string OrderItemDate { get; set; }
+    }
 }
