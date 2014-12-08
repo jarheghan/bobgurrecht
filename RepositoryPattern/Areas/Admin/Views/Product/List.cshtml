@@ -44,9 +44,6 @@
              {
                  var ss = new MvcWebGrid(Model.SearchResult, defaultSort: "Name");
                  @ss.GetHtml(tableStyle: "table table-bordered table-striped"
-                    //,headerStyle:"gvHeading"
-                    //,rowStyle:"gridrow"
-                    //,alternatingRowStyle:""
                 , columns: ss.Columns(
                     ss.Column("Name", "Product Name"),
                     ss.Column("Description"),
