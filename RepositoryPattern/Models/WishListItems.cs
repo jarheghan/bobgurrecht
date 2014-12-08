@@ -21,5 +21,6 @@ namespace RepositoryPattern.Models
         public string Picture { get; set; }
         public int OrderItemID { get; set; }
         public string OrderItemDate { get; set; }
+        public string ProductNumber { get; set; }
     }
 }

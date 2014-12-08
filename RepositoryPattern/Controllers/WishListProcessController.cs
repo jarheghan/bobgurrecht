@@ -81,7 +81,8 @@ namespace RepositoryPattern.Controllers
                         Quantity = orderItem.Quantity,
                         Picture = pic.FilePath,
                         OrderItemID = orderItem.ID,
-                        OrderItemDate = (orderItem.AddDate ?? DateTime.Now).ToShortDateString()
+                        OrderItemDate = (orderItem.AddDate ?? DateTime.Now).ToShortDateString(),
+                        ProductNumber = product.SKU
                     };
                 });
             

@@ -465,8 +465,14 @@ var catalog = (function () {
             async: false,
             success: function (val) {
                 if (val === "success") {
+                    $.messager.model = {
+                        ok: { text: "Continue Shopping", classed: "btn btn-primary" },
+                        cancel: {text: "Cancel", classed: "btn btn-danger"}
+                    };
+                    $.messager.confirm("Process Wish List", "Your wishList has been processed!", function () {
+                        window.location.href = "/";
+                    });
                    
-                    $.messager.alert("Message has been Sent");
                 }
                 if (val === "error") {
                     $.messager.alert("The record was not Updated");

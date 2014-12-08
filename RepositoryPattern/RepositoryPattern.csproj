@@ -719,8 +719,6 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Home\Error500.cshtml" />
     <Content Include="Views\UserMailer\_Layout.cshtml" />
-    <Content Include="Views\UserMailer\Welcome.cshtml" />
-    <Content Include="Views\UserMailer\PassWordReset.cshtml" />
     <Content Include="Views\UserMailer\EmailWishList.cshtml" />
   </ItemGroup>
   <ItemGroup>

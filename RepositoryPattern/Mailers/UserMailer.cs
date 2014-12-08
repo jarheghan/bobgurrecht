@@ -3,6 +3,7 @@ using RepositoryPattern.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Linq;
+using System.Configuration;
 
 namespace RepositoryPattern.Mailers
 { 
@@ -37,14 +38,14 @@ namespace RepositoryPattern.Mailers
 
         public virtual MvcMailMessage EmailWishList(IEnumerable<EmailWishList> items)
         {
+            var emailaddress = ConfigurationManager.AppSettings["EmailAddresses"].ToString();
             ViewData = new ViewDataDictionary(items);
             ViewBag.Name = items.Select(x => x.FullName).FirstOrDefault();
             return Populate(x =>
                 {
                     x.Subject = "Items Order By Customer";
                     x.ViewName = "EmailWishList";
-                    x.To.Add("dscrollj@gmail.com");
-                    
+                    x.To.Add(emailaddress);
                 });
         }
  	}

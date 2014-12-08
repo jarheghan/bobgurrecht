@@ -11,12 +11,12 @@
     <table>
         <thead>
             <tr>
-                <th>Product Name</th> <th>Product Quantity</th><th>Order Date</th>
+                <th>Product Name</th> <th>Product Quantity</th><th>Product Number</th><th>Order Date</th>
             </tr>
         </thead>
          @foreach(var wl in ViewData.Model){
         <tr>
-            <td>@wl.ProductName</td><td>@wl.Quantity</td><td>@wl.OrderItemDate</td>
+            <td>@wl.ProductName</td><td>@wl.Quantity</td><td>@wl.ProductNumber</td><td>@wl.OrderItemDate</td>
         </tr>
          }
     </table>
