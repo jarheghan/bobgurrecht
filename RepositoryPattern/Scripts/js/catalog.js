@@ -21,7 +21,11 @@ var catalog = (function () {
                   var prodTable = $("#tablePrdVariation");
                   var des = $('body').find('#description').val();
                   var size = $('body').find('#size').val();
-                  prodTable.append('<tr id="tr' + i1 + '"><td><input type="hidden" name="[' + i1 + '].Description" value="' + des + '"/>' + des + '</td><td><input type="hidden" name="[' + i1 + '].Size" value="' + size + '"/>' + size
+                  var checkbox = $('body').find('#ckcDefault').val();
+                  var myval = checkbox === "true" ? "Default" : "";
+                  prodTable.append('<tr id="tr' + i1 + '"><td><input type="hidden" name="[' + i1 + '].Description" value="' + des + '"/>'
+                      + des + '</td><td><input type="hidden" name="[' + i1 + '].Size" value="' + size + '"/>' + size
+                      + '</td><td><input type="hidden" name="[' + i1 + '].ckcDefault" value="' + checkbox + '"/>' + myval
                       + '</td><td><a href="#" onclick="catalog.removeVariation(' + i1 + ')">Remove</a></td></tr>');
                   i1++;
                   $(this).dialog("close");

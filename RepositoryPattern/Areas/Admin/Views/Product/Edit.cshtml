@@ -86,7 +86,7 @@
                                             @Html.Label("Product Variation", new { @for = "" })<br />
                                             <div>
                                            <table class="table table-bordered table-hover" id="tblProductVariation">
-                                              <thead><tr><th>Variation Name</th><th>Size</th></tr></thead>
+                                              <thead><tr><th>Variation Name</th><th>Size</th><th>Variation Default</th></tr></thead>
                                                <tbody id="tablePrdVariation">
                                                    @{int cnt1 = 0;}
                                                   @if (Model.ProductVariation != null)
@@ -98,6 +98,7 @@
                                                       <tr>
                                                        <td>@Html.HiddenFor(x =>x.ProductVariation[cnt].Description) @prdvar.Description</td>
                                                        <td>@Html.HiddenFor(x =>x.ProductVariation[cnt].Size) @Html.HiddenFor(x =>x.ProductVariation[cnt].ID) @prdvar.Size</td>
+                                                       <td>@Html.HiddenFor(x =>x.ProductVariation[cnt].Default) @{var varia = prdvar.Default == true ? "Default" : string.Empty;}@varia</td>
                                                        <td><a href="@Url.Action("DeleteVariation", new { Id = prdvar.ID, prdId = Model.Product.ID })">Remove</a>
                                                        <td><a href="#" onclick="catalog.editProdtionVartion(@prdvar.ID)">Edit</a>
                                                         </td></tr>

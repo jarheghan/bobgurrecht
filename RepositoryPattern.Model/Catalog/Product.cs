@@ -38,7 +38,7 @@ namespace RepositoryPattern.Model.Catalog
         public int PictureID { get; set; }
         [Required]
         public int CategoryID { get; set; }
-        public string ProductNameSKU { get; set; }
+        public string ProductNameSKUNew { get; set; }
         public int ID
         {
             get;

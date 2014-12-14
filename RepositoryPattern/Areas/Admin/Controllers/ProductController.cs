@@ -49,9 +49,9 @@ namespace RepositoryPattern.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(searchModel.SearchButton) || searchModel.Page.HasValue)
             {
                 var product = _productRepository.GetAllProduct();
-                var filterproduct1 = product.Where(x => (x.ProductNameSKU != null));
+                var filterproduct1 = product.Where(x => (x.ProductNameSKUNew != null));
                 var filterproduct = filterproduct1.Where(x => (
-                            x.ProductNameSKU.ToUpper().Contains(searchModel.ProductName.ToUpper())
+                            x.ProductNameSKUNew.ToUpper().Contains(searchModel.ProductName.ToUpper())
                                        || searchModel.ProductName == null)
                     ).OrderBy(p => p.Name);
 

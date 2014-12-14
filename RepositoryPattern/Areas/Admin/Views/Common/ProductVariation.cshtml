@@ -14,6 +14,11 @@
                 @Html.TextBox("size",null, new {@class="form-control" })
                 @Html.ValidationMessage("ShortDescription")
             </div>
+              <div class="form-group">
+                @Html.Label("Make Default Variation")
+                @Html.CheckBox("ckcDefault",false)
+                @Html.ValidationMessage("Default")
+            </div>
                                        
                 </div>
      </div>

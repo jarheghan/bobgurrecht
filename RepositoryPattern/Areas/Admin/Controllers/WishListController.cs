@@ -13,6 +13,7 @@ using PagedList;
 
 namespace RepositoryPattern.Areas.Admin.Controllers
 {
+     [Authorize(Roles = "Admin")]
     public class WishListController : BaseController
     {
         //

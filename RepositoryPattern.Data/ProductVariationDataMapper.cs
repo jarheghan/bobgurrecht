@@ -33,7 +33,8 @@ namespace RepositoryPattern.Data
                 AddDate = result.prv_add_date,
                 ChangeDate = result.prv_change_date,
                 ChangeUser = result.prv_change_user,
-                DeleteFlag = result.prv_delete_flag
+                DeleteFlag = result.prv_delete_flag,
+                Default = result.prv_default
             };
             return productVariation;
         }
@@ -214,7 +215,7 @@ namespace RepositoryPattern.Data
             using (IDbConnection cn = Connection)
             {
                 List<ProductVariation> prdvar = new List<ProductVariation>();
-                var prdvariation = cn.Query<dynamic>(@"select * from ProductVariation where prv_prd_id = @productId", new {productId = productId });
+                var prdvariation = cn.Query<dynamic>(@"select * from ProductVariation where prv_prd_id = @productId order by prv_default desc", new { productId = productId });
 
                 foreach (var pv in prdvariation)
                 {
