@@ -6,18 +6,10 @@
    Category cat = ViewBag.Category;
    }
 <div class="row">
-    
-    <h1>@cat.Name</h1>
-    <p>@cat.Description</p>
-    <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
+    <div class="col-md-6">
+        <div><h1>@cat.Name</h1></div>
+        <div><h3>@cat.Description</h3></div>
+    </div>
 </div>
   <br>
 @if (catInfo != null)

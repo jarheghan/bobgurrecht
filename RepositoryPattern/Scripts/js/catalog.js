@@ -18,14 +18,22 @@ var catalog = (function () {
                 text: "Save"
               , 'class': "btn-primary"
               , click: function () {
+                  var tdArray = [];
+                  $('#tdDefault').each(function (index) {
+                      tdArray.push($(this).text());
+                  });
+                  var tdVal = jQuery.inArray("Default", tdArray);
                   var prodTable = $("#tablePrdVariation");
                   var des = $('body').find('#description').val();
                   var size = $('body').find('#size').val();
-                  var checkbox = $('body').find('#ckcDefault').val();
-                  var myval = checkbox === "true" ? "Default" : "";
+                  var checkbox = $('body').find('#Default').val();
+                  if (tdVal === -1 && checkbox === "true") {
+                      var myval = "Default";
+                  }
+                  else { var myval = ""}
                   prodTable.append('<tr id="tr' + i1 + '"><td><input type="hidden" name="[' + i1 + '].Description" value="' + des + '"/>'
                       + des + '</td><td><input type="hidden" name="[' + i1 + '].Size" value="' + size + '"/>' + size
-                      + '</td><td><input type="hidden" name="[' + i1 + '].ckcDefault" value="' + checkbox + '"/>' + myval
+                      + '</td><td id="tdDefault"><input type="hidden" name="[' + i1 + '].Default" value="' + checkbox + '"/>' + myval
                       + '</td><td><a href="#" onclick="catalog.removeVariation(' + i1 + ')">Remove</a></td></tr>');
                   i1++;
                   $(this).dialog("close");
@@ -42,6 +50,7 @@ var catalog = (function () {
         ]
  });
 
+   
  var dialogEditProductVariation1 = $('#productvariationedit1').dialog({
      title: "Production Variation 1",
      autoOpen: false,
@@ -60,6 +69,7 @@ var catalog = (function () {
                var data = {
                    Description: $('body').find('#description').val(),
                    Size: $('body').find('#size').val(),
+                   Default: $('body').find('#Default').is(':checked')?true:false,
                    ProductID: $('body').find('#pvProductID').val(),
                }
                $.ajax({
@@ -106,6 +116,7 @@ var catalog = (function () {
                                            var data = {
                                                Description: $('body').find('#descriptionedit').val(),
                                                Size: $('body').find('#sizeedit').val(),
+                                               Default: $('body').find('#Default').is(':checked')?true:false,
                                                ID: $('body').find('#prdVariationIDedit').val(),
                                            }
                                            $.ajax({

@@ -50,7 +50,8 @@ namespace RepositoryPattern.Data
                 Color = prdVariation.Color,
                 AddUser = prdVariation.AddUser,
                 AddDate = prdVariation.AddDate,
-                DeleteFlag = prdVariation.DeleteFlag
+                DeleteFlag = prdVariation.DeleteFlag,
+                Default = prdVariation.Default
             };
 
             using (IDbConnection cn = Connection)
@@ -61,6 +62,7 @@ namespace RepositoryPattern.Data
                                    ,prv_size
                                    ,prv_type
                                    ,prv_color
+                                   ,prv_default
                                    ,prv_add_user
                                    ,prv_add_date
                                    ,prv_delete_flag)
@@ -70,6 +72,7 @@ namespace RepositoryPattern.Data
                                    ,@Size
                                    ,@Type
                                    ,@Color
+                                   ,@Default
                                    ,@AddUser
                                    ,@AddDate
                                    ,@DeleteFlag)", param);
@@ -88,7 +91,8 @@ namespace RepositoryPattern.Data
                 Color = prdVariation.Color,
                 AddUser = prdVariation.AddUser,
                 AddDate = prdVariation.AddDate,
-                DeleteFlag = prdVariation.DeleteFlag
+                DeleteFlag = prdVariation.DeleteFlag,
+                Default = prdVariation.Default
             };
 
             try
@@ -97,12 +101,20 @@ namespace RepositoryPattern.Data
                 using (IDbConnection cn = Connection)
                 {
                     int i = cn.Query<int>(@"DECLARE @TmpTable TABLE(ID int)
+                                    
+                                    if(@Default = 1)
+                                    BEGIN
+                                    update ProductVariation
+                                    set prv_default = NULL
+                                    where prv_prd_id = @ProductID                                    
+                                    END
                                     INSERT INTO ProductVariation
                                    (prv_prd_id
                                    ,prv_description
                                    ,prv_size
                                    ,prv_type
                                    ,prv_color
+                                   ,prv_default
                                    ,prv_add_user
                                    ,prv_add_date
                                    ,prv_delete_flag) OUTPUT Inserted.prv_prd_id INTO @TmpTable
@@ -112,6 +124,7 @@ namespace RepositoryPattern.Data
                                    ,@Size
                                    ,@Type
                                    ,@Color
+                                   ,@Default
                                    ,@AddUser
                                    ,@AddDate
                                    ,@DeleteFlag) select ID from @TmpTable", param).FirstOrDefault();
@@ -147,6 +160,7 @@ namespace RepositoryPattern.Data
                 Size = prdVariation.Size,
                 Type = prdVariation.Type,
                 Color = prdVariation.Color,
+                Default = prdVariation.Default,
                 ChangeUser = prdVariation.ChangeUser,
                 ChangeDate = prdVariation.ChangeDate,
                 DeleteFlag = prdVariation.DeleteFlag
@@ -160,6 +174,7 @@ namespace RepositoryPattern.Data
                                    ,prv_size = @Size
                                    ,prv_type = @Type
                                    ,prv_color = @Color 
+                                   ,prv_default = @Default
                                    ,prv_change_user = @ChangeUser
                                    ,prv_change_date = @ChangeDate
                                    ,prv_delete_flag = @DeleteFlag where prv_id = @ID
@@ -182,6 +197,7 @@ namespace RepositoryPattern.Data
                 Size = prdVariation.Size,
                 Type = prdVariation.Type,
                 Color = prdVariation.Color,
+                Default = prdVariation.Default,
                 ChangeUser = prdVariation.ChangeUser,
                 ChangeDate = prdVariation.ChangeDate,
                 DeleteFlag = prdVariation.DeleteFlag
@@ -191,9 +207,19 @@ namespace RepositoryPattern.Data
                 try
                 {
                     int i = cn.Query<int>(@"DECLARE @TmpTable TABLE(ID int)
+                                    DECLARE @prd_id int
+                                    select @prd_id = prv_prd_id FROM ProductVariation where prv_id = @ID
+                                    if(@Default = 1)
+                                    BEGIN
+                                    update ProductVariation
+                                    set prv_default = NULL
+                                    where prv_prd_id = @prd_id
+                                    END
+
                                     Update ProductVariation
                                     set prv_description = @Description
                                    ,prv_size = @Size
+                                   ,prv_default = @Default
                                    ,prv_change_user = @ChangeUser
                                    ,prv_change_date = @ChangeDate
                                    ,prv_delete_flag = @DeleteFlag OUTPUT INSERTED.prv_prd_id into @TmpTable  where prv_id = @ID

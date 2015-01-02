@@ -3,10 +3,11 @@
     Layout = "~/Views/Shared/_Root.cshtml";
 }
 
-
+<div class="main-container">
 <div class="container">
  @Html.Action("Menu","Common",new{Id = ViewBag.CatId})
-     <div class="row">
-    </div>
+     @*<div class="row">
+    </div>*@
     @Html.Action("DisplayCategoryProduct", "Common", new{Id = ViewBag.CatId})
   </div>
+</div>
