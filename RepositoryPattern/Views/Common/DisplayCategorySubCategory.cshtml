@@ -5,7 +5,7 @@
   // var catInfo = Model.Select(x => x.Name).FirstOrDefault();
    RepositoryPattern.Models.CategoryModel cat = ViewBag.Category;
    }
-<div class="col-sm-4">
+<div class="col-sm-8">
     
     <h1>@cat.Category.Name</h1>
     <p>@cat.Category.Description</p>
@@ -21,9 +21,11 @@
 
 @if (Model != null)
 {
-
-   @Html.RenderTemplateAsColumns(Model.Categories.ToList(),"_categorypartial",4) 
-
+<div class="row">
+     <div class="col-sm-12">
+   @Html.RenderTemplateAsColumns(Model.Categories.ToList(),"_categorypartial",3) 
+</div>
+    </div>
 }
 </div>
  

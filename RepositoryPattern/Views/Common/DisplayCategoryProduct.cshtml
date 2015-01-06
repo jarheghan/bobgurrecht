@@ -6,7 +6,7 @@
    Category cat = ViewBag.Category;
    }
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <div><h1>@cat.Name</h1></div>
         <div><h3>@cat.Description</h3></div>
     </div>
@@ -15,7 +15,9 @@
 @if (catInfo != null)
 {
 <div class="row">
-   @Html.RenderTemplateAsColumns(Model.ToList(),"_productpartial",4) 
+     <div class="col-sm-12">
+   @Html.RenderTemplateAsColumns(Model.ToList(),"_productpartial",3) 
 </div>
+     </div>
 }
  

@@ -11,21 +11,26 @@
   
     }
      
-         <div class="col-sm-12">
+          <div class="product-image-wrapper">
+        <div class="single-products">
+        <div class="productinfo text-center">
               @if( pic!= null){
-             <div class=""><a href="@Url.Action("CategoryProduct","Home",new{Id= Model.ID})">
-             <img class="small-thumbnail" src="@Url.Content(imgpath + "/" + @pic.FilePath)" /></a></div>
+             <a href="@Url.Action("CategoryProduct","Home",new{Id= Model.ID})">
+             <img style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/" + @pic.FilePath)" /></a>
                 }
                    @if(pic == null){
-             <div class=""><a href="@Url.Action("CategoryProduct","Home",new{Id= Model.ID})">     
-             <img class="small-thumbnail" src="@Url.Content(imgpath + "/pro-test.png")" /></a></div>
+             <a href="@Url.Action("CategoryProduct","Home",new{Id= Model.ID})">     
+             <img style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(imgpath + "/pro-test.png")" /></a>
                    }
                     
-             <div><h5> <label class="nlabel">  @Model.Name</label></h5></div>
+             <h5>@Model.Name</h5>
                  
-                <div> <p class="dlabel">@Model.Description</p></div>
+                <p>@Model.Description</p>
                 <br>
                 <br>
          </div>
-     
+     </div>
+              </div>
+
+
    

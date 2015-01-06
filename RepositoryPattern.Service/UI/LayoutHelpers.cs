@@ -97,18 +97,18 @@ namespace RepositoryPattern.Service.UI
                 int numberOfRows = items.Count / numberOfColumns;
 
                 //create the needed table tag
-                builder.Append("<table>");
+                builder.Append("<div class=\"col-sm-12\">");
 
                 //create the rows and columns
                 foreach (var item in items)
                 {
                     if (columnsInRow == 1)
                     {
-                        builder.Append("<tr>");
+                        builder.Append("<div class=\"col-sm-12\">");
                     }
-                    builder.Append("<td>");
+                    builder.Append("<div class=\"col-sm-3\">");
                     builder.Append(getStringMethod(partialViewName, item));
-                    builder.Append("</td>");
+                    builder.Append("</div>");
                     bool isLastItem = (items.Count == numberOfItemsDone + 1);
 
                     if ((columnsInRow == numberOfColumns) || isLastItem)
@@ -118,7 +118,7 @@ namespace RepositoryPattern.Service.UI
                             numberOfExtraColumnInLastRow = numberOfColumns - columnsInRow;
                             builder.Append(RenderExtraColumns(numberOfExtraColumnInLastRow));
                         }
-                        builder.Append("</tr>");
+                        builder.Append("</div>");
                         columnsInRow = 1;
                         rowsDone++;
 
@@ -129,7 +129,7 @@ namespace RepositoryPattern.Service.UI
                     }
                     numberOfItemsDone++;
                 }
-                builder.Append("</table>");
+                builder.Append("</div>");
                 return MvcHtmlString.Create(builder.ToString());
             }
             
@@ -143,7 +143,7 @@ namespace RepositoryPattern.Service.UI
             { StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < numberOfExtraColumnsInLastRow; i++)
                 { 
-                    builder.Append("<td></td>"); 
+                    builder.Append("<div></div>"); 
                 }
                 return builder.ToString(); 
             } 

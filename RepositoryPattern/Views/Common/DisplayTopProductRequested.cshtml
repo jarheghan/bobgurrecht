@@ -29,15 +29,21 @@
     {
         int i = cat.Product.ID;
     <div class="col-sm-3">
+         <div class="product-image-wrapper">
+        <div class="single-products">
+        <div class="productinfo text-center">
          @{ if(cat.Picture!=null)
          {  
-           <a href="@Url.Action("Product", "Home", new {prd=cat.Product.ID, catID =cat.CategoryID??default(int)})"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/" + cat.Picture.FilePath)"></a>
+           <a href="@Url.Action("Product", "Home", new {prd=cat.Product.ID, catID =cat.CategoryID??default(int)})">
+               <img  style="height:auto; width:auto; max-width:170px; max-height:200px;"  src="@Url.Content(imgpath + "/" + cat.Picture.FilePath)"></a>
          }
-         else{<a href="#"><img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(csspart + "/img/I08000.jpg")"></a>}
+         else{<a href="#"><img  style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(csspart + "/img/I08000.jpg")"></a>}
          }
-    <a><label class="plabel">@cat.Product.Name</label></a>
+    <a><p>@cat.Product.Name</p></a>
     </div>
-    
+    </div>
+             </div>
+        </div>
     }
 </div>
 

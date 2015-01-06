@@ -4,11 +4,16 @@
     int leng = Model.Product.Name.Count();
     }
      
-         <div class="col-sm-12">
-             <div class=""><a href="@Url.Action("Product","Home",new{prd= Model.Product.ID, catID= Model.CategoryID})">
-             <img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;" 
-                 src="@Url.Content(imgpath + "/"+Model.Picture.FilePath)" /></a></div>
-             <div><h5> <label class="nlabel">  @Model.Product.Name.Substring(0,leng)</label></h5></div>
+        
+         <div class="product-image-wrapper">
+        <div class="single-products">
+        <div class="productinfo text-center">
+             <a href="@Url.Action("Product","Home",new{prd= Model.Product.ID, catID= Model.CategoryID})">
+             <img style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(imgpath + "/"+Model.Picture.FilePath)" /></a>
+             <h5> @Model.Product.Name.Substring(0,leng)</h5>
                  
-                <div> <p class="dlabel">@Model.Product.ShortDescription</p></div>
+                 <p>@Model.Product.ShortDescription</p>
          </div>
+       </div>
+    
+</div>
