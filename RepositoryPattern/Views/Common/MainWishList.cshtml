@@ -6,7 +6,7 @@
              <table class="table table-bordered" id="tblWishList">
                  <thead>
                      <tr class="success">
-                         <th>Picture</th><th>Name</th><th>Variation</th><th>Quantity</th><th>Remove</th>
+                         <th>Picture</th><th>Name</th><th>Product No</th><th>Variation</th><th>Quantity</th><th>Remove</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -17,6 +17,7 @@
                      <tr id="rwWishlist_@items.OrderItems.ID">
                          <td><img  style="height:auto; width:auto; max-width:40px; max-height:40px;" src="@Url.Content(imgpath + items.Picture.FilePath)"></td>
                          <td>@Html.Label(items.Product.Name)</td>
+                         <td>@Html.Label(items.Product.SKU)</td>
                          @if(items.ProductVariation.ID > 0)
                          {
                          <td>@Html.Label(items.ProductVariation.Description)</td>
