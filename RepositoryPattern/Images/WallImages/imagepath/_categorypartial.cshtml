@@ -1,0 +1,16 @@
+﻿
+@using RepositoryPattern.Model.Catalog;
+@model Category
+ @{ var imgpath = "~/Images/WallImages/imagepath";
+    }    
+         <div class="col-lg-12" id="cat">
+             <div class=""><a href="@Url.Action("CategoryProduct","Home",new{Id= Model.ID})">
+             <img class="small-thumbnail" style="height:auto; width:auto; max-width:170px; max-height:200px;" 
+                 src="@Url.Content(imgpath + "/categoryPlaceholder.png")" /></a></div>
+             <div><h5> <label class="nlabel">  @Model.Name</label></h5></div>
+                 
+                <div> <p class="dlabel">@Model.Description</p></div>
+         </div>
+
+     
+   

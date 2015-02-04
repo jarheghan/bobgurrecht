@@ -1,16 +1,17 @@
 ﻿@using RepositoryPattern.Model.Catalog;
 @model ProductCategory
  @{ var imgpath = "~/Images/WallImages/imagepath";
+    
     int leng = Model.Product.Name.Count();
-    }
+  }
      
         
          <div class="product-image-wrapper">
         <div class="single-products">
         <div class="productinfo text-center">
              <a href="@Url.Action("Product","Home",new{prd= Model.Product.ID, catID= Model.CategoryID})">
-             <img style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(imgpath + "/"+Model.Picture.FilePath)" /></a>
-             <h5> @Model.Product.Name.Substring(0,leng)</h5>
+             <img style="height:auto; width:auto; max-width:170px; max-height:200px;" src="@Url.Content(imgpath + "/"+ (@Model.Picture != null?Model.Picture.FilePath:""))" /></a>
+             <h5>@Model.Product.Name</h5>
                  
                  <p>@Model.Product.ShortDescription</p>
          </div>
